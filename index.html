@@ -1,0 +1,2961 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SHOPEE K뷰티 BI</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+:root{
+  --bg:#0B0D11;--bg2:#12151C;--sf:#232B3E;--sf2:#1E2330;--sf3:#252A38;
+  --bd:rgba(255,255,255,.06);--bd2:rgba(255,255,255,.1);
+  --tx:#F0F2F8;--tx2:#6B7494;--tx3:#5A6480;
+  --pk:#FF5FA0;--pk-d:rgba(255,95,160,.12);
+  --gn:#00DFA2;--gn-d:rgba(0,223,162,.12);
+  --yw:#FFB547;--yw-d:rgba(255,181,71,.12);
+  --bl:#4EA8FF;--bl-d:rgba(78,168,255,.12);
+  --pu:#9B78FF;--pu-d:rgba(155,120,255,.12);
+  --tl:#00D4C8;--tl-d:rgba(0,212,200,.12);
+  --rd:#FF5C5C;
+  --g1:linear-gradient(135deg,#FF5FA0,#9B78FF);
+  --g2:linear-gradient(135deg,#00DFA2,#4EA8FF);
+  --g3:linear-gradient(135deg,#FFB547,#FF5FA0);
+  --font:'Noto Sans KR',sans-serif;
+}
+@font-face{font-family:';src:url('https://cdn.jsdelivr.net/gh/orioncactus/);}
+body{background:#0B0D11;color:var(--tx);font-family:var(--font);font-size:13px;line-height:1.55;display:flex;flex-direction:column}
+
+/* TOP BAR */
+.topbar{height:52px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;background:#12151C;border-bottom:1px solid rgba(255,255,255,0.07);position:relative;z-index:10}
+.logo{font-size:15px;font-weight:800;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.live-pill{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--gn);background:rgba(0,223,162,0.12);border:1px solid rgba(0,223,162,.25);padding:4px 10px;border-radius:99px}
+.live-dot{width:5px;height:5px;background:var(--gn);border-radius:50%;animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+.ticker-wrap{flex:1;overflow:hidden;display:flex;gap:20px;padding:0 16px}
+.tick{font-size:10px;color:var(--tx2);display:flex;gap:5px;align-items:center;white-space:nowrap}
+.tick b{color:var(--tx);font-weight:600}
+.tick-up{color:var(--gn)}.tick-dn{color:var(--rd)}
+
+/* AGENT TABS */
+.agent-nav{height:44px;display:flex;overflow-x:auto;background:#12151C;border-bottom:1px solid rgba(255,255,255,0.07);scrollbar-width:none;flex-shrink:0}
+.agent-nav::-webkit-scrollbar{display:none}
+.atab{
+  flex-shrink:0;display:inline-flex;align-items:center;gap:6px;
+  padding:0 18px;height:100%;
+  font-size:11px;font-weight:600;color:var(--tx2);cursor:pointer;
+  border:none;background:none;font-family:var(--font);
+  border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;
+}
+.atab:hover{color:var(--tx)}
+.atab.active{color:var(--tx);border-bottom-color:var(--pk)}
+.atab-ico{font-size:14px}
+
+/* LAYOUT */
+.layout{flex:1;display:flex;overflow:hidden;background:#0B0D11}
+.sidebar{width:200px;flex-shrink:0;background:#12151C;border-right:1px solid var(--bd);overflow-y:auto;padding:12px 8px}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:#252A38;border-radius:99px}
+.nav-grp-label{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--tx3);padding:10px 8px 5px}
+.nav-item{
+  display:flex;align-items:center;gap:8px;padding:8px 10px;
+  border-radius:8px;cursor:pointer;font-size:12px;color:var(--tx2);
+  transition:all .12s;margin-bottom:1px;font-weight:500;
+}
+.nav-item:hover{background:#232B3E;color:var(--tx)}
+.nav-item.active{background:rgba(255,95,160,0.12);color:var(--pk);font-weight:600}
+.ni{font-size:14px;flex-shrink:0;width:18px;text-align:center}
+
+main{flex:1;overflow-y:auto;background:#0B0D11}
+main::-webkit-scrollbar{width:4px}
+main::-webkit-scrollbar-thumb{background:#252A38;border-radius:99px}
+.page{display:none;padding:16px;background:#0B0D11}
+.page.active{display:block !important;visibility:visible !important;opacity:1 !important;background:#0B0D11}.ph{display:none !important}
+
+/* SECTION */
+.sec-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:10px;flex-wrap:wrap}
+.sec-title{font-size:18px;font-weight:800;color:#FFFFFF}
+.sec-sub{font-size:11px;color:#8B96B8;margin-top:3px}
+
+/* KPI GRID */
+.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+@media(min-width:600px){.kpi-grid{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:#232B3E;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:14px 16px;position:relative;overflow:hidden}
+.kpi::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;opacity:.5}
+.kpi.k-pk::after{background:var(--g1)}.kpi.k-gn::after{background:var(--g2)}
+.kpi.k-yw::after{background:var(--g3)}.kpi.k-bl::after{background:var(--bl)}
+.kpi-lbl{font-size:10px;font-weight:600;color:var(--tx2);margin-bottom:6px}
+.kpi-val{font-size:26px;font-weight:800;line-height:1}
+.kpi-val.pk{background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.kpi-val.gn{color:var(--gn)}.kpi-val.yw{color:var(--yw)}.kpi-val.bl{color:var(--bl)}.kpi-val.pu{color:var(--pu)}
+.kpi-meta{font-size:10px;color:var(--tx2);margin-top:5px}
+
+/* CARDS */
+.card{background:#232B3E;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px;margin-bottom:10px}
+.card-title{font-size:12px;font-weight:700;color:var(--tx2);letter-spacing:.3px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+
+/* GRADIENT CARD */
+.grad-card{border-radius:14px;padding:14px 16px;margin-bottom:10px}
+.gc-pk{background:linear-gradient(135deg,rgba(255,95,160,.15),rgba(155,120,255,.08));border:1px solid rgba(255,95,160,.2)}
+.gc-gn{background:linear-gradient(135deg,rgba(0,223,162,.12),rgba(78,168,255,.06));border:1px solid rgba(0,223,162,.2)}
+.gc-yw{background:linear-gradient(135deg,rgba(255,181,71,.12),rgba(255,95,160,.06));border:1px solid rgba(255,181,71,.2)}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:11px;background:#232B3E}
+.tbl th{font-size:10px;font-weight:600;color:var(--tx2);padding:8px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.07);background:#263248}
+.tbl td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.07);color:var(--tx2);background:#232B3E}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tbody tr:hover td{background:rgba(255,255,255,.04)}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px}
+.b-go{background:rgba(0,223,162,0.12);color:var(--gn);border:1px solid rgba(0,223,162,.3)}
+.b-rv{background:rgba(255,181,71,0.12);color:var(--yw);border:1px solid rgba(255,181,71,.3)}
+.b-no{background:rgba(255,95,160,0.12);color:var(--pk);border:1px solid rgba(255,95,160,.3)}
+.b-x{background:#263248;color:var(--tx2);border:1px solid rgba(255,255,255,0.07)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:10px;border:none;font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.btn-pk{background:var(--g1);color:#fff}
+.btn-pk:hover{opacity:.9}
+.btn-sf{background:#263248;color:var(--tx2);border:1px solid rgba(255,255,255,0.1)}
+.btn-sf:hover{color:var(--tx);border-color:var(--tx2)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* INPUTS */
+input[type=text],input[type=number],textarea,select{
+  background:#263248;border:1px solid rgba(255,255,255,.1);border-radius:10px;
+  color:var(--tx);font-family:var(--font);font-size:12px;padding:9px 12px;width:100%;outline:none;transition:border-color .15s;
+}
+input:focus,textarea:focus,select:focus{border-color:var(--pk)}
+select option{background:#263248}
+input[type=range]{width:100%;accent-color:var(--pk)}
+label{font-size:10px;font-weight:600;color:var(--tx2);display:block;margin-bottom:5px}
+
+/* PROGRESS */
+.prog-bg{background:#263248;border-radius:99px;height:6px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px;transition:width .6s}
+.pf-pk{background:var(--g1)}.pf-gn{background:var(--g2)}.pf-yw{background:var(--yw)}
+
+/* BRIEFING CARDS */
+.bc{background:#232B3E;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;margin-bottom:12px;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.bc-hdr{display:flex;align-items:center;gap:10px;padding:16px;cursor:pointer;transition:background .12s;background:#263248;border-bottom:1px solid rgba(255,255,255,.08)}
+.bc-hdr:hover{background:#252A38}
+.bc-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.bc-name{font-size:14px;font-weight:800;color:#FFFFFF}
+.bc-role{font-size:11px;color:#8B96B8 !important;margin-top:2px}
+.bc-tabs{padding:8px 14px;display:flex;gap:5px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(0,0,0,.15)}
+.bc-tab{font-size:11px;font-weight:600;padding:8px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#8B96B8;cursor:pointer;margin:2px;min-height:36px;transition:all .15s}
+.bc-tab:hover{border-color:var(--pk);color:var(--pk)}
+.bc-body{display:none;background:#232B3E}
+.bc-card{background:#232B3E;border:1px solid rgba(255,255,255,.1);border-left:3px solid transparent;border-radius:14px;overflow:hidden;margin-bottom:12px;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.bc-brief{padding:14px;border-bottom:1px solid rgba(255,255,255,0.07);font-size:11px;color:var(--tx3);text-align:center}
+.bc-wf{padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#1A2230}
+.wf-col{background:#263248;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px}
+.wf-lbl{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+.wf-item{font-size:10px;color:var(--tx2);line-height:1.6;margin-bottom:3px;display:flex;gap:5px}
+.wf-item::before{content:'·';color:var(--tx3);flex-shrink:0}
+
+/* MISC */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mb10{margin-bottom:10px}
+.spinner{width:22px;height:22px;border:2px solid var(--sf3);border-top-color:var(--pk);border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading{display:flex;align-items:center;gap:10px;padding:20px;color:var(--tx2);font-size:11px}
+pre.pre{background:#263248;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:12px;font-family:monospace;font-size:10px;line-height:1.7;color:var(--tx);white-space:pre-wrap;max-height:280px;overflow-y:auto}
+.copy-btn{font-size:10px;font-weight:600;padding:4px 10px;background:#263248;border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:var(--tx2);cursor:pointer;transition:all .12s}
+.copy-btn:hover{border-color:var(--gn);color:var(--gn)}
+.copy-btn.ok{border-color:var(--gn);color:var(--gn)}
+.lang-toggle{display:flex;gap:4px}
+.lang-btn{font-size:10px;font-weight:600;padding:5px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:var(--tx2);cursor:pointer;transition:all .12s}
+.lang-btn.active{background:rgba(255,95,160,0.12);border-color:var(--pk);color:var(--pk)}
+.type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
+.type-btn{padding:10px 8px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:#263248;color:var(--tx2);cursor:pointer;text-align:center;font-size:10px;font-weight:600;font-family:var(--font);transition:all .12s}
+.type-btn:hover{border-color:var(--pk);color:var(--pk)}
+.type-btn.sel{background:rgba(255,95,160,0.12);border-color:var(--pk);color:var(--pk)}
+.type-btn .bico{font-size:18px;display:block;margin-bottom:3px}
+.arr{font-size:10px;color:var(--tx2);transition:transform .2s;flex-shrink:0}
+
+@media(max-width:700px){.sidebar{display:none}}
+
+/* ═══ AIMAX 스타일 에이전트 카드 ═══ */
+.ag-grid{display:flex;flex-direction:column;gap:8px;padding:0 4px;}
+.ag-card{
+  background:#141824;border:1px solid rgba(255,255,255,.07);
+  border-radius:16px;padding:16px;
+  display:flex;flex-direction:column;gap:10px;
+  transition:border-color .2s;cursor:pointer;
+}
+.ag-card:active{border-color:var(--ac,#FF5FA0);}
+.ag-card-top{display:flex;align-items:center;gap:10px;}
+.ag-avatar{
+  width:48px;height:48px;border-radius:50%;flex-shrink:0;
+  background:var(--ag,linear-gradient(135deg,#FF5FA0,#9B78FF));
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;border:2px solid rgba(255,255,255,.08);
+}
+.ag-info{flex:1;}
+.ag-name{font-size:15px;font-weight:700;color:#F0F2F8;white-space:nowrap;}
+.ag-role{font-size:11px;color:#6B7494;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:50vw;}
+.ag-status{
+  font-size:10px;font-weight:700;padding:3px 8px;
+  border-radius:99px;white-space:nowrap;
+}
+.st-ok{background:rgba(0,223,162,.12);color:#00DFA2;border:1px solid rgba(0,223,162,.2);}
+.st-auto{background:rgba(78,168,255,.12);color:#4EA8FF;border:1px solid rgba(78,168,255,.2);}
+.ag-desc{font-size:11px;color:#6B7494;line-height:1.6;}
+.ag-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.ag-tag{
+  font-size:10px;padding:3px 8px;border-radius:99px;
+  background:rgba(255,255,255,.05);color:#8B96B8;
+  border:1px solid rgba(255,255,255,.06);
+}
+.ag-done{
+  font-size:10px;color:#4A5470;
+  padding-top:8px;border-top:1px solid rgba(255,255,255,.05);
+}
+.ag-done span{color:#00DFA2;}
+.ag-stat-row{
+  display:flex;gap:8px;
+  padding:10px 4px 4px;
+}
+.ag-stat-box{
+  flex:1;background:#0F1117;border-radius:10px;
+  padding:10px;text-align:center;
+}
+.ag-stat-num{font-size:20px;font-weight:900;color:#FF5FA0;font-family:'Space Grotesk',sans-serif;line-height:1;}
+.ag-stat-lbl{font-size:10px;color:#4A5470;margin-top:3px;}
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:10px">
+    <span class="logo">SHOPEE K뷰티 BI</span>
+  </div>
+  <div class="ticker-wrap" id="ticker"></div>
+  <div class="live-pill"><div class="live-dot"></div>LIVE</div>
+</div>
+
+<div class="agent-nav" id="agentNav"><button class="atab active" onclick="openAgent('manager',this)" style="color:var(--pk)"><span class="atab-ico">📊</span> 관리자</button><button class="atab" onclick="openAgent('sourcing',this)" style="color:var(--gn)"><span class="atab-ico">🔍</span> 소싱담당</button><button class="atab" onclick="openAgent('sales',this)" style="color:var(--yw)"><span class="atab-ico">💰</span> 세일즈담당</button><button class="atab" onclick="openAgent('marketing',this)" style="color:var(--pu)"><span class="atab-ico">📢</span> 마케팅담당</button><button class="atab" onclick="openAgent('logistics',this)" style="color:var(--tl)"><span class="atab-ico">📦</span> 물류담당</button><button class="atab" onclick="openAgent('design',this)" style="color:var(--bl)"><span class="atab-ico">🎨</span> 디자인담당</button><button class="atab" onclick="openAgent('accounting',this)" style="color:#00D4C8"><span class="atab-ico">💹</span> 회계담당</button><button class="atab" onclick="openSimModal()" style="color:#00DFA2">🌏 시뮬</button>
+</div>
+
+<div class="layout">
+<div class="sidebar"><div><div class="nav-grp-label">오늘</div><div class="nav-item active" data-page="briefing" onclick="showPage('briefing',this)"><span class="ni">🔔</span>팀 브리핑</div></div><div><div class="nav-grp-label">분석</div><div class="nav-item" data-page="overview" onclick="showPage('overview',this)"><span class="ni">📊</span>시장 현황</div><div class="nav-item" data-page="sourcing_intel" onclick="showPage('sourcing_intel',this)"><span class="ni">🗓</span>소싱 타이밍</div><div class="nav-item" data-page="products" onclick="showPage('products',this)"><span class="ni">🏆</span>TOP 상품</div><div class="nav-item" data-page="competitors" onclick="showPage('competitors',this)"><span class="ni">🔍</span>경쟁 구도</div><div class="nav-item" data-page="catch_up" onclick="showPage('catch_up',this)"><span class="ni">🎯</span>추격 대시보드</div></div><div><div class="nav-grp-label">운영</div><div class="nav-item" data-page="revenue" onclick="showPage('revenue',this)"><span class="ni">💰</span>수익 시뮬레이터</div><div class="nav-item" data-page="pipeline" onclick="showPage('pipeline',this)"><span class="ni">📦</span>SKU 파이프라인</div><div class="nav-item" data-page="calendar" onclick="showPage('calendar',this)"><span class="ni">📅</span>프로모션 캘린더</div></div><div><div class="nav-grp-label">성장</div><div class="nav-item" data-page="kpi" onclick="showPage('kpi',this)"><span class="ni">📈</span>KPI 벤치마크</div><div class="nav-item" data-page="roadmap" onclick="showPage('roadmap',this)"><span class="ni">🗺</span>성장 로드맵</div></div><div><div class="nav-grp-label">콘텐츠</div><div class="nav-item" data-page="detail" onclick="showPage('detail',this)"><span class="ni">🖼</span>상세페이지 가이드</div><div class="nav-item" data-page="voucher" onclick="showPage('voucher',this)"><span class="ni">🎫</span>바우처 전략</div></div><div><div class="nav-grp-label">도구</div><div class="nav-item" data-page="logistics_calc" onclick="showPage('logistics_calc',this)"><span class="ni">🚚</span>배송 비교 계산기</div><div class="nav-item" data-page="content_gen" onclick="showPage('content_gen',this)"><span class="ni">🎨</span>콘텐츠 생성기</div><div class="nav-item" data-page="simulator" onclick="openSimModal()"><span class="ni">🌏</span>전체 마켓 시뮬레이터</div>
+<div class="nav-item" data-page="livechecker" onclick="showPage('livechecker',this)"><span class="ni">🔴</span>실시간 마진 검증</div></div></div>
+<main>
+<div id="page-briefing" class="page active">
+  <div class="sec-head">
+    <div><div class="sec-title" style="background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">오늘의 팀 브리핑</div><div class="sec-sub" id="briefing-date"></div></div>
+    <button class="btn btn-pk" onclick="runAllBriefings()">▶ 전체 브리핑</button>
+  </div>
+  <div class="grad-card gc-pk mb10">
+    <div style="font-size:10px;font-weight:600;color:var(--pk);margin-bottom:8px">팀 업무 흐름</div>
+    <div style="display:flex;align-items:center;gap:6px;overflow-x:auto;white-space:nowrap;padding-bottom:2px">
+      <span style="background:rgba(0,223,162,0.12);color:var(--gn);border-radius:8px;padding:5px 12px;font-size:11px;font-weight:600">🔍 소싱</span>
+      <span style="color:var(--tx3)">→</span>
+      <span style="background:rgba(255,181,71,0.12);color:var(--yw);border-radius:8px;padding:5px 12px;font-size:11px;font-weight:600">💰 세일즈</span>
+      <span style="color:var(--tx3)">→</span>
+      <div style="display:flex;flex-direction:column;gap:3px">
+        <span style="background:rgba(155,120,255,0.12);color:var(--pu);border-radius:8px;padding:4px 12px;font-size:11px;font-weight:600">📢 마케팅</span>
+        <span style="background:rgba(78,168,255,0.12);color:var(--bl);border-radius:8px;padding:4px 12px;font-size:11px;font-weight:600">🎨 디자인</span>
+      </div>
+      <span style="color:var(--tx3)">→</span>
+      <span style="background:rgba(0,212,200,0.12);color:var(--tl);border-radius:8px;padding:5px 12px;font-size:11px;font-weight:600">📦 물류</span>
+      <span style="color:var(--tx3)">→</span>
+      <span style="background:rgba(255,95,160,0.12);color:var(--pk);border-radius:8px;padding:5px 12px;font-size:11px;font-weight:700">📊 팀장 보고</span>
+    </div>
+  </div>
+  <div id="bCards"></div>
+</div>
+<div id="page-overview" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">시장 현황</div><div class="sec-sub">쇼피코리아 공식 데이터 · 2024-2025</div></div></div>
+  <div class="grad-card gc-pk mb10">
+    <div style="font-size:11px;font-weight:700;color:var(--pk);margin-bottom:5px">🔥 지금 들어가야 하는 이유</div>
+    <p style="font-size:11px;color:var(--tx2);line-height:1.7">쇼피 베트남 2024년 한국 제품 주문 <strong style="color:var(--tx)">+134% 증가</strong> · K뷰티 카테고리 <strong style="color:var(--tx)">77% 성장</strong> · 11.11 메가데이 한국 셀러 판매 <strong style="color:var(--pk)">9배 급증</strong><br>2025년 한국 셀러 입점 +28% — 지금이 진입 적기</p>
+  </div>
+  <div class="kpi-grid mb10">
+    <div class="kpi k-pk"><div class="kpi-lbl">베트남 주문 성장</div><div class="kpi-val pk">+134%</div><div class="kpi-meta">2024 vs 2023 · 전체 1위</div></div>
+    <div class="kpi k-gn"><div class="kpi-lbl">K뷰티 카테고리</div><div class="kpi-val gn">+77%</div><div class="kpi-meta">2024 쇼피 전체</div></div>
+    <div class="kpi k-yw"><div class="kpi-lbl">11.11 스파이크</div><div class="kpi-val yw">9배</div><div class="kpi-meta">일평균 대비</div></div>
+    <div class="kpi k-bl"><div class="kpi-lbl">태국 성장률</div><div class="kpi-val bl">+182%</div><div class="kpi-meta">2순위 타겟</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">마켓별 한국 제품 주문 성장률 (2024)</div>
+    <div id="marketChart"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">마켓별 수수료 구조</div>
+    <table class="tbl">
+      <tr><th>마켓</th><th>수수료</th><th>원천세</th><th>합계</th><th>추천</th></tr>
+      <tr><td>🇻🇳 베트남</td><td>5.8%</td><td>1.5%</td><td style="color:var(--gn);font-weight:700">7.3%</td><td><span class="badge b-go">1순위</span></td></tr>
+      <tr><td>🇹🇭 태국</td><td>7.0%</td><td>1.5%</td><td>8.5%</td><td><span class="badge b-rv">2순위</span></td></tr>
+      <tr><td>🇵🇭 필리핀</td><td>7.5%</td><td>0%</td><td>7.5%</td><td><span class="badge b-rv">3순위</span></td></tr>
+    </table>
+  </div>
+</div>
+<div id="page-sourcing_intel" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">소싱 타이밍 인텔리전스</div><div class="sec-sub">올영세일 연동 · 챌린저스 데이터 · D-day 자동계산</div></div></div>
+  <div class="grad-card gc-yw mb10">
+    <div style="font-size:11px;font-weight:700;color:var(--yw);margin-bottom:4px">📊 챌린저스 2026 핵심 데이터</div>
+    <p style="font-size:11px;color:var(--tx2);line-height:1.7">소비자 <strong style="color:var(--tx)">61%</strong>가 세일 전부터 탐색 시작 · <strong style="color:var(--tx)">35%</strong>는 살 제품 이미 결정 후 세일 대기<br>→ 올영세일 <strong style="color:var(--pk)">7일 전</strong> = 쇼피 광고 시작 타이밍</p>
+  </div>
+  <div class="card mb10">
+    <div class="card-title">2026년 올영세일 타임라인</div>
+    <div id="saleTimeline"></div>
+  </div>
+  <div class="grad-card gc-pk">
+    <div style="font-size:11px;font-weight:700;color:var(--pk);margin-bottom:4px">⚡ 지금 해야 할 것</div>
+    <div id="todayAction" style="font-size:11px;color:var(--tx2);line-height:1.8"></div>
+  </div>
+</div>
+<div id="page-products" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">TOP 상품 분석</div><div class="sec-sub">올리브영 2025.06 실측 · 마진 자동계산</div></div></div>
+  <div class="grad-card gc-gn mb10">
+    <div style="font-size:11px;font-weight:700;color:var(--gn);margin-bottom:4px">💡 기획세트 분할 전략</div>
+    <p style="font-size:11px;color:var(--tx2);line-height:1.7">올리브영 더블기획 구매 → 단품 2개 분리 등록. 단위원가 절반 → <strong style="color:var(--tx)">마진 10~15%p 개선</strong>. 등록정가 = 권장가 ÷ 0.70 (상시 -30%)</p>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <div style="overflow-x:auto"><table class="tbl" id="productsTable"></table></div>
+  </div>
+</div>
+<div id="page-competitors" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">경쟁 구도</div><div class="sec-sub">쇼피 베트남 K뷰티 시장 현황</div></div></div>
+  <div class="g2 mb10">
+    <div class="card">
+      <div class="card-title"><span style="color:var(--gn)">✅ 소싱 가능 (미직입점)</span></div>
+      <div style="font-size:11px;color:var(--tx2);line-height:2">· 아누아 PDRN 세럼<br>· 토리든 다이브인 세럼<br>· 구달 청귤 비타C 세럼<br>· 웰라쥬 히알루론 앰플<br>· 에스트라 아토베리어 크림</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span style="color:var(--rd)">⊘ 직입점 제외</span></div>
+      <div style="font-size:11px;color:var(--tx2);line-height:2">· 메디힐<br>· COSRX / 코스알엑스<br>· 바이오던스<br>· 달바 (더달바)<br>· 티르티르</div>
+    </div>
+  </div>
+  <div class="grad-card gc-pk">
+    <div style="font-size:11px;font-weight:700;color:var(--pk);margin-bottom:5px">⚡ 후발주자 포지셔닝 전략</div>
+    <p style="font-size:11px;color:var(--tx2);line-height:1.7">경쟁자 대비 <strong style="color:var(--tx)">-10~13% 저가 진입</strong> + 번들 차별화. 올리브영 직구매 정품 신뢰도로 프리미엄. <strong style="color:var(--pk)">리뷰 50개 = 생존 임계점.</strong></p>
+  </div>
+</div>
+<div id="page-catch_up" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">후발주자 추격 대시보드</div><div class="sec-sub">경쟁자 리뷰 격차 · 추격 속도 계산</div></div>
+  <button class="btn btn-sf" onclick="updateCatchUp()" style="font-size:11px">업데이트</button></div>
+  <div class="kpi-grid mb10">
+    <div class="kpi k-pk"><div class="kpi-lbl">경쟁자 TOP 리뷰</div><div class="kpi-val pk" id="cu-comp-num">500</div></div>
+    <div class="kpi k-gn"><div class="kpi-lbl">우리 리뷰</div><div class="kpi-val" style="color:var(--rd)" id="cu-our-num">0</div></div>
+    <div class="kpi k-yw"><div class="kpi-lbl">하루 목표</div><div class="kpi-val yw" id="cu-daily">3개</div><div class="kpi-meta">6개월 추격 기준</div></div>
+    <div class="kpi k-bl"><div class="kpi-lbl">추격 완료</div><div class="kpi-val bl" id="cu-eta">180일</div></div>
+  </div>
+  <div class="card mb10">
+    <div class="card-title">리뷰 격차 시각화</div>
+    <div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:10px;color:var(--tx2)">경쟁자 TOP</span><span style="font-size:10px;font-weight:600;color:var(--gn)" id="cu-comp-disp">500개</span></div>
+      <div class="prog-bg"><div class="prog-fill pf-gn" style="width:100%"></div></div>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:10px;color:var(--tx2)">우리 현황</span><span style="font-size:10px;font-weight:600;color:var(--rd)" id="cu-our-disp">0개</span></div>
+      <div class="prog-bg"><div class="prog-fill" id="cu-our-bar" style="width:0%;background:var(--rd)"></div></div>
+    </div>
+  </div>
+  <div class="card mb10">
+    <div class="card-title">Phase 진행도</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:10px;font-weight:600;color:var(--pk)">Phase 1 — 0/50 리뷰</span><span style="font-size:10px;color:var(--tx2)">진입가 -10~13%</span></div><div class="prog-bg"><div class="prog-fill pf-pk" id="phase1-bar" style="width:0%"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:10px;font-weight:600;color:var(--yw)">Phase 2 — 0/300 리뷰</span><span style="font-size:10px;color:var(--tx2)">마진 정상화</span></div><div class="prog-bg"><div class="prog-fill pf-yw" id="phase2-bar" style="width:0%"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:10px;font-weight:600;color:var(--gn)">Phase 3 — 0/500 리뷰</span><span style="font-size:10px;color:var(--tx2)">프리미엄 포지셔닝</span></div><div class="prog-bg"><div class="prog-fill pf-gn" id="phase3-bar" style="width:0%"></div></div></div>
+    </div>
+  </div>
+  <div class="g2 mb10">
+    <div><label>우리 현재 리뷰</label><input type="number" id="cu-in-ours" value="0" min="0"></div>
+    <div><label>경쟁자 리뷰</label><input type="number" id="cu-in-comp" value="500" min="0"></div>
+  </div>
+  <button class="btn btn-pk" onclick="updateCatchUp()" style="width:100%">추격지수 업데이트</button>
+</div>
+<div id="page-revenue" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">수익 시뮬레이터</div><div class="sec-sub">월별 예상 순이익</div></div></div>
+  <div class="card mb10">
+    <div class="card-title">파라미터 설정</div>
+    <div class="g2" style="gap:12px">
+      <div><label>월 주문 건수</label><div style="display:flex;align-items:center;gap:8px"><input type="range" id="rv-orders" min="10" max="1000" value="100" oninput="calcRevenue()"><span id="rv-orders-val" style="font-size:12px;font-weight:700;color:var(--pk);min-width:45px">100건</span></div></div>
+      <div><label>평균 판매가</label><div style="display:flex;align-items:center;gap:8px"><input type="range" id="rv-price" min="20000" max="100000" value="39000" step="1000" oninput="calcRevenue()"><span id="rv-price-val" style="font-size:12px;font-weight:700;color:var(--pk);min-width:65px">₩39,000</span></div></div>
+      <div><label>평균 마진율</label><div style="display:flex;align-items:center;gap:8px"><input type="range" id="rv-margin" min="10" max="50" value="30" oninput="calcRevenue()"><span id="rv-margin-val" style="font-size:12px;font-weight:700;color:var(--pk);min-width:40px">30%</span></div></div>
+      <div><label>합포장 비율</label><div style="display:flex;align-items:center;gap:8px"><input type="range" id="rv-bundle" min="0" max="100" value="30" oninput="calcRevenue()"><span id="rv-bundle-val" style="font-size:12px;font-weight:700;color:var(--pk);min-width:40px">30%</span></div></div>
+    </div>
+  </div>
+  <div class="kpi-grid mb10">
+    <div class="kpi k-gn"><div class="kpi-lbl">월 매출</div><div class="kpi-val gn" id="rv-revenue">-</div></div>
+    <div class="kpi k-pk"><div class="kpi-lbl">월 순이익</div><div class="kpi-val pk" id="rv-profit">-</div></div>
+    <div class="kpi k-bl"><div class="kpi-lbl">배송비 절감</div><div class="kpi-val bl" id="rv-shipping">-</div></div>
+    <div class="kpi k-yw"><div class="kpi-lbl">11.11 예상 (×9)</div><div class="kpi-val yw" id="rv-1111">-</div></div>
+  </div>
+  <div class="card"><div class="card-title">월별 수익 예측</div><div id="revenueChart"></div></div>
+</div>
+<div id="page-pipeline" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">SKU 파이프라인</div><div class="sec-sub">Phase별 상품 등록 현황</div></div></div>
+  <div class="kpi-grid mb10">
+    <div class="kpi k-pk"><div class="kpi-lbl">Phase 1 목표</div><div class="kpi-val pk">5개</div><div class="kpi-meta">검증 · 1~3개월</div></div>
+    <div class="kpi k-gn"><div class="kpi-lbl">GO 확정</div><div class="kpi-val gn" id="pipelineGoCount">-</div><div class="kpi-meta">마진 25%↑</div></div>
+    <div class="kpi k-bl"><div class="kpi-lbl">Phase 2 목표</div><div class="kpi-val bl">15개</div><div class="kpi-meta">성장 · 4~9개월</div></div>
+    <div class="kpi k-yw"><div class="kpi-lbl">Phase 3 목표</div><div class="kpi-val yw">30+</div><div class="kpi-meta">스케일 · 10~18개월</div></div>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table class="tbl">
+      <tr><th>상태</th><th>상품</th><th>마진</th><th>단계</th></tr>
+      <tr><td><span class="badge b-go">GO</span></td><td>토리든 다이브인 세럼</td><td style="color:var(--gn);font-weight:600">31.9%</td><td>등록 준비</td></tr>
+      <tr><td><span class="badge b-go">GO</span></td><td>아누아 PDRN 세럼</td><td style="color:var(--gn);font-weight:600">30.5%</td><td>등록 준비</td></tr>
+      <tr><td><span class="badge b-go">GO</span></td><td>구달 비타C 세럼</td><td style="color:var(--gn);font-weight:600">31.5%</td><td>등록 준비</td></tr>
+      <tr><td><span class="badge b-rv">REVIEW</span></td><td>에스네이처 스쿠알란 크림</td><td style="color:var(--yw);font-weight:600">22.1%</td><td>추가 검토</td></tr>
+    </table>
+  </div>
+</div>
+<div id="page-calendar" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">프로모션 캘린더</div><div class="sec-sub">2026 쇼피 메가세일 일정</div></div></div>
+  <div class="card" style="padding:0;overflow:hidden;margin-bottom:10px">
+    <table class="tbl">
+      <tr><th>이벤트</th><th>날짜</th><th>배율</th><th>준비 시작</th><th>우선순위</th></tr>
+      <tr><td>🔥 11.11 메가데이</td><td>11월 11일</td><td style="color:var(--pk);font-weight:700">×9</td><td>10/15</td><td><span class="badge b-go">P0</span></td></tr>
+      <tr><td>🎄 12.12 메가데이</td><td>12월 12일</td><td style="color:var(--yw);font-weight:700">×4</td><td>11/25</td><td><span class="badge b-go">P0</span></td></tr>
+      <tr><td>🧧 Tết 설날</td><td>1~2월</td><td style="color:var(--yw)">×3</td><td>12월</td><td><span class="badge b-rv">P1</span></td></tr>
+      <tr><td>9.9 메가데이</td><td>9월 9일</td><td>×2.5</td><td>8/20</td><td><span class="badge b-rv">P1</span></td></tr>
+      <tr><td>더블데이 (매월)</td><td>1.1~9.9</td><td>×1.5</td><td>전월 말</td><td><span class="badge b-x">P2</span></td></tr>
+    </table>
+  </div>
+  <div class="grad-card gc-yw">
+    <div style="font-size:11px;font-weight:700;color:var(--yw);margin-bottom:5px">⚡ 챌린지 마케팅 타이밍 공식</div>
+    <p style="font-size:11px;color:var(--tx2);line-height:1.7"><strong style="color:var(--tx)">올영세일 7일 전</strong> = 쇼피 광고비 증액 시작 · 소비자 61%가 세일 전부터 탐색<br><strong style="color:var(--tx)">D+10</strong> = 리뷰 요청 메시지 · <strong style="color:var(--tx)">포토리뷰</strong> = 2배 코인 지급 → ROAS 극대화</p>
+  </div>
+</div>
+<div id="page-kpi" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">KPI 벤치마크</div><div class="sec-sub">쇼피 K뷰티 핵심 성과 지표</div></div></div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table class="tbl">
+      <tr><th>지표</th><th>목표</th><th>위험 신호</th><th>개선 방법</th></tr>
+      <tr><td>CTR</td><td style="color:var(--gn)">0.5~2%</td><td style="color:var(--rd)">0.3% 미만</td><td>썸네일 교체</td></tr>
+      <tr><td>전환율</td><td style="color:var(--gn)">2~5%</td><td style="color:var(--rd)">1% 미만</td><td>가격·상세페이지</td></tr>
+      <tr><td>응답률</td><td style="color:var(--gn)">90%↑</td><td style="color:var(--rd)">70% 미만</td><td>자동응답 세팅</td></tr>
+      <tr><td>리뷰 평점</td><td style="color:var(--gn)">4.8↑</td><td style="color:var(--rd)">4.5 미만</td><td>Review Prize</td></tr>
+      <tr><td>재구매율</td><td style="color:var(--gn)">15%↑</td><td style="color:var(--rd)">10% 미만</td><td>쿠폰 락인</td></tr>
+    </table>
+  </div>
+</div>
+<div id="page-roadmap" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">성장 로드맵</div><div class="sec-sub">3단계 확장 전략</div></div></div>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div class="grad-card gc-pk">
+      <div style="font-size:13px;font-weight:700;color:var(--pk);margin-bottom:6px">Phase 1 — 검증 (1~3개월)</div>
+      <div style="font-size:11px;color:var(--tx2);line-height:1.9">목표: 리뷰 50개 · SKU 5개 · 월 순이익 ₩3M<br>전략: 경쟁자 대비 -10~13% 저가 진입 → 리뷰 최속 확보<br>광고: Shopee Ads 일 ₩2,000~5,000</div>
+    </div>
+    <div class="grad-card gc-yw">
+      <div style="font-size:13px;font-weight:700;color:var(--yw);margin-bottom:6px">Phase 2 — 성장 (4~9개월)</div>
+      <div style="font-size:11px;color:var(--tx2);line-height:1.9">목표: 리뷰 500개 · SKU 15개 · 월 500건 · ₩10M<br>전략: 정상 마진 회복 + 번들 구성 추가<br>물류: 한진 글로벌 원클릭 계약</div>
+    </div>
+    <div class="grad-card gc-gn">
+      <div style="font-size:13px;font-weight:700;color:var(--gn);margin-bottom:6px">Phase 3 — 스케일 (10~18개월)</div>
+      <div style="font-size:11px;color:var(--tx2);line-height:1.9">목표: 리뷰 2,000개 · SKU 30개+ · 멀티마켓<br>전략: 카테고리 1~3위 + 쇼피라이브 주 2회<br>물류: CJ대한통운 CBE (1~2일 배송)</div>
+    </div>
+  </div>
+</div>
+<div id="page-detail" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">상세페이지 가이드</div><div class="sec-sub">쇼피 베트남 최적화 구성</div></div></div>
+  <div class="grad-card gc-pk mb10">
+    <div style="font-size:11px;font-weight:700;color:var(--pk);margin-bottom:4px">⭐ 3초 룰 — 첫 2장이 전부</div>
+    <p style="font-size:11px;color:var(--tx2)">첫 번째 썸네일이 CTR을 결정. 예산 70%를 여기 집중. 정품배지 + 랭킹배지 필수.</p>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table class="tbl">
+      <tr><th>순서</th><th>섹션</th><th>핵심 요소</th><th>우선순위</th></tr>
+      <tr><td>1</td><td>히어로 배너</td><td>정품배지 + 랭킹 + 핵심효능</td><td><span class="badge b-go">필수</span></td></tr>
+      <tr><td>2</td><td>성분 강조</td><td>성분명 + 농도 + 효과 (베트남어)</td><td><span class="badge b-go">필수</span></td></tr>
+      <tr><td>3</td><td>Before/After</td><td>피부 변화 비교 or 후기 발췌</td><td><span class="badge b-go">필수</span></td></tr>
+      <tr><td>4</td><td>사용방법</td><td>4단계 Cách dùng</td><td><span class="badge b-rv">권장</span></td></tr>
+      <tr><td>5</td><td>배송·정품 안내</td><td>올리브영 직구매 + 배송</td><td><span class="badge b-rv">권장</span></td></tr>
+    </table>
+  </div>
+</div>
+<div id="page-voucher" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">바우처 전략</div><div class="sec-sub">챌린지 마케팅 + 쇼피 공식 툴</div></div></div>
+  <div class="grad-card gc-yw mb10">
+    <div style="font-size:11px;font-weight:700;color:var(--yw);margin-bottom:4px">🎯 챌린지 마케팅 → 높은 ROAS 공식</div>
+    <p style="font-size:11px;color:var(--tx2);line-height:1.7">팀워크 사례 ROAS 2,618% 검증된 구조: <strong style="color:var(--tx)">구매 완료 → 쿠폰 지급 → 재구매 유도</strong><br>쇼피 적용: D+10 메시지 → 포토리뷰 요청 → Review Prize → 재구매 쿠폰</p>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table class="tbl">
+      <tr><th>유형</th><th>코드</th><th>조건</th><th>혜택</th></tr>
+      <tr><td>🎁 첫구매</td><td style="font-family:monospace">KBEAUTY50</td><td>₩300K↑</td><td>50,000₫ 할인</td></tr>
+      <tr><td>🚀 번들</td><td style="font-family:monospace">BUNDLE2</td><td>2개↑</td><td>무료배송</td></tr>
+      <tr><td>⚡ 플래시</td><td style="font-family:monospace">FLASH20</td><td>2시간 한정</td><td>-20%</td></tr>
+      <tr><td>💜 리뷰 재구매</td><td style="font-family:monospace">REVIEW15</td><td>포토리뷰 후</td><td>-15%</td></tr>
+    </table>
+  </div>
+</div>
+<div id="page-logistics_calc" class="page ph">
+  <div class="sec-head"><div><div class="sec-title">배송 플랫폼 비교</div><div class="sec-sub">한국 → 베트남 · EMS · 한진 · CJ대한통운</div></div></div>
+  <div class="card mb10">
+    <div class="card-title">배송 조건 입력</div>
+    <div class="g2" style="gap:10px;margin-bottom:10px">
+      <div><label>상품 무게 (g)</label><input type="number" id="lc-weight" value="130" oninput="calcLogistics()"></div>
+      <div><label>월 발송 건수</label><input type="number" id="lc-qty" value="30" oninput="calcLogistics()"></div>
+    </div>
+    <label>합포장 비율</label>
+    <div style="display:flex;align-items:center;gap:8px">
+      <input type="range" id="lc-bundle" min="0" max="100" value="30" oninput="calcLogistics()">
+      <span id="lc-bundle-val" style="font-size:12px;font-weight:700;color:var(--pk);min-width:40px">30%</span>
+    </div>
+  </div>
+  <div id="logistics-compare" style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px"></div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table class="tbl">
+      <tr><th>단계</th><th>권장 배송사</th><th>기준</th><th>배송일</th></tr>
+      <tr><td style="color:var(--pk);font-weight:600">Phase 1<br><span style="font-size:11px">지금</span></td><td><strong>EMS</strong> + 와이즈커머스 비교</td><td>월 50건 미만</td><td>7~14일</td></tr>
+      <tr><td style="color:var(--yw);font-weight:600">Phase 2</td><td><strong>한진 글로벌 원클릭</strong></td><td>50~200건/월</td><td>5~10일</td></tr>
+      <tr><td style="color:var(--gn);font-weight:600">Phase 3</td><td><strong>CJ대한통운 CBE</strong></td><td>200건↑/월</td><td style="color:var(--gn);font-weight:700">1~2일 🔥</td></tr>
+    </table>
+  </div>
+</div>
+<div id="page-content_gen" class="page ph">
+  <div class="sec-head" style="flex-wrap:wrap;gap:8px"><div><div class="sec-title">콘텐츠 생성기</div><div class="sec-sub">상품명 → 카루셀 · 쇼피 상품명 · 캡션 · 틱톡 · 바우처 자동생성</div></div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="cg-lang-vi" onclick="setCGLang('vi')">🇻🇳 베트남어</button>
+    <button class="lang-btn" id="cg-lang-ko" onclick="setCGLang('ko')">🇰🇷 한국어</button>
+  </div></div>
+  <div class="card mb10">
+    <div class="card-title">상품 정보</div>
+    <div style="margin-bottom:10px"><label>올리브영 URL 또는 상품명</label><input type="text" id="cg-product" placeholder="예: 토리든 다이브인 히알루론산 세럼 50ml"></div>
+    <div class="g2" style="gap:8px;margin-bottom:12px">
+      <div><label>카테고리</label><select id="cg-category"><option>세럼 / 에센스</option><option>크림 / 로션</option><option>앰플</option><option>마스크팩</option><option>선케어</option></select></div>
+      <div><label>핵심 효능</label><input type="text" id="cg-keywords" placeholder="수분, 히알루론산..."></div>
+    </div>
+    <div class="type-grid">
+      <button class="type-btn sel" data-type="carousel" onclick="toggleCGType(this)"><span class="bico">📸</span>카루셀</button>
+      <button class="type-btn sel" data-type="shopeeTitle" onclick="toggleCGType(this)"><span class="bico">🛍️</span>쇼피상품명</button>
+      <button class="type-btn sel" data-type="caption" onclick="toggleCGType(this)"><span class="bico">📢</span>SNS캡션</button>
+      <button class="type-btn sel" data-type="tiktok" onclick="toggleCGType(this)"><span class="bico">🎬</span>TikTok</button>
+      <button class="type-btn sel" data-type="shopeeDetail" onclick="toggleCGType(this)"><span class="bico">📄</span>상세페이지</button>
+      <button class="type-btn sel" data-type="voucher" onclick="toggleCGType(this)"><span class="bico">🎫</span>바우처</button>
+    </div>
+    <button class="btn btn-pk" id="cg-gen-btn" onclick="generateCGContent()" style="width:100%">
+      <span id="cg-gen-icon">✨</span> <span id="cg-gen-label">콘텐츠 생성하기</span>
+    </button>
+  </div>
+  <div id="cg-results"><div style="text-align:center;padding:24px;color:var(--tx3);font-size:11px">상품 정보를 입력하고 콘텐츠를 생성하세요</div></div>
+</div>
+<div id="page-livechecker" class="page ph" style="background:#0B0D11">
+  <!-- Notion 싱크 바 -->
+  <div id="notion-sync-bar" style="margin:0 16px 12px;background:#141824;border:1px solid rgba(155,120,255,.25);border-radius:12px;padding:12px 14px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="font-size:12px;font-weight:700;color:#9B78FF">🔗 Notion GO 상품 동기화</div>
+      <span id="notion-sync-status" style="font-size:10px;color:#4A5470">미연결</span>
+    </div>
+    <div style="display:flex;gap:8px">
+      <input id="notion-token-input" type="password" placeholder="Notion 토큰 입력 (secret_...)"
+        style="flex:1;background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px 10px;color:#F0F2F8;font-size:11px;font-family:inherit">
+      <button onclick="syncFromNotion()"
+        style="background:linear-gradient(135deg,#9B78FF,#FF5FA0);border:none;border-radius:8px;padding:8px 14px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap">동기화</button>
+    </div>
+    <div id="notion-sync-log" style="font-size:10px;color:#4A5470;margin-top:6px">귀국 후 Notion 토큰 입력 → GO 상품 자동 로드</div>
+  </div>
+  <!-- 카테고리 필터 -->
+  <div style="display:flex;gap:6px;padding:10px 16px 0;flex-wrap:wrap">
+    <button onclick="filterLC('all')" id="lc-cat-all" style="font-size:11px;padding:5px 14px;border-radius:99px;border:1px solid rgba(255,95,160,.4);background:rgba(255,95,160,.15);color:#FF5FA0;cursor:pointer;font-weight:700">전체</button>
+    <button onclick="filterLC('beauty')" id="lc-cat-beauty" style="font-size:11px;padding:5px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#6B7494;cursor:pointer;font-weight:600">💄 K뷰티</button>
+    <button onclick="filterLC('bath')" id="lc-cat-bath" style="font-size:11px;padding:5px 14px;border-radius:99px;border:1px solid rgba(0,212,200,.3);background:rgba(0,212,200,.08);color:#00D4C8;cursor:pointer;font-weight:600">🛁 목욕용품</button>
+  </div>
+  <div class="sec-head" style="flex-wrap:wrap;gap:8px"><div><div class="sec-title">실시간 마진 검증</div><div class="sec-sub">올리브영 2025.06.03 실측 데이터</div></div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+    <select id="lc-market" onchange="renderLiveChecker()" style="width:auto">
+      <option value="VN">🇻🇳 베트남 7.3%</option>
+      <option value="TH">🇹🇭 태국 8.5%</option>
+    </select>
+    <select id="lc-margin" onchange="renderLiveChecker()" style="width:auto">
+      <option value="25">목표 마진 25%</option>
+      <option value="20">목표 마진 20%</option>
+      <option value="30">목표 마진 30%</option>
+    </select>
+    <button class="btn btn-sf" onclick="lcAiAnalyze()" style="font-size:11px">✨ 분석</button>
+  </div></div>
+  <div id="lcInsightBox" style="display:none;margin-bottom:10px" class="grad-card gc-pk"><div id="lcInsightText" style="font-size:11px;line-height:1.8"></div></div>
+  <div class="card" style="padding:0;overflow:hidden"><div style="overflow-x:auto;background:#0B0D11"><table class="tbl" id="lcTable"></table></div></div>
+  <div style="font-size:10px;color:var(--tx3);margin-top:6px;padding:0 4px">⚡ EMS 배송비 추정값 · 수수료+원천세 자동반영 · 등록정가 = 권장가 ÷ 0.70</div>
+<div id="page-simulator" class="page ph" style="background:#0B0D11;padding:16px">
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <div>
+      <div style="font-size:17px;font-weight:800;color:#F0F2F8">🌏 전체 마켓 마진 시뮬레이터</div>
+      <div style="font-size:11px;color:#8B96B8;margin-top:3px">쇼피 7개국 동시 계산 · 상품 등록 의사결정</div>
+    </div>
+  </div>
+
+  <!-- 입력 -->
+  <div style="background:#1A2030;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px;margin-bottom:10px">
+    <div style="font-size:12px;font-weight:700;color:#8B96B8;margin-bottom:12px">📦 상품 원가 입력</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+      <div>
+        <label style="font-size:10px;color:#8B96B8;display:block;margin-bottom:5px">올영 구매가 (₩)</label>
+        <input type="number" id="sim-price" value="25800" oninput="runSim()"
+          style="width:100%;background:#1F2840;border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:#F0F2F8;font-size:12px;padding:9px 12px;box-sizing:border-box;outline:none">
+      </div>
+      <div>
+        <label style="font-size:10px;color:#8B96B8;display:block;margin-bottom:5px">기획세트 분할</label>
+        <select id="sim-split" onchange="runSim()"
+          style="width:100%;background:#1F2840;border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:#F0F2F8;font-size:12px;padding:9px 12px">
+          <option value="1">단품 (÷1)</option>
+          <option value="2" selected>더블기획 (÷2)</option>
+          <option value="3">3종기획 (÷3)</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+      <div>
+        <label style="font-size:10px;color:#8B96B8;display:block;margin-bottom:5px">상품 무게 (g)</label>
+        <input type="number" id="sim-weight" value="130" oninput="runSim()"
+          style="width:100%;background:#1F2840;border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:#F0F2F8;font-size:12px;padding:9px 12px;box-sizing:border-box;outline:none">
+      </div>
+      <div>
+        <label style="font-size:10px;color:#8B96B8;display:block;margin-bottom:5px">합포장</label>
+        <select id="sim-bundle" onchange="runSim()"
+          style="width:100%;background:#1F2840;border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:#F0F2F8;font-size:12px;padding:9px 12px">
+          <option value="0">단독 발송</option>
+          <option value="1">합포장 (2개)</option>
+          <option value="2">합포장 (3개)</option>
+        </select>
+      </div>
+    </div>
+    <label style="font-size:10px;color:#8B96B8;display:block;margin-bottom:5px">목표 마진율</label>
+    <div style="display:flex;align-items:center;gap:8px">
+      <input type="range" id="sim-margin" min="10" max="50" value="25" oninput="runSim()" style="flex:1;accent-color:#FF5FA0">
+      <span id="sim-margin-val" style="font-size:14px;font-weight:800;color:#FF5FA0;min-width:45px">25%</span>
+    </div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:10px;color:#8B96B8">단위 원가</span>
+      <span id="sim-unit-cost" style="font-size:18px;font-weight:800;color:#4EA8FF">₩12,900</span>
+    </div>
+  </div>
+
+  <!-- KPI 요약 -->
+  <div id="sim-kpi" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:10px"></div>
+
+  <!-- 테이블 -->
+  <div style="background:#1A2030;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;margin-bottom:10px">
+    <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.08);background:#1F2840;display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:11px;font-weight:700;color:#FF5FA0">국가별 마진 분석</span>
+      <span id="sim-go-label" style="font-size:10px;color:#00DFA2;font-weight:600"></span>
+    </div>
+    <div style="overflow-x:auto">
+      <table id="simTable" style="width:100%;border-collapse:collapse;min-width:620px"></table>
+    </div>
+  </div>
+
+  <div style="font-size:11px;color:#4A5470;line-height:1.7;padding:2px 0">
+    ※ 2025.06 환율 기준 · EMS 배송비 추정 · 수수료+원천세 자동 반영 · 등록정가 = 권장가÷0.70
+  </div>
+</div>
+<!-- ══ 경쟁자 추적 ══ -->
+<div id="page-competitor" class="page ph">
+  <div class="page-hdr"><span class="page-ico">🕵️</span><div><div class="page-title">경쟁자 추적</div><div class="page-sub">상위 셀러 가격·리뷰 모니터링</div></div></div>
+  <div style="padding:0 16px 16px">
+    <!-- 입력 폼 -->
+    <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:700;color:#FF5FA0;margin-bottom:12px">경쟁자 상품 등록</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <input id="comp-brand" placeholder="브랜드명 (예: Anua)" style="background:#0F1117;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 12px;color:#F0F2F8;font-size:12px;font-family:inherit">
+        <input id="comp-price" type="number" placeholder="경쟁자 판매가 (₩)" style="background:#0F1117;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 12px;color:#F0F2F8;font-size:12px;font-family:inherit">
+        <div style="display:flex;gap:8px">
+          <input id="comp-reviews" type="number" placeholder="리뷰 수" style="flex:1;background:#0F1117;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 12px;color:#F0F2F8;font-size:12px;font-family:inherit">
+          <input id="comp-rating" type="number" step="0.1" placeholder="평점" style="flex:1;background:#0F1117;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 12px;color:#F0F2F8;font-size:12px;font-family:inherit">
+        </div>
+        <button onclick="addCompetitor()" style="background:linear-gradient(135deg,#FF5FA0,#9B78FF);border:none;border-radius:8px;padding:12px;color:#fff;font-size:13px;font-weight:700;cursor:pointer">+ 등록</button>
+      </div>
+    </div>
+    <!-- 비교 테이블 -->
+    <div id="comp-table" style="display:flex;flex-direction:column;gap:8px"></div>
+  </div>
+</div>
+
+<!-- ══ 트렌드 분석 ══ -->
+<div id="page-trends" class="page ph">
+  <div class="page-hdr"><span class="page-ico">📈</span><div><div class="page-title">트렌드 분석</div><div class="page-sub">K뷰티 글로벌 검색 트렌드</div></div></div>
+  <div style="padding:0 16px 16px">
+    <!-- 검색 트렌드 -->
+    <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:700;color:#9B78FF;margin-bottom:12px">🔍 K뷰티 글로벌 검색 트렌드 (2026)</div>
+      <div id="trend-bars"></div>
+    </div>
+    <!-- 시즌 캘린더 -->
+    <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:700;color:#FFB547;margin-bottom:12px">📅 쇼피 메가세일 캘린더</div>
+      <div id="trend-calendar"></div>
+    </div>
+    <!-- 카테고리 트렌드 -->
+    <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px">
+      <div style="font-size:12px;font-weight:700;color:#00DFA2;margin-bottom:12px">🏆 올영 급상승 카테고리</div>
+      <div id="trend-cats"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 판매 데이터 ══ -->
+<div id="page-salesdata" class="page ph">
+  <div class="page-hdr"><span class="page-ico">📊</span><div><div class="page-title">판매 데이터</div><div class="page-sub">실적 입력 · 성과 분석</div></div></div>
+  <div style="padding:0 16px 16px">
+    <!-- 이번 주 입력 -->
+    <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:700;color:#4EA8FF;margin-bottom:12px">이번 주 실적 입력</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div><div style="font-size:10px;color:#6B7494;margin-bottom:4px">주문 건수</div>
+        <input id="sd-orders" type="number" value="0" style="width:100%;background:#0F1117;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 10px;color:#F0F2F8;font-size:13px;font-family:inherit"></div>
+        <div><div style="font-size:10px;color:#6B7494;margin-bottom:4px">총 매출 (₩)</div>
+        <input id="sd-revenue" type="number" value="0" style="width:100%;background:#0F1117;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 10px;color:#F0F2F8;font-size:13px;font-family:inherit"></div>
+        <div><div style="font-size:10px;color:#6B7494;margin-bottom:4px">평균 마진율 (%)</div>
+        <input id="sd-margin" type="number" value="25" style="width:100%;background:#0F1117;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 10px;color:#F0F2F8;font-size:13px;font-family:inherit"></div>
+        <div><div style="font-size:10px;color:#6B7494;margin-bottom:4px">신규 리뷰</div>
+        <input id="sd-reviews" type="number" value="0" style="width:100%;background:#0F1117;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 10px;color:#F0F2F8;font-size:13px;font-family:inherit"></div>
+      </div>
+      <button onclick="saveSalesData()" style="width:100%;background:linear-gradient(135deg,#4EA8FF,#9B78FF);border:none;border-radius:8px;padding:12px;color:#fff;font-size:13px;font-weight:700;cursor:pointer">저장 · 분석</button>
+    </div>
+    <!-- KPI 카드 -->
+    <div id="sd-kpis" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px"></div>
+    <!-- 성장 차트 -->
+    <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px">
+      <div style="font-size:12px;font-weight:700;color:#4EA8FF;margin-bottom:10px">주간 매출 추이</div>
+      <div id="sd-chart" style="height:80px;display:flex;align-items:flex-end;gap:4px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ AI 리포트 ══ -->
+<div id="page-aireport" class="page ph">
+  <div class="page-hdr"><span class="page-ico">🧠</span><div><div class="page-title">AI 딥 리포트</div><div class="page-sub">전체 데이터 종합 분석</div></div></div>
+  <div style="padding:0 16px 16px">
+    <!-- 리포트 설정 -->
+    <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:700;color:#FF5FA0;margin-bottom:12px">리포트 유형 선택</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <label style="display:flex;align-items:center;gap:10px;padding:10px;background:#0F1117;border-radius:8px;cursor:pointer">
+          <input type="radio" name="rtype" value="weekly" checked style="accent-color:#FF5FA0">
+          <div><div style="font-size:12px;color:#F0F2F8;font-weight:600">주간 성과 리포트</div><div style="font-size:10px;color:#6B7494">매출·마진·리뷰 종합 분석</div></div>
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;padding:10px;background:#0F1117;border-radius:8px;cursor:pointer">
+          <input type="radio" name="rtype" value="sourcing" style="accent-color:#FF5FA0">
+          <div><div style="font-size:12px;color:#F0F2F8;font-weight:600">소싱 전략 리포트</div><div style="font-size:10px;color:#6B7494">GO 상품 심층 분석 + 다음 소싱 추천</div></div>
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;padding:10px;background:#0F1117;border-radius:8px;cursor:pointer">
+          <input type="radio" name="rtype" value="market" style="accent-color:#FF5FA0">
+          <div><div style="font-size:12px;color:#F0F2F8;font-weight:600">시장 확장 리포트</div><div style="font-size:10px;color:#6B7494">7개국 중 다음 진출 국가 추천</div></div>
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;padding:10px;background:#0F1117;border-radius:8px;cursor:pointer">
+          <input type="radio" name="rtype" value="compete" style="accent-color:#FF5FA0">
+          <div><div style="font-size:12px;color:#F0F2F8;font-weight:600">경쟁자 격차 리포트</div><div style="font-size:10px;color:#6B7494">경쟁자 대비 우위·약점 분석</div></div>
+        </label>
+      </div>
+      <button onclick="genAIReport()" id="air-btn" style="width:100%;margin-top:12px;background:linear-gradient(135deg,#FF5FA0,#9B78FF);border:none;border-radius:8px;padding:14px;color:#fff;font-size:14px;font-weight:700;cursor:pointer">
+        🧠 AI 딥 분석 실행
+      </button>
+    </div>
+    <!-- 리포트 출력 -->
+    <div id="air-result" style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;min-height:120px;font-size:12px;color:#6B7494;line-height:1.7">
+      리포트 유형을 선택하고 실행해주세요.
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ 회계담당 손익계산 ══ -->
+<div id="page-accounting" class="page ph" style="background:#0B0D11">
+  <div class="page-hdr"><span class="page-ico">💹</span>
+    <div><div class="page-title">회계 관리</div>
+    <div class="page-sub">매입 · 판매 · 손익 처리</div></div>
+  </div>
+  <div style="padding:0 16px 24px">
+
+    <!-- 탭 -->
+    <div style="display:flex;gap:6px;margin-bottom:12px">
+      <button id="ac-tab-buy" onclick="switchACTab('buy')" style="flex:1;padding:9px 4px;background:linear-gradient(135deg,rgba(78,168,255,.2),rgba(155,120,255,.1));border:1px solid rgba(78,168,255,.3);border-radius:10px;color:#4EA8FF;font-size:11px;font-weight:700;cursor:pointer">📦 매입</button>
+      <button id="ac-tab-sell" onclick="switchACTab('sell')" style="flex:1;padding:9px 4px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:#6B7494;font-size:11px;font-weight:700;cursor:pointer">💰 판매</button>
+      <button id="ac-tab-pl" onclick="switchACTab('pl')" style="flex:1;padding:9px 4px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:#6B7494;font-size:11px;font-weight:700;cursor:pointer">📊 손익</button>
+    </div>
+
+    <!-- 매입 패널 -->
+    <div id="ac-panel-buy">
+      <div style="background:#141824;border:1px solid rgba(78,168,255,.2);border-radius:14px;padding:14px;margin-bottom:8px">
+        <div style="font-size:12px;font-weight:700;color:#4EA8FF;margin-bottom:10px">📦 매입 처리 (올영 구매)</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <input id="buy-product" placeholder="상품명 (예: Torriden 세럼 2팩)" style="background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:9px 12px;color:#F0F2F8;font-size:12px;font-family:inherit">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div><div style="font-size:10px;color:#6B7494;margin-bottom:3px">올영 구매가 (₩)</div><input id="buy-price" type="number" placeholder="25800" oninput="calcBuyTotal()" style="width:100%;background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px 10px;color:#F0F2F8;font-size:12px;font-family:inherit"></div>
+            <div><div style="font-size:10px;color:#6B7494;margin-bottom:3px">수량</div><input id="buy-qty" type="number" placeholder="10" oninput="calcBuyTotal()" style="width:100%;background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px 10px;color:#F0F2F8;font-size:12px;font-family:inherit"></div>
+            <div><div style="font-size:10px;color:#6B7494;margin-bottom:3px">세금계산서</div><select id="buy-tax" style="width:100%;background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px 10px;color:#F0F2F8;font-size:12px;font-family:inherit"><option value="yes">✅ 발행</option><option value="no">❌ 미발행</option></select></div>
+            <div><div style="font-size:10px;color:#6B7494;margin-bottom:3px">총 매입액</div><div id="buy-calc" style="background:#0F1117;border:1px solid rgba(78,168,255,.2);border-radius:8px;padding:8px 10px;font-size:13px;font-weight:700;color:#4EA8FF">₩0</div></div>
+          </div>
+          <button onclick="recordBuy()" style="background:linear-gradient(135deg,#4EA8FF,#9B78FF);border:none;border-radius:8px;padding:11px;color:#fff;font-size:13px;font-weight:700;cursor:pointer">매입 등록</button>
+        </div>
+      </div>
+      <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px">
+        <div style="font-size:12px;font-weight:700;color:#F0F2F8;margin-bottom:8px">매입 내역</div>
+        <div id="buy-records" style="font-size:11px;color:#4A5470;text-align:center;padding:8px">등록된 매입 없음</div>
+        <div style="display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid rgba(255,255,255,.05);margin-top:8px">
+          <span style="font-size:11px;color:#6B7494">누계 매입액</span>
+          <span id="buy-total" style="font-size:13px;font-weight:700;color:#4EA8FF">₩0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 판매 패널 -->
+    <div id="ac-panel-sell" style="display:none">
+      <div style="background:#141824;border:1px solid rgba(0,223,162,.2);border-radius:14px;padding:14px;margin-bottom:8px">
+        <div style="font-size:12px;font-weight:700;color:#00DFA2;margin-bottom:10px">💰 판매 처리 (쇼피 정산)</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <input id="sell-product" placeholder="상품명" style="background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:9px 12px;color:#F0F2F8;font-size:12px;font-family:inherit">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div><div style="font-size:10px;color:#6B7494;margin-bottom:3px">판매가 (₩)</div><input id="sell-price" type="number" placeholder="35000" oninput="calcSellProfit()" style="width:100%;background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px 10px;color:#F0F2F8;font-size:12px;font-family:inherit"></div>
+            <div><div style="font-size:10px;color:#6B7494;margin-bottom:3px">수량</div><input id="sell-qty" type="number" placeholder="1" oninput="calcSellProfit()" style="width:100%;background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px 10px;color:#F0F2F8;font-size:12px;font-family:inherit"></div>
+            <div><div style="font-size:10px;color:#6B7494;margin-bottom:3px">수수료 (%)</div><input id="sell-fee" type="number" value="7.3" oninput="calcSellProfit()" style="width:100%;background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px 10px;color:#F0F2F8;font-size:12px;font-family:inherit"></div>
+            <div><div style="font-size:10px;color:#6B7494;margin-bottom:3px">배송비 (₩)</div><input id="sell-ship" type="number" placeholder="12600" oninput="calcSellProfit()" style="width:100%;background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px 10px;color:#F0F2F8;font-size:12px;font-family:inherit"></div>
+          </div>
+          <div style="background:#0F1117;border:1px solid rgba(0,223,162,.2);border-radius:8px;padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px">
+            <div style="font-size:10px;color:#6B7494">정산금<div id="sell-calc-settlement" style="font-size:13px;font-weight:700;color:#F0F2F8;margin-top:2px">₩0</div></div>
+            <div style="font-size:10px;color:#6B7494">순이익<div id="sell-calc-profit" style="font-size:13px;font-weight:700;color:#00DFA2;margin-top:2px">₩0</div></div>
+            <div style="font-size:10px;color:#6B7494">마진율<div id="sell-calc-margin" style="font-size:13px;font-weight:700;color:#FFB547;margin-top:2px">0%</div></div>
+            <div style="font-size:10px;color:#6B7494">수수료<div id="sell-calc-fee" style="font-size:13px;font-weight:700;color:#FF5FA0;margin-top:2px">₩0</div></div>
+          </div>
+          <button onclick="recordSell()" style="background:linear-gradient(135deg,#00DFA2,#4EA8FF);border:none;border-radius:8px;padding:11px;color:#fff;font-size:13px;font-weight:700;cursor:pointer">판매 등록</button>
+        </div>
+      </div>
+      <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px">
+        <div style="font-size:12px;font-weight:700;color:#F0F2F8;margin-bottom:8px">판매 내역</div>
+        <div id="sell-records" style="font-size:11px;color:#4A5470;text-align:center;padding:8px">등록된 판매 없음</div>
+        <div style="padding-top:8px;border-top:1px solid rgba(255,255,255,.05);margin-top:8px;display:flex;flex-direction:column;gap:4px">
+          <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#6B7494">총 판매액</span><span id="sell-total" style="font-size:13px;font-weight:700;color:#00DFA2">₩0</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#6B7494">총 수수료</span><span id="sell-fee-total" style="font-size:12px;font-weight:700;color:#FF5FA0">₩0</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#6B7494">총 순이익</span><span id="sell-profit-total" style="font-size:13px;font-weight:700;color:#FFB547">₩0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 손익 패널 -->
+    <div id="ac-panel-pl" style="display:none">
+      <div id="pl-summary" style="background:#141824;border:1px solid rgba(0,212,200,.2);border-radius:14px;padding:14px;margin-bottom:8px">
+        <div style="font-size:12px;font-weight:700;color:#00D4C8;margin-bottom:12px">📊 누계 손익 현황</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="background:#0F1117;border-radius:10px;padding:10px"><div style="font-size:10px;color:#6B7494">총 매입</div><div id="pl-total-buy" style="font-size:16px;font-weight:700;color:#4EA8FF;margin-top:4px">₩0</div></div>
+          <div style="background:#0F1117;border-radius:10px;padding:10px"><div style="font-size:10px;color:#6B7494">총 판매</div><div id="pl-total-sell" style="font-size:16px;font-weight:700;color:#00DFA2;margin-top:4px">₩0</div></div>
+          <div style="background:#0F1117;border-radius:10px;padding:10px"><div style="font-size:10px;color:#6B7494">총 수수료</div><div id="pl-total-fee" style="font-size:16px;font-weight:700;color:#FF5FA0;margin-top:4px">₩0</div></div>
+          <div style="background:rgba(0,223,162,.06);border:1px solid rgba(0,223,162,.2);border-radius:10px;padding:10px"><div style="font-size:10px;color:#6B7494">순이익</div><div id="pl-net-profit" style="font-size:16px;font-weight:900;color:#00DFA2;margin-top:4px">₩0</div></div>
+        </div>
+        <div style="margin-top:10px;background:#0F1117;border-radius:8px;padding:10px">
+          <div style="font-size:10px;color:#6B7494;margin-bottom:4px">부가세 예상 (매출의 10%)</div>
+          <div id="pl-vat" style="font-size:14px;font-weight:700;color:#FFB547">₩0</div>
+        </div>
+      </div>
+      <div id="pl-ledger" style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px">
+        <div style="font-size:12px;font-weight:700;color:#F0F2F8;margin-bottom:8px">거래 원장</div>
+        <div id="pl-ledger-list" style="font-size:11px;color:#4A5470;text-align:center;padding:8px">거래 없음</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ 차트 대시보드 ══ -->
+<div id="page-charts" class="page ph" style="background:#0B0D11">
+  <div class="page-hdr">
+    <span class="page-ico">📊</span>
+    <div><div class="page-title">성과 대시보드</div>
+    <div class="page-sub">매출·마진·마켓 종합 분석</div></div>
+  </div>
+  <div style="padding:0 16px 24px">
+
+    <!-- KPI 카드 행 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px" id="ch-kpi-row">
+      <div style="background:#141824;border:1px solid rgba(0,223,162,.2);border-radius:12px;padding:14px">
+        <div style="font-size:10px;color:#6B7494;margin-bottom:4px">평균 마진율</div>
+        <div id="ch-avg-margin" style="font-size:22px;font-weight:900;color:#00DFA2;font-family:'Space Grotesk',sans-serif">-</div>
+        <div style="font-size:10px;color:#4A5470;margin-top:2px">GO 상품 기준</div>
+      </div>
+      <div style="background:#141824;border:1px solid rgba(78,168,255,.2);border-radius:12px;padding:14px">
+        <div style="font-size:10px;color:#6B7494;margin-bottom:4px">GO 상품</div>
+        <div id="ch-go-count" style="font-size:22px;font-weight:900;color:#4EA8FF;font-family:'Space Grotesk',sans-serif">-</div>
+        <div style="font-size:10px;color:#4A5470;margin-top:2px">/ 8개 분석 중</div>
+      </div>
+      <div style="background:#141824;border:1px solid rgba(255,181,71,.2);border-radius:12px;padding:14px">
+        <div style="font-size:10px;color:#6B7494;margin-bottom:4px">최고 마진 마켓</div>
+        <div id="ch-best-market" style="font-size:18px;font-weight:900;color:#FFB547;font-family:'Space Grotesk',sans-serif">-</div>
+        <div id="ch-best-margin" style="font-size:10px;color:#4A5470;margin-top:2px">-</div>
+      </div>
+      <div style="background:#141824;border:1px solid rgba(255,95,160,.2);border-radius:12px;padding:14px">
+        <div style="font-size:10px;color:#6B7494;margin-bottom:4px">예상 등록정가</div>
+        <div id="ch-avg-listprice" style="font-size:18px;font-weight:900;color:#FF5FA0;font-family:'Space Grotesk',sans-serif">-</div>
+        <div style="font-size:10px;color:#4A5470;margin-top:2px">GO 상품 평균</div>
+      </div>
+    </div>
+
+    <!-- 마켓별 마진 바 차트 -->
+    <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:700;color:#F0F2F8;margin-bottom:12px">🌏 마켓별 마진율 비교</div>
+      <canvas id="marketBarChart" height="160"></canvas>
+    </div>
+
+    <!-- 상품별 마진 차트 -->
+    <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:700;color:#F0F2F8;margin-bottom:4px">🏆 상품별 마진 분석</div>
+      <div style="font-size:10px;color:#6B7494;margin-bottom:12px">베트남 기준 · 목표 25%</div>
+      <canvas id="productChart" height="180"></canvas>
+    </div>
+
+    <!-- 마켓 도넛 차트 + 상품 분포 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+      <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px">
+        <div style="font-size:11px;font-weight:700;color:#F0F2F8;margin-bottom:10px">마켓 수수료</div>
+        <canvas id="feeDonut" height="130"></canvas>
+      </div>
+      <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px">
+        <div style="font-size:11px;font-weight:700;color:#F0F2F8;margin-bottom:10px">GO/검토/NO</div>
+        <canvas id="gradeDonut" height="130"></canvas>
+      </div>
+    </div>
+
+    <!-- 원가 구성 차트 -->
+    <div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px">
+      <div style="font-size:12px;font-weight:700;color:#F0F2F8;margin-bottom:4px">💰 상품 원가 구성</div>
+      <div style="font-size:10px;color:#6B7494;margin-bottom:12px">매입원가 vs 배송비 vs 수수료 vs 이익</div>
+      <canvas id="costStack" height="160"></canvas>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ 릴스 제작 ══ -->
+<div id="page-reels" class="page ph" style="background:#0B0D11">
+  <div class="page-hdr">
+    <span class="page-ico">🎬</span>
+    <div><div class="page-title">릴스 제작 크루</div>
+    <div class="page-sub">5개 플랫폼 동시 제작 → 비교 보고</div></div>
+  </div>
+  <div style="padding:0 16px 24px">
+
+    <!-- 입력 -->
+    <div style="background:#141824;border:1px solid rgba(155,120,255,.2);border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:700;color:#9B78FF;margin-bottom:12px">📦 상품 정보</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <input id="rl-product" placeholder="상품명 (예: Torriden Dive-In Serum)" style="background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px 12px;color:#F0F2F8;font-size:12px;font-family:inherit">
+        <input id="rl-benefit" placeholder="핵심 혜택 (예: 히알루론산 1000ppm, 수분 72시간)" style="background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px 12px;color:#F0F2F8;font-size:12px;font-family:inherit">
+        <select id="rl-type" style="background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px 12px;color:#F0F2F8;font-size:12px;font-family:inherit">
+          <option value="intro">제품 소개형</option>
+          <option value="tutorial">사용 튜토리얼</option>
+          <option value="before_after">Before/After</option>
+          <option value="trending">트렌딩 사운드</option>
+          <option value="unboxing">언박싱</option>
+        </select>
+        <select id="rl-lang" style="background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px 12px;color:#F0F2F8;font-size:12px;font-family:inherit">
+          <option value="vi">베트남어</option>
+          <option value="ko">한국어</option>
+          <option value="both">한국어 + 베트남어</option>
+        </select>
+        <button onclick="genReels()" id="rl-btn" style="background:linear-gradient(135deg,#9B78FF,#FF5FA0);border:none;border-radius:8px;padding:13px;color:#fff;font-size:13px;font-weight:700;cursor:pointer">🎬 스크립트 + 프롬프트 생성</button>
+      </div>
+    </div>
+
+    <!-- 결과 -->
+    <div id="rl-result">
+
+      <!-- 스크립트 -->
+      <div id="rl-script-box" style="display:none;background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;margin-bottom:12px">
+        <div style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;font-weight:700;color:#9B78FF">📝 60초 릴스 스크립트</span>
+          <button onclick="copyText('rl-script-content')" style="font-size:10px;padding:4px 10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#8B96B8;cursor:pointer">복사</button>
+        </div>
+        <div id="rl-script-content" style="padding:14px;font-size:11px;color:#8B96B8;line-height:1.8;white-space:pre-wrap"></div>
+      </div>
+
+      <!-- 플랫폼별 프롬프트 -->
+      <div id="rl-prompts-box" style="display:none;margin-bottom:12px">
+        <div style="font-size:12px;font-weight:700;color:#F0F2F8;margin-bottom:8px">🎯 플랫폼별 AI 프롬프트</div>
+        <div id="rl-prompts-list" style="display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+
+      <!-- 비교 보고 -->
+      <div id="rl-report-box" style="display:none;background:#141824;border:1px solid rgba(255,181,71,.2);border-radius:14px;overflow:hidden;margin-bottom:12px">
+        <div style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06)">
+          <span style="font-size:12px;font-weight:700;color:#FFB547">📋 제작 완료 후 — 결과 비교 입력</span>
+        </div>
+        <div style="padding:14px">
+          <div style="font-size:11px;color:#6B7494;margin-bottom:10px">각 플랫폼에서 영상 제작 후 URL 입력 → AI 비교 분석</div>
+          <div id="rl-platform-inputs" style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;gap:8px;align-items:center">
+              <span style="font-size:11px;color:#8B96B8;width:70px;flex-shrink:0">Kling AI</span>
+              <input placeholder="영상 URL" style="flex:1;background:#0F1117;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:7px 10px;color:#F0F2F8;font-size:11px;font-family:inherit">
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span style="font-size:11px;color:#8B96B8;width:70px;flex-shrink:0">Runway</span>
+              <input placeholder="영상 URL" style="flex:1;background:#0F1117;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:7px 10px;color:#F0F2F8;font-size:11px;font-family:inherit">
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span style="font-size:11px;color:#8B96B8;width:70px;flex-shrink:0">HeyGen</span>
+              <input placeholder="영상 URL" style="flex:1;background:#0F1117;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:7px 10px;color:#F0F2F8;font-size:11px;font-family:inherit">
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span style="font-size:11px;color:#8B96B8;width:70px;flex-shrink:0">CapCut</span>
+              <input placeholder="영상 URL" style="flex:1;background:#0F1117;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:7px 10px;color:#F0F2F8;font-size:11px;font-family:inherit">
+            </div>
+          </div>
+          <button onclick="genCompareReport()" style="width:100%;margin-top:10px;background:rgba(255,181,71,.15);border:1px solid rgba(255,181,71,.3);border-radius:8px;padding:10px;color:#FFB547;font-size:12px;font-weight:700;cursor:pointer">📊 비교 리포트 생성 → 진우님 보고</button>
+        </div>
+      </div>
+
+      <!-- 최종 보고 -->
+      <div id="rl-final-report" style="display:none;background:#141824;border:1px solid rgba(0,223,162,.2);border-radius:14px;padding:16px">
+        <div style="font-size:12px;font-weight:700;color:#00DFA2;margin-bottom:10px">✅ 마케팅 에이전트 → 진우님 보고</div>
+        <div id="rl-final-content" style="font-size:11px;color:#8B96B8;line-height:1.8;white-space:pre-wrap"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
+          <button onclick="approveReels()" style="background:rgba(0,223,162,.15);border:1px solid rgba(0,223,162,.3);border-radius:8px;padding:10px;color:#00DFA2;font-size:12px;font-weight:700;cursor:pointer">✅ 승인 · 업로드</button>
+          <button onclick="rejectReels()" style="background:rgba(255,92,92,.1);border:1px solid rgba(255,92,92,.2);border-radius:8px;padding:10px;color:#FF5C5C;font-size:12px;font-weight:700;cursor:pointer">🔄 재제작 요청</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ 소싱팀장 보고 ══ -->
+<div id="page-sourcing-report" class="page ph" style="background:#0B0D11">
+  <div class="page-hdr">
+    <span class="page-ico">📋</span>
+    <div><div class="page-title">소싱팀장 보고</div>
+    <div class="page-sub">국가별 연령대 베스트 분석</div></div>
+  </div>
+  <div style="padding:0 16px 24px">
+
+    <!-- 국가 선택 -->
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+      <button onclick="showMarketReport('all')" id="mr-all" style="font-size:11px;padding:5px 12px;border-radius:99px;border:1px solid rgba(255,95,160,.4);background:rgba(255,95,160,.15);color:#FF5FA0;cursor:pointer;font-weight:700">전체</button>
+      <button onclick="showMarketReport('VN')" id="mr-VN" style="font-size:11px;padding:5px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#6B7494;cursor:pointer">🇻🇳 VN</button>
+      <button onclick="showMarketReport('TH')" id="mr-TH" style="font-size:11px;padding:5px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#6B7494;cursor:pointer">🇹🇭 TH</button>
+      <button onclick="showMarketReport('MY')" id="mr-MY" style="font-size:11px;padding:5px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#6B7494;cursor:pointer">🇲🇾 MY</button>
+      <button onclick="showMarketReport('SG')" id="mr-SG" style="font-size:11px;padding:5px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#6B7494;cursor:pointer">🇸🇬 SG</button>
+      <button onclick="showMarketReport('PH')" id="mr-PH" style="font-size:11px;padding:5px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#6B7494;cursor:pointer">🇵🇭 PH</button>
+      <button onclick="showMarketReport('TW')" id="mr-TW" style="font-size:11px;padding:5px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#6B7494;cursor:pointer">🇹🇼 TW</button>
+    </div>
+
+    <div id="market-report-content"></div>
+  </div>
+</div>
+</main>
+</div>
+
+<script>
+function showPage(id,el){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');p.classList.add('ph');});
+  document.querySelectorAll('.nav-item,.atab').forEach(function(b){b.classList.remove('active');});
+  var pg=document.getElementById('page-'+id);
+  if(pg){pg.classList.remove('ph');pg.classList.add('active');}
+  document.querySelectorAll('[data-page="'+id+'"]').forEach(function(b){b.classList.add('active');});
+  var mn=document.querySelector('main');if(mn)mn.scrollTop=0;
+  if(id==='simulator'){try{openSimModal();}catch(x){}}
+  try{
+    if(id==='overview')initMarketChart();
+    if(id==='revenue'){calcRevenue();initRevenueChart();}
+    if(id==='products')renderProducts();
+    if(id==='livechecker')renderLiveChecker();
+    if(id==='briefing')initBriefing();
+    if(id==='catch_up')initCatchUp();
+    if(id==='logistics_calc')calcLogistics();
+    if(id==='sourcing_intel')initSourcingIntel();
+    if(id==='competitor')initCompetitor();
+    if(id==='trends')initTrends();
+    if(id==='salesdata')initSalesData();
+    if(id==='aireport')initAIReport();
+    if(id==='charts')initCharts();
+    if(id==='sourcing-report')initSourcingReport();
+    if(id==='reels')initReels();
+    if(id==='accounting')initAccounting();
+    if(id==='pipeline'){var g=document.getElementById('pipelineGoCount');if(g)g.textContent=LC_PRODUCTS.filter(function(p){return lcCalc(p).grade==='go';}).length;}
+  }catch(e){}
+}
+
+var LC_MARKETS={VN:{name:'Vietnam',fee:0.058,tax:0.015},TH:{name:'Thailand',fee:0.070,tax:0.015}};
+var LC_PRODUCTS=[
+  {rank:1,brand:'Mediheal',name:'Mask Pack 10+1',salePrice:9900,isSet:false,setCount:1,isDirect:true,weight:350},
+  {rank:2,brand:'Essnature',name:'Squalane Cream 2-Pack',salePrice:20700,isSet:true,setCount:2,isDirect:false,weight:160},
+  {rank:4,brand:'Goodal',name:'Vita-C Serum 50ml',salePrice:21000,isSet:false,setCount:1,isDirect:false,weight:130},
+  {rank:6,brand:'Wellage',name:'Hyaluron Ampoule 2-Pack',salePrice:29300,isSet:true,setCount:2,isDirect:false,weight:180},
+  {rank:8,brand:'Anua',name:'PDRN Serum 2-Pack',salePrice:26900,isSet:true,setCount:2,isDirect:false,weight:100},
+  {rank:9,brand:'Torriden',name:'Dive-In Serum 2-Pack',salePrice:25800,isSet:true,setCount:2,isDirect:false,weight:100},
+  {rank:10,brand:'Aestura',name:'Atobarrier Cream 80ml',salePrice:25000,isSet:false,setCount:1,isDirect:false,weight:200},
+  {rank:12,brand:'Primera',name:'Vitatiinol Serum 30g',salePrice:52500,isSet:false,setCount:1,isDirect:false,weight:100},
+  /* ── 목욕용품 카테고리 ── */
+  {rank:1,brand:'Mise en Scene',name:'Bath Salt Scrub',salePrice:9900,isSet:false,setCount:1,isDirect:false,weight:250,category:'bath'},
+  {rank:2,brand:'Innisfree',name:'Jeju Volcanic Bath Powder 2-Pack',salePrice:18000,isSet:true,setCount:2,isDirect:false,weight:200,category:'bath'},
+  {rank:3,brand:'Nature Republic',name:'Lemon Bath Salt Gift Set',salePrice:24900,isSet:false,setCount:1,isDirect:false,weight:280,category:'bath'},
+  {rank:4,brand:'Healing Bird',name:'Bath Bomb 5-Pack',salePrice:19800,isSet:true,setCount:5,isDirect:false,weight:180,category:'bath'},
+  {rank:5,brand:'Dr.Brandt',name:'Exfoliating Body Scrub 2-Pack',salePrice:22000,isSet:true,setCount:2,isDirect:false,weight:220,category:'bath'},
+];
+function estShip(w){if(w<=100)return 10800;if(w<=200)return 12600;if(w<=300)return 14400;if(w<=500)return 17500;return 23000;}
+function lcCalc(p,mk,tm){
+  var m=LC_MARKETS[mk||'VN'],t=tm||25;
+  var uc=p.isSet?Math.round(p.salePrice/p.setCount):p.salePrice;
+  var w=p.isSet?Math.round(p.weight/p.setCount):p.weight;
+  var sh=estShip(w),tc=uc+sh,tf=m.fee+m.tax;
+  var sp=Math.round(Math.round(tc/(1-tf-t/100)/1000)*1000);
+  var pr=sp?sp-tc-sp*tf:0,mg=sp?(pr/sp*100):0;
+  var slp=sp?Math.round(Math.round(sp/0.70/1000)*1000):0;
+  var gr=p.isDirect?'x':(mg>=t?'go':(mg>=15?'review':'no'));
+  return{unitCost:uc,ship:sh,totalCost:tc,sugPrice:sp,profit:pr,margin:mg,grade:gr,shopeeListPrice:slp,localFmt:sp?Math.round(sp*18.8).toLocaleString()+'₫':'-'};
+}
+function renderLiveChecker(){
+  var mk=(document.getElementById('lc-market')||{}).value||'VN';
+  var tg=parseInt((document.getElementById('lc-margin')||{}).value||25);
+  var tbl=document.getElementById('lcTable');if(!tbl)return;
+  var BG='#0F1117',HDR='#141824';
+  var r='<tr style="background:'+HDR+'"><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">#</th><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">브랜드</th><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">세일가</th><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">단위원가</th><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">권장가</th><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">마진</th><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">판정</th></tr>';
+  var TD='style="background:'+BG+';padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.05);';
+  var filtered = _lcFilter==='all' ? LC_PRODUCTS : LC_PRODUCTS.filter(function(p){
+    if(_lcFilter==='bath') return p.category==='bath';
+    return !p.category || p.category==='beauty';
+  });
+  filtered.forEach(function(p){
+    var c=lcCalc(p,mk,tg);
+    var bc=c.grade==='go'?'b-go':(c.grade==='review'?'b-rv':(c.grade==='no'?'b-no':'b-x'));
+    var bt=c.grade==='go'?'GO':(c.grade==='review'?'검토':(c.grade==='no'?'NO':'제외'));
+    var mc=c.grade==='go'?'#00DFA2':(c.grade==='review'?'#FFB547':'#6B7494');
+    r+='<tr style="background:'+BG+'">';
+    r+='<td '+TD+'color:#4A5470;font-family:monospace">'+p.rank+'</td>';
+    r+='<td '+TD+'color:#FFFFFF"><strong>'+p.brand+'</strong>'+(p.isSet?'<span style="color:#FFB547;font-size:11px;margin-left:3px">÷'+p.setCount+'</span>':'')+'<div style="font-size:11px;color:#4A5470">'+p.name+'</div></td>';
+    r+='<td '+TD+'color:#8B96B8;font-family:monospace">₩'+p.salePrice.toLocaleString()+'</td>';
+    r+='<td '+TD+'color:#4EA8FF;font-family:monospace">₩'+c.unitCost.toLocaleString()+'</td>';
+    r+='<td '+TD+'color:#00DFA2;font-family:monospace">₩'+(c.sugPrice||0).toLocaleString()+'<div style="font-size:11px;color:#4A5470">'+c.localFmt+'</div></td>';
+    r+='<td '+TD+'font-weight:700;font-family:monospace;color:'+mc+'">'+c.margin.toFixed(1)+'%</td>';
+    r+='<td '+TD+'"><span class="badge '+bc+'">'+bt+'</span></td></tr>';
+  });
+  tbl.innerHTML=r;
+}
+function renderProducts(){
+  var tbl=document.getElementById('productsTable');if(!tbl)return;
+  var BG='#0F1117',HDR='#141824';
+  var r='<tr style="background:'+HDR+'"><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">#</th><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px"">브랜드</th><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px">세일가</th><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px">권장가</th><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px">마진</th><th style="background:'+HDR+';font-size:10px;font-weight:600;color:#6B7494;padding:8px 10px">판정</th></tr>';
+  var TD='style="background:'+BG+';padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.05);';
+  LC_PRODUCTS.forEach(function(p){
+    var c=lcCalc(p,'VN',25);
+    var bc=c.grade==='go'?'b-go':(c.grade==='review'?'b-rv':(c.grade==='no'?'b-no':'b-x'));
+    var bt=c.grade==='go'?'GO':(c.grade==='review'?'검토':(c.grade==='no'?'NO':'제외'));
+    var mc=c.grade==='go'?'#00DFA2':(c.grade==='review'?'#FFB547':'#6B7494');
+    r+='<tr style="background:'+BG+'">';
+    r+='<td '+TD+'color:#4A5470;font-family:monospace">'+p.rank+'</td>';
+    r+='<td '+TD+'color:#FFFFFF"><strong>'+p.brand+'</strong>'+(p.isSet?'<span style="color:#FFB547;font-size:11px"> ÷'+p.setCount+'</span>':'')+'<div style="font-size:11px;color:#4A5470">'+p.name+'</div></td>';
+    r+='<td '+TD+'color:#8B96B8;font-family:monospace">₩'+p.salePrice.toLocaleString()+'</td>';
+    r+='<td '+TD+'color:#00DFA2;font-family:monospace">₩'+(c.sugPrice||0).toLocaleString()+'</td>';
+    r+='<td '+TD+'font-weight:700;font-family:monospace;color:'+mc+'">'+c.margin.toFixed(1)+'%</td>';
+    r+='<td '+TD+'"><span class="badge '+bc+'">'+bt+'</span></td></tr>';
+  });
+  tbl.innerHTML=r;
+}
+function lcAiAnalyze(){
+  var mk=(document.getElementById('lc-market')||{}).value||'VN';
+  var tg=parseInt((document.getElementById('lc-margin')||{}).value||25);
+  var box=document.getElementById('lcInsightBox'),tx=document.getElementById('lcInsightText');
+  if(!box||!tx)return;
+  var go=LC_PRODUCTS.filter(function(p){return lcCalc(p,mk,tg).grade==='go';});
+  var out=['MARKET :: '+LC_MARKETS[mk].name+' | TARGET :: '+tg+'%',''];
+  if(go.length){var t2=go[0];var cv=lcCalc(t2,mk,tg);out.push('TOP_GO :: '+t2.brand);out.push('MARGIN '+cv.margin.toFixed(1)+'% | LIST ₩'+(cv.shopeeListPrice||0).toLocaleString());}
+  out.push('');out.push('SIGNAL :: '+go.slice(0,3).map(function(p){return p.brand;}).join(' + '));
+  tx.innerHTML='<span style="color:#00DFA2">'+out.join('\n')+'</span>';
+  box.style.display='block';
+}
+function initMarketChart(){
+  var el=document.getElementById('marketChart');if(!el||el.getAttribute('data-r'))return;
+  el.setAttribute('data-r','1');
+  var data=[['Vietnam',134,'#00DFA2'],['Thailand',182,'#9B78FF'],['Philippines',89,'#4EA8FF'],['Malaysia',67,'#00D4C8'],['Singapore',45,'#FFB547'],['Taiwan',38,'#8B96B8']];
+  var html='<div style="display:flex;flex-direction:column;gap:7px">';
+  data.forEach(function(d){var pct=(d[1]/182*100).toFixed(0);
+    html+='<div style="display:flex;align-items:center;gap:8px"><div style="width:80px;font-size:11px;color:#8B96B8;text-align:right;flex-shrink:0">'+d[0]+'</div>';
+    html+='<div style="flex:1;background:#0B0D11;height:18px"><div style="width:'+pct+'%;background:'+d[2]+';height:100%;display:flex;align-items:center;padding-left:6px"><span style="font-size:11px;font-weight:700;color:#0B0D11">+'+d[1]+'%</span></div></div></div>';});
+  el.innerHTML=html+'</div>';
+}
+function initRevenueChart(){
+  var el=document.getElementById('revenueChart');if(!el)return;
+  var o=parseInt((document.getElementById('rv-orders')||{value:'100'}).value);
+  var p=parseInt((document.getElementById('rv-price')||{value:'39000'}).value);
+  var m=parseInt((document.getElementById('rv-margin')||{value:'30'}).value)/100;
+  var mths=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+  var muls=[1,1,1.2,1,1,1.5,1,1,2.5,1,9,4];
+  var vals=muls.map(function(ml){return Math.round(o*p*m*ml/10000);});
+  var mx=Math.max.apply(null,vals);
+  var html='<div style="font-size:11px;color:#8B96B8;margin-bottom:8px">월별 순이익 (만원) // 11월=11.11 x9</div><div style="display:flex;align-items:flex-end;gap:2px;height:90px">';
+  vals.forEach(function(v,i){var h=Math.max(4,Math.round(v/mx*100));var isN=(i===10);
+    html+='<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:10px;color:'+(isN?'#FFB547':'#3A4055')+'">'+v+'</div><div style="width:100%;height:'+h+'%;background:'+(isN?'#FFB547':'rgba(56,178,255,.4)')+'"></div><div style="font-size:10px;color:#4A5470">'+mths[i]+'</div></div>';});
+  el.innerHTML=html+'</div>';
+}
+function calcRevenue(){
+  var o=parseInt((document.getElementById('rv-orders')||{value:'100'}).value);
+  var p=parseInt((document.getElementById('rv-price')||{value:'39000'}).value);
+  var m=parseInt((document.getElementById('rv-margin')||{value:'30'}).value);
+  var b=parseInt((document.getElementById('rv-bundle')||{value:'30'}).value);
+  var S=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  S('rv-orders-val',o);S('rv-price-val','₩'+p.toLocaleString());S('rv-margin-val',m+'%');S('rv-bundle-val',b+'%');
+  var rev=o*p,prof=Math.round(rev*m/100),ship=Math.round(o*b/100*9000);
+  S('rv-revenue','₩'+Math.round(rev/10000)+'만');S('rv-profit','₩'+Math.round(prof/10000)+'만');
+  S('rv-shipping','₩'+Math.round(ship/10000)+'만');S('rv-1111','₩'+Math.round(prof*9/10000)+'만');
+}
+function initCatchUp(){updateCatchUp();}
+function updateCatchUp(){
+  var our=parseInt((document.getElementById('cu-in-ours')||{value:'0'}).value)||0;
+  var comp=parseInt((document.getElementById('cu-in-comp')||{value:'500'}).value)||500;
+  var gap=comp-our,daily=Math.ceil(gap/180),eta=Math.ceil(gap/Math.max(1,daily));
+  var pct=Math.min(100,Math.round(our/comp*100));
+  function S(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+  S('cu-comp-num',comp);S('cu-our-num',our);S('cu-daily',daily);S('cu-eta',eta+'d');
+  S('cu-comp-disp',comp);S('cu-our-disp',our);S('cu-gap',gap);
+  var ob=document.getElementById('cu-our-bar');if(ob)ob.style.width=pct+'%';
+  var p1=document.getElementById('phase1-bar');if(p1)p1.style.width=Math.min(100,our/50*100)+'%';
+  var p2=document.getElementById('phase2-bar');if(p2)p2.style.width=Math.min(100,our/300*100)+'%';
+  var p3=document.getElementById('phase3-bar');if(p3)p3.style.width=Math.min(100,our/500*100)+'%';
+}
+function calcLogistics(){
+  var wt=parseInt((document.getElementById('lc-weight')||{value:'130'}).value)||130;
+  var qty=parseInt((document.getElementById('lc-qty')||{value:'30'}).value)||30;
+  var bdl=parseInt((document.getElementById('lc-bundle')||{value:'30'}).value)||30;
+  var bv=document.getElementById('lc-bundle-val');if(bv)bv.textContent=bdl+'%';
+  function emsRate(w){if(w<=100)return 10800;if(w<=200)return 12600;if(w<=300)return 14400;if(w<=500)return 17500;return 23000;}
+  var ems=emsRate(wt)*qty;
+  var carriers=[
+    {name:'EMS',phase:'P1 (현재)',cost:ems,transit:'7-14일',color:'#FF5C5C',note:'계약 불필요'},
+    {name:'K-Packet',phase:'P1 대안',cost:Math.round(qty*5500),transit:'14-20일',color:'#8B96B8',note:'경량 상품만'},
+    {name:'한진글로벌',phase:'P2 (50건+/월)',cost:Math.round(qty*7800),transit:'5-10일',color:'#FFB547',note:'베트남 포스트 파트너'},
+    {name:'CJ CBE',phase:'P3 (200건+/월)',cost:Math.round(qty*6500),transit:'1-2일',color:'#00DFA2',note:'현지 풀필먼트 ★'},
+  ];
+  var cont=document.getElementById('logistics-compare');if(!cont)return;
+  var mx=ems;
+  cont.innerHTML=carriers.map(function(c){
+    var pct=Math.round(c.cost/mx*100);
+    return '<div style="background:#1A2030;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;margin-bottom:8px">'+
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">'+
+      '<div><span style="font-size:11px;font-weight:700;color:'+c.color+'">'+c.name+'</span> '+
+      '<span style="font-size:11px;color:#6B7494">'+c.phase+'</span></div>'+
+      '<div><span style="font-size:12px;color:'+c.color+'">₩'+c.cost.toLocaleString()+'</span>'+
+      ' <span style="font-size:11px;color:#8B96B8">'+c.transit+'</span></div></div>'+
+      '<div style="background:#0B0D11;height:4px;margin-bottom:4px"><div style="width:'+pct+'%;height:100%;background:'+c.color+'"></div></div>'+
+      '<div style="font-size:11px;color:#4A5470">'+c.note+'</div></div>';
+  }).join('');
+}
+function initSourcingIntel(){
+  var sales=[
+    {name:'6월 올영세일',start:'2026-06-05',end:'2026-06-11',type:'regular'},
+    {name:'9월 올영세일',start:'2026-09-17',end:'2026-09-24',type:'regular'},
+    {name:'올영 어워즈 특가',start:'2026-10-28',end:'2026-11-04',type:'special'},
+    {name:'11월 올영세일',start:'2026-11-05',end:'2026-11-11',type:'major'},
+    {name:'12월 올영세일',start:'2026-12-03',end:'2026-12-09',type:'regular'},
+  ];
+  var now=new Date();
+  var tl=document.getElementById('saleTimeline');if(!tl)return;
+  var html='';var nextAction='';
+  sales.forEach(function(s){
+    var start=new Date(s.start),end=new Date(s.end);
+    var prep=new Date(start);prep.setDate(prep.getDate()-14);
+    var mktStart=new Date(start);mktStart.setDate(mktStart.getDate()-7);
+    var diff=Math.floor((start-now)/(1000*60*60*24));
+    var isPast=end<now,isCurrent=start<=now&&now<=end;
+    var color=s.type==='major'?'#FFB547':(s.type==='special'?'#9B78FF':'#8B96B8');
+    var status=isPast?'종료':(isCurrent?'LIVE':(diff<=0?'NOW':'D-'+diff));
+    var statusColor=isPast?'#3A4055':(isCurrent?'#00DFA2':'#FFB547');
+    if(!isPast&&!nextAction){
+      nextAction=diff<=0?'⚡ '+s.name+' 진행 중 → 광고비 집중 투입':(diff<=7?'⚡ '+s.name+' D-'+diff+' → 쇼피 광고비 증액 즉시':(diff<=14?'📦 '+s.name+' D-'+diff+' → 소싱 물량 확보 시작':'📋 '+s.name+' D-'+diff+' → 준비 시작 D-14: '+prep.toLocaleDateString('ko-KR')));
+    }
+    html+='<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07);align-items:flex-start">';
+    html+='<div style="font-size:10px;color:'+statusColor+';width:50px;flex-shrink:0;font-weight:700">'+status+'</div>';
+    html+='<div style="flex:1"><div style="font-size:11px;color:'+color+';font-weight:600">'+s.name+'</div>';
+    html+='<div style="font-size:11px;color:#4A5470;margin-top:2px">'+s.start+' ~ '+s.end+'</div>';
+    html+='<div style="font-size:11px;color:#6B7494;margin-top:3px">▸ 소싱 준비: '+prep.toLocaleDateString('ko-KR')+' · 쇼피 광고: '+mktStart.toLocaleDateString('ko-KR')+'</div></div></div>';
+  });
+  tl.innerHTML=html;
+  var ta=document.getElementById('todayAction');
+  if(ta)ta.textContent=nextAction||'2026년 전체 세일 일정 완료. 2027년 일정 대기 중.';
+}
+
+var BDATA=[
+  {id:'sourcing',icon:'🔍',name:'소싱담당',role:'올리브영 실시간 소싱 전담',color:'#00DFA2',
+   tabs:[['sourcing-report','📋 소싱보고'],['livechecker','🔴 마진검증'],['products','🏆 상품분석'],['competitor','🕵️ 경쟁자'],['trends','📈 트렌드']],
+   done:['토리든 더블기획 GO 확정 세일즈팀 전달','구달 비타C 마진 31.5% 검증 완료'],
+   doing:['아누아 PDRN 세럼 소싱 진행 중','에스네이처 크림 REVIEW 추가 검토'],
+   next:['이번 주 3개 SKU 확정','세일즈팀 가격 협의 후 팀장 보고'],
+   report:'3개 SKU GO 확정 시 팀장 보고 예정'},
+  {id:'sales',icon:'💰',name:'세일즈담당',role:'후발주자 딥 분석 추격 전략',color:'#FFB547',
+   tabs:[['simulator','🌏 전체시뮬'],['salesdata','📊 판매데이터'],['revenue','💰 수익계산기'],['kpi','📈 KPI'],['catch_up','🎯 추격현황']],
+   done:['토리든 세럼 쇼피 등록 (-30%)','고객 응대 14건 완료'],
+   doing:['웰라쥬 앰플 전환율 0.8% 원인 분석','6.6 바우처 마케팅팀 협의 중'],
+   next:['GO 상품 가격 세팅','주간 KPI 추격지수 팀장 보고'],
+   report:'주간 매출 2.8M 추격지수 팀장 보고 준비 중'},
+  {id:'marketing',icon:'📢',name:'마케팅담당',role:'콘텐츠 바우처 챌린지 마케팅',color:'#9B78FF',
+   tabs:[['reels','🎬 릴스제작'],['content_gen','🎨 콘텐츠생성기'],['detail','🖼 상세페이지'],['voucher','💰 바우처']],
+   done:['아누아 PDRN 베트남어 상세페이지 완성','첫구매 바우처 KBEAUTY50 등록'],
+   doing:['6.6 플래시 바우처 카피 작업 (긴급)','D+10 리뷰 요청 14명 준비'],
+   next:['세일즈팀과 할인율 협의','팀장 바우처 승인 요청'],
+   report:'6.6 캠페인 70% 준비 바우처 승인 후 보고'},
+  {id:'logistics',icon:'📦',name:'물류담당',role:'배송 재고 출고 관리',color:'#00D4C8',
+   tabs:[['logistics_calc','🚚 배송비계산기'],['pipeline','📦 SKU파이프라인']],
+   done:['오늘 출고 8건 처리','합포장 3건 27,000원 절감'],
+   doing:['아누아 재고 7개 긴급 보충 요청','6.6 전 재고 점검 중'],
+   next:['추가 입고 확인 후 출고 스케줄','팀장 주간 물류 보고'],
+   report:'재고 위험 1종 아누아 소싱팀 협의 완료 후 보고'},
+  {id:'design',icon:'🎨',name:'디자인담당',role:'이미지 배너 프로모션 비주얼',color:'#4EA8FF',
+   tabs:[['detail','🖼 상세페이지가이드'],['roadmap','🗺 성장로드맵']],
+   done:['아누아 썸네일 v1 완성','토리든 히어로 배너 납품'],
+   doing:['6.6 메가세일 배너 60% 완성 (긴급)','웰라쥬 앰플 썸네일 리뉴얼 검토'],
+   next:['6.6 배너 오늘 완성 세일즈팀 전달','구달 상세페이지 착수'],
+   report:'6.6 배너 완성 즉시 팀장 확인 요청'},
+  {id:'accounting',icon:'💹',name:'회계담당',role:'손익계산 정산 세금 관리',color:'#00D4C8',
+   tabs:[['accounting','💹 손익계산'],['salesdata','📊 판매데이터']],
+   done:['5월 손익 정산 완료','배송비 영수증 분류'],
+   doing:['6월 쇼피 정산 CSV 입력 대기','부가세 신고 준비'],
+   next:['올영 세금계산서 요청','월간 손익 리포트 작성'],
+   report:'월말 손익 확정 후 팀장 보고'},
+];
+
+function bcFmt(lines){
+  var out='<div style="font-size:11px;line-height:1.75;color:#8B96B8">';
+  lines.forEach(function(line){
+    if(!line){out+='<div style="height:5px"></div>';return;}
+    if(line.charAt(0)==='🔴'||line.charAt(0)==='📋'||line.charAt(0)==='💰'||line.charAt(0)==='📈'||
+       line.charAt(0)==='🛒'||line.charAt(0)==='🎯'||line.charAt(0)==='⚠'||line.charAt(0)==='⚡'||
+       line.indexOf('현황:')>0||line.indexOf('포인트')>0||line.indexOf('체크리스트')>0){
+      out+='<div style="font-size:12px;font-weight:700;color:#F0F2F8;margin:8px 0 3px">'+line+'</div>';
+    } else if(line.trim().slice(0,2)==='· '){
+      out+='<div style="display:flex;gap:5px;padding-left:4px"><span style="color:#FF5FA0;flex-shrink:0">·</span><span>'+line.trim().slice(2)+'</span></div>';
+    } else {
+      out+='<div>'+line+'</div>';
+    }
+  });
+  return out+'</div>';
+}
+function bcGen(id){
+  var el=document.getElementById('bc-brief-'+id),st=document.getElementById('bc-status-'+id);
+  if(!el)return;
+  var now=new Date(),h=now.getHours(),mi=now.getMinutes();
+  var ap=h<12?'오전 ':'오후 ',hh=h===0?12:(h>12?h-12:h);
+  var ts=ap+hh+':'+(mi<10?'0':'')+mi;
+  var go=LC_PRODUCTS.filter(function(p){return lcCalc(p).grade==='go';});
+  var avg=go.length?(go.reduce(function(s,p){return s+lcCalc(p).margin;},0)/go.length).toFixed(1):'0';
+  var L=[];
+  if(id==='sourcing'){
+    L=['오늘의 소싱 포인트','',
+      'GO 상품 현황: '+go.length+'개 확정 | 이번 주 목표: 3 SKU','',
+      'TOP GO 추천:'];
+    go.slice(0,3).forEach(function(p,i){var cv=lcCalc(p);L.push('  '+(i+1)+'. '+p.brand+' — 마진 '+cv.margin.toFixed(1)+'%'+(p.isSet?' (기획÷'+p.setCount+')':''));});
+    L=L.concat(['','⚠️ 경고: 아누아 재고 7개 → 긴급 보충 필요',
+      '제외: 메디힐 / COSRX 직입점','',
+      '오늘 체크리스트:',
+      '· 올영 랭킹 변동 확인',
+      '· 에스네이처 크림 REVIEW 재검토',
+      '· 3 SKU 확정 → 세일즈팀 전달']);
+  }else if(id==='sales'){
+    L=['🔴 후발주자 세일즈 딥 분석','',
+      '📋 ① 리뷰 격차: 경쟁자 500개 | 우리 0개','6개월 추격 목표: 하루 3개↑','',
+      '💰 ② 가격: 경쟁자 대비 -10~13% 진입','등록정가 = 판매가 ÷ 0.70','',
+      '📈 ③ KPI: CTR 0.5~2% | 전환율 2~5%','',
+      '🛒 ④ 주간 현황: 누계 71건 | 순이익 845,000원','평균 GO 마진: '+avg+'%','',
+      '오늘 체크리스트:',
+      '· 6.6 바우처 쇼피 등록',
+      '· 웰라쥬 가격 조정 결정',
+      '· 경쟁자 3종 스냅샷'];
+  }else if(id==='marketing'){
+    L=['오늘의 마케팅 현황','',
+      '챌린지 시퀀스 (ROAS 2,618%):',
+      '구매→D+10 리뷰요청→포토쿠폰→재구매','',
+      '⚡ 긴급: 6.6 플래시 바우처 카피 완성','',
+      '오늘 체크리스트:',
+      '· 6.6 플래시 바우처 카피 완성',
+      '· D+10 리뷰 요청 14명 발송',
+      '· 팀장 바우처 승인 요청'];
+  }else if(id==='logistics'){
+    L=['오늘의 물류 현황','',
+      '출고: 8건 | 합포장 절감: 27,000원','',
+      '🔴 재고 위험:',
+      '  아누아 PDRN 세럼: 7개 (긴급!)',
+      '  토리든: 15개 | 구달: 12개','',
+      '오늘 체크리스트:',
+      '· 아누아 보충 확인',
+      '· 오늘 출고 8건 처리'];
+  }else if(id==='design'){
+    L=['오늘의 디자인 현황','',
+      '진행 중: 6.6 배너 60% 완성 (긴급)','',
+      '오늘 체크리스트:',
+      '· 6.6 배너 완성 → 세일즈팀',
+      '· 웰라쥬 썸네일 v2 시안'];
+  }
+  el.innerHTML='<div style="font-size:11px;color:#6B7494;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.07)">생성 '+ts+'</div>'+bcFmt(L);
+  if(st){st.textContent='완료 ✓';st.style.color='#00DFA2';}
+}
+function bcToggle(id){
+  var body=document.getElementById('bc-body-'+id),arr=document.getElementById('bc-arr-'+id);
+  if(!body)return;
+  var open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  if(arr)arr.textContent=open?'▾':'▴';
+  if(!open)bcGen(id);
+}
+function bcOpenOnly(id){agSelect(id);}
+function runAllBriefings(){
+  /* ag-detail 패널 열기 */
+  var panel=document.getElementById('ag-detail');
+  if(panel) panel.style.display='block';
+  /* 모든 에이전트 bc-body 표시 + 브리핑 생성 */
+  BDATA.forEach(function(a){
+    var body=document.getElementById('bc-body-'+a.id);
+    var arr=document.getElementById('bc-arr-'+a.id);
+    if(body) body.style.display='block';
+    if(arr) arr.textContent='▴';
+    bcGen(a.id);
+  });
+  /* 첫 번째 에이전트로 스크롤 */
+  setTimeout(function(){
+    if(panel) panel.scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+function openAgent(agentId,btn){
+  document.querySelectorAll('.atab').forEach(function(b){b.classList.remove('active');});
+  if(btn)btn.classList.add('active');
+  showPage('briefing',null);
+  setTimeout(function(){if(agentId==='manager')runAllBriefings();else bcOpenOnly(agentId);},50);
+}
+function renderBCards(){
+  var container=document.getElementById('bCards');
+  if(!container||container.innerHTML.trim())return;
+  var avatars={
+    sourcing:{bg:'linear-gradient(135deg,#00DFA2,#4EA8FF)',emoji:'🔍'},
+    sales:{bg:'linear-gradient(135deg,#FFB547,#FF5FA0)',emoji:'💰'},
+    marketing:{bg:'linear-gradient(135deg,#9B78FF,#FF5FA0)',emoji:'📢'},
+    logistics:{bg:'linear-gradient(135deg,#00D4C8,#4EA8FF)',emoji:'📦'},
+    design:{bg:'linear-gradient(135deg,#4EA8FF,#9B78FF)',emoji:'🎨'},
+    accounting:{bg:'linear-gradient(135deg,#00D4C8,#00DFA2)',emoji:'💹'}
+  };
+  var statusMap={sourcing:'자동 실행',sales:'사용 가능',marketing:'사용 가능',logistics:'사용 가능',design:'사용 가능'};
+  var tagsMap={
+    sourcing:['마진 검증','GO/NO GO','Notion'],
+    sales:['7개국 가격','KPI','추격 전략'],
+    marketing:['베트남어','카루셀','바우처'],
+    logistics:['배송비','EMS/한진','합포장'],
+    design:['상세페이지','썸네일','가이드'],
+    accounting:['손익계산','월간정산','세금예상']
+  };
+  var doneMap={sourcing:'GO 상품 3개 확정',sales:'6.6 바우처 등록',marketing:'카루셀 5장 완성',logistics:'합포장 8건 처리',design:'히어로 배너 납품',
+    accounting:'5월 손익 정산 완료'};
+  /* 상단 스탯 */
+  var goCount=LC_PRODUCTS.filter(function(p){return lcCalc(p).grade==='go';}).length;
+  var html='<div class="ag-stat-row">';
+  html+='<div class="ag-stat-box"><div class="ag-stat-num" style="color:#00DFA2">'+goCount+'</div><div class="ag-stat-lbl">GO 상품</div></div>';
+  html+='<div class="ag-stat-box"><div class="ag-stat-num" style="color:#4EA8FF">5</div><div class="ag-stat-lbl">에이전트</div></div>';
+  html+='<div class="ag-stat-box"><div class="ag-stat-num" style="color:#FFB547">7</div><div class="ag-stat-lbl">국가</div></div>';
+  html+='<div class="ag-stat-box"><div class="ag-stat-num" style="color:#FF5FA0">0</div><div class="ag-stat-lbl">인건비</div></div>';
+  html+='</div>';
+  /* 에이전트 그리드 */
+  html+='<div class="ag-grid">';
+  BDATA.forEach(function(a){
+    var av=avatars[a.id]||{bg:'linear-gradient(135deg,#FF5FA0,#9B78FF)',emoji:'🤖'};
+    var tags=(tagsMap[a.id]||[]).map(function(t){return '<span class="ag-tag">'+t+'</span>';}).join('');
+    var isAuto=a.id==='sourcing';
+    html+='<div class="ag-card" id="ag-card-'+a.id+'" onclick="agSelect(\''+a.id+'\')" style="--ac:'+a.color+'">';
+    html+='<div class="ag-card-top">';
+    html+='<div class="ag-avatar" style="background:'+av.bg+'">'+av.emoji+'</div>';
+    html+='<div class="ag-info"><div class="ag-name">'+a.name+'</div><div class="ag-role">'+a.role.substring(0,14)+'</div></div>';
+    html+='<span class="ag-status '+(isAuto?'st-auto':'st-ok')+'">'+(isAuto?'자동':'사용가능')+'</span>';
+    html+='</div>';
+    html+='<div class="ag-tags">'+tags+'</div>';
+    html+='<div class="ag-done">최근 · <span style="color:#00DFA2">'+doneMap[a.id]+'</span></div>';
+    html+='</div>';
+  });
+  html+='</div>';
+  /* 디테일 패널 (카드 클릭 시 탭+브리핑) */
+  html+='<div id="ag-detail" style="margin-top:10px;display:none">';
+  BDATA.forEach(function(a){
+    var tabBtns=a.tabs.map(function(t){
+      return '<button class="bc-tab atb" data-page="'+t[0]+'" style="font-size:11px;padding:7px 13px">'+t[1]+'</button>';
+    }).join('');
+    html+='<div id="bc-body-'+a.id+'" style="display:none">';
+    html+='<div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden">';
+    html+='<div style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between">';
+    html+='<span style="font-size:13px;font-weight:700;color:'+a.color+'">'+a.name+'</span>';
+    html+='<button onclick="bcGen(\''+a.id+'\')" style="font-size:11px;padding:5px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#8B96B8;cursor:pointer" id="bc-status-'+a.id+'">브리핑 생성</button>';
+    html+='</div>';
+    html+='<div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;flex-wrap:wrap;gap:5px">'+tabBtns+'</div>';
+    html+='<div id="bc-brief-'+a.id+'" style="padding:12px 14px;font-size:11px;color:#6B7494;line-height:1.7">탭을 눌러 이동하거나 브리핑을 생성하세요</div>';
+    html+='</div></div>';
+  });
+  html+='</div>';
+  container.innerHTML=html;
+}
+
+function agSelect(id){
+  /* 카드 하이라이트 */
+  document.querySelectorAll('.ag-card').forEach(function(el){
+    el.style.borderColor='rgba(255,255,255,.07)';
+  });
+  var sel=document.getElementById('ag-card-'+id);
+  if(sel) sel.style.borderColor='var(--ac)';
+  /* 디테일 패널 */
+  var panel=document.getElementById('ag-detail');
+  if(panel) panel.style.display='block';
+  BDATA.forEach(function(a){
+    var body=document.getElementById('bc-body-'+a.id);
+    if(body) body.style.display=a.id===id?'block':'none';
+  });
+  /* 스크롤 */
+  setTimeout(function(){
+    var d=document.getElementById('ag-detail');
+    if(d) d.scrollIntoView({behavior:'smooth',block:'start'});
+  },80);
+  bcGen(id);
+}
+
+/* ══ 경쟁자 추적 ══ */
+var COMPETITORS=[];
+function addCompetitor(){
+  var brand=document.getElementById('comp-brand').value.trim();
+  var price=parseInt(document.getElementById('comp-price').value)||0;
+  var reviews=parseInt(document.getElementById('comp-reviews').value)||0;
+  var rating=parseFloat(document.getElementById('comp-rating').value)||0;
+  if(!brand||!price){alert('브랜드명과 가격을 입력해주세요');return;}
+  COMPETITORS.push({brand,price,reviews,rating,date:new Date().toLocaleDateString('ko-KR')});
+  document.getElementById('comp-brand').value='';
+  document.getElementById('comp-price').value='';
+  document.getElementById('comp-reviews').value='';
+  document.getElementById('comp-rating').value='';
+  renderCompetitors();
+}
+function renderCompetitors(){
+  var el=document.getElementById('comp-table');
+  if(!el)return;
+  if(!COMPETITORS.length){
+    el.innerHTML='<div style="text-align:center;color:#4A5470;font-size:12px;padding:20px">경쟁자 상품을 등록해주세요</div>';
+    return;
+  }
+  var myBest=LC_PRODUCTS.filter(function(p){return lcCalc(p).grade==='go';});
+  var myAvgPrice=myBest.length?Math.round(myBest.reduce(function(s,p){return s+lcCalc(p).sugPrice;},0)/myBest.length):0;
+  el.innerHTML='<div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden">'+
+  '<div style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);font-size:11px;font-weight:700;color:#6B7494;display:flex;gap:8px">'+
+  '<span style="flex:2">브랜드</span><span style="flex:1;text-align:right">가격</span><span style="flex:1;text-align:right">리뷰</span><span style="flex:1;text-align:right">평점</span><span style="flex:1;text-align:right">가격차</span></div>'+
+  COMPETITORS.map(function(co){
+    var diff=myAvgPrice?Math.round((myAvgPrice-co.price)/co.price*100):0;
+    var dc=diff>0?'#00DFA2':(diff<0?'#FF5C5C':'#6B7494');
+    var ds=diff>0?'↓'+Math.abs(diff)+'%':(diff<0?'↑'+Math.abs(diff)+'%':'동일');
+    return '<div style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:8px;align-items:center">'+
+    '<span style="flex:2;font-size:12px;color:#F0F2F8;font-weight:600">'+co.brand+'</span>'+
+    '<span style="flex:1;text-align:right;font-size:12px;color:#8B96B8">₩'+co.price.toLocaleString()+'</span>'+
+    '<span style="flex:1;text-align:right;font-size:12px;color:#FFB547">'+co.reviews+'</span>'+
+    '<span style="flex:1;text-align:right;font-size:12px;color:#9B78FF">'+co.rating+'</span>'+
+    '<span style="flex:1;text-align:right;font-size:11px;font-weight:700;color:'+dc+'">'+ds+'</span></div>';
+  }).join('')+'</div>';
+}
+function initCompetitor(){renderCompetitors();}
+
+/* ══ 트렌드 분석 ══ */
+function initTrends(){
+  /* 검색 트렌드 */
+  var trends=[
+    {kw:'K-beauty Vietnam',score:98,color:'#FF5FA0'},
+    {kw:'Korean skincare',score:89,color:'#9B78FF'},
+    {kw:'Torriden serum',score:76,color:'#00DFA2'},
+    {kw:'Anua toner pad',score:71,color:'#4EA8FF'},
+    {kw:'Olive Young direct',score:65,color:'#FFB547'},
+    {kw:'Korean moisturizer',score:58,color:'#00D4C8'},
+  ];
+  var tb=document.getElementById('trend-bars');
+  if(tb&&!tb.innerHTML){
+    tb.innerHTML=trends.map(function(t){
+      return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">'+
+      '<div style="font-size:11px;color:#8B96B8;width:130px;flex-shrink:0">'+t.kw+'</div>'+
+      '<div style="flex:1;background:#0F1117;height:6px;border-radius:99px;overflow:hidden">'+
+      '<div style="width:'+t.score+'%;height:100%;background:'+t.color+';border-radius:99px"></div></div>'+
+      '<div style="font-size:11px;font-weight:700;color:'+t.color+';width:25px;text-align:right">'+t.score+'</div></div>';
+    }).join('');
+  }
+  /* 메가세일 캘린더 */
+  var sales=[
+    {name:'6.6 세일',date:'6/6',d:0,color:'#FF5FA0'},
+    {name:'올영 세일',date:'6/5~11',d:2,color:'#FFB547'},
+    {name:'9.9 세일',date:'9/9',d:95,color:'#9B78FF'},
+    {name:'11.11',date:'11/11',d:158,color:'#00DFA2'},
+    {name:'12.12',date:'12/12',d:189,color:'#4EA8FF'},
+  ];
+  var tc=document.getElementById('trend-calendar');
+  if(tc&&!tc.innerHTML){
+    tc.innerHTML=sales.map(function(s){
+      var isPast=s.d<0,isNow=s.d<=3&&s.d>=0;
+      return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)">'+
+      '<div style="font-size:11px;font-weight:700;color:'+(isNow?'#00DFA2':(isPast?'#3A4055':s.color))+';width:45px">'+s.date+'</div>'+
+      '<div style="flex:1;font-size:12px;color:'+(isPast?'#3A4055':'#F0F2F8')+'">'+s.name+'</div>'+
+      (isNow?'<span style="font-size:10px;padding:2px 8px;background:rgba(0,223,162,.15);color:#00DFA2;border-radius:99px;font-weight:700">LIVE</span>':
+      isPast?'<span style="font-size:10px;color:#3A4055">종료</span>':
+      '<span style="font-size:10px;color:#6B7494">D-'+s.d+'</span>')+
+      '</div>';
+    }).join('');
+  }
+  /* 카테고리 트렌드 */
+  var cats=[
+    {name:'세럼/에센스',growth:'+42%',rank:1,color:'#FF5FA0'},
+    {name:'선크림',growth:'+38%',rank:2,color:'#FFB547'},
+    {name:'토너패드',growth:'+31%',rank:3,color:'#9B78FF'},
+    {name:'크림/로션',growth:'+24%',rank:4,color:'#4EA8FF'},
+    {name:'앰플',growth:'+19%',rank:5,color:'#00DFA2'},
+  ];
+  var tcat=document.getElementById('trend-cats');
+  if(tcat&&!tcat.innerHTML){
+    tcat.innerHTML=cats.map(function(cat){
+      return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)">'+
+      '<div style="font-size:16px;font-weight:900;color:'+cat.color+';width:20px;font-family:Space Grotesk,sans-serif">'+cat.rank+'</div>'+
+      '<div style="flex:1;font-size:12px;color:#F0F2F8;font-weight:600">'+cat.name+'</div>'+
+      '<div style="font-size:13px;font-weight:900;color:'+cat.color+'">'+cat.growth+'</div></div>';
+    }).join('');
+  }
+}
+
+/* ══ 판매 데이터 ══ */
+var SALES_HISTORY=[];
+function saveSalesData(){
+  var orders=parseInt(document.getElementById('sd-orders').value)||0;
+  var revenue=parseInt(document.getElementById('sd-revenue').value)||0;
+  var margin=parseInt(document.getElementById('sd-margin').value)||25;
+  var reviews=parseInt(document.getElementById('sd-reviews').value)||0;
+  var week='W'+(SALES_HISTORY.length+1);
+  SALES_HISTORY.push({week,orders,revenue,margin,reviews,profit:Math.round(revenue*margin/100)});
+  renderSalesData();
+}
+function initSalesData(){renderSalesData();}
+function renderSalesData(){
+  /* KPI */
+  var kpiEl=document.getElementById('sd-kpis');
+  if(!kpiEl)return;
+  var latest=SALES_HISTORY[SALES_HISTORY.length-1];
+  if(!latest){
+    kpiEl.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#4A5470;font-size:12px;padding:16px">데이터를 입력하면 분석이 시작됩니다</div>';
+    return;
+  }
+  var prev=SALES_HISTORY[SALES_HISTORY.length-2];
+  function chg(a,b){if(!b)return '';var d=Math.round((a-b)/b*100);return d>0?'<span style="color:#00DFA2">↑'+d+'%</span>':'<span style="color:#FF5C5C">↓'+Math.abs(d)+'%</span>';}
+  var kpis=[
+    {lbl:'주문',val:latest.orders+'건',chg:prev?chg(latest.orders,prev.orders):''},
+    {lbl:'매출',val:'₩'+Math.round(latest.revenue/10000)+'만',chg:prev?chg(latest.revenue,prev.revenue):''},
+    {lbl:'순이익',val:'₩'+Math.round(latest.profit/10000)+'만',chg:prev?chg(latest.profit,prev.profit):''},
+    {lbl:'리뷰',val:latest.reviews+'개',chg:prev?chg(latest.reviews,prev.reviews):''},
+  ];
+  kpiEl.innerHTML=kpis.map(function(k){
+    return '<div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:12px">'+
+    '<div style="font-size:10px;color:#6B7494;margin-bottom:4px">'+k.lbl+'</div>'+
+    '<div style="font-size:18px;font-weight:900;color:#F0F2F8;font-family:Space Grotesk,sans-serif">'+k.val+'</div>'+
+    (k.chg?'<div style="font-size:10px;margin-top:2px">'+k.chg+'</div>':'')+'</div>';
+  }).join('');
+  /* 차트 */
+  var chartEl=document.getElementById('sd-chart');
+  if(chartEl&&SALES_HISTORY.length){
+    var maxR=Math.max.apply(null,SALES_HISTORY.map(function(s){return s.revenue;}));
+    chartEl.innerHTML=SALES_HISTORY.map(function(s){
+      var h=Math.max(8,Math.round(s.revenue/maxR*100));
+      var isLast=s===SALES_HISTORY[SALES_HISTORY.length-1];
+      return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px">'+
+      '<div style="font-size:9px;color:'+(isLast?'#4EA8FF':'#3A4055')+'">₩'+Math.round(s.revenue/10000)+'만</div>'+
+      '<div style="width:100%;height:'+h+'%;background:'+(isLast?'linear-gradient(180deg,#4EA8FF,#9B78FF)':'rgba(78,168,255,.25)')+';border-radius:3px 3px 0 0;min-height:8px"></div>'+
+      '<div style="font-size:9px;color:#3A4055">'+s.week+'</div></div>';
+    }).join('');
+  }
+}
+
+/* ══ AI 딥 리포트 ══ */
+function initAIReport(){}
+async function genAIReport(){
+  var rtype=document.querySelector('input[name="rtype"]:checked');
+  if(!rtype)return;
+  var type=rtype.value;
+  var btn=document.getElementById('air-btn');
+  var out=document.getElementById('air-result');
+  btn.disabled=true;btn.textContent='🧠 분석 중...';
+  out.innerHTML='<div style="color:#6B7494;font-size:12px">AI가 전체 데이터를 분석하고 있습니다...</div>';
+  var goProds=LC_PRODUCTS.filter(function(p){return lcCalc(p).grade==='go';});
+  var salesSum=SALES_HISTORY.length?SALES_HISTORY[SALES_HISTORY.length-1]:{orders:0,revenue:0,margin:25,profit:0};
+  var compSum=COMPETITORS.length?'경쟁자 '+COMPETITORS.length+'개 등록: '+COMPETITORS.map(function(c){return c.brand+'(₩'+c.price.toLocaleString()+', 리뷰'+c.reviews+'개)';}).join(', '):'경쟁자 데이터 없음';
+  var prompts={
+    weekly:'다음 쇼피 K뷰티 셀러 주간 데이터를 분석하고 한국어로 주간 성과 리포트를 작성해주세요.\n\n판매: '+salesSum.orders+'건, 매출: ₩'+salesSum.revenue.toLocaleString()+', 마진: '+salesSum.margin+'%, 순이익: ₩'+salesSum.profit.toLocaleString()+'\nGO 상품: '+goProds.map(function(p){return p.brand+'(마진'+lcCalc(p).margin.toFixed(1)+'%)';}).join(', ')+'\n\n형식: 핵심 성과 요약 → 잘된 점 → 개선 필요 → 다음 주 액션 3가지. 각 섹션 2-3줄로 간결하게.',
+    sourcing:'다음 K뷰티 소싱 데이터를 분석하고 한국어로 소싱 전략 리포트를 작성해주세요.\n\nGO 상품: '+goProds.map(function(p){var cv=lcCalc(p);return p.brand+' '+p.name+'(세일가₩'+p.salePrice.toLocaleString()+', 마진'+cv.margin.toFixed(1)+'%, 권장가₩'+cv.sugPrice.toLocaleString()+')';}).join('\n')+'\n\n형식: 최우선 소싱 추천 → 번들 조합 제안 → 제외 상품 이유 → 다음 소싱 타이밍. 각 섹션 2-3줄.',
+    market:'다음 7개국 마진 데이터를 분석하고 한국어로 시장 확장 전략 리포트를 작성해주세요.\n\n'+['VN','TH','MY','SG','PH','TW','ID'].map(function(mk){var r=goProds.length?lcCalc(goProds[0],mk):null;return mk+': 마진'+(r?r.margin.toFixed(1):'N/A')+'%';}).join(', ')+'\n\n형식: 즉시 진출 추천 국가 순위 → 각 국가 진출 이유 한 줄 → 리스크 요인 → 6개월 로드맵. 간결하게.',
+    compete:'다음 경쟁자 데이터를 분석하고 한국어로 경쟁자 격차 리포트를 작성해주세요.\n\n'+compSum+'\n내 GO 상품 평균 권장가: ₩'+(goProds.length?Math.round(goProds.reduce(function(s,p){return s+lcCalc(p).sugPrice;},0)/goProds.length).toLocaleString():'N/A')+'\n\n형식: 가격 경쟁력 분석 → 리뷰 격차 해소 전략 → 차별화 포인트 → 6개월 추격 플랜. 간결하게.'
+  };
+  try{
+    var res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:prompts[type]}]
+      })
+    });
+    var data=await res.json();
+    var text=data.content&&data.content[0]&&data.content[0].text;
+    if(!text)throw new Error('응답 없음');
+    out.innerHTML='<div style="font-size:12px;color:#F0F2F8;line-height:1.8;white-space:pre-wrap">'+text+'</div>';
+  }catch(e){
+    out.innerHTML='<div style="font-size:12px;color:#FF5C5C">오류: '+e.message+'<br><br><span style="color:#6B7494">PC에서 실행하거나 API 키를 확인해주세요.</span></div>';
+  }
+  btn.disabled=false;btn.textContent='🧠 AI 딥 분석 실행';
+}
+
+
+/* ══ Notion 동기화 ══ */
+function getNotionToken(){
+  var inp=document.getElementById('notion-token-input');
+  var stored='';
+  try{stored=localStorage.getItem('shopee_notion_token')||'';}catch(e){}
+  return (inp&&inp.value.trim())||stored||'';
+}
+function updateSyncUI(msg,color){
+  var el=document.getElementById('notion-sync-log');
+  if(el){el.textContent=msg;el.style.color=color||'#6B7494';}
+}
+async function syncFromNotion(){
+  var token=getNotionToken();
+  if(!token){updateSyncUI('❌ 토큰을 입력해주세요','#FF5C5C');return;}
+  try{localStorage.setItem('shopee_notion_token',token);}catch(e){}
+  updateSyncUI('🔄 Notion에서 GO 상품 로드 중...','#9B78FF');
+  var DB_ID='3789a485-ea9d-802b-967f-c8a31a721995';
+  try{
+    var res=await fetch('https://api.notion.com/v1/databases/'+DB_ID+'/query',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+token,'Notion-Version':'2022-06-28','Content-Type':'application/json'},
+      body:JSON.stringify({filter:{or:[{property:'단계',select:{equals:'1.발주'}},{property:'단계',select:{equals:'0.소싱 검토'}}]},page_size:20})
+    });
+    var data=await res.json();
+    if(data.status===401){updateSyncUI('❌ 토큰 오류 — notion.so/my-integrations 확인','#FF5C5C');return;}
+    if(!data.results||!data.results.length){updateSyncUI('⚠️ 등록 상품 없음 — 소싱 에이전트 먼저 실행','#FFB547');return;}
+    var newProds=data.results.map(function(page,idx){
+      var props=page.properties;
+      var name=props['이름']&&props['이름'].title&&props['이름'].title[0]?props['이름'].title[0].plain_text:'상품'+(idx+1);
+      var memo=props['비고']&&props['비고'].rich_text&&props['비고'].rich_text[0]?props['비고'].rich_text[0].plain_text:'';
+      var pm=memo.match(/세일가\s*[₩]?([\d,]+)/);
+      var salePrice=pm?parseInt(pm[1].replace(/,/g,'')):20000+idx*2000;
+      var brand=name.replace('[쇼피] ','').split(' ')[0]||'Brand';
+      var isSet=memo.indexOf('÷2')>-1||memo.indexOf('기획')>-1;
+      return{rank:idx+1,brand:brand,name:name.replace('[쇼피] ','').replace(brand,'').trim()||name,salePrice:salePrice,isSet:isSet,setCount:isSet?2:1,isDirect:false,weight:isSet?200:130};
+    });
+    LC_PRODUCTS=newProds;
+    var st=document.getElementById('notion-sync-status');
+    if(st){st.textContent='연결됨 '+new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});st.style.color='#00DFA2';}
+    updateSyncUI('✅ '+newProds.length+'개 상품 로드 완료 → 마진 재계산','#00DFA2');
+    renderLiveChecker();
+  }catch(e){updateSyncUI('❌ '+e.message+' (PC 실행 권장)','#FF5C5C');}
+}
+
+
+/* ══ 회계담당 ══ */
+var AC_MONTHS = [];
+function calcPL(){
+  var s=parseInt(document.getElementById('ac-settlement').value)||0;
+  var o=parseInt(document.getElementById('ac-orders').value)||0;
+  var cogs=parseInt(document.getElementById('ac-cogs').value)||0;
+  var ship=parseInt(document.getElementById('ac-shipping').value)||0;
+  var ads=parseInt(document.getElementById('ac-ads').value)||0;
+  var oth=parseInt(document.getElementById('ac-other').value)||0;
+  if(!s){
+    document.getElementById('pl-detail').innerHTML='<span style="color:#4A5470">금액을 입력하면 자동 계산됩니다</span>';
+    return;
+  }
+  var totalCost=cogs+ship+ads+oth;
+  var grossProfit=s-cogs-ship;
+  var opProfit=s-totalCost;
+  var margin=s?Math.round(opProfit/s*1000)/10:0;
+  var avgOrder=o?Math.round(s/o):0;
+  var marginColor=margin>=25?'#00DFA2':(margin>=15?'#FFB547':'#FF5C5C');
+  var html='';
+  function row(lbl,val,color){return '<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)"><span style="color:#6B7494">'+lbl+'</span><span style="color:'+(color||'#8B96B8')+'">'+val+'</span></div>';}
+  html+=row('정산금','₩'+s.toLocaleString(),'#F0F2F8');
+  html+=row('매입원가','-₩'+cogs.toLocaleString());
+  html+=row('배송비','-₩'+ship.toLocaleString());
+  html+=row('광고비','-₩'+ads.toLocaleString());
+  html+=row('기타','-₩'+oth.toLocaleString());
+  html+='<div style="height:8px"></div>';
+  html+='<div style="display:flex;justify-content:space-between;padding:8px 0;background:rgba(255,255,255,.03);border-radius:8px;padding:8px 10px;margin-top:4px">';
+  html+='<span style="font-size:13px;font-weight:700;color:#F0F2F8">영업이익</span>';
+  html+='<span style="font-size:14px;font-weight:900;color:'+marginColor+'">₩'+opProfit.toLocaleString()+' ('+margin+'%)</span></div>';
+  if(o) html+=row('건당 평균','₩'+avgOrder.toLocaleString(),'#4EA8FF');
+  document.getElementById('pl-detail').innerHTML=html;
+  /* 세금 예상 */
+  var vat=Math.round(s*0.1);
+  var taxEl=document.getElementById('tax-estimate');
+  if(taxEl){
+    taxEl.innerHTML=
+      '<div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:#6B7494">부가세 예상 (10%)</span><span style="color:#FFB547">₩'+vat.toLocaleString()+'</span></div>'+
+      '<div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:#6B7494">종소세 예상 (15%)</span><span style="color:#FFB547">₩'+Math.round(opProfit*0.15).toLocaleString()+'</span></div>'+
+      '<div style="font-size:10px;color:#4A5470;margin-top:6px">* 올영 세금계산서 매입분 공제 시 부가세 절감 가능</div>';
+  }
+}
+function saveMonth(){
+  var s=parseInt(document.getElementById('ac-settlement').value)||0;
+  if(!s){alert('정산금을 입력해주세요');return;}
+  var cogs=parseInt(document.getElementById('ac-cogs').value)||0;
+  var ship=parseInt(document.getElementById('ac-shipping').value)||0;
+  var ads=parseInt(document.getElementById('ac-ads').value)||0;
+  var oth=parseInt(document.getElementById('ac-other').value)||0;
+  var profit=s-cogs-ship-ads-oth;
+  var now=new Date();
+  AC_MONTHS.push({month:(now.getMonth()+1)+'월',settlement:s,profit:profit,margin:s?Math.round(profit/s*100):0});
+  renderMonthly();
+}
+function renderMonthly(){
+  var chart=document.getElementById('monthly-chart');
+  var list=document.getElementById('monthly-list');
+  if(!AC_MONTHS.length||!chart)return;
+  var maxP=Math.max.apply(null,AC_MONTHS.map(function(m){return Math.abs(m.profit);}));
+  chart.innerHTML=AC_MONTHS.map(function(m){
+    var h=Math.max(8,Math.round(Math.abs(m.profit)/maxP*100));
+    var isPos=m.profit>=0;
+    var isLast=m===AC_MONTHS[AC_MONTHS.length-1];
+    return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px">'+
+      '<div style="font-size:9px;color:'+(isLast?'#00D4C8':'#3A4055')+'">'+Math.round(m.profit/10000)+'만</div>'+
+      '<div style="width:100%;height:'+h+'%;background:'+(isPos?(isLast?'linear-gradient(180deg,#00D4C8,#4EA8FF)':'rgba(0,212,200,.25)'):'rgba(255,92,92,.4)')+';border-radius:3px 3px 0 0;min-height:8px"></div>'+
+      '<div style="font-size:9px;color:#3A4055">'+m.month+'</div></div>';
+  }).join('');
+  list.innerHTML=AC_MONTHS.map(function(m){
+    var mc=m.margin>=25?'#00DFA2':(m.margin>=15?'#FFB547':'#FF5C5C');
+    return '<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:11px">'+
+      '<span style="color:#6B7494">'+m.month+'</span>'+
+      '<span style="color:#8B96B8">₩'+Math.round(m.settlement/10000)+'만</span>'+
+      '<span style="color:'+mc+';font-weight:700">'+m.margin+'%</span></div>';
+  }).join('');
+}
+function initAccounting(){renderBuyList();renderSellList();}
+
+
+/* ══ 차트 대시보드 ══ */
+var _chartInstances = {};
+function destroyChart(id){
+  if(_chartInstances[id]){_chartInstances[id].destroy();delete _chartInstances[id];}
+}
+
+function initCharts(){
+  var go=LC_PRODUCTS.filter(function(p){return lcCalc(p).grade==='go';});
+  var all=LC_PRODUCTS;
+
+  /* KPI 업데이트 */
+  var avgM=go.length?(go.reduce(function(s,p){return s+lcCalc(p).margin;},0)/go.length):0;
+  var bestMkt={name:'대만',margin:0};
+  ['VN','TH','MY','SG','PH','TW','ID'].forEach(function(mk){
+    if(go.length){var m=lcCalc(go[0],mk).margin;if(m>bestMkt.margin){bestMkt={name:mk,margin:m};}}
+  });
+  var avgLP=go.length?Math.round(go.reduce(function(s,p){return s+lcCalc(p).shopeeListPrice;},0)/go.length):0;
+  var S=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  S('ch-avg-margin',avgM.toFixed(1)+'%');
+  S('ch-go-count',go.length+'개');
+  S('ch-best-market',bestMkt.name);
+  S('ch-best-margin',bestMkt.margin.toFixed(1)+'%');
+  S('ch-avg-listprice','₩'+avgLP.toLocaleString());
+
+  var dkStyle={color:'rgba(255,255,255,.5)',font:{size:10,family:"'Noto Sans KR',sans-serif"}};
+  var gridColor='rgba(255,255,255,.05)';
+
+  /* 1. 마켓별 마진 바 차트 */
+  destroyChart('marketBarChart');
+  var mkData=['VN','TH','MY','SG','PH','TW','ID'].map(function(mk){
+    if(!go.length)return 0;
+    return parseFloat(lcCalc(go[0],mk).margin.toFixed(1));
+  });
+  var mkColors=mkData.map(function(v){return v>=25?'rgba(0,223,162,.8)':(v>=15?'rgba(255,181,71,.8)':'rgba(255,92,92,.7)');});
+  _chartInstances['marketBarChart']=new Chart(document.getElementById('marketBarChart'),{
+    type:'bar',
+    data:{
+      labels:['🇻🇳 VN','🇹🇭 TH','🇲🇾 MY','🇸🇬 SG','🇵🇭 PH','🇹🇼 TW','🇮🇩 ID'],
+      datasets:[{data:mkData,backgroundColor:mkColors,borderRadius:6,borderSkipped:false}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.parsed.y+'%';}}}},
+      scales:{
+        x:{ticks:dkStyle,grid:{color:gridColor}},
+        y:{ticks:{...dkStyle,callback:function(v){return v+'%';}},grid:{color:gridColor},
+           min:0,max:35,
+           afterDataLimits:function(a){a.max=35;}}
+      }
+    }
+  });
+
+  /* 2. 상품별 마진 차트 */
+  destroyChart('productChart');
+  var pLabels=all.map(function(p){return p.brand;});
+  var pMargins=all.map(function(p){var c=lcCalc(p);return c.grade==='x'?0:parseFloat(c.margin.toFixed(1));});
+  var pColors=pMargins.map(function(v){return v>=25?'rgba(0,223,162,.8)':(v>=15?'rgba(255,181,71,.8)':'rgba(255,92,92,.7)');});
+  _chartInstances['productChart']=new Chart(document.getElementById('productChart'),{
+    type:'bar',
+    data:{
+      labels:pLabels,
+      datasets:[
+        {label:'마진율',data:pMargins,backgroundColor:pColors,borderRadius:4,borderSkipped:false},
+        {label:'목표(25%)',data:pMargins.map(function(){return 25;}),type:'line',borderColor:'rgba(255,95,160,.5)',borderDash:[4,4],pointRadius:0,borderWidth:1.5,fill:false}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.y+'%';}}}},
+      scales:{
+        x:{ticks:{...dkStyle,maxRotation:0},grid:{color:gridColor}},
+        y:{ticks:{...dkStyle,callback:function(v){return v+'%';}},grid:{color:gridColor},min:0,max:40}
+      }
+    }
+  });
+
+  /* 3. 마켓 수수료 도넛 */
+  destroyChart('feeDonut');
+  _chartInstances['feeDonut']=new Chart(document.getElementById('feeDonut'),{
+    type:'doughnut',
+    data:{
+      labels:['VN','TH','MY','SG','PH','TW','ID'],
+      datasets:[{data:[7.3,8.5,6.5,6.5,7.5,6.0,9.5],
+        backgroundColor:['#00DFA2','#9B78FF','#4EA8FF','#00D4C8','#FFB547','#FF5FA0','rgba(255,92,92,.7)'],
+        borderWidth:0,hoverOffset:6}]
+    },
+    options:{responsive:true,maintainAspectRatio:true,cutout:'65%',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.label+': '+c.parsed+'%';}}}}
+    }
+  });
+
+  /* 4. GO/검토/NO 도넛 */
+  destroyChart('gradeDonut');
+  var grades={go:0,review:0,no:0,x:0};
+  all.forEach(function(p){var g=lcCalc(p).grade;if(grades[g]!==undefined)grades[g]++;});
+  _chartInstances['gradeDonut']=new Chart(document.getElementById('gradeDonut'),{
+    type:'doughnut',
+    data:{
+      labels:['GO','검토','NO','제외'],
+      datasets:[{data:[grades.go,grades.review,grades.no,grades.x],
+        backgroundColor:['#00DFA2','#FFB547','rgba(255,92,92,.7)','rgba(107,116,148,.4)'],
+        borderWidth:0,hoverOffset:6}]
+    },
+    options:{responsive:true,maintainAspectRatio:true,cutout:'65%',
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.label+': '+c.parsed+'개';}}}}
+    }
+  });
+
+  /* 5. 원가 구성 스택 바 */
+  destroyChart('costStack');
+  var costData=all.slice(0,6).map(function(p){
+    var cv=lcCalc(p);
+    var sp=cv.sugPrice||1;
+    return{
+      brand:p.brand,
+      cogs:Math.round(cv.unitCost/sp*100),
+      ship:Math.round(cv.ship/sp*100),
+      fee:Math.round((sp*(0.073))/sp*100),
+      profit:Math.max(0,Math.round(cv.margin))
+    };
+  });
+  _chartInstances['costStack']=new Chart(document.getElementById('costStack'),{
+    type:'bar',
+    data:{
+      labels:costData.map(function(d){return d.brand;}),
+      datasets:[
+        {label:'매입원가',data:costData.map(function(d){return d.cogs;}),backgroundColor:'rgba(78,168,255,.7)',borderRadius:4,borderSkipped:false},
+        {label:'배송비',data:costData.map(function(d){return d.ship;}),backgroundColor:'rgba(155,120,255,.7)'},
+        {label:'수수료',data:costData.map(function(d){return d.fee;}),backgroundColor:'rgba(255,181,71,.7)'},
+        {label:'이익',data:costData.map(function(d){return d.profit;}),backgroundColor:'rgba(0,223,162,.7)'}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{position:'bottom',labels:{color:'rgba(255,255,255,.5)',font:{size:10},boxWidth:10,padding:8}}},
+      scales:{
+        x:{stacked:true,ticks:dkStyle,grid:{color:gridColor}},
+        y:{stacked:true,ticks:{...dkStyle,callback:function(v){return v+'%';}},grid:{color:gridColor},max:100}
+      }
+    }
+  });
+}
+
+
+/* ══ 릴스 제작 에이전트 ══ */
+var _currentProduct = '';
+var _currentScript = '';
+
+async function genReels(){
+  var product = document.getElementById('rl-product').value.trim();
+  var benefit = document.getElementById('rl-benefit').value.trim();
+  var type = document.getElementById('rl-type').value;
+  var lang = document.getElementById('rl-lang').value;
+  if(!product){alert('상품명을 입력해주세요');return;}
+  _currentProduct = product;
+
+  var btn = document.getElementById('rl-btn');
+  btn.disabled = true; btn.textContent = '⏳ 생성 중...';
+
+  var typeMap = {intro:'제품 소개형',tutorial:'사용 튜토리얼',before_after:'Before/After 변화',trending:'트렌딩 사운드',unboxing:'언박싱'};
+  var langMap = {vi:'베트남어(Tiếng Việt)',ko:'한국어',both:'한국어 + 베트남어 병기'};
+
+  var prompt = `당신은 K뷰티 뷰티 릴스 전문 제작 에이전트입니다.
+
+상품: ${product}
+핵심 혜택: ${benefit||'미입력'}
+영상 유형: ${typeMap[type]}
+언어: ${langMap[lang]}
+플랫폼: TikTok, Instagram Reels, Shopee Video
+
+아래 형식으로 정확히 출력하세요:
+
+[60초 스크립트]
+0~3초 (훅): ...
+3~15초 (문제 제기): ...
+15~40초 (제품 소개): ...
+40~55초 (결과 증명): ...
+55~60초 (CTA): ...
+
+[Kling AI 프롬프트]
+(영어, 이미지→영상 생성용)
+
+[Runway Gen-3 프롬프트]
+(영어, 시네마틱 영상용)
+
+[HeyGen 프롬프트]
+(영어, AI 모델 소개 영상용)
+
+[CapCut AI 프롬프트]
+(한국어, 트렌딩 편집용)
+
+[자막 세트]
+(각 장면별 자막, ${langMap[lang]})
+
+[해시태그]
+(TikTok/Instagram/Shopee 각 10개)`;
+
+  try{
+    var res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})
+    });
+    var data = await res.json();
+    var text = data.content&&data.content[0]&&data.content[0].text;
+    if(!text) throw new Error('응답 없음');
+    _currentScript = text;
+
+    // 스크립트 박스
+    var sb = document.getElementById('rl-script-box');
+    var sc = document.getElementById('rl-script-content');
+    var scriptPart = text.split('[Kling AI')[0].replace('[60초 스크립트]','').trim();
+    sc.textContent = scriptPart;
+    sb.style.display = 'block';
+
+    // 플랫폼 프롬프트 박스
+    var platforms = ['Kling AI','Runway Gen-3','HeyGen','CapCut AI','자막 세트','해시태그'];
+    var colors = ['#00DFA2','#9B78FF','#4EA8FF','#FFB547','#FF5FA0','#00D4C8'];
+    var pl = document.getElementById('rl-prompts-list');
+    var pb = document.getElementById('rl-prompts-box');
+    pl.innerHTML = '';
+    platforms.forEach(function(p,i){
+      var regex = new RegExp('\\['+p+'[^\\]]*\\]([^\\[]*)', 's');
+      var m = text.match(regex);
+      if(!m) return;
+      var content = m[1].trim();
+      var div = document.createElement('div');
+      var pid = 'rl-p-'+i;
+      div.style.cssText = 'background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden';
+      var esc = content.replace(/'/g,"\\'").replace(/\n/g,'\\n');
+      div.innerHTML = '<div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center">'+
+        '<span style="font-size:11px;font-weight:700;color:'+colors[i]+'">'+p+'</span>'+
+        '<button onclick="copyText(\''+pid+'\')" style="font-size:9px;padding:3px 8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#8B96B8;cursor:pointer">복사</button>'+
+        '</div><div id="'+pid+'" style="padding:12px 14px;font-size:11px;color:#6B7494;line-height:1.7;white-space:pre-wrap">'+content+'</div>';
+      pl.appendChild(div);
+    });
+    pb.style.display = 'block';
+
+    // 비교 보고 섹션 표시
+    document.getElementById('rl-report-box').style.display = 'block';
+
+  }catch(e){
+    document.getElementById('rl-result').innerHTML += '<div style="color:#FF5C5C;font-size:11px;padding:12px;background:#141824;border-radius:10px;margin-top:8px">오류: '+e.message+' (PC에서 실행 권장)</div>';
+  }
+  btn.disabled = false;
+  btn.textContent = '🎬 스크립트 + 프롬프트 생성';
+}
+
+async function genCompareReport(){
+  var inputs = document.querySelectorAll('#rl-platform-inputs input');
+  var platforms = ['Kling AI','Runway','HeyGen','CapCut'];
+  var results = [];
+  inputs.forEach(function(inp,i){
+    if(inp.value.trim()) results.push(platforms[i]+': '+inp.value.trim());
+  });
+
+  var box = document.getElementById('rl-final-report');
+  var content = document.getElementById('rl-final-content');
+  box.style.display = 'block';
+
+  if(!results.length){
+    content.textContent = '📋 마케팅 에이전트 → 진우님 보고\n\n제작 완료 후 URL을 입력하면\nAI가 플랫폼별 비교 분석을 자동 생성합니다.\n\n지금은 수동 입력으로 진행해주세요:';
+    return;
+  }
+
+  content.textContent = '⏳ 비교 분석 중...';
+
+  var prompt = `K뷰티 릴스 플랫폼 비교 분석 보고서를 작성해주세요.
+
+상품: ${_currentProduct}
+제작 결과:
+${results.join('\n')}
+
+형식:
+📹 릴스 제작 비교 보고 — ${_currentProduct}
+
+플랫폼별 평가:
+(각 플랫폼별 화질·자연스러움·K뷰티 적합도 별점 5점 만점)
+
+최종 추천: [플랫폼명]
+추천 이유: (2줄)
+수정 제안: (1줄)
+
+→ 승인 시 쇼피 영상 + TikTok + Instagram 동시 업로드 예정`;
+
+  try{
+    var res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,messages:[{role:'user',content:prompt}]})
+    });
+    var data = await res.json();
+    var text = data.content&&data.content[0]&&data.content[0].text;
+    content.textContent = text||'응답 없음';
+  }catch(e){
+    content.textContent = '📋 마케팅 에이전트 보고\n\n상품: '+_currentProduct+'\n\n플랫폼별 제작 결과를 확인 후\n최적 플랫폼을 선택해주세요.\n\n'+results.join('\n');
+  }
+}
+
+function copyText(id){
+  var el = document.getElementById(id);
+  if(!el) return;
+  navigator.clipboard.writeText(el.textContent).then(function(){
+    var msg = document.createElement('div');
+    msg.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#00DFA2;color:#000;padding:8px 20px;border-radius:99px;font-size:12px;font-weight:700;z-index:9999';
+    msg.textContent = '복사됨 ✓';
+    document.body.appendChild(msg);
+    setTimeout(function(){msg.remove();},1500);
+  });
+}
+
+function approveReels(){
+  alert('✅ 승인 완료!\n\n쇼피 영상 + TikTok + Instagram\n동시 업로드를 진행해주세요.');
+}
+function rejectReels(){
+  document.getElementById('rl-result').innerHTML = '';
+  document.getElementById('rl-btn').textContent = '🎬 스크립트 + 프롬프트 생성';
+}
+
+function initReels(){}
+
+
+/* ══ 회계 매입/판매 처리 ══ */
+var AC_BUYS = [];
+var AC_SELLS = [];
+
+function switchACTab(tab){
+  ['buy','sell','pl'].forEach(function(t){
+    var btn = document.getElementById('ac-tab-'+t);
+    var panel = document.getElementById('ac-panel-'+t);
+    if(btn){btn.style.background=t===tab?'linear-gradient(135deg,rgba(0,212,200,.2),rgba(78,168,255,.15))':'rgba(255,255,255,.04)';
+      btn.style.borderColor=t===tab?'rgba(0,212,200,.3)':'rgba(255,255,255,.08)';
+      btn.style.color=t===tab?'#00D4C8':'#6B7494';}
+    if(panel) panel.style.display=t===tab?'block':'none';
+  });
+  if(tab==='pl') updatePL();
+}
+
+function calcBuyTotal(){
+  var p=parseInt(document.getElementById('buy-price').value)||0;
+  var q=parseInt(document.getElementById('buy-qty').value)||1;
+  var el=document.getElementById('buy-calc');
+  if(el) el.textContent='₩'+(p*q).toLocaleString();
+}
+
+function calcSellProfit(){
+  var price=parseInt(document.getElementById('sell-price').value)||0;
+  var qty=parseInt(document.getElementById('sell-qty').value)||1;
+  var fee=parseFloat(document.getElementById('sell-fee').value)||7.3;
+  var ship=parseInt(document.getElementById('sell-ship').value)||0;
+  var settlement=Math.round(price*qty*(1-fee/100));
+  var feeAmt=Math.round(price*qty*fee/100);
+  var profit=settlement-ship;
+  var margin=settlement?Math.round(profit/settlement*100):0;
+  var S=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  S('sell-calc-settlement','₩'+settlement.toLocaleString());
+  S('sell-calc-profit','₩'+profit.toLocaleString());
+  S('sell-calc-margin',margin+'%');
+  S('sell-calc-fee','₩'+feeAmt.toLocaleString());
+}
+
+function recordBuy(){
+  var product=document.getElementById('buy-product').value.trim();
+  var price=parseInt(document.getElementById('buy-price').value)||0;
+  var qty=parseInt(document.getElementById('buy-qty').value)||1;
+  var tax=document.getElementById('buy-tax').value;
+  if(!product||!price){alert('상품명과 구매가를 입력해주세요');return;}
+  var total=price*qty;
+  AC_BUYS.push({
+    date:new Date().toLocaleDateString('ko-KR'),
+    product:product, price:price, qty:qty, total:total, tax:tax
+  });
+  renderBuyList();
+  document.getElementById('buy-product').value='';
+  document.getElementById('buy-price').value='';
+  document.getElementById('buy-qty').value='';
+  document.getElementById('buy-calc').textContent='₩0';
+}
+
+function renderBuyList(){
+  var el=document.getElementById('buy-records');
+  var totalEl=document.getElementById('buy-total');
+  if(!el)return;
+  var grandTotal=AC_BUYS.reduce(function(s,b){return s+b.total;},0);
+  if(!AC_BUYS.length){el.textContent='등록된 매입 없음';if(totalEl)totalEl.textContent='₩0';return;}
+  el.innerHTML=AC_BUYS.slice().reverse().map(function(b){
+    return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">'+
+      '<div style="flex:1"><div style="font-size:11px;color:#F0F2F8;font-weight:600">'+b.product+'</div>'+
+      '<div style="font-size:10px;color:#4A5470">'+b.date+' · '+b.qty+'개 · '+(b.tax==='yes'?'<span style="color:#00DFA2">세금계산서</span>':'<span style="color:#6B7494">미발행</span>')+'</div></div>'+
+      '<div style="font-size:12px;font-weight:700;color:#4EA8FF">₩'+b.total.toLocaleString()+'</div></div>';
+  }).join('');
+  if(totalEl) totalEl.textContent='₩'+grandTotal.toLocaleString();
+}
+
+function recordSell(){
+  var product=document.getElementById('sell-product').value.trim();
+  var price=parseInt(document.getElementById('sell-price').value)||0;
+  var qty=parseInt(document.getElementById('sell-qty').value)||1;
+  var fee=parseFloat(document.getElementById('sell-fee').value)||7.3;
+  var ship=parseInt(document.getElementById('sell-ship').value)||0;
+  if(!product||!price){alert('상품명과 판매가를 입력해주세요');return;}
+  var settlement=Math.round(price*qty*(1-fee/100));
+  var feeAmt=Math.round(price*qty*fee/100);
+  var profit=settlement-ship;
+  var margin=settlement?Math.round(profit/settlement*100):0;
+  AC_SELLS.push({
+    date:new Date().toLocaleDateString('ko-KR'),
+    product:product, price:price, qty:qty, settlement:settlement,
+    fee:feeAmt, ship:ship, profit:profit, margin:margin
+  });
+  renderSellList();
+  document.getElementById('sell-product').value='';
+  document.getElementById('sell-price').value='';
+  document.getElementById('sell-qty').value='';
+  document.getElementById('sell-ship').value='';
+}
+
+function renderSellList(){
+  var el=document.getElementById('sell-records');
+  if(!el)return;
+  var totalSell=AC_SELLS.reduce(function(s,b){return s+b.settlement;},0);
+  var totalFee=AC_SELLS.reduce(function(s,b){return s+b.fee;},0);
+  var totalProfit=AC_SELLS.reduce(function(s,b){return s+b.profit;},0);
+  if(!AC_SELLS.length){el.textContent='등록된 판매 없음';return;}
+  el.innerHTML=AC_SELLS.slice().reverse().map(function(s){
+    var mc=s.margin>=25?'#00DFA2':(s.margin>=15?'#FFB547':'#FF5C5C');
+    return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">'+
+      '<div style="flex:1"><div style="font-size:11px;color:#F0F2F8;font-weight:600">'+s.product+'</div>'+
+      '<div style="font-size:10px;color:#4A5470">'+s.date+' · '+s.qty+'개 · 수수료 ₩'+s.fee.toLocaleString()+'</div></div>'+
+      '<div style="text-align:right"><div style="font-size:12px;font-weight:700;color:#00DFA2">₩'+s.profit.toLocaleString()+'</div>'+
+      '<div style="font-size:10px;color:'+mc+'">'+s.margin+'%</div></div></div>';
+  }).join('');
+  var S=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  S('sell-total','₩'+totalSell.toLocaleString());
+  S('sell-fee-total','₩'+totalFee.toLocaleString());
+  S('sell-profit-total','₩'+totalProfit.toLocaleString());
+}
+
+function updatePL(){
+  var totalBuy=AC_BUYS.reduce(function(s,b){return s+b.total;},0);
+  var totalSell=AC_SELLS.reduce(function(s,b){return s+b.settlement;},0);
+  var totalFee=AC_SELLS.reduce(function(s,b){return s+b.fee;},0);
+  var totalShip=AC_SELLS.reduce(function(s,b){return s+b.ship;},0);
+  var netProfit=totalSell-totalBuy-totalShip;
+  var vat=Math.round(totalSell*0.1);
+  var S=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+  S('pl-total-buy','₩'+totalBuy.toLocaleString());
+  S('pl-total-sell','₩'+totalSell.toLocaleString());
+  S('pl-total-fee','₩'+totalFee.toLocaleString());
+  S('pl-net-profit','₩'+netProfit.toLocaleString());
+  S('pl-vat','₩'+vat.toLocaleString());
+  var ledger=document.getElementById('pl-ledger-list');
+  if(!ledger)return;
+  var all=[];
+  AC_BUYS.forEach(function(b){all.push({date:b.date,type:'매입',product:b.product,amount:-b.total,color:'#4EA8FF'});});
+  AC_SELLS.forEach(function(s){all.push({date:s.date,type:'판매',product:s.product,amount:s.profit,color:'#00DFA2'});});
+  if(!all.length){ledger.textContent='거래 없음';return;}
+  ledger.innerHTML=all.reverse().map(function(t){
+    return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">'+
+      '<span style="font-size:10px;padding:2px 7px;border-radius:99px;background:rgba(255,255,255,.06);color:'+t.color+';font-weight:700;flex-shrink:0">'+t.type+'</span>'+
+      '<div style="flex:1;font-size:11px;color:#8B96B8">'+t.product+'<div style="font-size:10px;color:#4A5470">'+t.date+'</div></div>'+
+      '<div style="font-size:12px;font-weight:700;color:'+t.color+'">'+
+      (t.amount>=0?'+':'')+'₩'+Math.abs(t.amount).toLocaleString()+'</div></div>';
+  }).join('');
+}
+
+
+/* 카테고리 필터 */
+var _lcFilter = 'all';
+function filterLC(cat){
+  _lcFilter = cat;
+  document.querySelectorAll('[id^="lc-cat-"]').forEach(function(btn){
+    var isActive = btn.id === 'lc-cat-'+cat;
+    btn.style.background = isActive ? 'rgba(255,95,160,.15)' : 'transparent';
+    btn.style.borderColor = isActive ? 'rgba(255,95,160,.4)' : 'rgba(255,255,255,.1)';
+    btn.style.color = isActive ? '#FF5FA0' : '#6B7494';
+  });
+  renderLiveChecker();
+}
+
+
+/* ══ 국가별 연령대 베스트 데이터 ══ */
+var MARKET_AGE_DATA = {
+  VN: {
+    name:'베트남', flag:'🇻🇳', currency:'₫', fx:18.8,
+    age2030: [
+      {rank:1, cat:'세럼/앰플', keyword:'Hyaluronic Serum', trend:'▲', reason:'글래스 스킨 열풍', sourcing:'Torriden·Anua'},
+      {rank:2, cat:'선크림', keyword:'Korean Sunscreen', trend:'▲▲', reason:'야외활동 증가', sourcing:'Anessa·Round Lab'},
+      {rank:3, cat:'토너패드', keyword:'Toner Pad', trend:'▲', reason:'간편한 스킨케어', sourcing:'Anua·클리오'},
+      {rank:4, cat:'립틴트', keyword:'Lip Tint', trend:'→', reason:'K팝 메이크업', sourcing:'롬앤·3CE'},
+      {rank:5, cat:'수분크림', keyword:'Water Cream', trend:'▲', reason:'습도 높은 날씨', sourcing:'Wellage·아누아'},
+    ],
+    age3040: [
+      {rank:1, cat:'안티에이징 세럼', keyword:'Anti-aging Serum', trend:'▲▲', reason:'피부 탄력 관심 급증', sourcing:'Primera·Aestura'},
+      {rank:2, cat:'에센스', keyword:'Brightening Essence', trend:'▲', reason:'미백 수요', sourcing:'구달·설화수'},
+      {rank:3, cat:'아이크림', keyword:'Eye Cream', trend:'▲', reason:'눈가 주름 관리', sourcing:'Aestura·이니스프리'},
+      {rank:4, cat:'영양크림', keyword:'Nourishing Cream', trend:'→', reason:'피부 장벽 강화', sourcing:'Aestura·CNP'},
+      {rank:5, cat:'마스크팩', keyword:'Sheet Mask', trend:'▲', reason:'홈케어 루틴', sourcing:'메디힐(제외)·JM솔루션'},
+    ]
+  },
+  TH: {
+    name:'태국', flag:'🇹🇭', currency:'฿', fx:0.028,
+    age2030: [
+      {rank:1, cat:'선크림', keyword:'Sunscreen SPF50+', trend:'▲▲', reason:'강한 자외선', sourcing:'Round Lab·Anessa'},
+      {rank:2, cat:'미백 세럼', keyword:'Brightening Serum', trend:'▲▲', reason:'밝은 피부 선호', sourcing:'구달·Goodal'},
+      {rank:3, cat:'쿠션 파운데이션', keyword:'Cushion Foundation', trend:'▲', reason:'K메이크업 트렌드', sourcing:'설화수·이니스프리'},
+      {rank:4, cat:'클렌징', keyword:'Cleansing Oil', trend:'→', reason:'이중세안 문화', sourcing:'스킨1004·바이오더마'},
+      {rank:5, cat:'비타민C 세럼', keyword:'Vitamin C Serum', trend:'▲', reason:'미백+항산화', sourcing:'구달 비타C'},
+    ],
+    age3040: [
+      {rank:1, cat:'미백 크림', keyword:'Whitening Cream', trend:'▲▲', reason:'밝은 피부 최우선', sourcing:'구달·설화수'},
+      {rank:2, cat:'안티에이징', keyword:'Anti-wrinkle Serum', trend:'▲', reason:'노화 예방', sourcing:'Primera·CNP'},
+      {rank:3, cat:'영양 앰플', keyword:'Nourishing Ampoule', trend:'▲', reason:'집중 케어', sourcing:'Wellage·에스트라'},
+      {rank:4, cat:'선스틱', keyword:'Sun Stick', trend:'▲', reason:'휴대 편의성', sourcing:'Round Lab'},
+      {rank:5, cat:'배스·목욕', keyword:'Bath Set', trend:'▲', reason:'K웰니스 트렌드', sourcing:'Innisfree 배스'},
+    ]
+  },
+  MY: {
+    name:'말레이시아', flag:'🇲🇾', currency:'RM', fx:0.0035,
+    age2030: [
+      {rank:1, cat:'히알루론산 세럼', keyword:'HA Serum', trend:'▲', reason:'수분 광채 피부', sourcing:'Torriden'},
+      {rank:2, cat:'선크림', keyword:'Korean Sunscreen', trend:'▲▲', reason:'무더운 날씨', sourcing:'Anessa·Round Lab'},
+      {rank:3, cat:'PDRN 세럼', keyword:'PDRN Repair Serum', trend:'▲▲', reason:'피부 재생 관심', sourcing:'Anua PDRN'},
+      {rank:4, cat:'클렌징폼', keyword:'Gentle Cleanser', trend:'→', reason:'민감성 피부', sourcing:'세타필·라운드랩'},
+      {rank:5, cat:'립케어', keyword:'Lip Oil', trend:'▲', reason:'글로시 립 트렌드', sourcing:'롬앤'},
+    ],
+    age3040: [
+      {rank:1, cat:'에센스', keyword:'Firming Essence', trend:'▲', reason:'탄력 개선', sourcing:'Primera·Aestura'},
+      {rank:2, cat:'목욕용품', keyword:'Korean Bath Set', trend:'▲', reason:'K웰니스 확산', sourcing:'Innisfree·Healing Bird'},
+      {rank:3, cat:'미백 세럼', keyword:'Brightening Serum', trend:'▲▲', reason:'멜라닌 케어', sourcing:'구달 비타C'},
+      {rank:4, cat:'보습크림', keyword:'Intensive Cream', trend:'→', reason:'피부 장벽', sourcing:'Wellage·Aestura'},
+      {rank:5, cat:'마스크팩', keyword:'Premium Sheet Mask', trend:'▲', reason:'주간 집중케어', sourcing:'JM솔루션'},
+    ]
+  },
+  SG: {
+    name:'싱가포르', flag:'🇸🇬', currency:'S$', fx:0.00091,
+    age2030: [
+      {rank:1, cat:'글래스스킨 세럼', keyword:'Glass Skin Serum', trend:'▲▲', reason:'글래스스킨 1위 트렌드', sourcing:'Torriden·Anua'},
+      {rank:2, cat:'선크림 (경량)', keyword:'Light Sunscreen', trend:'▲▲', reason:'습한 날씨+가벼운 제형', sourcing:'Round Lab·Anessa'},
+      {rank:3, cat:'웰니스 스킨케어', keyword:'Barrier Repair', trend:'▲', reason:'Skin-First 트렌드', sourcing:'Aestura·에스네이처'},
+      {rank:4, cat:'토너패드', keyword:'Exfoliating Toner Pad', trend:'▲', reason:'간편 각질케어', sourcing:'Anua 토너패드'},
+      {rank:5, cat:'목욕용품', keyword:'K-Bath Experience', trend:'▲', reason:'K드라마 목욕문화', sourcing:'Innisfree 배스솔트'},
+    ],
+    age3040: [
+      {rank:1, cat:'안티에이징 세럼', keyword:'Premium Anti-aging', trend:'▲▲', reason:'고구매력+피부투자', sourcing:'Primera·설화수'},
+      {rank:2, cat:'아이케어', keyword:'Eye Serum', trend:'▲', reason:'눈가 집중 관리', sourcing:'Aestura·이니스프리'},
+      {rank:3, cat:'프리미엄 크림', keyword:'Intensive Repair Cream', trend:'▲', reason:'고가 제품 선호', sourcing:'Wellage·CNP'},
+      {rank:4, cat:'비타민C 앰플', keyword:'Vitamin C Brightening', trend:'▲▲', reason:'색소침착 케어', sourcing:'구달 비타C'},
+      {rank:5, cat:'웰니스 목욕', keyword:'Premium Bath Set', trend:'▲', reason:'프리미엄 홈케어', sourcing:'Healing Bird 배스봄'},
+    ]
+  },
+  PH: {
+    name:'필리핀', flag:'🇵🇭', currency:'₱', fx:0.043,
+    age2030: [
+      {rank:1, cat:'미백 세럼', keyword:'Whitening Serum', trend:'▲▲', reason:'밝은 피부 최우선 가치', sourcing:'구달·Goodal'},
+      {rank:2, cat:'선크림', keyword:'Sunscreen SPF50+', trend:'▲▲', reason:'강한 자외선', sourcing:'Anessa·Round Lab'},
+      {rank:3, cat:'비타민C', keyword:'Vitamin C Serum', trend:'▲▲', reason:'미백+항산화', sourcing:'구달 비타C 세럼'},
+      {rank:4, cat:'수분크림', keyword:'Hydrating Cream', trend:'▲', reason:'수분 유지', sourcing:'Wellage·Anua'},
+      {rank:5, cat:'클렌징', keyword:'Foam Cleanser', trend:'→', reason:'더운 날씨 세안', sourcing:'라운드랩·세라베'},
+    ],
+    age3040: [
+      {rank:1, cat:'미백 집중케어', keyword:'Intensive Brightening', trend:'▲▲', reason:'색소침착 케어 수요', sourcing:'구달·Primera'},
+      {rank:2, cat:'안티에이징', keyword:'Anti-aging Serum', trend:'▲', reason:'노화 예방', sourcing:'Primera·Aestura'},
+      {rank:3, cat:'배스·스크럽', keyword:'Body Scrub Set', trend:'▲', reason:'K웰니스 관심', sourcing:'미쟝센·Innisfree'},
+      {rank:4, cat:'영양크림', keyword:'Nourishing Cream', trend:'→', reason:'피부 장벽', sourcing:'Aestura 아토베리어'},
+      {rank:5, cat:'마스크팩', keyword:'Sheet Mask', trend:'▲', reason:'주간 홈케어', sourcing:'JM솔루션'},
+    ]
+  },
+  TW: {
+    name:'대만', flag:'🇹🇼', currency:'NT$', fx:0.024,
+    age2030: [
+      {rank:1, cat:'세럼/앰플', keyword:'K-Beauty Serum', trend:'▲', reason:'K팝 영향 K뷰티 선호', sourcing:'Torriden·Anua·Wellage'},
+      {rank:2, cat:'토너', keyword:'Hydrating Toner', trend:'▲', reason:'스킨케어 루틴 정착', sourcing:'Anua·이니스프리'},
+      {rank:3, cat:'선크림', keyword:'Korean Sunscreen', trend:'▲▲', reason:'K선크림 품질 인정', sourcing:'Round Lab·Anessa'},
+      {rank:4, cat:'수분크림', keyword:'Water Gel Cream', trend:'▲', reason:'산뜻한 제형 선호', sourcing:'Torriden·Wellage'},
+      {rank:5, cat:'마스크팩', keyword:'Sheet Mask', trend:'→', reason:'K마스크 인지도', sourcing:'JM솔루션'},
+    ],
+    age3040: [
+      {rank:1, cat:'에센스/세럼', keyword:'Firming Serum', trend:'▲▲', reason:'탄력 개선', sourcing:'Primera·Aestura'},
+      {rank:2, cat:'목욕용품', keyword:'K-Bath Premium', trend:'▲', reason:'프리미엄 홈케어', sourcing:'Innisfree·Healing Bird'},
+      {rank:3, cat:'비타민C', keyword:'Brightening Ampoule', trend:'▲', reason:'미백+항산화', sourcing:'구달 비타C'},
+      {rank:4, cat:'아이크림', keyword:'Eye Cream', trend:'▲', reason:'눈가 케어', sourcing:'이니스프리·Aestura'},
+      {rank:5, cat:'프리미엄 크림', keyword:'Anti-aging Cream', trend:'▲▲', reason:'고가 제품 구매력', sourcing:'설화수·Primera'},
+    ]
+  }
+};
+
+/* ══ 소싱팀장 보고 ══ */
+function showMarketReport(marketCode){
+  /* 버튼 상태 */
+  Object.keys(MARKET_AGE_DATA).concat(['all']).forEach(function(k){
+    var btn=document.getElementById('mr-'+k);
+    if(!btn)return;
+    var isActive=k===marketCode;
+    btn.style.background=isActive?'rgba(255,95,160,.15)':'transparent';
+    btn.style.borderColor=isActive?'rgba(255,95,160,.4)':'rgba(255,255,255,.1)';
+    btn.style.color=isActive?'#FF5FA0':'#6B7494';
+  });
+
+  var cont=document.getElementById('market-report-content');
+  if(!cont)return;
+  var markets=marketCode==='all'?Object.keys(MARKET_AGE_DATA):[marketCode];
+  var html='';
+
+  markets.forEach(function(mk){
+    var m=MARKET_AGE_DATA[mk];
+    if(!m)return;
+
+    /* 마켓 헤더 */
+    html+='<div style="background:#141824;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;margin-bottom:12px">';
+    html+='<div style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between">';
+    html+='<div style="display:flex;align-items:center;gap:8px"><span style="font-size:20px">'+m.flag+'</span><span style="font-size:14px;font-weight:700;color:#F0F2F8">'+m.name+'</span></div>';
+    var vn=MARKET_AGE_DATA[mk];
+    var goMargin=lcCalc(LC_PRODUCTS[0]||{salePrice:25800,isSet:true,setCount:2,isDirect:false,weight:100},mk);
+    html+='<span style="font-size:11px;color:'+(goMargin.grade==='go'?'#00DFA2':'#FFB547')+';font-weight:700">마진 '+goMargin.margin.toFixed(1)+'%</span>';
+    html+='</div>';
+
+    /* 20~30대 */
+    html+='<div style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05)">';
+    html+='<div style="font-size:11px;font-weight:700;color:#FF5FA0;margin-bottom:8px">👩 20~30대 TOP 5</div>';
+    m.age2030.forEach(function(item){
+      var tc=item.trend==='▲▲'?'#FF5FA0':(item.trend==='▲'?'#FFB547':'#6B7494');
+      html+='<div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.03)">';
+      html+='<span style="font-size:11px;font-weight:700;color:#4A5470;width:16px;flex-shrink:0">'+item.rank+'</span>';
+      html+='<div style="flex:1"><div style="font-size:11px;font-weight:600;color:#F0F2F8">'+item.cat+'</div>';
+      html+='<div style="font-size:10px;color:#4A5470;margin-top:1px">'+item.reason+'</div>';
+      html+='<div style="font-size:10px;color:#00DFA2;margin-top:2px">소싱: '+item.sourcing+'</div></div>';
+      html+='<span style="font-size:13px;color:'+tc+'">'+item.trend+'</span>';
+      html+='</div>';
+    });
+    html+='</div>';
+
+    /* 30~40대 */
+    html+='<div style="padding:12px 14px">';
+    html+='<div style="font-size:11px;font-weight:700;color:#9B78FF;margin-bottom:8px">👩 30~40대 TOP 5</div>';
+    m.age3040.forEach(function(item){
+      var tc=item.trend==='▲▲'?'#FF5FA0':(item.trend==='▲'?'#FFB547':'#6B7494');
+      html+='<div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.03)">';
+      html+='<span style="font-size:11px;font-weight:700;color:#4A5470;width:16px;flex-shrink:0">'+item.rank+'</span>';
+      html+='<div style="flex:1"><div style="font-size:11px;font-weight:600;color:#F0F2F8">'+item.cat+'</div>';
+      html+='<div style="font-size:10px;color:#4A5470;margin-top:1px">'+item.reason+'</div>';
+      html+='<div style="font-size:10px;color:#9B78FF;margin-top:2px">소싱: '+item.sourcing+'</div></div>';
+      html+='<span style="font-size:13px;color:'+tc+'">'+item.trend+'</span>';
+      html+='</div>';
+    });
+    html+='</div></div>';
+  });
+
+  cont.innerHTML=html;
+}
+function initSourcingReport(){showMarketReport('all');}
+
+function initBriefing(){
+  var el=document.getElementById('briefing-date');
+  if(el&&!el.textContent){var n=new Date();el.textContent='2026년 '+n.toLocaleDateString('ko-KR',{month:'long',day:'numeric'})+'·5개 팀 에이전트';}
+  renderBCards();
+}
+
+var cgLang='vi',cgTypes=new Set(['carousel','shopeeTitle','caption','tiktok','shopeeDetail','voucher']);
+function setCGLang(l){cgLang=l;document.getElementById('cg-lang-vi').classList.toggle('active',l==='vi');document.getElementById('cg-lang-ko').classList.toggle('active',l==='ko');}
+function toggleCGType(btn){var t=btn.getAttribute('data-type');if(cgTypes.has(t)){cgTypes.delete(t);btn.classList.remove('selected');}else{cgTypes.add(t);btn.classList.add('selected');}}
+async function generateCGContent(){
+  var product=document.getElementById('cg-product').value.trim();if(!product){alert('상품 정보를 입력하세요');return;}
+  var category=document.getElementById('cg-category').value;
+  var keywords=document.getElementById('cg-keywords').value.trim();
+  var btn=document.getElementById('cg-gen-btn');btn.disabled=true;
+  document.getElementById('cg-gen-icon').textContent='⏳';document.getElementById('cg-gen-label').textContent='생성 중...';
+  document.getElementById('cg-results').innerHTML='<div class="loading"><div class="spinner"></div>AI 콘텐츠 생성 중...</div>';
+  var lang=cgLang==='vi'?'All consumer content in Vietnamese (Tiếng Việt). Ingredient names in English.':'All content in Korean.';
+  var prompt='You are a Shopee Vietnam K-beauty cross-border AI.\nLanguage: '+lang+'\nContext: Olive Young Korea → Shopee Vietnam. Emphasize authenticity, Olive Young direct, Korea shipping.\nList Price = Target / 0.70 (-30% always shown).\nProduct: '+product+' | Category: '+category+(keywords?' | Benefits: '+keywords:'')+'\n\nRespond ONLY valid JSON no markdown:\n{"productName":"","carousel":[{"slide":1,"emoji":"","title":"","body":"","tip":""}],"shopeeTitle":"","shopeeDetail":"","captions":{"instagram":"","tiktok":"","threads":""},"tiktokScript":"","vouchers":{"welcome":"","bundle":"","flash":"","review":""}}';
+  try{
+    var res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})});
+    var data=await res.json();
+    var text=data.content&&data.content[0]&&data.content[0].text;
+    if(!text)throw new Error('응답 없음');
+    var result=JSON.parse(text.replace(/```json|```/g,'').trim());
+    var html='<div style="font-size:11px;color:#00DFA2;margin-bottom:8px">// 생성 완료 · '+result.productName+'</div>';
+    function cgCard(title,body,copy){
+      var id2='cg-'+Math.random().toString(36).slice(2,7);
+      var esc=copy.replace(/'/g,"\\'").replace(/\n/g,'\\n');
+      return '<div style="background:#1A2030;border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden;margin-bottom:8px"><div style="padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;font-weight:700;color:#FF5FA0">'+title+'</span><button onclick="doCopy(\''+esc+'\',\''+id2+'\')" id="'+id2+'" style="font-size:11px;padding:3px 8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#8B96B8;cursor:pointer">복사</button></div><div style="padding:12px">'+body+'</div></div>';
+    }
+    if(cgTypes.has('carousel')&&result.carousel){html+=cgCard('📸 인스타 카루셀',result.carousel.map(function(s){return '<div style="border-left:2px solid #FFB547;padding:6px 8px;margin-bottom:5px"><div style="color:#FFB547;font-size:11px">SLIDE '+s.slide+'</div><div style="color:#F0F2F8;font-size:11px;margin:2px 0">'+s.emoji+' '+s.title+'</div><div style="color:#8B96B8;font-size:10px">'+s.body+'</div>'+(s.tip?'<div style="color:#9B78FF;font-size:11px;margin-top:2px">→ '+s.tip+'</div>':'')+'</div>';}).join(''),result.carousel.map(function(s){return 'Slide '+s.slide+': '+s.title+'\n'+s.body;}).join('\n\n'));}
+    if(cgTypes.has('shopeeTitle')&&result.shopeeTitle)html+=cgCard('🛍️ 쇼피 상품명','<div style="font-size:11px;color:#F0F2F8;line-height:1.6;padding:4px">'+result.shopeeTitle+'</div><div style="font-size:11px;color:#4A5470;margin-top:4px">'+result.shopeeTitle.length+' / 120자</div>',result.shopeeTitle);
+    if(cgTypes.has('shopeeDetail')&&result.shopeeDetail)html+=cgCard('📄 상세페이지','<pre style="font-size:10px;color:#8B96B8;line-height:1.7;white-space:pre-wrap">'+result.shopeeDetail+'</pre>',result.shopeeDetail);
+    if(cgTypes.has('caption')&&result.captions){var cb='',ct='';['instagram','tiktok','threads'].forEach(function(k){if(result.captions[k]){cb+='<div style="border:1px solid rgba(255,255,255,.07);padding:8px;margin-bottom:5px;border-radius:6px"><div style="font-size:11px;color:#4EA8FF;margin-bottom:3px">'+k.toUpperCase()+'</div><div style="font-size:11px;color:#F0F2F8;line-height:1.6">'+result.captions[k].replace(/\n/g,'<br>')+'</div></div>';ct+='\n['+k+']\n'+result.captions[k]+'\n';}});html+=cgCard('📢 SNS 캡션',cb,ct);}
+    if(cgTypes.has('tiktok')&&result.tiktokScript)html+=cgCard('🎬 TikTok 스크립트','<pre style="font-size:10px;color:#8B96B8;line-height:1.7;white-space:pre-wrap">'+result.tiktokScript+'</pre>',result.tiktokScript);
+    if(cgTypes.has('voucher')&&result.vouchers){var vb='',vt='';['welcome','bundle','flash','review'].forEach(function(k){if(result.vouchers[k]){vb+='<div style="border:1px solid rgba(255,255,255,.07);padding:8px;margin-bottom:5px;border-radius:6px"><div style="font-size:11px;color:#FFB547;margin-bottom:3px">'+k.toUpperCase()+'</div><div style="font-size:10px;color:#F0F2F8;line-height:1.7">'+result.vouchers[k].replace(/\n/g,'<br>')+'</div></div>';vt+='\n['+k+']\n'+result.vouchers[k]+'\n';}});html+=cgCard('🎫 바우처 카피',vb,vt);}
+    document.getElementById('cg-results').innerHTML=html;
+  }catch(e){document.getElementById('cg-results').innerHTML='<div style="font-size:10px;color:#FF5C5C;padding:12px">오류: '+e.message+'</div>';}
+  btn.disabled=false;document.getElementById('cg-gen-icon').textContent='✨';document.getElementById('cg-gen-label').textContent='다시 생성하기';
+}
+function doCopy(text,id){navigator.clipboard.writeText(text).then(function(){var b=document.getElementById(id);if(b){b.textContent='복사됨 ✓';setTimeout(function(){b.textContent='복사';},1500);}});}
+
+function updateTicker(){
+  var items=[
+    {label:'VN GROWTH',val:'+134%',cls:'tick-up'},{label:'K-BEAUTY',val:'+77%',cls:'tick-up'},
+    {label:'11.11 SPIKE',val:'9×',cls:'tick-up'},{label:'ANUA MARGIN',val:'30.5%',cls:'tick-up'},
+    {label:'TORRIDEN MARGIN',val:'31.9%',cls:'tick-up'},{label:'STOCK ALERT',val:'ANUA 7u',cls:'tick-dn'},
+    {label:'PHASE',val:'1/3',cls:''},{label:'TARGET SKU',val:'5',cls:''},
+  ];
+  var tk=document.getElementById('ticker');if(!tk)return;
+  tk.innerHTML=items.map(function(i){return '<div class="tick-item"><span>'+i.label+'</span><strong class="'+i.cls+'">'+i.val+'</strong></div>';}).join('');
+}
+function updateTime(){var e=document.getElementById('time-display');if(e)e.textContent=new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',second:'2-digit'})+' KST';}
+
+function openSimModal(){
+  var m=document.getElementById('sim-modal');
+  if(m){m.style.display='block';runModal();}
+}
+function runModal(){
+  var price  = parseInt(document.getElementById('ms-price').value)||0;
+  var split  = parseInt(document.getElementById('ms-split').value)||1;
+  var weight = parseInt(document.getElementById('ms-weight').value)||130;
+  var tgt    = parseInt(document.getElementById('ms-margin').value)||25;
+  var bundle = parseInt(document.getElementById('ms-bundle').value)||0;
+  var mv = document.getElementById('ms-margin-val'); if(mv) mv.textContent=tgt+'%';
+  var uc = Math.round(price/split);
+  var uw = Math.round(weight/split);
+  var bd = bundle+1;
+  var sc = Math.round(simShipCost(uw*bd)/bd);
+  var ucEl=document.getElementById('ms-unit-cost'); if(ucEl) ucEl.textContent='₩'+uc.toLocaleString();
+  var BG='#0B0D11',HDR='#141824';
+  var tbl=document.getElementById('ms-table'); if(!tbl)return;
+  var go=0,bm=null,bmg=0;
+  var r='<tr style="background:'+HDR+'">'
+    +'<th style="background:'+HDR+';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">마켓</th>'
+    +'<th style="background:'+HDR+';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">수수료</th>'
+    +'<th style="background:'+HDR+';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">권장가</th>'
+    +'<th style="background:'+HDR+';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">등록정가</th>'
+    +'<th style="background:'+HDR+';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">현지가</th>'
+    +'<th style="background:'+HDR+';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">마진</th>'
+    +'<th style="background:'+HDR+';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">판정</th></tr>';
+  SIM_MARKETS.forEach(function(m){
+    var c2=simCalc(uc,sc,m,tgt);
+    if(c2.grade==='go'){go++;if(c2.margin>bmg){bmg=c2.margin;bm=m;}}
+    var bc=c2.grade==='go'?'#00DFA2':(c2.grade==='review'?'#FFB547':'#FF5C5C');
+    var bt=c2.grade==='go'?'✅ GO':(c2.grade==='review'?'🔍 검토':'❌ NO');
+    var rb=c2.grade==='go'?'rgba(0,223,162,0.05)':BG;
+    r+='<tr style="background:'+rb+'">'
+      +'<td style="background:'+rb+';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05)"><span style="font-size:14px">'+m.flag+'</span><span style="font-size:11px;color:#F0F2F8;font-weight:600;margin-left:4px">'+m.name+'</span></td>'
+      +'<td style="background:'+rb+';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);color:#6B7494;font-size:10px">'+((m.fee+m.tax)*100).toFixed(1)+'%</td>'
+      +'<td style="background:'+rb+';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);color:#00DFA2;font-weight:700;font-size:12px">₩'+(c2.sp||0).toLocaleString()+'</td>'
+      +'<td style="background:'+rb+';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);color:#4A5470;font-size:10px;text-decoration:line-through">₩'+(c2.listPrice||0).toLocaleString()+'</td>'
+      +'<td style="background:'+rb+';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);color:#4EA8FF;font-size:11px">'+c2.localFormatted+'</td>'
+      +'<td style="background:'+rb+';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);color:'+bc+';font-weight:800">'+c2.margin.toFixed(1)+'%</td>'
+      +'<td style="background:'+rb+';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);font-size:11px">'+bt+'</td></tr>';
+  });
+  tbl.innerHTML=r;
+  var kpi=document.getElementById('ms-kpi');
+  if(kpi){
+    var KS='background:#1A2030;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px;text-align:center';
+    kpi.innerHTML=
+      '<div style="'+KS+'"><div style="font-size:11px;color:#6B7494;margin-bottom:4px">단위원가</div><div style="font-size:17px;font-weight:800;color:#FF5FA0">₩'+uc.toLocaleString()+'</div></div>'+
+      '<div style="'+KS+'"><div style="font-size:11px;color:#6B7494;margin-bottom:4px">GO 국가</div><div style="font-size:20px;font-weight:800;color:#00DFA2">'+go+'<span style="font-size:12px">/7</span></div></div>'+
+      '<div style="'+KS+'"><div style="font-size:11px;color:#6B7494;margin-bottom:4px">최고마진</div><div style="font-size:17px;font-weight:800;color:#4EA8FF">'+(bm?bmg.toFixed(1)+'%':'-')+'</div><div style="font-size:11px;color:#4A5470">'+(bm?bm.name:'')+'</div></div>'+
+      '<div style="'+KS+'"><div style="font-size:11px;color:#6B7494;margin-bottom:4px">목표마진</div><div style="font-size:20px;font-weight:800;color:#FFB547">'+tgt+'%</div></div>';
+  }
+  var gl=document.getElementById('ms-go-label'); if(gl) gl.textContent='GO '+go+'개국 / 7개국';
+}
+
+// ── 전체 마켓 시뮬레이터 ────────────────────────────────────────────
+var SIM_MARKETS = [
+  {code:'VN', flag:'🇻🇳', name:'베트남',    fee:0.058, tax:0.015, cur:'₫',   fx:18.8,     priority:1},
+  {code:'TH', flag:'🇹🇭', name:'태국',      fee:0.070, tax:0.015, cur:'฿',   fx:0.028,    priority:2},
+  {code:'MY', flag:'🇲🇾', name:'말레이시아', fee:0.065, tax:0.000, cur:'RM',  fx:0.0035,   priority:3},
+  {code:'SG', flag:'🇸🇬', name:'싱가포르',  fee:0.065, tax:0.000, cur:'S$',  fx:0.00091,  priority:4},
+  {code:'PH', flag:'🇵🇭', name:'필리핀',    fee:0.075, tax:0.000, cur:'₱',   fx:0.043,    priority:5},
+  {code:'TW', flag:'🇹🇼', name:'대만',      fee:0.060, tax:0.000, cur:'NT$', fx:0.024,    priority:6},
+  {code:'ID', flag:'🇮🇩', name:'인도네시아', fee:0.070, tax:0.025, cur:'Rp',  fx:11.2,     priority:7},
+];
+
+function simShipCost(w) {
+  if(w<=100) return 10800;
+  if(w<=200) return 12600;
+  if(w<=300) return 14400;
+  if(w<=500) return 17500;
+  return 23000;
+}
+
+function simCalc(unitCost, shipCost, market, targetMargin) {
+  var tf = market.fee + market.tax;
+  var tc = unitCost + shipCost;
+  var sp = Math.round(Math.round(tc / (1 - tf - targetMargin/100) / 1000) * 1000);
+  var profit = sp - tc - sp * tf;
+  var margin = sp ? profit / sp * 100 : 0;
+  var listPrice = sp ? Math.round(Math.round(sp / 0.70 / 1000) * 1000) : 0;
+  var localPrice = sp ? (sp * market.fx) : 0;
+  var localFormatted = '';
+  if (market.code === 'VN') localFormatted = Math.round(localPrice).toLocaleString() + '₫';
+  else if (market.code === 'TH') localFormatted = localPrice.toFixed(0) + '฿';
+  else if (market.code === 'MY') localFormatted = localPrice.toFixed(2) + 'RM';
+  else if (market.code === 'SG') localFormatted = localPrice.toFixed(2) + 'S$';
+  else if (market.code === 'PH') localFormatted = localPrice.toFixed(0) + '₱';
+  else if (market.code === 'TW') localFormatted = localPrice.toFixed(0) + 'NT$';
+  else if (market.code === 'ID') localFormatted = Math.round(localPrice/1000) + 'K Rp';
+  var grade = margin >= targetMargin ? 'go' : (margin >= 15 ? 'review' : 'no');
+  return { sp: sp, listPrice: listPrice, profit: profit, margin: margin, localFormatted: localFormatted, grade: grade };
+}
+
+function runSim() {
+  var price  = parseInt(document.getElementById('sim-price').value) || 0;
+  var split  = parseInt(document.getElementById('sim-split').value) || 1;
+  var weight = parseInt(document.getElementById('sim-weight').value) || 130;
+  var targetMargin = parseInt(document.getElementById('sim-margin').value) || 25;
+  var bundle = parseInt(document.getElementById('sim-bundle').value) || 0;
+
+  var marginVal = document.getElementById('sim-margin-val');
+  if (marginVal) marginVal.textContent = targetMargin + '%';
+
+  var unitCost = Math.round(price / split);
+  var unitWeight = Math.round(weight / split);
+  var bundleDiv = bundle + 1;
+  var shipCost = Math.round(simShipCost(unitWeight * bundleDiv) / bundleDiv);
+
+  var ucEl = document.getElementById('sim-unit-cost');
+  if (ucEl) ucEl.textContent = '₩' + unitCost.toLocaleString();
+
+  var BG = '#0F1117', HDR = '#141824';
+  var tbl = document.getElementById('simTable');
+  if (!tbl) return;
+
+  var goCount = 0;
+  var bestMarket = null, bestMargin = 0;
+
+  var r = '<tr style="background:' + HDR + '">'
+    + '<th style="background:' + HDR + ';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">마켓</th>'
+    + '<th style="background:' + HDR + ';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">수수료</th>'
+    + '<th style="background:' + HDR + ';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">권장가(₩)</th>'
+    + '<th style="background:' + HDR + ';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">등록정가</th>'
+    + '<th style="background:' + HDR + ';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">현지가</th>'
+    + '<th style="background:' + HDR + ';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">마진율</th>'
+    + '<th style="background:' + HDR + ';font-size:11px;color:#6B7494;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.07)">결정</th></tr>';
+
+  SIM_MARKETS.forEach(function(m) {
+    var c = simCalc(unitCost, shipCost, m, targetMargin);
+    if (c.grade === 'go') { goCount++; if (c.margin > bestMargin) { bestMargin = c.margin; bestMarket = m; } }
+    var bc = c.grade==='go'?'b-go':(c.grade==='review'?'b-rv':'b-no');
+    var bt = c.grade==='go'?'GO':(c.grade==='review'?'검토':'NO');
+    var mc = c.grade==='go'?'#00DFA2':(c.grade==='review'?'#FFB547':'#FF5C5C');
+    var rowBg = c.grade==='go'?'rgba(0,223,162,0.04)':BG;
+
+    r += '<tr style="background:' + rowBg + '">';
+    r += '<td style="background:' + rowBg + ';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05)">'
+      + '<span style="font-size:14px">' + m.flag + '</span>'
+      + '<span style="font-size:11px;color:#F0F2F8;font-weight:600;margin-left:5px">' + m.name + '</span></td>';
+    r += '<td style="background:' + rowBg + ';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);font-size:10px;color:#6B7494;font-family:monospace">'
+      + ((m.fee+m.tax)*100).toFixed(1) + '%</td>';
+    r += '<td style="background:' + rowBg + ';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);color:#00DFA2;font-family:monospace;font-weight:700">'
+      + '₩' + (c.sp||0).toLocaleString() + '</td>';
+    r += '<td style="background:' + rowBg + ';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);color:#4A5470;font-family:monospace;text-decoration:line-through;font-size:10px">'
+      + '₩' + (c.listPrice||0).toLocaleString() + '</td>';
+    r += '<td style="background:' + rowBg + ';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);color:#4EA8FF;font-size:11px;font-family:monospace">'
+      + c.localFormatted + '</td>';
+    r += '<td style="background:' + rowBg + ';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);font-weight:700;font-family:monospace;color:' + mc + '">'
+      + c.margin.toFixed(1) + '%</td>';
+    r += '<td style="background:' + rowBg + ';padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05)">'
+      + '<span class="badge ' + bc + '">' + bt + '</span></td></tr>';
+  });
+
+  tbl.innerHTML = r;
+
+  var gcEl = document.getElementById('sim-go-label');
+  if (gcEl) gcEl.textContent = '  GO ' + goCount + '개국 / 7개국';
+
+  // 요약 KPI
+  var summary = document.getElementById('sim-kpi');
+  if (summary) {
+    summary.style.display = 'grid'; // already grid
+    var KS='background:#1A2030;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 14px';
+    var LB='display:block;font-size:10px;color:#8B96B8;margin-bottom:5px';
+    summary.innerHTML=
+      '<div style="'+KS+'"><span style="'+LB+'">단위 원가</span><span style="font-size:20px;font-weight:800;background:linear-gradient(135deg,#FF5FA0,#9B78FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent">₩'+unitCost.toLocaleString()+'</span><div style="font-size:11px;color:#6B7494;margin-top:3px">배송 ₩'+shipCost.toLocaleString()+' 포함</div></div>'+
+      '<div style="'+KS+'"><span style="'+LB+'">GO 국가</span><span style="font-size:22px;font-weight:800;color:#00DFA2">'+goCount+'<span style="font-size:13px">/7</span></span></div>'+
+      '<div style="'+KS+'"><span style="'+LB+'">최고 마진</span><span style="font-size:22px;font-weight:800;color:#4EA8FF">'+(bestMarket?bestMargin.toFixed(1)+'%':'-')+'</span><div style="font-size:11px;color:#6B7494;margin-top:3px">'+(bestMarket?bestMarket.name:'')+'</div></div>'+
+      '<div style="'+KS+'"><span style="'+LB+'">목표 마진</span><span style="font-size:22px;font-weight:800;color:#FFB547">'+targetMargin+'%</span></div>';
+  }
+}
+
+
+document.addEventListener('click',function(e){
+  var t=e.target;
+  if(t.classList&&(t.classList.contains('atb')||t.classList.contains('bc-tab-btn'))){
+    var pg=t.getAttribute('data-page');
+    if(pg){
+      if(pg==='simulator'){try{openSimModal();}catch(x){}}
+      else{try{showPage(pg,null);}catch(x){}}
+    }
+  }
+});
+document.addEventListener('DOMContentLoaded',function(){
+  try{updateTicker();updateTime();setInterval(updateTime,1000);initBriefing();calcRevenue();var sv=localStorage.getItem('shopee_notion_token');if(sv){var ti=document.getElementById('notion-token-input');if(ti)ti.value=sv;}}catch(e){}
+});
+</script>
+
+<div id="sim-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#0B0D11;z-index:9999;overflow-y:auto;-webkit-overflow-scrolling:touch">
+  <div style="padding:14px">
+    <!-- 헤더 -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;position:sticky;top:0;background:#0B0D11;padding:10px 0;z-index:2">
+      <button onclick="document.getElementById('sim-modal').style.display='none'" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#F0F2F8;font-size:13px;padding:8px 14px;cursor:pointer">← 닫기</button>
+      <div style="font-size:16px;font-weight:800;color:#F0F2F8">🌏 전체 마켓 시뮬레이터</div>
+    </div>
+    <!-- 입력 -->
+    <div style="background:#1A2030;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-size:11px;font-weight:700;color:#8B96B8;margin-bottom:12px">📦 상품 원가 입력</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+        <div>
+          <div style="font-size:10px;color:#6B7494;margin-bottom:4px">올영 구매가 (₩)</div>
+          <input type="number" id="ms-price" value="25800" oninput="runModal()"
+            style="width:100%;background:#0F1520;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#F0F2F8;font-size:12px;padding:9px 12px;box-sizing:border-box;outline:none">
+        </div>
+        <div>
+          <div style="font-size:10px;color:#6B7494;margin-bottom:4px">기획세트 분할</div>
+          <select id="ms-split" onchange="runModal()" style="width:100%;background:#0F1520;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#F0F2F8;font-size:12px;padding:9px 12px">
+            <option value="1">단품 ÷1</option>
+            <option value="2" selected>더블기획 ÷2</option>
+            <option value="3">3종기획 ÷3</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+        <div>
+          <div style="font-size:10px;color:#6B7494;margin-bottom:4px">무게 (g)</div>
+          <input type="number" id="ms-weight" value="130" oninput="runModal()" style="width:100%;background:#0F1520;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#F0F2F8;font-size:12px;padding:9px 12px;box-sizing:border-box;outline:none">
+        </div>
+        <div>
+          <div style="font-size:10px;color:#6B7494;margin-bottom:4px">합포장</div>
+          <select id="ms-bundle" onchange="runModal()" style="width:100%;background:#0F1520;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#F0F2F8;font-size:12px;padding:9px 12px">
+            <option value="0">단독 발송</option>
+            <option value="1">합포장 2개</option>
+            <option value="2">합포장 3개</option>
+          </select>
+        </div>
+      </div>
+      <div style="font-size:10px;color:#6B7494;margin-bottom:5px">목표 마진율</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <input type="range" id="ms-margin" min="10" max="50" value="25" oninput="runModal()" style="flex:1;accent-color:#FF5FA0">
+        <span id="ms-margin-val" style="font-size:16px;font-weight:800;color:#FF5FA0;min-width:45px">25%</span>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between">
+        <span style="font-size:10px;color:#6B7494">단위 원가</span>
+        <span id="ms-unit-cost" style="font-size:16px;font-weight:800;color:#4EA8FF">₩12,900</span>
+      </div>
+    </div>
+    <!-- KPI -->
+    <div id="ms-kpi" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:12px"></div>
+    <!-- 테이블 -->
+    <div style="background:#1A2030;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden">
+      <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:11px;font-weight:700;color:#FF5FA0">국가별 마진 분석</span>
+        <span id="ms-go-label" style="font-size:10px;color:#00DFA2;font-weight:700"></span>
+      </div>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+        <table id="ms-table" style="width:100%;border-collapse:collapse;min-width:600px"></table>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#4A5470;margin-top:8px;line-height:1.7">※ 2025.06 환율 · EMS 배송비 추정 · 수수료+원천세 반영 · 등록정가=권장가÷0.70</div>
+  </div>
+</div>
+
+<script>/* PATCH-CLAUDE-20260607: structural + API fixes */
+(function(){
+  // 1) Un-nest agent sub-pages accidentally nested inside #page-livechecker
+  try{
+    var main=document.querySelector('main');
+    ['simulator','competitor','trends','salesdata','aireport','accounting','charts','reels','sourcing-report'].forEach(function(id){
+      var el=document.getElementById('page-'+id);
+      if(el&&main&&el.parentElement!==main) main.appendChild(el);
+    });
+  }catch(e){console.warn('unnest fail',e);}
+  // 2) Anthropic API: browser CORS requires special header + key
+  var _f=window.fetch.bind(window);
+  window.fetch=function(url,opt){
+    opt=opt||{};
+    try{
+      if(typeof url==='string'&&url.indexOf('api.anthropic.com')>-1){
+        var k=localStorage.getItem('shopee_anthropic_key')||'';
+        if(!k){ k=(window.prompt('Claude API 키를 입력하세요 (최초 1회, 이 브라우저에만 저장)')||'').trim(); if(k) localStorage.setItem('shopee_anthropic_key',k); }
+        var h={}; var oh=opt.headers||{};
+        if(oh.forEach){ oh.forEach(function(v,kk){h[kk]=v;}); } else { for(var kk in oh) h[kk]=oh[kk]; }
+        h['content-type']='application/json';
+        h['anthropic-version']='2023-06-01';
+        h['anthropic-dangerous-direct-browser-access']='true';
+        h['x-api-key']=k;
+        opt.headers=h;
+      }
+    }catch(e){}
+    return _f(url,opt);
+  };
+  // 3) Notion direct browser calls are CORS-blocked — clear guidance
+  window.addEventListener('DOMContentLoaded',function(){
+    if(window.syncFromNotion){
+      var _s=window.syncFromNotion;
+      window.syncFromNotion=function(){
+        try{ var r=_s.apply(this,arguments); if(r&&r.catch) r.catch(function(){ alert('Notion API는 브라우저 직접 호출이 차단됩니다(CORS). 코워크의 Claude에게 동기화를 요청해 주세요.'); }); return r; }
+        catch(e){ alert('Notion 동기화는 브라우저에서 불가능합니다. 코워크 Claude를 이용하세요.'); }
+      };
+    }
+  });
+})();</script>
+
+<script>/* PATCH-CLAUDE-20260607-B: complete 7-market data (margin-formula 기준) */
+(function(){ try{ if(window.LC_MARKETS) Object.assign(window.LC_MARKETS,{
+  MY:{name:'Malaysia',fee:0.065,tax:0},
+  SG:{name:'Singapore',fee:0.065,tax:0},
+  PH:{name:'Philippines',fee:0.075,tax:0},
+  TW:{name:'Taiwan',fee:0.06,tax:0},
+  ID:{name:'Indonesia',fee:0.07,tax:0.025}
+}); }catch(e){console.warn(e);} })();</script>
+
+
+<script>/* PATCH-CLAUDE-20260607-C2: TOP 상품 = 2026-06-07 올영 랭킹 실측 (데이터 교체 방식) */
+(function(){ try{
+  var N=[
+   {rank:1,brand:'라운드랩',name:'자작나무 톤업 선크림 1+1',salePrice:23900,isSet:true,setCount:2,isDirect:true,weight:100},
+   {rank:2,brand:'메디힐',name:'에센셜 마스크팩 10+1',salePrice:10000,isSet:false,setCount:1,isDirect:true,weight:350},
+   {rank:3,brand:'메디힐',name:'더마 토너패드 200매',salePrice:28900,isSet:false,setCount:1,isDirect:true,weight:500},
+   {rank:4,brand:'아누아',name:'PDRN 캡슐100 세럼 30ml 더블기획',salePrice:27900,isSet:true,setCount:2,isDirect:false,weight:100},
+   {rank:5,brand:'달바',name:'퍼스트 스프레이 세럼 100ml ×2',salePrice:33900,isSet:true,setCount:2,isDirect:true,weight:300},
+   {rank:6,brand:'토리든',name:'다이브인 세럼 50ml 더블기획',salePrice:28500,isSet:true,setCount:2,isDirect:false,weight:200},
+   {rank:7,brand:'라운드랩',name:'자작나무 수분 선크림 1+1',salePrice:24500,isSet:true,setCount:2,isDirect:true,weight:100},
+   {rank:8,brand:'라로슈포제',name:'시카플라스트 밤 B5+ 100ml (VN 공식유통)',salePrice:29900,isSet:false,setCount:1,isDirect:true,weight:150},
+   {rank:9,brand:'셀라딕스',name:'트러블 131 앰플 30ml 기획(+리필)',salePrice:24900,isSet:true,setCount:2,isDirect:false,weight:100},
+   {rank:10,brand:'어노브',name:'딥 데미지 헤어마스크 더블기획',salePrice:29800,isSet:true,setCount:2,isDirect:false,weight:450}
+  ];
+  if(window.LC_PRODUCTS){ LC_PRODUCTS.length=0; N.forEach(function(x){LC_PRODUCTS.push(x);}); }
+  var sub=document.querySelector('#page-products .sec-sub');
+  if(sub) sub.textContent='올리브영 2026.06.07 실측(랭킹 페이지 직접 수집) · 베트남 마진 기준 · 매일 09:30 자동 분석';
+  if(window.renderProducts) renderProducts();
+}catch(e){console.warn('patchC2',e);} })();</script>
+
+
+
+<script>/* PATCH-CLAUDE-SG [2026-06-07] SG 베스트 + 양방향 링크 + 3중수수료 판정 (daily auto) */
+(function(){ try{
+  var OY='https://www.oliveyoung.co.kr/store/search/getSearchMain.do?giftYn=N&query=', SGS='https://shopee.sg/search?sortBy=sales&keyword=';
+  var SG={date:'2026-06-07', note:"'korean serum' 판매량 실측 · 상품명 클릭=쇼피SG, 매칭 클릭=올리브영 · 판정은 3중 수수료(VN 19.55%+인출 0.9%) 기준",
+   rows:[
+    ['1','토리든 다이브인 번들×2 (공식)','S$28.71','40k+','✅ ₩16,500 단품×2 (정확매칭) · ₩28,500 더블기획','x','NO', OY+encodeURIComponent('토리든 다이브인'), SGS+encodeURIComponent('torriden dive in serum bundle')],
+    ['2','토리든 발란스풀 시카 세럼 (공식)','S$15.69','10k+','✅ ₩23,800 더블기획 · 정가판매 마진 7.5%','rv','검토', OY+encodeURIComponent('토리든 발란스풀 시카 세럼'), SGS+encodeURIComponent('torriden balanceful cica serum')],
+    ['3','토리든 셀메이징 앰플 (공식)','S$17.94','10k+','✅ ₩18,200 기획(비타C 변형)','rv','검토', OY+encodeURIComponent('토리든 셀메이징 앰플'), SGS+encodeURIComponent('torriden cellmazing ampoule')],
+    ['4','달바 화이트 트러플 스프레이 (공식)','S$13.99','2k+','⊘ 직입점 브랜드','x','제외', '', SGS+encodeURIComponent('dalba white truffle spray serum')],
+    ['5','SKIN1004 센텔라 앰플','S$11.62','1k+','✅ ₩15,300 — 저단가·마진 부족','x','NO', OY+encodeURIComponent('스킨1004 센텔라 앰플'), SGS+encodeURIComponent('skin1004 centella ampoule')],
+    ['6','메디큐브 PDRN 핑크 펩타이드 (공식)','S$21.52','1k+','✅ ₩24,600 리필기획 · 정가판매 마진 21.1% (후보 1위)','go','REVIEW↑', OY+encodeURIComponent('메디큐브 PDRN 핑크 펩타이드 세럼'), SGS+encodeURIComponent('medicube pdrn pink peptide serum')],
+    ['7','뷰티오브조선 아이세럼','S$7.47','1k+','❌ 올영 미취급','x','—', '', SGS+encodeURIComponent('beauty of joseon revive eye serum')],
+    ['8','아누아 나이아신 TXA (공식)','S$23.59','—','✅ ₩26,900 2입 기획 · 정가판매 마진 3.8%','rv','검토', OY+encodeURIComponent('아누아 나이아신아마이드 세럼'), SGS+encodeURIComponent('anua niacinamide txa serum')]
+   ]};
+  function render(){
+    var page=document.getElementById('page-products'); if(!page) return;
+    var old=document.getElementById('sg-best-card'); if(old) old.remove();
+    var card=document.createElement('div'); card.className='card'; card.id='sg-best-card'; card.style.marginTop='14px';
+    var h='<div style="padding:12px 14px"><div style="font-weight:700;color:#FFF">🇸🇬 쇼피 SG K뷰티 베스트 × 올영 소싱 매칭 <span style="color:#6B7494;font-size:11px;font-weight:400">'+SG.date+' 실측 · 매일 자동 갱신</span></div>'
+      +'<div style="color:#FFB547;font-size:11px;margin:4px 0 10px">'+SG.note+'</div>'
+      +'<table class="tbl" style="width:100%"><tr><th>#</th><th>SG 베스트 상품</th><th>SG가</th><th>판매량</th><th>올영 매칭</th><th>판정</th></tr>';
+    var mc={go:'#00DFA2',rv:'#FFB547',x:'#6B7494'};
+    SG.rows.forEach(function(r){
+      var st='background:#0F1117;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.05);';
+      var nameCell = r[8]? '<a href="'+r[8]+'" target="_blank" rel="noopener" style="color:#FFFFFF;font-weight:700;text-decoration:underline dotted;text-underline-offset:3px">'+r[1]+' ↗</a>' : '<span style="color:#FFFFFF">'+r[1]+'</span>';
+      var match = r[7]? '<a href="'+r[7]+'" target="_blank" rel="noopener" style="color:'+mc[r[5]]+';font-weight:700;text-decoration:underline dotted;text-underline-offset:3px">'+r[4]+' ↗</a>' : '<span style="color:'+mc[r[5]]+'">'+r[4]+'</span>';
+      h+='<tr><td style="'+st+'color:#4A5470;font-family:monospace">'+r[0]+'</td><td style="'+st+'">'+nameCell+'</td><td style="'+st+'color:#8B96B8;font-family:monospace">'+r[2]+'</td><td style="'+st+'color:#00DFA2;font-family:monospace;font-weight:700">'+r[3]+'</td><td style="'+st+'font-size:12px">'+match+'</td><td style="'+st+'"><span class="badge b-'+(r[5]==='go'?'go':r[5]==='rv'?'rv':'x')+'">'+r[6]+'</span></td></tr>';
+    });
+    h+='</table><div style="color:#6B7494;font-size:11px;margin-top:8px">3중 수수료 반영 재판정: 메디큐브 PDRN이 후보 1위(21.1%) · 상세는 Notion 소싱 파이프라인</div></div>';
+    card.innerHTML=h; page.appendChild(card);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',render); else render();
+}catch(e){console.warn('patchSG',e);} })();</script>
+<script>/* PATCH-CLAUDE-SIM v2: 3중 수수료 소싱 마진 시뮬레이터 (판매/거래/인출 분리 · 국내비용 · 반품률) */
+(function(){ try{
+  var MKT={VN:{s:19.55,t:0,label:'🇻🇳 VN'},SG:{s:15.55,t:3,label:'🇸🇬 SG'},PH:{s:8.66,t:0,label:'🇵🇭 PH'},TW:{s:10.5,t:0,label:'🇹🇼 TW'},MY:{s:19.55,t:0,label:'🇲🇾 MY(미확인)'},TH:{s:19.55,t:0,label:'🇹🇭 TH(미확인)'}};
+  function ems(g){ if(g<=100)return 10800; if(g<=200)return 12600; if(g<=300)return 14400; if(g<=500)return 17500; return 23000; }
+  var PRESETS=[
+   ['메디큐브 PDRN 리필기획 (재계산 1위)',24600,2,100],
+   ['아누아 PDRN 더블기획',27900,2,100],
+   ['토리든 시카 더블기획',23800,2,200],
+   ['아누아 TXA 2입',26900,2,100],
+   ['구달 청귤 기획',20900,2,100]
+  ];
+  function won(n){ return '₩'+Math.round(n).toLocaleString(); }
+  function el(id){ return document.getElementById(id); }
+  function render(){
+    var page=document.getElementById('page-products'); if(!page) return;
+    var old=el('match-sim-card'); if(old) old.remove();
+    var card=document.createElement('div'); card.className='card'; card.id='match-sim-card'; card.style.marginTop='14px';
+    var inp='background:#161A24;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:#FFF;padding:8px 10px;width:100%';
+    var lab='color:#6B7494;font-size:10px;margin-bottom:3px';
+    var h='<div style="padding:12px 14px">'
+     +'<div style="font-weight:700;color:#FFF">🧮 소싱 마진 시뮬레이터 v2 <span style="color:#6B7494;font-size:11px;font-weight:400">3중 수수료(판매+거래+인출) · 국내비용 · 반품률 반영</span></div>'
+     +'<div style="display:flex;gap:6px;flex-wrap:wrap;margin:10px 0">'
+     +PRESETS.map(function(p,i){return '<button onclick="msFill('+i+')" style="background:#1E2433;border:1px solid rgba(255,255,255,.15);color:#8B96B8;border-radius:14px;padding:4px 10px;font-size:11px;cursor:pointer">'+p[0]+'</button>';}).join('')
+     +'</div>'
+     +'<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px">'
+     +'<div><div style="'+lab+'">마켓</div><select id="ms-mkt" style="'+inp+'">'+Object.keys(MKT).map(function(k){return '<option value="'+k+'"'+(k==='VN'?' selected':'')+'>'+MKT[k].label+'</option>';}).join('')+'</select></div>'
+     +'<div><div style="'+lab+'">판매수수료 %</div><input id="ms-fs" type="number" step="0.01" value="19.55" style="'+inp+'"></div>'
+     +'<div><div style="'+lab+'">거래수수료 %</div><input id="ms-ft" type="number" step="0.01" value="0" style="'+inp+'"></div>'
+     +'<div><div style="'+lab+'">인출수수료 %</div><input id="ms-fw" type="number" step="0.1" value="0.9" style="'+inp+'"></div>'
+     +'<div><div style="'+lab+'">반품률 %</div><input id="ms-ret" type="number" step="0.5" value="0" style="'+inp+'"></div>'
+     +'<div><div style="'+lab+'">목표 마진 %</div><input id="ms-tm" type="number" value="25" style="'+inp+'"></div>'
+     +'<div><div style="'+lab+'">올영 세일가(₩)</div><input id="ms-price" type="number" value="24600" style="'+inp+'"></div>'
+     +'<div><div style="'+lab+'">세트 분할수</div><input id="ms-set" type="number" value="2" min="1" style="'+inp+'"></div>'
+     +'<div><div style="'+lab+'">단위 무게(g)</div><input id="ms-wt" type="number" value="100" style="'+inp+'"></div>'
+     +'<div><div style="'+lab+'">국내배송비(₩)</div><input id="ms-dom" type="number" value="0" style="'+inp+'"></div>'
+     +'<div><div style="'+lab+'">포장비(₩)</div><input id="ms-pack" type="number" value="0" style="'+inp+'"></div>'
+     +'<div><div style="'+lab+'">예상판매가(₩·선택)</div><input id="ms-sp" type="number" placeholder="미입력 시 권장가" style="'+inp+'"></div>'
+     +'</div><div id="ms-out" style="margin-top:12px"></div></div>';
+    card.innerHTML=h; page.appendChild(card);
+    el('ms-mkt').addEventListener('change',function(){ var m=MKT[this.value]; el('ms-fs').value=m.s; el('ms-ft').value=m.t; msCalc(); });
+    ['ms-fs','ms-ft','ms-fw','ms-ret','ms-tm','ms-price','ms-set','ms-wt','ms-dom','ms-pack','ms-sp'].forEach(function(id){ el(id).addEventListener('input',msCalc); });
+    msCalc();
+  }
+  window.msFill=function(i){ var p=PRESETS[i]; el('ms-price').value=p[1]; el('ms-set').value=p[2]; el('ms-wt').value=p[3]; msCalc(); };
+  window.msCalc=function(){
+    var fees=((+el('ms-fs').value||0)+(+el('ms-ft').value||0)+(+el('ms-fw').value||0))/100;
+    var ret=(+el('ms-ret').value||0)/100, tm=(+el('ms-tm').value||25)/100;
+    var unit=(+el('ms-price').value||0)/Math.max(1,+el('ms-set').value||1);
+    var total=unit+ems(+el('ms-wt').value||100)+(+el('ms-dom').value||0)+(+el('ms-pack').value||0);
+    var box='display:inline-block;background:#0F1117;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px 14px;margin-right:8px;margin-bottom:6px';
+    var o='';
+    if(1-fees-tm<=0){ o='<span style="color:#FF6B6B">수수료+목표마진 합이 100%를 넘습니다</span>'; }
+    else{
+      var bep=total/(1-fees), rec=total/(1-fees-tm);
+      var sp=+el('ms-sp').value||rec;
+      var profit=(sp-sp*fees-total)*(1-ret);
+      var margin=(sp-sp*fees-total)/sp*100*(1-ret);
+      var mcol=margin>=25?'#00DFA2':margin>=15?'#FFB547':'#FF6B6B';
+      o='<span style="'+box+'"><span style="color:#6B7494;font-size:10px">단위원가+부대비</span><br><b style="color:#FFF;font-family:monospace">'+won(total)+'</b></span>'
+       +'<span style="'+box+'"><span style="color:#6B7494;font-size:10px">총 수수료율</span><br><b style="color:#FFF;font-family:monospace">'+(fees*100).toFixed(2)+'%</b></span>'
+       +'<span style="'+box+'"><span style="color:#6B7494;font-size:10px">BEP 판매가</span><br><b style="color:#FFB547;font-family:monospace">'+won(bep)+'</b></span>'
+       +'<span style="'+box+';border-color:#00DFA2"><span style="color:#6B7494;font-size:10px">권장판매가('+Math.round(tm*100)+'%)</span><br><b style="color:#00DFA2;font-family:monospace">'+won(rec)+'</b></span>'
+       +'<span style="'+box+'"><span style="color:#6B7494;font-size:10px">적용 판매가</span><br><b style="color:#FFF;font-family:monospace">'+won(sp)+'</b></span>'
+       +'<span style="'+box+'"><span style="color:#6B7494;font-size:10px">실효 마진'+(ret>0?'(반품 반영)':'')+'</span><br><b style="color:'+mcol+';font-family:monospace">'+margin.toFixed(1)+'%</b></span>'
+       +'<span style="'+box+'"><span style="color:#6B7494;font-size:10px">건당 순이익</span><br><b style="color:#FF7AB6;font-family:monospace">'+won(profit)+'</b></span>'
+       +'<span style="'+box+'"><span style="color:#6B7494;font-size:10px">등록 정가(상시-30%)</span><br><b style="color:#8B96B8;font-family:monospace">'+won(sp/0.7)+'</b></span>';
+    }
+    el('ms-out').innerHTML=o;
+  };
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',render); else render();
+}catch(e){console.warn('patchSIMv2',e);} })();</script>
+</body>
+</html>
