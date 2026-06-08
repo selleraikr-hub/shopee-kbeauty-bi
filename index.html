@@ -2957,5 +2957,32 @@ document.addEventListener('DOMContentLoaded',function(){
   };
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',render); else render();
 }catch(e){console.warn('patchSIMv2',e);} })();</script>
+
+<!-- PATCH-CLAUDE-AUTOFILL 2026-06-08: 올영 URL/상품명 -> 카테고리·효능 자동완성 -->
+<script>
+window.cgAutoFill=async function(){
+  var inp=document.getElementById('cg-product'),kw=document.getElementById('cg-keywords'),sel=document.getElementById('cg-category');
+  if(!inp)return;
+  var raw=(inp.value||'').trim(); if(!raw)return;
+  var name=raw;
+  if(raw.indexOf('t_search_name=')>=0){ try{ name=decodeURIComponent(raw.split('t_search_name=')[1].split('&')[0]); }catch(e){} }
+  var key=localStorage.getItem('shopee_anthropic_key');
+  if(!key){ if(kw)kw.placeholder='⚠️ 먼저 Claude API 키 입력'; return; }
+  var cats=sel?[].slice.call(sel.options).map(function(o){return o.value;}).filter(Boolean):[];
+  var prevPh=kw?kw.placeholder:'';
+  if(kw)kw.placeholder='🔄 AI 분석 중...';
+  try{
+    var prompt='K뷰티 상품 "'+name+'" 분석. JSON만 출력(설명·코드펜스 금지). category는 반드시 다음 중 하나: '+cats.join(' | ')+'. benefits는 핵심효능 한국어 키워드 4개 쉼표구분. 형식 {"category":"...","benefits":"a, b, c, d"}';
+    var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,messages:[{role:'user',content:prompt}]})});
+    var d=await r.json();
+    var t0=((d.content&&d.content[0]&&d.content[0].text)||'');
+    var a=t0.indexOf('{'),b=t0.lastIndexOf('}');
+    var obj=JSON.parse(a>=0&&b>=0?t0.slice(a,b+1):t0);
+    if(sel&&obj.category){var o=[].slice.call(sel.options).find(function(x){return x.value===obj.category||x.textContent.trim()===obj.category;});if(o){sel.value=o.value;sel.dispatchEvent(new Event('change',{bubbles:true}));}}
+    if(kw&&obj.benefits){kw.value=obj.benefits;kw.placeholder=prevPh;kw.dispatchEvent(new Event('input',{bubbles:true}));}
+  }catch(e){ if(kw)kw.placeholder=prevPh; if(window.console&&console.warn)console.warn('cgAutoFill',e); }
+};
+(function wire(){var p=document.getElementById('cg-product');if(p&&!p.__afWired){p.__afWired=true;p.addEventListener('change',window.cgAutoFill);p.addEventListener('blur',window.cgAutoFill);}else if(!p){setTimeout(wire,800);}})();
+</script>
 </body>
 </html>
