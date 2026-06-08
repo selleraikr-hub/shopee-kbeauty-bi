@@ -2834,16 +2834,16 @@ document.addEventListener('DOMContentLoaded',function(){
 <script>/* PATCH-CLAUDE-20260607-C2: TOP 상품 = 2026-06-07 올영 랭킹 실측 (데이터 교체 방식) */
 (function(){ try{
   var N=[
-   {rank:1,brand:'라운드랩',name:'자작나무 톤업 선크림 1+1',salePrice:23900,isSet:true,setCount:2,isDirect:true,weight:100},
-   {rank:2,brand:'메디힐',name:'에센셜 마스크팩 10+1',salePrice:10000,isSet:false,setCount:1,isDirect:true,weight:350},
-   {rank:3,brand:'메디힐',name:'더마 토너패드 200매',salePrice:28900,isSet:false,setCount:1,isDirect:true,weight:500},
-   {rank:4,brand:'아누아',name:'PDRN 캡슐100 세럼 30ml 더블기획',salePrice:27900,isSet:true,setCount:2,isDirect:false,weight:100},
-   {rank:5,brand:'달바',name:'퍼스트 스프레이 세럼 100ml ×2',salePrice:33900,isSet:true,setCount:2,isDirect:true,weight:300},
-   {rank:6,brand:'토리든',name:'다이브인 세럼 50ml 더블기획',salePrice:28500,isSet:true,setCount:2,isDirect:false,weight:200},
-   {rank:7,brand:'라운드랩',name:'자작나무 수분 선크림 1+1',salePrice:24500,isSet:true,setCount:2,isDirect:true,weight:100},
-   {rank:8,brand:'라로슈포제',name:'시카플라스트 밤 B5+ 100ml (VN 공식유통)',salePrice:29900,isSet:false,setCount:1,isDirect:true,weight:150},
-   {rank:9,brand:'셀라딕스',name:'트러블 131 앰플 30ml 기획(+리필)',salePrice:24900,isSet:true,setCount:2,isDirect:false,weight:100},
-   {rank:10,brand:'어노브',name:'딥 데미지 헤어마스크 더블기획',salePrice:29800,isSet:true,setCount:2,isDirect:false,weight:450}
+   {rank:1,brand:'메디힐',name:'에센셜 마스크팩 10/10+1매 7종',salePrice:10000,isSet:false,setCount:1,isDirect:true,weight:350},
+   {rank:2,brand:'아누아',name:'PDRN 수분 캡슐 미스트 100ml 2입',salePrice:31500,isSet:true,setCount:2,isDirect:false,weight:500},
+   {rank:3,brand:'셀라딕스',name:'트러블 세범 리밸런싱 131 앰플 30ml(+리필10ml)',salePrice:24200,isSet:false,setCount:1,isDirect:false,weight:200},
+   {rank:4,brand:'케어플러스',name:'상처 커버 스팟 패치 324매',salePrice:5700,isSet:false,setCount:1,isDirect:false,weight:300},
+   {rank:5,brand:'메디힐',name:'더마 토너패드 200매 7종',salePrice:28700,isSet:false,setCount:1,isDirect:true,weight:500},
+   {rank:6,brand:'아누아',name:'PDRN 히알루론산 100 세럼 30ml 더블',salePrice:27900,isSet:true,setCount:2,isDirect:false,weight:300},
+   {rank:7,brand:'어노브',name:'딥데미지 리페어 샴푸 500g 더블',salePrice:26800,isSet:true,setCount:2,isDirect:false,weight:1100},
+   {rank:8,brand:'토리든',name:'다이브인 히알루론산 세럼 50ml 더블',salePrice:27000,isSet:true,setCount:2,isDirect:false,weight:500},
+   {rank:9,brand:'라로슈포제',name:'시카플라스트 밤 B5+ 100ml (글로벌 현지유통)',salePrice:29900,isSet:false,setCount:1,isDirect:true,weight:150},
+   {rank:10,brand:'메디힐',name:'에센셜 마스크팩 1매 7종',salePrice:1000,isSet:false,setCount:1,isDirect:true,weight:100}
   ];
   if(window.LC_PRODUCTS){ LC_PRODUCTS.length=0; N.forEach(function(x){LC_PRODUCTS.push(x);}); }
   var sub=document.querySelector('#page-products .sec-sub');
@@ -2858,15 +2858,15 @@ document.addEventListener('DOMContentLoaded',function(){
   var OY='https://www.oliveyoung.co.kr/store/search/getSearchMain.do?giftYn=N&query=', SGS='https://shopee.sg/search?sortBy=sales&keyword=';
   var SG={date:'2026-06-07', note:"'korean serum' 판매량 실측 · 상품명 클릭=쇼피SG, 매칭 클릭=올리브영 · 판정은 3중 수수료(VN 19.55%+인출 0.9%) 기준",
    rows:[
-    ['1','토리든 다이브인 번들×2 (공식)','S$28.71','40k+','✅ ₩16,500 단품×2 (정확매칭) · ₩28,500 더블기획','x','NO', OY+encodeURIComponent('토리든 다이브인'), SGS+encodeURIComponent('torriden dive in serum bundle')],
-    ['2','토리든 발란스풀 시카 세럼 (공식)','S$15.69','10k+','✅ ₩23,800 더블기획 · 정가판매 마진 7.5%','rv','검토', OY+encodeURIComponent('토리든 발란스풀 시카 세럼'), SGS+encodeURIComponent('torriden balanceful cica serum')],
-    ['3','토리든 셀메이징 앰플 (공식)','S$17.94','10k+','✅ ₩18,200 기획(비타C 변형)','rv','검토', OY+encodeURIComponent('토리든 셀메이징 앰플'), SGS+encodeURIComponent('torriden cellmazing ampoule')],
-    ['4','달바 화이트 트러플 스프레이 (공식)','S$13.99','2k+','⊘ 직입점 브랜드','x','제외', '', SGS+encodeURIComponent('dalba white truffle spray serum')],
-    ['5','SKIN1004 센텔라 앰플','S$11.62','1k+','✅ ₩15,300 — 저단가·마진 부족','x','NO', OY+encodeURIComponent('스킨1004 센텔라 앰플'), SGS+encodeURIComponent('skin1004 centella ampoule')],
-    ['6','메디큐브 PDRN 핑크 펩타이드 (공식)','S$21.52','1k+','✅ ₩24,600 리필기획 · 정가판매 마진 21.1% (후보 1위)','go','REVIEW↑', OY+encodeURIComponent('메디큐브 PDRN 핑크 펩타이드 세럼'), SGS+encodeURIComponent('medicube pdrn pink peptide serum')],
-    ['7','뷰티오브조선 아이세럼','S$7.47','1k+','❌ 올영 미취급','x','—', '', SGS+encodeURIComponent('beauty of joseon revive eye serum')],
-    ['8','아누아 나이아신 TXA (공식)','S$23.59','—','✅ ₩26,900 2입 기획 · 정가판매 마진 3.8%','rv','검토', OY+encodeURIComponent('아누아 나이아신아마이드 세럼'), SGS+encodeURIComponent('anua niacinamide txa serum')]
-   ]};
+    ['1','dAlba No.1 화이트 트러플 스프레이 세럼 (달바)','S$15.10','3k+','달바 직입점 — 제외','x','제외', '', SGS+encodeURIComponent('dalba white truffle spray serum')],
+    ['2','토리든 다이브인 세럼 50ml','S$15.43','2k+','올영 더블 27,000+EMS → 적자','x','NO', OY+encodeURIComponent('토리든 다이브인 세럼'), SGS+encodeURIComponent('torriden dive in serum')],
+    ['3','토리든 다이브인 수분세럼 세트 50+50','S$26.28','2k+','올영 27,000+EMS17,500 → 적자','x','NO', OY+encodeURIComponent('토리든 다이브인 세럼'), SGS+encodeURIComponent('torriden dive in moisture serum set')],
+    ['4','SKIN1004 마다가스카르 센텔라 100% 추출','S$12.35','1k+','올영 앰플 15,300+EMS → 적자','x','NO', OY+encodeURIComponent('스킨1004 센텔라 앰플'), SGS+encodeURIComponent('skin1004 madagascar centella')],
+    ['5','SKIN1004 모이스처 선세럼 세트','S$24.64','1k+','올영 선앰플 17,850+EMS → 적자','x','NO', OY+encodeURIComponent('스킨1004 선앰플'), SGS+encodeURIComponent('skin1004 moisture sun serum set')],
+    ['6','조선미녀 리바이브 아이세럼 (인삼)','S$7.47','1k+','올영 미취급(검색 무결과)','x','제외', '', SGS+encodeURIComponent('beauty of joseon revive eye serum')],
+    ['7','메디큐브 PDRN 핑크 펩타이드 세럼','S$21.52','1k+','올영 24,600+EMS → 적자','x','NO', OY+encodeURIComponent('메디큐브 PDRN 핑크 펩타이드 앰플'), SGS+encodeURIComponent('medicube pdrn pink peptide serum')],
+    ['8','COSRX 6 펩타이드 스킨 부스터','S$16.53','901','코스알엑스 직입점 — 제외','x','제외', '', SGS+encodeURIComponent('cosrx 6 peptide skin booster')]
+  ]};
   function render(){
     var page=document.getElementById('page-products'); if(!page) return;
     var old=document.getElementById('sg-best-card'); if(old) old.remove();
