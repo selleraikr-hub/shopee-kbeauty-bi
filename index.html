@@ -1681,7 +1681,7 @@ async function genAIReport(){
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
+        max_tokens:8000,
         messages:[{role:'user',content:prompts[type]}]
       })
     });
@@ -2021,7 +2021,7 @@ async function genReels(){
     var res = await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,messages:[{role:'user',content:prompt}]})
     });
     var data = await res.json();
     var text = data.content&&data.content[0]&&data.content[0].text;
@@ -2109,7 +2109,7 @@ ${results.join('\n')}
     var res = await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,messages:[{role:'user',content:prompt}]})
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,messages:[{role:'user',content:prompt}]})
     });
     var data = await res.json();
     var text = data.content&&data.content[0]&&data.content[0].text;
@@ -2491,7 +2491,7 @@ async function generateCGContent(){
   var lang=cgLang==='vi'?'All consumer content in Vietnamese (Tiếng Việt). Ingredient names in English.':'All content in Korean.';
   var prompt='You are a Shopee Vietnam K-beauty cross-border AI.\nLanguage: '+lang+'\nContext: Olive Young Korea → Shopee Vietnam. Emphasize authenticity, Olive Young direct, Korea shipping.\nList Price = Target / 0.70 (-30% always shown).\nProduct: '+product+' | Category: '+category+(keywords?' | Benefits: '+keywords:'')+'\n\nRespond ONLY valid JSON no markdown:\n{"productName":"","carousel":[{"slide":1,"emoji":"","title":"","body":"","tip":""}],"shopeeTitle":"","shopeeDetail":"","captions":{"instagram":"","tiktok":"","threads":""},"tiktokScript":"","vouchers":{"welcome":"","bundle":"","flash":"","review":""}}';
   try{
-    var res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})});
+    var res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,messages:[{role:'user',content:prompt}]})});
     var data=await res.json();
     var text=data.content&&data.content[0]&&data.content[0].text;
     if(!text)throw new Error('응답 없음');
