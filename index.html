@@ -2834,17 +2834,17 @@ document.addEventListener('DOMContentLoaded',function(){
 <script>/* PATCH-CLAUDE-20260607-C2: TOP 상품 = 2026-06-07 올영 랭킹 실측 (데이터 교체 방식) */
 (function(){ try{
   var N=[
-   {rank:1,brand:'티르티르',name:'BTS 더 시티 부산 아이코닉 레드 듀오 기획',salePrice:46000,isSet:true,setCount:2,isDirect:true,weight:300},
-   {rank:2,brand:'메디힐',name:'더마 토너패드 200매 대용량 7종 기획',salePrice:28700,isSet:false,setCount:1,isDirect:true,weight:600},
-   {rank:3,brand:'리덴스',name:'톤앤스팟 코렉터 앰플 30ml 더블기획(1+1)',salePrice:23900,isSet:true,setCount:2,isDirect:false,weight:260},
-   {rank:4,brand:'토니모리',name:'퍼펙트립스 쇼킹립 틴트',salePrice:9900,isSet:false,setCount:1,isDirect:false,weight:60},
-   {rank:5,brand:'메디힐',name:'에센셜 마스크팩 10/10+1매 기획 7종',salePrice:10000,isSet:true,setCount:11,isDirect:true,weight:330},
-   {rank:6,brand:'디어클레어스',name:'블루 유스 액티베이팅 드롭 50ml 한정기획',salePrice:33900,isSet:false,setCount:1,isDirect:false,weight:180},
-   {rank:7,brand:'칼로',name:'스탑/컨트롤 PLUS 15포 2종',salePrice:8500,isSet:false,setCount:1,isDirect:false,weight:170},
-   {rank:8,brand:'라로슈포제',name:'시카플라스트 밤 B5+ 100ml 기획',salePrice:29900,isSet:false,setCount:1,isDirect:true,weight:180},
-   {rank:9,brand:'어노브',name:'딥 데미지 리페어 헤어 마스크 320ml 더블',salePrice:29800,isSet:true,setCount:2,isDirect:false,weight:850},
-   {rank:10,brand:'아누아',name:'PDRN 히알루론산 캡슐 100 세럼 30ml 더블기획',salePrice:27900,isSet:true,setCount:2,isDirect:false,weight:260}
-];
+   {rank:1,brand:'메디힐',name:'더마 토너패드 200매 대용량 7종 기획',salePrice:28500,isSet:false,setCount:1,isDirect:true,weight:600},
+   {rank:2,brand:'오리온',name:'촉촉한 황치즈칩 160g (식품·소싱제외)',salePrice:2800,isSet:false,setCount:1,isDirect:false,weight:200},
+   {rank:3,brand:'메디힐',name:'에센셜 마스크팩 10/10+1매 기획 7종',salePrice:9950,isSet:true,setCount:11,isDirect:true,weight:330},
+   {rank:4,brand:'리디에뜨',name:'리디잇 잇몸치약 100g',salePrice:15520,isSet:false,setCount:1,isDirect:false,weight:130},
+   {rank:5,brand:'토리든',name:'다이브인 저분자 히알루론산 세럼 50ml 더블 기획',salePrice:26800,isSet:true,setCount:2,isDirect:false,weight:300},
+   {rank:6,brand:'모델로',name:'UV 프로텍션 쿨핏 마스크',salePrice:16800,isSet:false,setCount:1,isDirect:false,weight:100},
+   {rank:7,brand:'홀리카홀리카',name:'마이페이브 피스 아이섀도우/젤테일',salePrice:4900,isSet:false,setCount:1,isDirect:false,weight:30},
+   {rank:8,brand:'퓌',name:'3D 볼류밍 글로스 5.3g',salePrice:12900,isSet:false,setCount:1,isDirect:false,weight:40},
+   {rank:9,brand:'라로슈포제',name:'시카플라스트 밤 B5+ 100ml 기획',salePrice:29900,isSet:false,setCount:1,isDirect:true,weight:180},
+   {rank:10,brand:'어노브',name:'딥 데미지 리페어 헤어 마스크',salePrice:28990,isSet:false,setCount:1,isDirect:false,weight:450}
+  ];
   if(window.LC_PRODUCTS){ LC_PRODUCTS.length=0; N.forEach(function(x){LC_PRODUCTS.push(x);}); }
   var sub=document.querySelector('#page-products .sec-sub');
   if(sub) sub.textContent='올리브영 2026.06.07 실측(랭킹 페이지 직접 수집) · 베트남 마진 기준 · 매일 09:30 자동 분석';
@@ -2891,11 +2891,14 @@ document.addEventListener('DOMContentLoaded',function(){
   var MKT={VN:{s:19.55,t:0,label:'🇻🇳 VN'},SG:{s:15.55,t:3,label:'🇸🇬 SG'},PH:{s:8.66,t:0,label:'🇵🇭 PH'},TW:{s:10.5,t:0,label:'🇹🇼 TW'},MY:{s:19.55,t:0,label:'🇲🇾 MY(미확인)'},TH:{s:19.55,t:0,label:'🇹🇭 TH(미확인)'}};
   function ems(g){ if(g<=100)return 10800; if(g<=200)return 12600; if(g<=300)return 14400; if(g<=500)return 17500; return 23000; }
   var PRESETS=[
-   ['메디큐브 PDRN 리필기획 (재계산 1위)',24600,2,100],
-   ['아누아 PDRN 더블기획',27900,2,100],
-   ['토리든 시카 더블기획',23800,2,200],
-   ['아누아 TXA 2입',26900,2,100],
-   ['구달 청귤 기획',20900,2,100]
+   [1,"dAlba White Truffle First Spray Serum","S$10.99","3k+/월","-56%","Mall","⊘직입점",OY+encodeURIComponent("달바 세럼"),SGS+encodeURIComponent("d alba white truffle serum")],
+   [2,"Torriden DIVE IN Low Molecular Serum","S$12.14","3k+/월","-55%","Mall","⊘공식샵",OY+encodeURIComponent("토리든 다이브인 세럼"),SGS+encodeURIComponent("torriden dive in serum")],
+   [3,"Torriden DIVE IN 50ml x2 Bundle","S$22.71","2k+/월","-57%","Mall","⊘공식샵",OY+encodeURIComponent("토리든 다이브인 세럼"),SGS+encodeURIComponent("torriden dive in bundle")],
+   [4,"SKIN1004 Moisture-Boosting Sun Serum Set","S$22.64","1k+/월","-74%","Mall","⊘공식샵",OY+encodeURIComponent("스킨1004 선세럼"),SGS+encodeURIComponent("skin1004 sun serum set")],
+   [5,"Beauty of Joseon Revive Eye Serum","S$7.47","1k+/월","-69%","Mall","⊘공식샵",OY+encodeURIComponent("조선미녀 아이세럼"),SGS+encodeURIComponent("beauty of joseon revive eye serum")],
+   [6,"COSRX 6 Peptide Skin Booster 150ml","S$12.90","899/월","-63%","Mall","⊘직입점",OY+encodeURIComponent("코스알엑스 부스터"),SGS+encodeURIComponent("cosrx 6 peptide booster")],
+   [7,"Torriden Cellmazing Pore Ampoule","S$16.55","808/월","-53%","Mall","⊘공식샵",OY+encodeURIComponent("토리든 셀메이징"),SGS+encodeURIComponent("torriden cellmazing")],
+   [8,"Torriden BALANCEFUL Cica Serum","S$12.69","724/월","-55%","Mall","⊘공식샵",OY+encodeURIComponent("토리든 밸런스풀"),SGS+encodeURIComponent("torriden balanceful cica serum")]
   ];
   function won(n){ return '₩'+Math.round(n).toLocaleString(); }
   function el(id){ return document.getElementById(id); }
