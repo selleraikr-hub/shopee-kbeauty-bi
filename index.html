@@ -2987,5 +2987,26 @@ window.cgAutoFill=async function(){
 };
 (function wire(){var p=document.getElementById('cg-product');if(p&&!p.__afWired){p.__afWired=true;p.addEventListener('change',window.cgAutoFill);p.addEventListener('blur',window.cgAutoFill);}else if(!p){setTimeout(wire,800);}})();
 </script>
+
+<script>
+/* === CLAUDE DATA LOADER (data.json 분리 자동화) === */
+(function(){
+  fetch('data.json?v=' + Date.now())
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d.oliveYoungTop10 && typeof N !== 'undefined' && Array.isArray(N)) {
+        N.length = 0;
+        d.oliveYoungTop10.forEach(function(x){ N.push(x); });
+      }
+      window.__SG__ = d.shopeeSG || [];
+      window.__META__ = d.meta || {};
+      ['renderProducts','renderLiveChecker','initSourcingIntel'].forEach(function(fn){
+        try { if (typeof window[fn] === 'function') window[fn](); } catch(e){}
+      });
+      console.log('[data.json] loaded', d.meta && d.meta.date);
+    })
+    .catch(function(e){ console.warn('[data.json] load fail, fallback to inline', e); });
+})();
+</script>
 </body>
 </html>
