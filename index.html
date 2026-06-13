@@ -2834,20 +2834,17 @@ document.addEventListener('DOMContentLoaded',function(){
 <script>/* PATCH-CLAUDE-20260607-C2: TOP 상품 = 2026-06-07 올영 랭킹 실측 (데이터 교체 방식) */
 (function(){ try{
   var N=[
-   {rank:1,brand:'메디힐',name:'더마 토너패드 200매 대용량 7종 기획',salePrice:28500,isSet:false,setCount:1,isDirect:true,weight:600},
-   {rank:2,brand:'오리온',name:'촉촉한 황치즈칩 160g (식품·소싱제외)',salePrice:2800,isSet:false,setCount:1,isDirect:false,weight:200},
-   {rank:3,brand:'메디힐',name:'에센셜 마스크팩 10/10+1매 기획 7종',salePrice:9950,isSet:true,setCount:11,isDirect:true,weight:330},
-   {rank:4,brand:'리디에뜨',name:'리디잇 잇몸치약 100g',salePrice:15520,isSet:false,setCount:1,isDirect:false,weight:130},
-   {rank:5,brand:'토리든',name:'다이브인 저분자 히알루론산 세럼 50ml 더블 기획',salePrice:26800,isSet:true,setCount:2,isDirect:false,weight:300},
-   {rank:6,brand:'모델로',name:'UV 프로텍션 쿨핏 마스크',salePrice:16800,isSet:false,setCount:1,isDirect:false,weight:100},
-   {rank:7,brand:'홀리카홀리카',name:'마이페이브 피스 아이섀도우/젤테일',salePrice:4900,isSet:false,setCount:1,isDirect:false,weight:30},
-   {rank:8,brand:'퓌',name:'3D 볼류밍 글로스 5.3g',salePrice:12900,isSet:false,setCount:1,isDirect:false,weight:40},
-   {rank:9,brand:'라로슈포제',name:'시카플라스트 밤 B5+ 100ml 기획',salePrice:29900,isSet:false,setCount:1,isDirect:true,weight:180},
-   {rank:10,brand:'어노브',name:'딥 데미지 리페어 헤어 마스크',salePrice:28990,isSet:false,setCount:1,isDirect:false,weight:450}
+   {rank:1,brand:'토리든',name:'다이브인 저분자 히알루론산 마스크 10매 기획',salePrice:14400,isSet:true,setCount:10,isDirect:false,weight:380},
+   {rank:2,brand:'메디힐',name:'에센셜 마스크팩 10/10+1매 기획 7종',salePrice:9950,isSet:true,setCount:11,isDirect:true,weight:330},
+   {rank:3,brand:'라카',name:'퍼펙트 트윈 립 4.7g+4.2g 10colors',salePrice:16800,isSet:true,setCount:2,isDirect:false,weight:90},
+   {rank:4,brand:'것시스',name:'다이어트 B프로 14캡슐 (식품)',salePrice:12900,isSet:false,setCount:1,isDirect:false,weight:140},
+   {rank:5,brand:'코페르',name:'큐리페어 멜라크림 21ml 기획',salePrice:24900,isSet:false,setCount:1,isDirect:false,weight:130},
+   {rank:6,brand:'메디힐',name:'더마 토너패드 200매 대용량 7종 기획',salePrice:28500,isSet:true,setCount:7,isDirect:true,weight:600},
+   {rank:7,brand:'구달',name:'맑은 어성초 진정 수분 선크림 50ml 1+1',salePrice:18500,isSet:true,setCount:2,isDirect:false,weight:260},
+   {rank:8,brand:'셀라딕스',name:'트러블 세범 리밸런싱 131 앰플 30ml 기획',salePrice:24900,isSet:false,setCount:1,isDirect:false,weight:130},
+   {rank:9,brand:'리디에뜨',name:'리디잇 잇몸치약 100g',salePrice:15520,isSet:false,setCount:1,isDirect:false,weight:160},
+   {rank:10,brand:'디오디너리',name:'글리코릭 애시드 7% 엑스폴리에이팅 토너 100ml',salePrice:11300,isSet:false,setCount:1,isDirect:true,weight:200}
   ];
-  /* === CLAUDE DATA LOADER (data.json) === */
-  (function(){fetch('data.json?v='+Date.now()).then(function(r){return r.json();}).then(function(d){try{if(d&&d.oliveYoungTop10){N.length=0;d.oliveYoungTop10.forEach(function(x){N.push(x);});}window.__SG__=d.shopeeSG||[];window.__META__=d.meta||{};['renderProducts','renderLiveChecker','initSourcingIntel'].forEach(function(fn){try{if(typeof window[fn]==='function')window[fn]();}catch(e){}});}catch(e){console.warn(e);}}).catch(function(e){console.warn('data.json load',e);});})();
-
   if(window.LC_PRODUCTS){ LC_PRODUCTS.length=0; N.forEach(function(x){LC_PRODUCTS.push(x);}); }
   var sub=document.querySelector('#page-products .sec-sub');
   if(sub) sub.textContent='올리브영 2026.06.07 실측(랭킹 페이지 직접 수집) · 베트남 마진 기준 · 매일 09:30 자동 분석';
