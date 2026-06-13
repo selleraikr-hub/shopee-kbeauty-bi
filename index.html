@@ -2845,6 +2845,9 @@ document.addEventListener('DOMContentLoaded',function(){
    {rank:9,brand:'라로슈포제',name:'시카플라스트 밤 B5+ 100ml 기획',salePrice:29900,isSet:false,setCount:1,isDirect:true,weight:180},
    {rank:10,brand:'어노브',name:'딥 데미지 리페어 헤어 마스크',salePrice:28990,isSet:false,setCount:1,isDirect:false,weight:450}
   ];
+  /* === CLAUDE DATA LOADER (data.json) === */
+  (function(){fetch('data.json?v='+Date.now()).then(function(r){return r.json();}).then(function(d){try{if(d&&d.oliveYoungTop10){N.length=0;d.oliveYoungTop10.forEach(function(x){N.push(x);});}window.__SG__=d.shopeeSG||[];window.__META__=d.meta||{};['renderProducts','renderLiveChecker','initSourcingIntel'].forEach(function(fn){try{if(typeof window[fn]==='function')window[fn]();}catch(e){}});}catch(e){console.warn(e);}}).catch(function(e){console.warn('data.json load',e);});})();
+
   if(window.LC_PRODUCTS){ LC_PRODUCTS.length=0; N.forEach(function(x){LC_PRODUCTS.push(x);}); }
   var sub=document.querySelector('#page-products .sec-sub');
   if(sub) sub.textContent='올리브영 2026.06.07 실측(랭킹 페이지 직접 수집) · 베트남 마진 기준 · 매일 09:30 자동 분석';
@@ -2988,25 +2991,5 @@ window.cgAutoFill=async function(){
 (function wire(){var p=document.getElementById('cg-product');if(p&&!p.__afWired){p.__afWired=true;p.addEventListener('change',window.cgAutoFill);p.addEventListener('blur',window.cgAutoFill);}else if(!p){setTimeout(wire,800);}})();
 </script>
 
-<script>
-/* === CLAUDE DATA LOADER (data.json 분리 자동화) === */
-(function(){
-  fetch('data.json?v=' + Date.now())
-    .then(function(r){ return r.json(); })
-    .then(function(d){
-      if (d.oliveYoungTop10 && typeof N !== 'undefined' && Array.isArray(N)) {
-        N.length = 0;
-        d.oliveYoungTop10.forEach(function(x){ N.push(x); });
-      }
-      window.__SG__ = d.shopeeSG || [];
-      window.__META__ = d.meta || {};
-      ['renderProducts','renderLiveChecker','initSourcingIntel'].forEach(function(fn){
-        try { if (typeof window[fn] === 'function') window[fn](); } catch(e){}
-      });
-      console.log('[data.json] loaded', d.meta && d.meta.date);
-    })
-    .catch(function(e){ console.warn('[data.json] load fail, fallback to inline', e); });
-})();
-</script>
 </body>
 </html>
