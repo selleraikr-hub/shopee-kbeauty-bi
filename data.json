@@ -1,0 +1,223 @@
+{
+  "meta": {
+    "date": "2026-06-13",
+    "generatedAt": "2026-06-13T11:00:00+09:00",
+    "fxSgdKrw": 1181.89,
+    "summary": {
+      "GO": 0,
+      "REVIEW": 0,
+      "EXCLUDE": 3,
+      "NO": 7
+    },
+    "feeModel": {
+      "VN": 0.1955,
+      "SG": 0.1855,
+      "PH": 0.0866,
+      "TW": 0.105,
+      "BR": 0.2,
+      "withdraw": 0.009,
+      "source": "셀퍼스 2026-06-07"
+    },
+    "note": "TOP10이 저가 마스크·스킨케어 번들 위주라 세일가+EMS 총원가가 한국 정가를 초과, 전 마켓 권장가/정가 1.6~3.0배로 마진 미달. SG는 공식스토어 과점."
+  },
+  "oliveYoungTop10": [
+    {
+      "rank": 1,
+      "brand": "토리든",
+      "name": "다이브인 저분자 히알루론산 마스크 10매 기획",
+      "salePrice": 14400,
+      "listPrice": 30000,
+      "isSet": true,
+      "setCount": 10,
+      "isDirect": false,
+      "weight": 380,
+      "verdict": "NO",
+      "goodsNo": "A000000258706"
+    },
+    {
+      "rank": 2,
+      "brand": "메디힐",
+      "name": "에센셜 마스크팩 10/10+1매 기획 7종",
+      "salePrice": 9950,
+      "listPrice": 20000,
+      "isSet": true,
+      "setCount": 11,
+      "isDirect": true,
+      "weight": 330,
+      "verdict": "제외",
+      "goodsNo": "A000000223414"
+    },
+    {
+      "rank": 3,
+      "brand": "라카",
+      "name": "퍼펙트 트윈 립 4.7g+4.2g 10colors",
+      "salePrice": 16800,
+      "listPrice": 22000,
+      "isSet": true,
+      "setCount": 2,
+      "isDirect": false,
+      "weight": 90,
+      "verdict": "NO",
+      "goodsNo": "A000000205485"
+    },
+    {
+      "rank": 4,
+      "brand": "것시스",
+      "name": "다이어트 B프로 14캡슐 (식품)",
+      "salePrice": 12900,
+      "listPrice": 25900,
+      "isSet": false,
+      "setCount": 1,
+      "isDirect": false,
+      "weight": 140,
+      "verdict": "NO"
+    },
+    {
+      "rank": 5,
+      "brand": "코페르",
+      "name": "큐리페어 멜라크림 21ml 기획",
+      "salePrice": 24900,
+      "listPrice": 35700,
+      "isSet": false,
+      "setCount": 1,
+      "isDirect": false,
+      "weight": 130,
+      "verdict": "NO"
+    },
+    {
+      "rank": 6,
+      "brand": "메디힐",
+      "name": "더마 토너패드 200매 대용량 7종 기획",
+      "salePrice": 28500,
+      "listPrice": 39900,
+      "isSet": true,
+      "setCount": 7,
+      "isDirect": true,
+      "weight": 600,
+      "verdict": "제외",
+      "goodsNo": "A000000255385"
+    },
+    {
+      "rank": 7,
+      "brand": "구달",
+      "name": "맑은 어성초 진정 수분 선크림 50ml 1+1",
+      "salePrice": 18500,
+      "listPrice": 22000,
+      "isSet": true,
+      "setCount": 2,
+      "isDirect": false,
+      "weight": 260,
+      "verdict": "NO"
+    },
+    {
+      "rank": 8,
+      "brand": "셀라딕스",
+      "name": "트러블 세범 리밸런싱 131 앰플 30ml 기획",
+      "salePrice": 24900,
+      "listPrice": 28900,
+      "isSet": false,
+      "setCount": 1,
+      "isDirect": false,
+      "weight": 130,
+      "verdict": "NO"
+    },
+    {
+      "rank": 9,
+      "brand": "리디에뜨",
+      "name": "리디잇 잇몸치약 100g",
+      "salePrice": 15520,
+      "listPrice": 16900,
+      "isSet": false,
+      "setCount": 1,
+      "isDirect": false,
+      "weight": 160,
+      "verdict": "NO"
+    },
+    {
+      "rank": 10,
+      "brand": "디오디너리",
+      "name": "글리코릭 애시드 7% 엑스폴리에이팅 토너 100ml",
+      "salePrice": 11300,
+      "listPrice": 11300,
+      "isSet": false,
+      "setCount": 1,
+      "isDirect": true,
+      "weight": 200,
+      "verdict": "제외"
+    }
+  ],
+  "shopeeSG": [
+    {
+      "rank": 1,
+      "name": "d'Alba 화이트트러플 스프레이세럼",
+      "priceSGD": 15.7,
+      "priceKRW": 18556,
+      "soldPerMonth": "3k+",
+      "official": true,
+      "match": "⊘직입점"
+    },
+    {
+      "rank": 2,
+      "name": "Torriden DIVE IN 세럼",
+      "priceSGD": 14.25,
+      "priceKRW": 16842,
+      "soldPerMonth": "3k+",
+      "official": true,
+      "match": "✅과점"
+    },
+    {
+      "rank": 3,
+      "name": "Torriden DIVE IN 2개 번들",
+      "priceSGD": 29.1,
+      "priceKRW": 34393,
+      "soldPerMonth": "2k+",
+      "official": true,
+      "match": "✅과점"
+    },
+    {
+      "rank": 4,
+      "name": "Beauty of Joseon 리바이브 아이세럼",
+      "priceSGD": 9.5,
+      "priceKRW": 11228,
+      "soldPerMonth": "1k+",
+      "official": true,
+      "match": "❌미취급"
+    },
+    {
+      "rank": 5,
+      "name": "SKIN1004 수분 선세럼 세트",
+      "priceSGD": 25.13,
+      "priceKRW": 29701,
+      "soldPerMonth": "1k+",
+      "official": true,
+      "match": "❌미취급"
+    },
+    {
+      "rank": 6,
+      "name": "COSRX 6펩타이드 스킨부스터",
+      "priceSGD": 15.12,
+      "priceKRW": 17870,
+      "soldPerMonth": "897",
+      "official": true,
+      "match": "⊘직입점"
+    },
+    {
+      "rank": 7,
+      "name": "Torriden Cellmazing 포어앰플",
+      "priceSGD": 19,
+      "priceKRW": 22456,
+      "soldPerMonth": "814",
+      "official": true,
+      "match": "✅과점"
+    },
+    {
+      "rank": 8,
+      "name": "Torriden BALANCEFUL 시카세럼",
+      "priceSGD": 13,
+      "priceKRW": 15365,
+      "soldPerMonth": "706",
+      "official": true,
+      "match": "✅과점"
+    }
+  ]
+}
