@@ -2831,7 +2831,7 @@ document.addEventListener('DOMContentLoaded',function(){
 }); }catch(e){console.warn(e);} })();</script>
 
 
-<script>/* PATCH-CLAUDE-20260607-C2: TOP 상품 = 2026-06-07 올영 랭킹 실측 (데이터 교체 방식) */
+<script>/* PATCH-CLAUDE-20260607-C2: TOP 상품 = 2026-06-13 올영 랭킹 실측 (데이터 교체 방식) */
 (function(){ try{
   var N=[
    {rank:1,brand:'토리든',name:'다이브인 저분자 히알루론산 마스크 10매 기획',salePrice:14400,isSet:true,setCount:10,isDirect:false,weight:380},
@@ -2847,16 +2847,16 @@ document.addEventListener('DOMContentLoaded',function(){
   ];
   if(window.LC_PRODUCTS){ LC_PRODUCTS.length=0; N.forEach(function(x){LC_PRODUCTS.push(x);}); }
   var sub=document.querySelector('#page-products .sec-sub');
-  if(sub) sub.textContent='올리브영 2026.06.07 실측(랭킹 페이지 직접 수집) · 베트남 마진 기준 · 매일 09:30 자동 분석';
+  if(sub) sub.textContent='올리브영 2026.06.13 실측(랭킹 페이지 직접 수집) · 베트남 마진 기준 · 매일 09:30 자동 분석';
   if(window.renderProducts) renderProducts();
 }catch(e){console.warn('patchC2',e);} })();</script>
 
 
 
-<script>/* PATCH-CLAUDE-SG [2026-06-07] SG 베스트 + 양방향 링크 + 3중수수료 판정 (daily auto) */
+<script>/* PATCH-CLAUDE-SG [2026-06-13] SG 베스트 + 양방향 링크 + 3중수수료 판정 (daily auto) */
 (function(){ try{
   var OY='https://www.oliveyoung.co.kr/store/search/getSearchMain.do?giftYn=N&query=', SGS='https://shopee.sg/search?sortBy=sales&keyword=';
-  var SG={date:'2026-06-07', note:"'korean serum' 판매량 실측 · 상품명 클릭=쇼피SG, 매칭 클릭=올리브영 · 판정은 3중 수수료(VN 19.55%+인출 0.9%) 기준",
+  var SG={date:'2026-06-13', note:"'korean serum' 판매량 실측 · 상품명 클릭=쇼피SG, 매칭 클릭=올리브영 · 판정은 3중 수수료(VN 19.55%+인출 0.9%) 기준",
    rows:[
     ['1','dAlba No.1 화이트 트러플 스프레이 세럼 (달바)','S$15.10','3k+','달바 직입점 — 제외','x','제외', '', SGS+encodeURIComponent('korean serum dalba')],
     ['2','토리든 다이브인 세럼 50ml','S$15.43','2k+','올영 더블 27,000+EMS → 적자','x','NO', OY+encodeURIComponent('토리든 다이브인'), SGS+encodeURIComponent('torriden dive in')],
