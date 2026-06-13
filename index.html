@@ -243,7 +243,8 @@ pre.pre{background:#263248;border:1px solid rgba(255,255,255,0.07);border-radius
 </div>
 
 <div class="layout">
-<div class="sidebar"><div><div class="nav-grp-label">오늘</div><div class="nav-item active" data-page="briefing" onclick="showPage('briefing',this)"><span class="ni">🔔</span>팀 브리핑</div></div><div><div class="nav-grp-label">분석</div><div class="nav-item" data-page="overview" onclick="showPage('overview',this)"><span class="ni">📊</span>시장 현황</div><div class="nav-item" data-page="sourcing_intel" onclick="showPage('sourcing_intel',this)"><span class="ni">🗓</span>소싱 타이밍</div><div class="nav-item" data-page="products" onclick="showPage('products',this)"><span class="ni">🏆</span>TOP 상품</div><div class="nav-item" data-page="competitors" onclick="showPage('competitors',this)"><span class="ni">🔍</span>경쟁 구도</div><div class="nav-item" data-page="catch_up" onclick="showPage('catch_up',this)"><span class="ni">🎯</span>추격 대시보드</div></div><div><div class="nav-grp-label">운영</div><div class="nav-item" data-page="revenue" onclick="showPage('revenue',this)"><span class="ni">💰</span>수익 시뮬레이터</div><div class="nav-item" data-page="pipeline" onclick="showPage('pipeline',this)"><span class="ni">📦</span>SKU 파이프라인</div><div class="nav-item" data-page="calendar" onclick="showPage('calendar',this)"><span class="ni">📅</span>프로모션 캘린더</div></div><div><div class="nav-grp-label">성장</div><div class="nav-item" data-page="kpi" onclick="showPage('kpi',this)"><span class="ni">📈</span>KPI 벤치마크</div><div class="nav-item" data-page="roadmap" onclick="showPage('roadmap',this)"><span class="ni">🗺</span>성장 로드맵</div></div><div><div class="nav-grp-label">콘텐츠</div><div class="nav-item" data-page="detail" onclick="showPage('detail',this)"><span class="ni">🖼</span>상세페이지 가이드</div><div class="nav-item" data-page="voucher" onclick="showPage('voucher',this)"><span class="ni">🎫</span>바우처 전략</div></div><div><div class="nav-grp-label">도구</div><div class="nav-item" data-page="logistics_calc" onclick="showPage('logistics_calc',this)"><span class="ni">🚚</span>배송 비교 계산기</div><div class="nav-item" data-page="content_gen" onclick="showPage('content_gen',this)"><span class="ni">🎨</span>콘텐츠 생성기</div><div class="nav-item" data-page="simulator" onclick="openSimModal()"><span class="ni">🌏</span>전체 마켓 시뮬레이터</div>
+<div class="sidebar"><div><div class="nav-grp-label">오늘</div><div class="nav-item active" data-page="briefing" onclick="showPage('briefing',this)"><span class="ni">🔔</span>팀 브리핑</div>
+            <div class="nav-item" data-page="guide" onclick="showPage('guide',this)"><span class="ni">📖</span>사용 가이드</div></div><div><div class="nav-grp-label">분석</div><div class="nav-item" data-page="overview" onclick="showPage('overview',this)"><span class="ni">📊</span>시장 현황</div><div class="nav-item" data-page="sourcing_intel" onclick="showPage('sourcing_intel',this)"><span class="ni">🗓</span>소싱 타이밍</div><div class="nav-item" data-page="products" onclick="showPage('products',this)"><span class="ni">🏆</span>TOP 상품</div><div class="nav-item" data-page="competitors" onclick="showPage('competitors',this)"><span class="ni">🔍</span>경쟁 구도</div><div class="nav-item" data-page="catch_up" onclick="showPage('catch_up',this)"><span class="ni">🎯</span>추격 대시보드</div></div><div><div class="nav-grp-label">운영</div><div class="nav-item" data-page="revenue" onclick="showPage('revenue',this)"><span class="ni">💰</span>수익 시뮬레이터</div><div class="nav-item" data-page="pipeline" onclick="showPage('pipeline',this)"><span class="ni">📦</span>SKU 파이프라인</div><div class="nav-item" data-page="calendar" onclick="showPage('calendar',this)"><span class="ni">📅</span>프로모션 캘린더</div></div><div><div class="nav-grp-label">성장</div><div class="nav-item" data-page="kpi" onclick="showPage('kpi',this)"><span class="ni">📈</span>KPI 벤치마크</div><div class="nav-item" data-page="roadmap" onclick="showPage('roadmap',this)"><span class="ni">🗺</span>성장 로드맵</div></div><div><div class="nav-grp-label">콘텐츠</div><div class="nav-item" data-page="detail" onclick="showPage('detail',this)"><span class="ni">🖼</span>상세페이지 가이드</div><div class="nav-item" data-page="voucher" onclick="showPage('voucher',this)"><span class="ni">🎫</span>바우처 전략</div></div><div><div class="nav-grp-label">도구</div><div class="nav-item" data-page="logistics_calc" onclick="showPage('logistics_calc',this)"><span class="ni">🚚</span>배송 비교 계산기</div><div class="nav-item" data-page="content_gen" onclick="showPage('content_gen',this)"><span class="ni">🎨</span>콘텐츠 생성기</div><div class="nav-item" data-page="simulator" onclick="openSimModal()"><span class="ni">🌏</span>전체 마켓 시뮬레이터</div>
 <div class="nav-item" data-page="livechecker" onclick="showPage('livechecker',this)"><span class="ni">🔴</span>실시간 마진 검증</div></div></div>
 <main>
 <div id="page-briefing" class="page active">
@@ -1037,6 +1038,86 @@ pre.pre{background:#263248;border:1px solid rgba(255,255,255,0.07);border-radius
     </div>
 
     <div id="market-report-content"></div>
+  </div>
+</div>
+
+<div class="page ph" id="page-guide">
+  <div style="max-width:980px;">
+  <h2 style="margin:0 0 4px;">📖 사용 가이드</h2>
+  <div style="color:#9aa0a6;font-size:13px;margin-bottom:18px;">쇼피 K뷰티 소싱 플랫폼 — 처음 쓰는 분을 위한 안내서</div>
+  <div class="card" style="border-left:3px solid #d4537e;">
+    <b style="color:#d4537e;">이 플랫폼은 뭐예요?</b>
+    <p style="margin:8px 0 0;line-height:1.7;">한국 올리브영에서 잘 팔리는 화장품을 매일 자동으로 모아, <b>쇼피(동남아)에 팔면 남는지(마진)</b>를 계산해 <b>GO / 검토 / 제외</b>로 골라주는 도구입니다. 골라준 상품의 광고 콘텐츠(상세·썸네일·영상)까지 만들 수 있어요. 한마디로 <b>"뭘 떼다 팔지"를 정해주는 두뇌</b>입니다.</p>
+  </div>
+  <div class="card">
+    <b style="color:#d4537e;">① 화면 구조</b>
+    <p style="margin:8px 0 0;line-height:1.7;"><b>상단 탭</b> = 팀(역할)별 화면: 관리자·소싱담당·세일즈담당·마케팅담당·물류담당·디자인담당·회계담당.<br><b>왼쪽 메뉴</b> = 기능 그룹: <b>오늘</b>(팀 브리핑) · <b>분석</b>(시장현황·소싱타이밍·TOP상품·경쟁구도·추적) · <b>운영</b>(수익 시뮬·SKU·프로모션) · <b>성장</b>(KPI·로드맵) · <b>콘텐츠</b>(상세·바우처) · <b>도구</b>(배송계산·콘텐츠 생성기·마진검증).</p>
+  </div>
+  <div class="card">
+    <b style="color:#d4537e;">② 꼭 알아야 할 5가지 개념 (입문자용)</b>
+    <div style="margin-top:10px;line-height:1.7;">
+      <p><b>1) 3중 수수료</b> — 쇼피에 팔면 떼이는 돈(판매+거래+인출0.9%). 나라마다: <b>베트남 19.55% · 싱가포르 18.55% · 필리핀 8.66% · 대만 10.50% · 브라질 20%</b>.</p>
+      <p><b>2) EMS 배송비</b> — 한국→해외 우체국 배송. 무게로 결정(≤100g 10,800원 ~ &gt;500g 23,000원). 가벼울수록 유리.</p>
+      <p><b>3) 권장가</b> — 목표 마진(약 25%)이 남는 추천 판매가. <b>총원가 ÷ (1 − 수수료 − 0.009 − 0.25)</b>, 총원가=매입가+EMS.</p>
+      <p><b>4) 개당 분할</b> — 1+1·10매 묶음은 낱개로 쪼개 계산하면 배송비 부담↓ 마진↑. 우리 표는 이 방식.</p>
+      <p><b>5) 직입점 제외</b> — 한국 브랜드가 현지에 직접 공식 판매 중(메디힐·코스알엑스·라운드랩·클리오·바이오던스·달바·티르티르 등)이면 가격경쟁이 안 돼 <b>제외</b>.</p>
+    </div>
+  </div>
+  <div class="card">
+    <b style="color:#d4537e;">③ 판정 색깔의 뜻</b>
+    <div style="margin-top:10px;line-height:1.8;">
+      <span class="badge b-go">GO</span> 마진 충분 → <b>바로 등록 검토</b><br>
+      <span style="color:#ba7517;font-weight:bold;">검토</span> 마진 경계(24%대) → 등록가·바우처 조정 시 GO 가능<br>
+      <span style="color:#999;">제외</span> 직입점/글로벌 공식유통 → 진입 부적합<br>
+      <span style="color:#d63031;font-weight:bold;">NO</span> 마진 안 나옴 → 패스
+    </div>
+  </div>
+  <div class="card" style="border-left:3px solid #1d9e75;">
+    <b style="color:#0f6e56;">④ 매일 이렇게 (핵심 흐름)</b>
+    <div style="margin-top:10px;line-height:1.8;">
+      <b>1.</b> 매일 09:30 올리브영 베스트 자동 수집·분석.<br>
+      <b>2.</b> <b>분석 &gt; TOP 상품</b>에서 오늘 TOP10·판정 확인.<br>
+      <b>3.</b> <span class="badge b-go">GO</span> 배지 <b>클릭</b> → 콘텐츠 생성기 자동 이동 + 상품 입력 + 생성.<br>
+      <b>4.</b> 상세·카피 검토(현지어 검수) → 등록 진행.<br>
+      <b>5.</b> 아래 <b>SG 매칭</b>으로 싱가포르 경쟁 상황 확인.
+    </div>
+  </div>
+  <div class="card">
+    <b style="color:#d4537e;">⑤ 메뉴별 사용법 (전체)</b>
+    <div style="margin-top:10px;line-height:1.7;">
+      <p>🔔 <b>팀 브리핑</b> — 오늘 팀별 할 일·현황. 출근 후 먼저.</p>
+      <p>📊 <b>시장 현황</b> — 마켓별 트렌드·성장률.</p>
+      <p>① <b>소싱 타이밍</b> — 올영 세일 기준 매수 타이밍.</p>
+      <p>🏆 <b>TOP 상품</b> — 핵심. 올영 TOP10 마진·권장가·판정 + SG 매칭.</p>
+      <p>🔍 <b>경쟁 구도</b> — 동일 상품 경쟁 셀러 비교.</p>
+      <p>🎯 <b>추적 대시보드</b> — 등록 상품·추격 상황 추적.</p>
+      <p>💰 <b>수익 시뮬레이터</b> — 가격·수량 → 예상 순이익.</p>
+      <p>📦 <b>SKU 파이프라인</b> — 소싱→등록→판매 단계 관리.</p>
+      <p>📅 <b>프로모션 캘린더</b> — 메가세일 일정·광고 타이밍.</p>
+      <p>📈 <b>KPI 벤치마크</b> — 목표 대비 성과.</p>
+      <p>🛣️ <b>성장 로드맵</b> — 단계별 확장 계획.</p>
+      <p>📄 <b>상세페이지 가이드</b> — 상세 구성·이미지 스펙.</p>
+      <p>🎟️ <b>바우처 전략</b> — 첫구매·묶음·리뷰 쿠폰 설계.</p>
+      <p>🚚 <b>배송 비교 계산기</b> — EMS vs 타 배송사 비용.</p>
+      <p>🎨 <b>콘텐츠 생성기</b> — URL/상품명 → 상품명·카루셀·상세·틱톡·바우처 자동. (GO 클릭 시 자동 연결)</p>
+      <p>🌏 <b>전체 마켓 시뮬레이터</b> — 여러 나라 동시 마진 비교.</p>
+      <p>✅ <b>실시간 마진 검증</b> — 매입가·무게 입력해 즉시 마진 확인.</p>
+    </div>
+  </div>
+  <div class="card">
+    <b style="color:#d4537e;">⑥ 팀 화면(상단 탭) &amp; AI 에이전트</b>
+    <p style="margin:8px 0 0;line-height:1.7;">상단 탭에서 역할별 화면을 열고, "○○에게 물어보기" 버튼으로 분야별 AI(소싱·세일즈·마케팅·물류·디자인·회계)에게 바로 질문하세요. 예: 마케팅 → 카피·릴스, 물류 → 배송비, 회계 → 손익.</p>
+  </div>
+  <div class="card" style="border-left:3px solid #ee4d2d;">
+    <b style="color:#ee4d2d;">⑦ 주의사항</b>
+    <div style="margin-top:8px;line-height:1.7;">
+      · 숫자는 <b>추정치</b> — 등록 전 최신 수수료·무게로 재확인.<br>
+      · <b>제외</b> 브랜드는 떼다 팔지 않기(직입점/공식유통).<br>
+      · 현지어 카피는 <b>자동번역 그대로 금지</b>, 검수 후 사용.<br>
+      · 우상단 날짜가 오늘인지 확인(매일 갱신).
+    </div>
+  </div>
+  <div style="color:#777;font-size:11px;margin:6px 0 30px;">문의: 팀장 신진우 · 플랫폼 업데이트에 따라 갱신됩니다.</div>
   </div>
 </div>
 </main>
