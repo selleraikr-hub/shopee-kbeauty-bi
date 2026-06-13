@@ -2988,5 +2988,29 @@ window.cgAutoFill=async function(){
 (function wire(){var p=document.getElementById('cg-product');if(p&&!p.__afWired){p.__afWired=true;p.addEventListener('change',window.cgAutoFill);p.addEventListener('blur',window.cgAutoFill);}else if(!p){setTimeout(wire,800);}})();
 </script>
 
+
+<script>
+/* === GO-CLICK-TO-CONTENT : GO 배지 클릭 → 콘텐츠 생성기 자동 생성 === */
+(function(){
+  document.addEventListener('click', function(e){
+    var b = (e.target && e.target.closest) ? e.target.closest('.badge.b-go') : null;
+    if(!b) return;
+    var row = b.closest('tr'); if(!row) return;
+    if(row.innerText.indexOf('\u20a9') < 0) return; /* 상품표(₩ 가격) 행만 */
+    var nameCell = row.children[1]; if(!nameCell) return;
+    var name = nameCell.innerText.replace(/\s+/g,' ').trim();
+    if(!name) return;
+    var nav = document.querySelector('[onclick*="content_gen"]');
+    try{ showPage('content_gen', nav); }catch(err){}
+    var inp = document.getElementById('cg-product');
+    if(inp){ inp.value = name; inp.dispatchEvent(new Event('input',{bubbles:true})); }
+    try{ if(typeof generateCGContent==='function') generateCGContent(); }catch(err){}
+    try{ window.scrollTo(0,0); }catch(err){}
+  }, true);
+  var st=document.createElement('style');
+  st.textContent='.badge.b-go{cursor:pointer;} .badge.b-go:hover{outline:2px solid #1d9e75;outline-offset:1px;}';
+  document.head.appendChild(st);
+})();
+</script>
 </body>
 </html>
