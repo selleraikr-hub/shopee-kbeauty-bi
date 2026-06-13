@@ -2990,20 +2990,27 @@ window.cgAutoFill=async function(){
 
 
 <script>
-/* === GO-CLICK-TO-CONTENT : GO 배지 클릭 → 콘텐츠 생성기 자동 생성 === */
+/* === GO-CLICK-TO-CONTENT : GO 배지 클릭 → 콘텐츠 생성기 자동 생성 (URL 자동완성) === */
+/* goodsNo 맵: 매일 소싱 시 갱신. 키=상품명 포함 문자열, 값=올리브영 goodsNo */
 (function(){
+  var GNO = {
+    '것시스':'A000000227154', '리디에뜨':'A000000254597', '토리든':'A000000255842',
+    '라카':'A000000255256', '코페르':'A000000246297', '구달':'A000000219553',
+    '셀라딕스':'A000000255068', '디오디너리':'A000000223627'
+  };
+  function oyUrl(name){ for(var k in GNO){ if(name.indexOf(k)>=0) return 'https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo='+GNO[k]; } return null; }
   document.addEventListener('click', function(e){
     var b = (e.target && e.target.closest) ? e.target.closest('.badge.b-go') : null;
     if(!b) return;
     var row = b.closest('tr'); if(!row) return;
-    if(row.innerText.indexOf('\u20a9') < 0) return; /* 상품표(₩ 가격) 행만 */
+    if(row.innerText.indexOf('\u20a9') < 0) return; /* 상품표(₩) 행만 */
     var nameCell = row.children[1]; if(!nameCell) return;
     var name = nameCell.innerText.replace(/\s+/g,' ').trim();
     if(!name) return;
     var nav = document.querySelector('[onclick*="content_gen"]');
     try{ showPage('content_gen', nav); }catch(err){}
     var inp = document.getElementById('cg-product');
-    if(inp){ inp.value = name; inp.dispatchEvent(new Event('input',{bubbles:true})); }
+    if(inp){ inp.value = oyUrl(name) || name; inp.dispatchEvent(new Event('input',{bubbles:true})); }
     try{ if(typeof generateCGContent==='function') generateCGContent(); }catch(err){}
     try{ window.scrollTo(0,0); }catch(err){}
   }, true);
