@@ -264,7 +264,21 @@ const DEMAND={
    {name:'메디힐 토너패드 (공식)',cat:'toner pad',price:'₱1,273',sold:'상위',official:true,brandKo:'메디힐',supplyKRW:0,w:600},
    {name:'Biodance 콜라겐 겔 토너패드 (공식)',cat:'toner pad',price:'₱1,140',sold:'상위',official:true,brandKo:'바이오던스',supplyKRW:0,w:300},
  ]},
- TW:{scanned:false, fx:43, items:[]},
+ TW:{scanned:'sample', fx:43, items:[
+   {name:'SKIN1004 마다가스카르 센텔라 100% 앰플',cat:'ampoule',price:'NT$450',sold:'상위',official:false,brandKo:'스킨천사',supplyKRW:16000,w:120},
+   {name:'토리든 다이브인 저분자 세럼 50ml',cat:'serum',price:'NT$520',sold:'상위',official:false,brandKo:'토리든',supplyKRW:18000,w:130},
+   {name:'조선미녀 맑은쌀 선크림',cat:'sunscreen',price:'NT$390',sold:'상위',official:false,brandKo:'조선미녀',supplyKRW:13000,w:80},
+   {name:'아누아 어성초 77 토너',cat:'toner',price:'NT$560',sold:'상위',official:false,brandKo:'아누아',supplyKRW:15000,w:300},
+ ]},
+ SG:{scanned:'sample', fx:920, items:[
+   {name:"d'Alba 화이트트러플 스프레이 세럼",cat:'serum',price:'S$14',sold:'3k+',official:true,brandKo:'달바',supplyKRW:0,w:100},
+   {name:'토리든 다이브인 세럼 50ml',cat:'serum',price:'S$15',sold:'2k+',official:false,brandKo:'토리든',supplyKRW:18000,w:130},
+   {name:'아누아 PDRN 캡슐 세럼',cat:'serum',price:'S$18',sold:'1k+',official:false,brandKo:'아누아',supplyKRW:20000,w:100},
+ ]},
+ VN:{scanned:'sample', fx:0.054, items:[
+   {name:'아누아 어성초 토너 250ml',cat:'toner',price:'250,000₫',sold:'상위',official:false,brandKo:'아누아',supplyKRW:15000,w:320},
+   {name:'조선미녀 맑은쌀 선크림',cat:'sunscreen',price:'180,000₫',sold:'상위',official:false,brandKo:'조선미녀',supplyKRW:13000,w:80},
+ ]},
 };
 
 const P=[
@@ -391,6 +405,7 @@ const COMP={SG:{c:15.35,p:3,s:0.8,g:9},PH:{c:9.01,p:3,s:0,g:0},TW:{c:10.5,p:0,s:
 const SUBSIDY={SG:1.83,PH:40};
 const WEIGHTS={};P.forEach(p=>WEIGHTS[p.r]=p.w);
 const COUPANG={};P.forEach(p=>COUPANG[p.r]=p.sale);
+const BKMAP={'토코보':'Tocobo','이즈앤트리':'Isntree','디오이메':'DIOIME','서울화이트':'Seoul White Korea','아임프롬':"I'm From",'코스알엑스':'COSRX','메디힐':'Mediheal','바이오던스':'Biodance','스킨천사':'SKIN1004','토리든':'Torriden','조선미녀':'Beauty of Joseon','아누아':'Anua','달바':"dAlba"};
 function renderSettle(){
   const code=document.getElementById('st_mkt').value;const margin=+document.getElementById('st_margin').value||25;
   document.getElementById('st_mlabel').textContent=margin+'%';
@@ -413,7 +428,7 @@ function renderSettle(){
 }
 ['PH','TW','SG','VN'].forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=MK[k].name;document.getElementById('st_mkt').appendChild(o);});document.getElementById('st_mkt').value='PH';
 document.getElementById('st_mkt').addEventListener('change',renderSettle);document.getElementById('st_margin').addEventListener('input',renderSettle);
-function renderCTop(){const codes=['PH','TW','SG','VN'];const fl={PH:'🇵🇭',TW:'🇹🇼',SG:'🇸🇬',VN:'🇻🇳'};let h='';codes.forEach(code=>{const m=MK[code];const best='https://shopee.'+TLD[code]+'/search?keyword=korean%20skincare&sortBy=sales';h+='<div class="panel"><h3>'+fl[code]+' '+m.name+' <a class="src" href="'+best+'" target="_blank">쇼피 베스트 전체보기↗</a></h3>';const D=DEMAND[code];if(D&&D.scanned&&D.items&&D.items.length){h+='<table><thead><tr><th>쇼피 수요 상품</th><th class="r">현지가</th><th class="c">공식</th><th>현지 쇼피</th><th>한국 소싱(올영·쿠팡)</th></tr></thead><tbody>';D.items.forEach(it=>{const oy='https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query='+encodeURIComponent(it.brandKo);const cp='https://www.coupang.com/np/search?q='+encodeURIComponent(it.brandKo);const sp='https://shopee.'+TLD[code]+'/search?keyword='+encodeURIComponent(it.brandKo)+'&sortBy=price';h+='<tr><td class="nm">'+it.name+'</td><td class="r">'+it.price+'</td><td class="c">'+(it.official?'⊘':'✅')+'</td><td><a class="src" href="'+sp+'" target="_blank">쇼피↗</a></td><td>'+(it.official?'<span class="note">공식 — 경쟁불가</span>':'<a class="src" href="'+oy+'" target="_blank">올영↗</a> <a class="src" href="'+cp+'" target="_blank">쿠팡↗</a>')+'</td></tr>';});h+='</tbody></table>';}else{h+='<p class="note">🔧 '+m.name+' 쇼피 TOP10 수집 예정 — 위 "쇼피 베스트 전체보기↗"로 직접 확인 가능. 데일리 작업이 자동 수집 예정.</p>';}h+='</div>';});document.getElementById('ctop').innerHTML=h;}
+function renderCTop(){const codes=['PH','TW','SG','VN'];const fl={PH:'🇵🇭',TW:'🇹🇼',SG:'🇸🇬',VN:'🇻🇳'};const nf=s=>parseFloat(String(s).replace(/[^0-9.]/g,''))||0;let h='';codes.forEach(code=>{const m=MK[code];const D=DEMAND[code];const best='https://shopee.'+TLD[code]+'/search?keyword=korean%20skincare&sortBy=sales';h+='<div class="panel"><h3>'+fl[code]+' '+m.name+' <a class="src" href="'+best+'" target="_blank">쇼피 베스트 전체보기↗</a></h3>';if(D&&D.items&&D.items.length){if(D.scanned==='sample')h+='<p class="note" style="color:var(--review)">⚠ 예시·추정 데이터 — 실제 쇼피 스캔으로 교체 예정(데일리 작업).</p>';h+='<table><thead><tr><th>쇼피 수요 상품</th><th class="r">현지가</th><th class="c">공식</th><th class="r">추정공급가</th><th class="r">SLS권장가(KRW)</th><th class="c">판정</th><th>링크</th></tr></thead><tbody>';D.items.forEach(it=>{const sp='https://shopee.'+TLD[code]+'/search?keyword='+encodeURIComponent(BKMAP[it.brandKo]||it.brandKo)+'&sortBy=price';const oy='https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query='+encodeURIComponent(it.brandKo);const cp='https://www.coupang.com/np/search?q='+encodeURIComponent(it.brandKo);let supplyC,recC,vC;if(it.official){supplyC='-';recC='-';vC='<span class="v-제외">⊘ 공식</span>';}else{const pk=calc(code,it.supplyKRW,it.w,25).pk;const localKRW=nf(it.price)*m.fx;const ratio=localKRW>0?pk/localKRW:9;const v=ratio<=0.85?'GO':ratio<=1.05?'REVIEW':'NO';supplyC='₩'+won(it.supplyKRW)+'<br><span class="note">'+it.w+'g</span>';recC='₩'+won(pk)+'<br><span class="note">현지 ₩'+won(localKRW)+'</span>';vC='<span class="v-'+v+'">'+v+'</span>';}h+='<tr><td class="nm">'+it.name+'</td><td class="r">'+it.price+'</td><td class="c">'+(it.official?'⊘':'✅')+'</td><td class="r">'+supplyC+'</td><td class="r">'+recC+'</td><td class="c">'+vC+'</td><td><a class="src" href="'+sp+'" target="_blank">쇼피↗</a>'+(it.official?'':' <a class="src" href="'+oy+'" target="_blank">올영↗</a> <a class="src" href="'+cp+'" target="_blank">쿠팡↗</a>')+'</td></tr>';});h+='</tbody></table><p class="note" style="margin-top:6px">판정: SLS권장가(우리 25% 마진가)가 현지 시세보다 충분히 낮으면 GO(가격경쟁력). 공급가·무게 추정 — 링크로 실값 확인.</p>';}else{h+='<p class="note">🔧 '+m.name+' 쇼피 TOP10 수집 예정 — 위 "쇼피 베스트 전체보기↗"로 직접 확인 가능.</p>';}h+='</div>';});document.getElementById('ctop').innerHTML=h;}
 renderGrowth();renderFee();renderSku();renderAcct();renderTop10();renderSettle();renderCTop();
 document.getElementById('foot').innerHTML='나라별 소싱 워크플로우 v2 · PH 실측 스캔 / TW 수집 예정 · SLS 배송비(요율표 2026-06-08)+정산수수료(SG·PH 실값, TW·VN 추정) · 환율·공급가·무게 추정(확인 필요) · 올영+쿠팡 소싱 링크 · 콘텐츠 나라별 언어 초안.';
 renderCountry('PH');renderCountry('TW');renderMisc();renderSim();renderContent();renderProfit();
