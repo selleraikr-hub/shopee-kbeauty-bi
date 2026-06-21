@@ -64,11 +64,18 @@
   <nav class="side">
     <div class="grp">오늘</div>
     <a data-s="brief" class="on">🔔 브리핑</a>
+    <div class="grp">분석</div>
+    <a data-s="market">📊 시장 현황</a>
+    <a data-s="compete">🔍 경쟁·추격</a>
     <div class="grp">나라별 소싱</div>
     <a data-s="ph">🇵🇭 필리핀</a>
     <a data-s="tw">🇹🇼 대만</a>
     <a class="soon">🇻🇳 베트남</a>
     <a class="soon">🇹🇭 태국</a>
+    <div class="grp">운영</div>
+    <a data-s="sku">📦 SKU 파이프라인</a>
+    <a data-s="promo">📅 프로모션 캘린더</a>
+    <a data-s="acct">💹 회계·손익</a>
     <div class="grp">도구</div>
     <a data-s="sim">🌏 마진·정산 시뮬</a>
     <a data-s="content">✍️ 콘텐츠 생성기</a>
@@ -90,6 +97,56 @@
 
     <section class="sec" id="s-ph"></section>
     <section class="sec" id="s-tw"></section>
+
+    <section class="sec" id="s-market">
+      <h2 class="title">📊 시장 현황</h2>
+      <p class="desc">쇼피 동남아 K뷰티 시장 · 쇼피코리아 공식 데이터 2024–2025</p>
+      <div class="panel" style="border-color:#3a2230;background:linear-gradient(90deg,rgba(255,77,141,.08),transparent)">
+        <h3>🔥 지금 들어가야 하는 이유</h3>
+        <p class="note">쇼피 베트남 2024 한국 제품 주문 <b style="color:var(--green)">+134%</b> · K뷰티 카테고리 <b style="color:var(--green)">+77%</b> · 11.11 메가데이 한국 셀러 <b style="color:var(--green)">9배</b> · 2025 한국 셀러 입점 +28% — 지금이 진입 적기</p>
+      </div>
+      <div class="panel"><h3>마켓별 한국 제품 주문 성장률 (2024)</h3><div id="growth"></div></div>
+      <div class="panel"><h3>마켓별 실제 마진 수수료 (SLS 모델)</h3>
+        <table><thead><tr><th>마켓</th><th class="r">총수수료</th><th class="r">인출</th><th>비고</th></tr></thead><tbody id="feerows"></tbody></table>
+        <p class="note" style="margin-top:8px">※ 구버전 "VN 7.3%" 등은 판매수수료+원천세만 본 값. 실제 정산은 PG·서비스·GST·인출까지 반영된 위 SLS 모델 기준입니다.</p>
+      </div>
+    </section>
+    <section class="sec" id="s-compete">
+      <h2 class="title">🔍 경쟁 · 추격 대시보드</h2>
+      <p class="desc">후발주자 포지셔닝 — 리뷰 격차·추격 전략</p>
+      <div class="panel"><h3>후발주자 전략</h3><p class="note">경쟁자 대비 <b>-10~13% 저가 진입</b> + 번들 차별화. 올영/쿠팡 정품 신뢰. <b>리뷰 50개 = 생존 임계점.</b></p>
+        <div class="kpis" style="margin-top:10px"><div class="kpi"><b>500</b><span>경쟁자 TOP 리뷰</span></div><div class="kpi"><b>0</b><span>우리 리뷰</span></div><div class="kpi"><b>3개/일</b><span>추격 목표</span></div><div class="kpi"><b>180일</b><span>추격 기준</span></div></div></div>
+      <div class="panel"><h3>Phase 진행도</h3><p class="note">Phase 1 — 0/50 리뷰 · 진입가 -10~13%<br>Phase 2 — 0/300 리뷰 · 마진 정상화<br>Phase 3 — 0/500 리뷰 · 프리미엄 포지셔닝</p></div>
+    </section>
+    <section class="sec" id="s-sku">
+      <h2 class="title">📦 SKU 파이프라인</h2>
+      <p class="desc">소싱 → 등록 → 판매 단계 (오늘 GO/REVIEW 후보 자동 반영)</p>
+      <div class="panel"><div class="kpis"><div class="kpi"><b>5</b><span>Phase 1 목표(검증)</span></div><div class="kpi"><b>15</b><span>Phase 2(성장)</span></div><div class="kpi"><b>30+</b><span>Phase 3(스케일)</span></div></div></div>
+      <div class="panel"><h3>오늘 GO/REVIEW 후보 (PH 기준)</h3><table><thead><tr><th>상품</th><th class="r">세일가</th><th class="r">PH 권장가</th><th class="c">판정</th><th>단계</th></tr></thead><tbody id="skurows"></tbody></table></div>
+    </section>
+    <section class="sec" id="s-promo">
+      <h2 class="title">📅 프로모션 캘린더</h2>
+      <p class="desc">2026 쇼피 메가세일 — ×배율·준비 시작</p>
+      <div class="panel"><table><thead><tr><th>이벤트</th><th>날짜</th><th class="r">배율</th><th>준비 시작</th><th class="c">우선</th></tr></thead><tbody>
+        <tr><td>🔥 11.11 메가데이</td><td>11/11</td><td class="r">×9</td><td>10/15</td><td class="c">P0</td></tr>
+        <tr><td>🎄 12.12 메가데이</td><td>12/12</td><td class="r">×4</td><td>11/25</td><td class="c">P0</td></tr>
+        <tr><td>🧧 Tết 설날</td><td>1~2월</td><td class="r">×3</td><td>12월</td><td class="c">P1</td></tr>
+        <tr><td>9.9 메가데이</td><td>9/9</td><td class="r">×2.5</td><td>8/20</td><td class="c">P1</td></tr>
+        <tr><td>더블데이(매월)</td><td>n.n</td><td class="r">×1.5</td><td>전월 말</td><td class="c">P2</td></tr>
+      </tbody></table><p class="note" style="margin-top:8px">올영세일 7일 전 = 쇼피 광고 시작 타이밍.</p></div>
+    </section>
+    <section class="sec" id="s-acct">
+      <h2 class="title">💹 회계 · 손익</h2>
+      <p class="desc">매입(올영·쿠팡) vs 판매(쇼피 정산) — 순이익 계산 (SLS 수수료)</p>
+      <div class="panel"><h3>판매 손익 계산기</h3>
+        <div class="fld"><label>매입가(원가, KRW)</label><input id="a_cost" type="number" value="14000"></div>
+        <div class="fld"><label>판매가(KRW)</label><input id="a_price" type="number" value="23000"></div>
+        <div class="fld"><label>수수료(%)</label><input id="a_fee" type="number" value="13.2"></div>
+        <div class="fld"><label>배송비(KRW)</label><input id="a_ship" type="number" value="570"></div>
+        <div class="kpis" id="a_kpi" style="margin-top:10px"></div>
+        <p class="note" style="margin-top:6px">수수료 기본값 = PH SLS(약 13.2%). 마켓별 값은 시뮬 참조. 부가세(국내 매출 10%) 별도.</p>
+      </div>
+    </section>
 
     <section class="sec" id="s-sim">
       <h2 class="title">🌏 마진·정산 시뮬레이터 (통합·SLS)</h2>
@@ -261,6 +318,14 @@ Object.keys(MK).forEach(k=>{const o=document.createElement('option');o.value=k;o
 [cost_,weight_,margin_].forEach(e=>e.addEventListener('input',renderSim));msel_.addEventListener('change',renderSim);
 ['c_country','c_brand','c_name','c_cat'].forEach(id=>document.getElementById(id).addEventListener('input',renderContent));
 ['p_ord','p_price','p_margin'].forEach(id=>document.getElementById(id).addEventListener('input',renderProfit));
+// added sections
+function renderGrowth(){const G=[['Vietnam',134],['Thailand',182],['Philippines',89],['Malaysia',67],['Singapore',45],['Taiwan',38]];const mx=182;document.getElementById('growth').innerHTML=G.map(g=>'<div style="display:flex;align-items:center;gap:8px;margin:5px 0"><span style="width:84px;font-size:11.5px;color:var(--sub)">'+g[0]+'</span><div style="flex:1;background:#0b0f14;border-radius:5px;overflow:hidden"><div style="width:'+(g[1]/mx*100).toFixed(0)+'%;background:linear-gradient(90deg,var(--pink),var(--cyan));padding:3px 8px;font-size:11px;color:#06121a;font-weight:700;white-space:nowrap">+'+g[1]+'%</div></div></div>').join('');}
+function renderFee(){document.getElementById('feerows').innerHTML=['PH','TW','SG','VN'].map(c=>{const m=MK[c];return '<tr><td>'+m.name+'</td><td class="r">'+m.fee.toFixed(1)+'%</td><td class="r">'+m.wd+'%</td><td class="note">'+m.note+'</td></tr>';}).join('');}
+function renderSku(){let h='';P.forEach(p=>{if(p.dir)return;const v=verdictBy(p,'PH');if(v==='NO')return;const pk=calc('PH',p.sale,p.w,25).pk;h+='<tr><td><span class="nm">'+p.b+' '+p.n.slice(0,20)+'</span></td><td class="r">'+won(p.sale)+'</td><td class="r">₩'+won(pk)+'</td><td class="c"><span class="v-'+v+'">'+v+'</span></td><td class="note">Phase 1 검증</td></tr>';});document.getElementById('skurows').innerHTML=h||'<tr><td colspan=5 class="note">후보 없음</td></tr>';}
+function verdictBy(p,code){if(p.dir)return'제외';const r=calc(code,p.sale,p.w,25).pk/p.list;return r<=1.15?'GO':r<=1.40?'REVIEW':'NO';}
+function renderAcct(){const c=+document.getElementById('a_cost').value||0,p=+document.getElementById('a_price').value||0,f=+document.getElementById('a_fee').value||0,s=+document.getElementById('a_ship').value||0;const st=p*(1-f/100);const pf=st-c-s;const mr=p?pf/p*100:0;document.getElementById('a_kpi').innerHTML='<div class="kpi"><b>₩'+won(st)+'</b><span>정산금</span></div><div class="kpi"><b style="color:'+(pf>=0?'var(--go)':'var(--no)')+'">₩'+won(pf)+'</b><span>순이익</span></div><div class="kpi"><b>'+mr.toFixed(1)+'%</b><span>마진율</span></div><div class="kpi"><b>₩'+won(p*f/100)+'</b><span>수수료</span></div>';}
+['a_cost','a_price','a_fee','a_ship'].forEach(id=>document.getElementById(id).addEventListener('input',renderAcct));
+renderGrowth();renderFee();renderSku();renderAcct();
 document.getElementById('foot').innerHTML='나라별 소싱 워크플로우 v2 · PH 실측 스캔 / TW 수집 예정 · SLS 배송비(요율표 2026-06-08)+정산수수료(SG·PH 실값, TW·VN 추정) · 환율·공급가·무게 추정(확인 필요) · 올영+쿠팡 소싱 링크 · 콘텐츠 나라별 언어 초안.';
 renderCountry('PH');renderCountry('TW');renderMisc();renderSim();renderContent();renderProfit();
 </script>
