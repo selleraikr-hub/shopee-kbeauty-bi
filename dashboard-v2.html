@@ -12,6 +12,9 @@
   .top{display:flex;align-items:center;gap:18px;padding:10px 18px;background:#0a0e13;border-bottom:1px solid var(--line);font-size:12px;overflow-x:auto;white-space:nowrap;}
   .top .logo{color:var(--pink);font-weight:800;letter-spacing:.5px;} .top .tk{color:var(--sub);} .top .tk b{color:var(--green);}
   .top .live{margin-left:auto;color:var(--green);font-size:11px;border:1px solid var(--green);border-radius:10px;padding:2px 8px;}
+  .teambar{display:flex;gap:4px;padding:6px 14px;background:#0a0e13;border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;}
+  .teambar a{padding:7px 13px;color:#9fb0c0;cursor:pointer;font-size:12.5px;border-radius:8px;flex:none;}
+  .teambar a:hover{background:var(--panel2);} .teambar a.on{background:var(--panel2);color:#fff;box-shadow:inset 0 -2px 0 var(--pink);}
   .layout{display:flex;min-height:calc(100vh - 41px);}
   .side{width:206px;flex:none;background:var(--panel);border-right:1px solid var(--line);padding:14px 0;}
   .side .grp{color:var(--sub);font-size:10.5px;letter-spacing:1px;padding:14px 18px 6px;text-transform:uppercase;}
@@ -54,6 +57,9 @@
   <span class="tk">기준일 <b id="today">2026-06-21</b></span>
   <span class="live">● LIVE</span>
 </div>
+<div class="teambar" id="teambar">
+  <a data-t="manager">📊 관리자</a><a data-t="sourcing">🔍 소싱담당</a><a data-t="sales">💰 세일즈담당</a><a data-t="marketing">📢 마케팅담당</a><a data-t="logistics">📦 물류담당</a><a data-t="design">🎨 디자인담당</a><a data-t="acct2">💹 회계담당</a>
+</div>
 <div class="layout">
   <nav class="side">
     <div class="grp">오늘</div>
@@ -69,6 +75,7 @@
     <a data-s="profit">💰 수익 시뮬(월)</a>
   </nav>
   <main class="main">
+    <section class="sec" id="s-team"></section>
     <section class="sec on" id="s-brief">
       <h2 class="title">나라별 소싱 워크플로우</h2>
       <p class="desc">나라 선택 → ① 쇼피 그 나라 수요 TOP → ② 올영·쿠팡 소싱 매칭 → ③ SLS 마진 판정 → ④ 그 나라 언어 콘텐츠. 우선 PH·TW부터, 이후 VN·TH 확장.</p>
@@ -156,10 +163,32 @@ const DEMAND={
  TW:{scanned:false, fx:43, items:[]},
 };
 
-// nav
+// nav (left functions)
 document.querySelectorAll('.side a[data-s]').forEach(a=>a.onclick=()=>{
   document.querySelectorAll('.side a').forEach(x=>x.classList.remove('on'));a.classList.add('on');
+  document.querySelectorAll('#teambar a').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));document.getElementById('s-'+a.dataset.s).classList.add('on');
+});
+// team agents (top tabs)
+const TEAMS={
+ manager:{i:'📊',n:'관리자',role:'5개 팀(소싱·세일즈·마케팅·물류·디자인) 현황 종합·우선순위 지시',caps:['전체 현황 보고','오늘 뭐 해야 해','주간 계획','팀 업무 지시'],call:'manager-dashboard'},
+ sourcing:{i:'🔍',n:'소싱담당',role:'올영/쿠팡 URL→마진 검증, GO/NO 판정, 나라별 수요 매칭',caps:['소싱 검토해줘(GO/NO)','마진 확인','올영·쿠팡 URL 분석','PH·TW 수요 매칭'],call:'sourcing'},
+ sales:{i:'💰',n:'세일즈담당',role:'멀티마켓 등록가 산출, 후발주자 추격, KPI·바우처 전략',caps:['등록가 얼마로 해야해','어떤 나라에 팔아야해','KPI 확인','경쟁자 분석'],call:'sales'},
+ marketing:{i:'📢',n:'마케팅담당',role:'나라별 언어 상품명·카루셀·틱톡·바우처 카피',caps:['컨텐츠 만들어줘','카루셀','틱톡 스크립트','바우처 카피'],call:'marketing'},
+ logistics:{i:'📦',n:'물류담당',role:'SLS·EMS·한진·CJ 배송비 비교, 합포장 절감',caps:['배송비 얼마야','SLS vs EMS','합포장 절감','월 배송비'],call:'logistics'},
+ design:{i:'🎨',n:'디자인담당',role:'상세페이지·썸네일 스펙·번들 패키지 기획',caps:['상세페이지 만들어줘','썸네일 스펙','패키지 디자인','배너 사이즈'],call:'design'},
+ acct2:{i:'💹',n:'회계담당',role:'쇼피 정산 CSV→매출·비용·순이익, 월 손익·세금계산서',caps:['정산 붙여넣어','이번 달 수익','비용 정리','세금계산서'],call:'accounting'},
+};
+function renderTeam(t){const T=TEAMS[t];document.getElementById('s-team').innerHTML=
+ '<h2 class="title">'+T.i+' '+T.n+' 에이전트</h2><p class="desc">'+T.role+'</p>'
+ +'<div class="panel"><h3>이 에이전트 호출</h3><p class="note">Claude 코워크에서 스킬 <b>shopee-kbeauty-crew:'+T.call+'</b> 를 부르거나 아래처럼 물어보세요.</p>'
+ +'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">'+T.caps.map(c=>'<span class="badge b-go" style="cursor:default">'+c+'</span>').join('')+'</div></div>'
+ +'<div class="panel"><h3>예시</h3><p class="note">"'+T.caps[0]+'" · "'+T.caps[1]+'" 처럼 입력하면 '+T.n+' 에이전트가 처리합니다.</p></div>';}
+document.querySelectorAll('#teambar a').forEach(a=>a.onclick=()=>{
+  document.querySelectorAll('#teambar a').forEach(x=>x.classList.remove('on'));a.classList.add('on');
+  document.querySelectorAll('.side a').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));document.getElementById('s-team').classList.add('on');
+  renderTeam(a.dataset.t);
 });
 
 function renderCountry(code){
