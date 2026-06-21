@@ -30,7 +30,7 @@
   thead th{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);color:var(--cyan);font-weight:600;font-size:11.5px;}
   tbody td{padding:7px 6px;border-bottom:1px solid #1e2530;vertical-align:top;}
   td.r,th.r{text-align:right;} td.c,th.c{text-align:center;}
-  .wedit{background:#0b0f14;border:1px solid var(--cyan);color:var(--ink);border-radius:5px;padding:4px 6px;width:62px;font-size:12.5px;}
+  .wedit,.cedit{background:#0b0f14;border:1px solid var(--cyan);color:var(--ink);border-radius:5px;padding:4px 6px;width:62px;font-size:12.5px;}
   .v-GO{color:var(--go);font-weight:700;} .v-REVIEW{color:var(--review);font-weight:700;} .v-NO{color:var(--no);} .v-제외{color:var(--exc);}
   .brand{color:var(--sub);font-size:10.5px;} .nm{font-size:11.5px;}
   .off{color:var(--no);font-size:10px;} .ind{color:var(--go);font-size:10px;}
@@ -204,8 +204,8 @@
       <div class="panel">
         <div class="fld"><label>마켓</label><select id="st_mkt"></select></div>
         <div class="fld"><label>목표 마진 <b id="st_mlabel">25%</b></label><input id="st_margin" type="range" min="0" max="50" value="25" style="width:160px"></div>
-        <div style="overflow-x:auto"><table style="min-width:1000px"><thead><tr><th>#</th><th>상품</th><th class="c">무게(g) ✎</th><th class="r">사입가</th><th class="r">총운임</th><th class="r">감면</th><th class="r">판매자부담</th><th class="r">판매수수료</th><th class="r">PG</th><th class="r">서비스+GST</th><th class="r">인출</th><th class="r">최종판매가</th><th class="r">정산후마진</th><th class="c">판정</th></tr></thead><tbody id="st_rows"></tbody></table></div>
-        <p class="note" style="margin-top:8px">수수료 구성: SG·PH 정산시트 실값 / TW·VN 추정(합산을 판매수수료에 표기). 환율 추정. 사입가=올영 세일가(추후 편집 가능하게 확장).</p>
+        <div style="overflow-x:auto"><table style="min-width:1000px"><thead><tr><th>#</th><th>상품</th><th class="c">무게(g) ✎</th><th class="r">올영가</th><th class="c">쿠팡가 ✎</th><th class="r">사입가(싼곳)</th><th class="r">총운임</th><th class="r">감면</th><th class="r">판매자부담</th><th class="r">판매수수료</th><th class="r">PG</th><th class="r">서비스+GST</th><th class="r">인출</th><th class="r">최종판매가</th><th class="r">정산후마진</th><th class="c">판정</th></tr></thead><tbody id="st_rows"></tbody></table></div>
+        <p class="note" style="margin-top:8px">수수료 구성: SG·PH 정산시트 실값 / TW·VN 추정(합산을 판매수수료에 표기). 환율 추정. <b style="color:var(--cyan)">쿠팡가 ✎ 칸에 쿠팡 실가를 넣으면, 사입가는 올영·쿠팡 중 싼 값으로 자동 반영(추천 구매처 표시)되고 마진이 재계산됩니다.</b></p>
       </div>
     </section>
     <section class="sec" id="s-content">
@@ -390,16 +390,17 @@ function renderTop10(){let h='',cnt={GO:0,REVIEW:0,NO:0,'제외':0};P.forEach(p=
 const COMP={SG:{c:15.35,p:3,s:0.8,g:9},PH:{c:9.01,p:3,s:0,g:0},TW:{c:10.5,p:0,s:0,g:0},VN:{c:19.55,p:0,s:0,g:0}};
 const SUBSIDY={SG:1.83,PH:40};
 const WEIGHTS={};P.forEach(p=>WEIGHTS[p.r]=p.w);
+const COUPANG={};P.forEach(p=>COUPANG[p.r]=p.sale);
 function renderSettle(){
   const code=document.getElementById('st_mkt').value;const margin=+document.getElementById('st_margin').value||25;
   document.getElementById('st_mlabel').textContent=margin+'%';
   const m=MK[code],cp=COMP[code]||{c:m.fee,p:0,s:0,g:0},sub=SUBSIDY[code];let h='';
   P.forEach(p=>{const w=WEIGHTS[p.r];
-    if(p.dir){h+='<tr><td>'+p.r+'</td><td class="nm">'+p.b+' '+p.n.slice(0,14)+'</td><td class="c"><input class="wedit" data-r="'+p.r+'" value="'+w+'"></td><td class="r">'+won(p.sale)+'</td><td class="r" colspan="10" style="color:#6b7280">직입점 제외</td></tr>';return;}
-    const r=calc(code,p.sale,w,margin),pk=r.pk;const comm=pk*cp.c/100,pg=pk*cp.p/100,sg=pk*(cp.s+cp.g)/100,wd=pk*m.wd/100;const ratio=pk/p.list;const v=ratio<=1.15?'GO':ratio<=1.40?'REVIEW':'NO';
+    if(p.dir){h+='<tr><td>'+p.r+'</td><td class="nm">'+p.b+' '+p.n.slice(0,14)+'</td><td class="c"><input class="wedit" data-r="'+p.r+'" value="'+w+'"></td><td class="r">₩'+won(p.sale)+'</td><td class="c">-</td><td class="r">-</td><td class="r" colspan="10" style="color:#6b7280">직입점 제외</td></tr>';return;}
+    const buy=Math.min(p.sale,COUPANG[p.r]||p.sale);const bsrc=(COUPANG[p.r]<p.sale)?'쿠팡':'올영';const r=calc(code,buy,w,margin),pk=r.pk;const comm=pk*cp.c/100,pg=pk*cp.p/100,sg=pk*(cp.s+cp.g)/100,wd=pk*m.wd/100;const ratio=pk/p.list;const v=ratio<=1.15?'GO':ratio<=1.40?'REVIEW':'NO';
     h+='<tr><td>'+p.r+'</td><td class="nm">'+p.b+' '+p.n.slice(0,14)+'</td>'
       +'<td class="c"><input class="wedit" data-r="'+p.r+'" value="'+w+'"></td>'
-      +'<td class="r">₩'+won(p.sale)+'</td>'
+      +'<td class="r">₩'+won(p.sale)+'</td><td class="c"><input class="cedit" data-r="'+p.r+'" value="'+(COUPANG[p.r]||p.sale)+'"></td><td class="r"><b>₩'+won(buy)+'</b> <span class="note">'+bsrc+'</span></td>'
       +'<td class="r">'+((sub!=null&&r.sl!=null)?loc(r.sl+sub,m.cur):'-')+'</td>'
       +'<td class="r">'+(sub!=null?loc(sub,m.cur):'-')+'</td>'
       +'<td class="r">'+(r.sl!=null?loc(r.sl,m.cur):'-')+'<br><span class="note">₩'+won(r.sk)+'</span></td>'
@@ -408,6 +409,7 @@ function renderSettle(){
       +'<td class="c"><span class="v-'+v+'">'+v+'</span></td></tr>';});
   document.getElementById('st_rows').innerHTML=h;
   document.querySelectorAll('.wedit').forEach(inp=>inp.addEventListener('change',e=>{WEIGHTS[+e.target.dataset.r]=+e.target.value||0;renderSettle();}));
+  document.querySelectorAll('.cedit').forEach(inp=>inp.addEventListener('change',e=>{COUPANG[+e.target.dataset.r]=+e.target.value||0;renderSettle();}));
 }
 ['PH','TW','SG','VN'].forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=MK[k].name;document.getElementById('st_mkt').appendChild(o);});document.getElementById('st_mkt').value='PH';
 document.getElementById('st_mkt').addEventListener('change',renderSettle);document.getElementById('st_margin').addEventListener('input',renderSettle);
