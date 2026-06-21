@@ -179,7 +179,7 @@
       <div class="panel">
         <div class="fld"><label>마켓</label><select id="st_mkt"></select></div>
         <div class="fld"><label>목표 마진 <b id="st_mlabel">25%</b></label><input id="st_margin" type="range" min="0" max="50" value="25" style="width:160px"></div>
-        <div style="overflow-x:auto"><table style="min-width:1000px"><thead><tr><th>#</th><th>상품</th><th class="c">무게(g) ✎</th><th class="r">사입가</th><th class="r">SLS배송</th><th class="r">판매수수료</th><th class="r">PG</th><th class="r">서비스+GST</th><th class="r">인출</th><th class="r">최종판매가</th><th class="r">정산후마진</th><th class="c">판정</th></tr></thead><tbody id="st_rows"></tbody></table></div>
+        <div style="overflow-x:auto"><table style="min-width:1000px"><thead><tr><th>#</th><th>상품</th><th class="c">무게(g) ✎</th><th class="r">사입가</th><th class="r">총운임</th><th class="r">감면</th><th class="r">판매자부담</th><th class="r">판매수수료</th><th class="r">PG</th><th class="r">서비스+GST</th><th class="r">인출</th><th class="r">최종판매가</th><th class="r">정산후마진</th><th class="c">판정</th></tr></thead><tbody id="st_rows"></tbody></table></div>
         <p class="note" style="margin-top:8px">수수료 구성: SG·PH 정산시트 실값 / TW·VN 추정(합산을 판매수수료에 표기). 환율 추정. 사입가=올영 세일가(추후 편집 가능하게 확장).</p>
       </div>
     </section>
@@ -362,17 +362,20 @@ function renderAcct(){const c=+document.getElementById('a_cost').value||0,p=+doc
 function renderTop10(){let h='',cnt={GO:0,REVIEW:0,NO:0,'제외':0};P.forEach(p=>{const vc=c=>{const v=verdictBy(p,c);return '<span class="v-'+v+'">'+v+'</span>';};const best=!p.dir&&(verdictBy(p,'PH')==='GO'||verdictBy(p,'TW')==='GO');h+='<tr'+(best?' class="best"':'')+'><td>'+p.r+'</td><td><span class="brand">'+p.b+'</span><br><span class="nm">'+p.n+'</span></td><td class="r">'+won(p.list)+'</td><td class="r">'+won(p.sale)+'</td><td class="r">'+p.w+'g</td><td class="c">'+vc('PH')+'</td><td class="c">'+vc('TW')+'</td><td class="c">'+vc('SG')+'</td><td class="c">'+vc('VN')+'</td></tr>';cnt[verdictBy(p,'PH')]++;});document.getElementById('t10rows').innerHTML=h;document.getElementById('t10sum').innerHTML='<b>PH 기준:</b> GO '+cnt.GO+' · REVIEW '+cnt.REVIEW+' · NO '+cnt.NO+' · 제외 '+cnt['제외']+' · 바노바기 젤리마스크 = 4개 마켓 GO';let h2='';P.forEach(p=>{if(p.dir){h2+='<tr><td>'+p.r+'</td><td>'+p.b+'</td><td class="r" colspan="4" style="color:#6b7280">직입점 제외</td></tr>';return;}h2+='<tr><td>'+p.r+'</td><td><span class="nm">'+p.b+' '+p.n.slice(0,16)+'</span></td><td class="r">₩'+won(calc("PH",p.sale,p.w,25).pk)+'</td><td class="r">₩'+won(calc("TW",p.sale,p.w,25).pk)+'</td><td class="r">₩'+won(calc("SG",p.sale,p.w,25).pk)+'</td><td class="r">₩'+won(calc("VN",p.sale,p.w,25).pk)+'</td></tr>';});document.getElementById('t10rows2').innerHTML=h2;}
 // 정산 시뮬 표 (셀러 스타일) — 무게 편집 가능
 const COMP={SG:{c:15.35,p:3,s:0.8,g:9},PH:{c:9.01,p:3,s:0,g:0},TW:{c:10.5,p:0,s:0,g:0},VN:{c:19.55,p:0,s:0,g:0}};
+const SUBSIDY={SG:1.83,PH:40};
 const WEIGHTS={};P.forEach(p=>WEIGHTS[p.r]=p.w);
 function renderSettle(){
   const code=document.getElementById('st_mkt').value;const margin=+document.getElementById('st_margin').value||25;
   document.getElementById('st_mlabel').textContent=margin+'%';
-  const m=MK[code],cp=COMP[code]||{c:m.fee,p:0,s:0,g:0};let h='';
+  const m=MK[code],cp=COMP[code]||{c:m.fee,p:0,s:0,g:0},sub=SUBSIDY[code];let h='';
   P.forEach(p=>{const w=WEIGHTS[p.r];
-    if(p.dir){h+='<tr><td>'+p.r+'</td><td class="nm">'+p.b+' '+p.n.slice(0,14)+'</td><td class="c"><input class="wedit" data-r="'+p.r+'" value="'+w+'"></td><td class="r">'+won(p.sale)+'</td><td class="r" colspan="8" style="color:#6b7280">직입점 제외</td></tr>';return;}
+    if(p.dir){h+='<tr><td>'+p.r+'</td><td class="nm">'+p.b+' '+p.n.slice(0,14)+'</td><td class="c"><input class="wedit" data-r="'+p.r+'" value="'+w+'"></td><td class="r">'+won(p.sale)+'</td><td class="r" colspan="10" style="color:#6b7280">직입점 제외</td></tr>';return;}
     const r=calc(code,p.sale,w,margin),pk=r.pk;const comm=pk*cp.c/100,pg=pk*cp.p/100,sg=pk*(cp.s+cp.g)/100,wd=pk*m.wd/100;const ratio=pk/p.list;const v=ratio<=1.15?'GO':ratio<=1.40?'REVIEW':'NO';
     h+='<tr><td>'+p.r+'</td><td class="nm">'+p.b+' '+p.n.slice(0,14)+'</td>'
       +'<td class="c"><input class="wedit" data-r="'+p.r+'" value="'+w+'"></td>'
       +'<td class="r">₩'+won(p.sale)+'</td>'
+      +'<td class="r">'+((sub!=null&&r.sl!=null)?loc(r.sl+sub,m.cur):'-')+'</td>'
+      +'<td class="r">'+(sub!=null?loc(sub,m.cur):'-')+'</td>'
       +'<td class="r">'+(r.sl!=null?loc(r.sl,m.cur):'-')+'<br><span class="note">₩'+won(r.sk)+'</span></td>'
       +'<td class="r">₩'+won(comm)+'</td><td class="r">₩'+won(pg)+'</td><td class="r">₩'+won(sg)+'</td><td class="r">₩'+won(wd)+'</td>'
       +'<td class="r"><b>₩'+won(pk)+'</b></td><td class="r" style="color:var(--go)">₩'+won(r.mk)+'</td>'
