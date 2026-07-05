@@ -134,7 +134,7 @@
     <section class="sec" id="s-tw"></section>
     <section class="sec" id="s-autolive">
       <h2 class="title">📡 자동수집 LIVE</h2>
-      <p class="desc">크롬 확장프로그램(K뷰티 소싱 수집기)으로 올영·쿠팡·다이소 TOP100을 수집 → 카테고리 자동 태깅 → 가장 많은 카테고리 TOP5가 "존"이 됩니다. 존1~5는 매번 수집할 때마다 시장에 따라 바뀝니다.</p>
+      <p class="desc">크롬 확장프로그램(K뷰티 소싱 수집기)으로 올영·쿠팡·다이소 TOP100을 수집 → 카테고리 자동 태깅 → 가장 많은 카테고리 TOP5가 "존"이 됩니다. 상품 카드의 PH↗·TW↗·JP↗ 버튼 = 쇼피 필리핀·대만, Qoo10 재팬에서 그 상품 즉시 검색(경쟁·시세 확인).</p>
       <div id="autolive-body"><p class="note">불러오는 중…</p></div>
     </section>
 
@@ -593,6 +593,12 @@ function renderNiche(){const nf=s=>parseFloat(String(s).replace(/[^0-9.]/g,''))|
 renderGrowth();renderFee();renderSku();renderAcct();renderTop10();renderSettle();renderCTop();renderNiche();renderAutoLive();
 let AL_D=null, AL_F='all';
 const AL_CH={oliveyoung:{n:'올리브영',i:'🌿',c:'var(--green)'},coupang:{n:'쿠팡',i:'🛒',c:'var(--cyan)'},daiso:{n:'다이소',i:'🧺',c:'var(--orange)'}};
+function alQuery(it){
+  let n=(it.name||'').replace(/\[[^\]]*\]/g,'').replace(/\([^)]*\)/g,'').replace(/[,·]/g,' ').replace(/\s+/g,' ').trim();
+  n=n.split(' ').slice(0,4).join(' ');
+  const b=it.brand?((BKMAP[it.brand]||it.brand)+' '):'';
+  return (b+n).trim();
+}
 function alFilter(ch){AL_F=(AL_F===ch)?'all':ch;alDraw();}
 function alDraw(){
   const A=AL_D; const el=document.getElementById('autolive-body'); if(!A)return;
@@ -640,7 +646,13 @@ function alDraw(){
       h+='<div class="dz-item" style="border-left:3px solid '+C.c+'"><span class="rk">#'+it.rank+'</span> <span style="font-size:9.5px;color:'+C.c+';font-weight:700">'+C.n+'</span>'
         +(it.link?'<a class="nm" href="'+it.link+'" target="_blank">'+it.name+'</a>':'<span class="nm">'+it.name+'</span>')
         +(it.brand?'<span class="br">'+it.brand+'</span>':'')
-        +'<div class="pr">'+(it.price?'₩'+won(it.price):'-')+'</div></div>';
+        +'<div class="pr">'+(it.price?'₩'+won(it.price):'-')+'</div>'
+        +(function(){const q=encodeURIComponent(alQuery(it));return '<div style="margin-top:7px">'
+          +'<a class="src" href="https://shopee.ph/search?keyword='+q+'" target="_blank" title="쇼피 필리핀에서 검색">PH↗</a>'
+          +'<a class="src" href="https://shopee.tw/search?keyword='+q+'" target="_blank" title="쇼피 대만에서 검색">TW↗</a>'
+          +'<a class="src" href="https://www.qoo10.jp/s/?keyword='+q+'" target="_blank" title="Qoo10 재팬에서 검색">JP↗</a>'
+          +'</div>';})()
+        +'</div>';
     });
     h+='</div>';
   });
