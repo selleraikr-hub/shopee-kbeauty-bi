@@ -219,5 +219,15 @@
       "official": true,
       "match": "✅과점"
     }
-  ]
+  ],
+  "autoCollected": {
+    "collectedAt": null,
+    "oliveyoung": {},
+    "coupang": {
+      "_status": "pending_api_key"
+    },
+    "daiso": {
+      "_status": "not_implemented_js_rendered_site"
+    }
+  }
 }
