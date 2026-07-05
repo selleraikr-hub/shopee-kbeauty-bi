@@ -221,10 +221,11 @@
     }
   ],
   "autoCollected": {
-    "collectedAt": "2026-07-05T10:51:46.801Z",
+    "collectedAt": "2026-07-05T10:54:42.090Z",
     "channels": {
       "coupang": 60,
-      "oliveyoung": 100
+      "oliveyoung": 100,
+      "daiso": 81
     },
     "zones": [
       {
@@ -984,7 +985,7 @@
       }
     ],
     "categoryCounts": {
-      "기타": 66,
+      "기타": 147,
       "클렌징": 7,
       "토너패드": 7,
       "메이크업": 16,
@@ -2118,6 +2119,575 @@
           "name": "[7월올영픽/리퀴드블러시 증정] 비디비치 블랙 퍼펙션 커버 핏 쿠션",
           "price": 35900,
           "rank": 100
+        }
+      ],
+      "daiso": [
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 1
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 2
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 3
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 4
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 5
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 6
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 7
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 8
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 9
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 10
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 11
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 12
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 13
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 14
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 15
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 16
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 17
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 18
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 19
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 20
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 21
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 22
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 23
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 24
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 25
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 26
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 27
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 28
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 29
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 30
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 31
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 32
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 33
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 34
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 35
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 36
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 37
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 38
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 39
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 40
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 41
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 42
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 43
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 44
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 45
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 46
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 47
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 48
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 49
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 50
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 51
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 52
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 53
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 54
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 55
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 56
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 57
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 58
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 59
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 60
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 61
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 62
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 63
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 64
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 65
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 66
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 67
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 68
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 69
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 70
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 71
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 72
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 73
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 74
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 75
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 76
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 77
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 78
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 79
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "최근 구매",
+          "price": null,
+          "rank": 80
+        },
+        {
+          "brand": null,
+          "link": null,
+          "name": "신상",
+          "price": null,
+          "rank": 81
         }
       ]
     }
