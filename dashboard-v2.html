@@ -598,7 +598,13 @@ const ALBK={'해피바스':'Happy Bath','아벤느':'Avene','일리윤':'ILLIYOO
 const ALTYPE=[['선스틱',['sun stick','サンスティック']],['선크림',['sunscreen','日焼け止め']],['선로션',['sun lotion','サンローション']],['풋크림',['foot cream','フットクリーム']],['비누',['bar soap','石鹸']],['샴푸',['shampoo','シャンプー']],['트리트먼트',['hair treatment','ヘアトリートメント']],['헤어 마스크',['hair mask','ヘアマスク']],['토너패드',['toner pad','トナーパッド']],['패드',['toner pad','トナーパッド']],['마스크',['mask pack','パック']],['틴트',['lip tint','ティント']],['립',['lip balm','リップ']],['쿠션',['cushion foundation','クッションファンデ']],['아이라이너',['eyeliner','アイライナー']],['섀도우',['eyeshadow','アイシャドウ']],['클렌징',['cleansing foam','クレンジングフォーム']],['세럼',['serum','セラム']],['앰플',['ampoule','アンプル']],['에센스',['essence','エッセンス']],['미스트',['face mist','ミスト']],['크림',['cream','クリーム']],['로션',['lotion','ローション']],['토너',['toner','化粧水']]];
 function alBrandEn(b){if(!b)return null;return ALBK[b]||BKMAP[b]||null;}
 function alQuery(it,mkt){
-  const bEn=alBrandEn(it.brand);
+  // 브랜드 필드가 없으면(쿠팡 등) 상품명 앞 단어에서 브랜드 추출
+  let brand=it.brand;
+  if(!brand){
+    const toks=(it.name||'').replace(/\[[^\]]*\]/g,'').trim().split(/[\s,]+/).slice(0,2);
+    for(const t of toks){if(ALBK[t]||BKMAP[t]){brand=t;break;}}
+  }
+  const bEn=alBrandEn(brand);
   let type=null;
   const nm=it.name||'';
   for(const t of ALTYPE){if(nm.includes(t[0])){type=t[1];break;}}
@@ -609,7 +615,7 @@ function alQuery(it,mkt){
   }else{
     if(bEn&&type)return bEn+' '+type[0];
     if(bEn)return bEn;
-    if(type&&it.brand)return it.brand+' '+type[0];
+    if(type&&brand)return brand+' '+type[0];
     if(type)return 'korean '+type[0];
   }
   // 폴백: 행사문구 제거한 한글 축약
