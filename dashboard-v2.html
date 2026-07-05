@@ -623,11 +623,46 @@ function alQuery(it,mkt){
   n=n.split(' ').slice(0,4).join(' ');
   return ((it.brand||'')+' '+n).trim();
 }
-function alFilter(ch){AL_F=(AL_F===ch)?'all':ch;alDraw();}
+function alFilter(ch){AL_F=ch;alDraw();}
+function alSurvey(it){
+  const sv=AL_SV[it.name];if(!sv)return '';
+  const cl=v=>v==='GO'?'var(--go)':v==='NO'?'var(--no)':'var(--review)';
+  const vb=(m,l)=>{if(!m)return '';return '<span style="font-size:10px;padding:1px 6px;border-radius:6px;margin-right:4px;border:1px solid '+cl(m.v)+';color:'+cl(m.v)+'">'+l+' '+m.p+' · '+m.v+'</span>';};
+  const id='sv'+Math.abs(it.name.split('').reduce((a,c)=>a*31+c.charCodeAt(0)|0,7));
+  const mk=(m,name)=>{if(!m)return '';let h='<div style="border:1px solid #2a313c;border-radius:8px;padding:8px 10px;margin-top:6px;background:#0b0f14">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;font-size:11px"><b style="color:'+cl(m.v)+'">'+name+' · '+m.v+'</b>'
+    +(m.url?'<a class="src" href="'+m.url+'" target="_blank" onclick="event.stopPropagation()">검색결과 열기↗</a>':'')+'</div>'
+    +(m.q?'<div class="note" style="font-size:10px;margin-top:2px">검색어: '+m.q+'</div>':'');
+    (m.items||[]).forEach(x=>{h+='<div style="display:flex;justify-content:space-between;gap:8px;font-size:11px;margin-top:3px"><span class="note">'+x.n+'</span><b style="white-space:nowrap">'+x.p+'</b></div>';});
+    if(m.note)h+='<div class="note" style="font-size:10px;margin-top:4px">⚠ '+m.note+'</div>';
+    return h+'</div>';};
+  return '<div style="margin-top:7px;cursor:pointer" onclick="var d=document.getElementById(\''+id+'\');d.style.display=d.style.display===\'none\'?\'block\':\'none\'">'
+    +vb(sv.jp,'JP')+vb(sv.tw,'TW')+vb(sv.ph,'PH')
+    +'<span class="note" style="font-size:9.5px">조사 '+(sv.date||'')+' · ▾ 클릭=상세</span></div>'
+    +'<div id="'+id+'" style="display:none">'+mk(sv.jp,'🇯🇵 Qoo10 재팬')+mk(sv.tw,'🇹🇼 쇼피 대만')+mk(sv.ph,'🇵🇭 쇼피 필리핀')
+    +(sv.note?'<div class="note" style="font-size:10.5px;margin-top:6px;padding:6px 8px;border-left:2px solid var(--pink)">'+sv.note+'</div>':'')+'</div>';
+}
+function alCard(it,ch){
+  const C=AL_CH[ch]||{n:ch||'',i:'',c:'var(--sub)'};
+  let h='<div class="dz-item" style="border-left:3px solid '+C.c+'"><span class="rk">#'+it.rank+'</span> <span style="font-size:9.5px;color:'+C.c+';font-weight:700">'+C.n+'</span>'
+    +(it.link?'<a class="nm" href="'+it.link+'" target="_blank">'+it.name+'</a>':'<span class="nm">'+it.name+'</span>')
+    +(it.brand?'<span class="br">'+it.brand+'</span>':'')
+    +'<div class="pr">'+(it.price?'₩'+won(it.price):'-')+'</div>'
+    +alSurvey(it);
+  const qe=alQuery(it,'EN'),qj=alQuery(it,'JP');
+  h+='<div style="margin-top:7px">'
+    +'<a class="src" href="https://shopee.ph/search?keyword='+encodeURIComponent(qe)+'" target="_blank" title="쇼피 PH 검색: '+qe+'">PH↗</a>'
+    +'<a class="src" href="https://shopee.tw/search?keyword='+encodeURIComponent(qe)+'" target="_blank" title="쇼피 TW 검색: '+qe+'">TW↗</a>'
+    +'<a class="src" href="https://www.qoo10.jp/s/?keyword='+encodeURIComponent(qj)+'" target="_blank" title="Qoo10 JP 검색: '+qj+'">JP↗</a>'
+    +(ch!=='coupang'?'<a class="src" href="https://www.coupang.com/np/search?q='+encodeURIComponent((((it.brand||'')+' '+(it.name||'').replace(/\[[^\]]*\]/g,'')).trim().split(/\s+/).slice(0,5).join(' ')))+'" target="_blank" title="쿠팡 최저 사입가 확인">쿠팡가↗</a>':'')
+    +'</div>';
+  return h+'</div>';
+}
 function alDraw(){
-  const A=AL_D; const el=document.getElementById('autolive-body'); if(!A)return;
-  const zones=A.zones||[]; const chans=A.channels||{};
+  const A=AL_D;const el=document.getElementById('autolive-body');if(!A)return;
+  const raw=A.raw||{};const chans=A.channels||{};const zones=A.zones||[];
   const chanTotal=Object.values(chans).reduce((s,n)=>s+n,0);
+  if(AL_F!=='zones'&&!(raw[AL_F]&&raw[AL_F].length)){AL_F=Object.keys(AL_CH).find(c=>(raw[c]||[]).length)||'zones';}
   let h='';
   h+='<div class="dz-stats">'
     +'<div class="dz-stat"><b>'+chanTotal+'</b><span>수집된 상품</span></div>'
@@ -635,74 +670,45 @@ function alDraw(){
     +'<div class="dz-stat"><b>'+zones.length+'</b><span>자동 생성된 존</span></div>'
     +'<div class="dz-stat"><b style="font-size:14px">'+(A.collectedAt?A.collectedAt.slice(0,16).replace('T',' '):'-')+'</b><span>마지막 수집</span></div>'
     +'</div>';
-  h+='<h3 style="font-size:13px;color:var(--sub);margin:6px 0 10px">수집 채널 <span class="note" style="font-weight:400">— 카드를 클릭하면 그 채널 상품만 필터링</span></h3><div class="dz-sources">';
+  h+='<h3 style="font-size:13px;color:var(--sub);margin:6px 0 10px">채널 — 카드를 클릭하면 그 채널의 랭킹 리스트</h3><div class="dz-sources">';
   Object.keys(AL_CH).forEach(ch=>{
-    const n=chans[ch]||0; const C=AL_CH[ch]; const on=AL_F===ch;
+    const n=(raw[ch]||[]).length||chans[ch]||0;const C=AL_CH[ch];const on=AL_F===ch;
     h+='<div class="dz-source" onclick="alFilter(\''+ch+'\')" style="cursor:pointer;border-left:4px solid '+C.c+';'+(on?'background:rgba(255,255,255,.05);box-shadow:0 0 0 1px '+C.c+';':'')+(n?'':'opacity:.5;')+'">'
-      +'<div class="ico">'+C.i+'</div><div class="txt"><b style="color:'+C.c+'">'+C.n+'</b>'+(on?' <span style="font-size:10px;color:'+C.c+'">✓ 필터 중</span>':'')
+      +'<div class="ico">'+C.i+'</div><div class="txt"><b style="color:'+C.c+'">'+C.n+'</b>'+(on?' <span style="font-size:10px;color:'+C.c+'">◀ 보는 중</span>':'')
       +'<div class="last">'+(n?n+'건 수집됨':'미수집')+'</div></div></div>';
   });
+  const zon=AL_F==='zones';
+  h+='<div class="dz-source" onclick="alFilter(\'zones\')" style="cursor:pointer;border-left:4px solid var(--pink);'+(zon?'background:rgba(255,255,255,.05);box-shadow:0 0 0 1px var(--pink);':'')+'">'
+    +'<div class="ico">🎯</div><div class="txt"><b style="color:var(--pink)">존 TOP5 (카테고리)</b>'+(zon?' <span style="font-size:10px;color:var(--pink)">◀ 보는 중</span>':'')
+    +'<div class="last">'+zones.length+'개 존</div></div></div>';
   h+='</div>';
-  if(AL_F!=='all')h+='<p class="note" style="margin:0 0 10px;color:'+AL_CH[AL_F].c+'">'+AL_CH[AL_F].n+' 상품만 표시 중 — 카드를 다시 누르면 전체 보기</p>';
-
-  if(!zones.length){
-    h+='<p class="note" style="color:var(--review)">아직 존이 생성되지 않았습니다. 상품을 수집하면 카테고리별로 자동 분류돼 TOP5가 존이 됩니다.</p>';
-    el.innerHTML=h;return;
-  }
-
-  h+='<h3 style="font-size:13px;color:var(--sub);margin:18px 0 10px">🎯 자동 생성된 존 (가장 많이 수집된 카테고리 TOP5)</h3>';
-  h+='<div class="dz-feed">';
-  zones.forEach(z=>{
-    const cnt=(AL_F==='all')?z.count:z.items.filter(it=>it.channel===AL_F).length;
-    const isBeauty=['스킨케어','마스크팩','선케어','클렌징','토너패드','메이크업'].includes(z.category);
-    h+='<div class="dz-event"><span><b style="color:var(--pink)">'+z.zone+'</b> · '+z.category+' <span class="note">('+cnt+'건'+(AL_F!=='all'?' · '+AL_CH[AL_F].n:'')+')</span>'
-      +(isBeauty?' <span style="color:var(--go);font-size:10.5px">→ 쇼피·Qoo10 등록 후보</span>':'')
-      +'</span><span class="t">'+cnt+'건</span></div>';
-  });
-  h+='</div>';
-
-  zones.forEach(z=>{
-    const items=z.items.filter(it=>AL_F==='all'||it.channel===AL_F);
-    if(!items.length)return;
-    h+='<h3 style="font-size:13px;color:var(--ink);margin:18px 0 10px"><b style="color:var(--pink)">'+z.zone+'</b> — '+z.category+' <span class="note">('+items.length+'건)</span></h3><div class="dz-grid">';
-    items.slice(0,24).forEach(it=>{
-      const C=AL_CH[it.channel]||{n:it.channel||'',c:'var(--sub)'};
-      h+='<div class="dz-item" style="border-left:3px solid '+C.c+'"><span class="rk">#'+it.rank+'</span> <span style="font-size:9.5px;color:'+C.c+';font-weight:700">'+C.n+'</span>'
-        +(it.link?'<a class="nm" href="'+it.link+'" target="_blank">'+it.name+'</a>':'<span class="nm">'+it.name+'</span>')
-        +(it.brand?'<span class="br">'+it.brand+'</span>':'')
-        +'<div class="pr">'+(it.price?'₩'+won(it.price):'-')+'</div>'
-        +(function(){const sv=AL_SV[it.name];if(!sv)return '';
-          const cl=v=>v==='GO'?'var(--go)':v==='NO'?'var(--no)':'var(--review)';
-          const vb=(m,l)=>{if(!m)return '';return '<span style="font-size:10px;padding:1px 6px;border-radius:6px;margin-right:4px;border:1px solid '+cl(m.v)+';color:'+cl(m.v)+'">'+l+' '+m.p+' · '+m.v+'</span>';};
-          const id='sv'+Math.abs(it.name.split('').reduce((a,c)=>a*31+c.charCodeAt(0)|0,7));
-          const mk=(m,name)=>{if(!m)return '';let h='<div style="border:1px solid #2a313c;border-radius:8px;padding:8px 10px;margin-top:6px;background:#0b0f14">'
-            +'<div style="display:flex;justify-content:space-between;align-items:center;font-size:11px"><b style="color:'+cl(m.v)+'">'+name+' · '+m.v+'</b>'
-            +(m.url?'<a class="src" href="'+m.url+'" target="_blank" onclick="event.stopPropagation()">검색결과 열기↗</a>':'')+'</div>'
-            +(m.q?'<div class="note" style="font-size:10px;margin-top:2px">검색어: '+m.q+'</div>':'');
-            (m.items||[]).forEach(x=>{h+='<div style="display:flex;justify-content:space-between;gap:8px;font-size:11px;margin-top:3px"><span class="note">'+x.n+'</span><b style="white-space:nowrap">'+x.p+'</b></div>';});
-            if(m.note)h+='<div class="note" style="font-size:10px;margin-top:4px">⚠ '+m.note+'</div>';
-            return h+'</div>';};
-          return '<div style="margin-top:7px;cursor:pointer" onclick="var d=document.getElementById(\''+id+'\');d.style.display=d.style.display===\'none\'?\'block\':\'none\'">'
-            +vb(sv.jp,'JP')+vb(sv.tw,'TW')+vb(sv.ph,'PH')
-            +'<span class="note" style="font-size:9.5px">조사 '+(sv.date||'')+' · ▾ 클릭=상세</span></div>'
-            +'<div id="'+id+'" style="display:none">'+mk(sv.jp,'🇯🇵 Qoo10 재팬')+mk(sv.tw,'🇹🇼 쇼피 대만')+mk(sv.ph,'🇵🇭 쇼피 필리핀')
-            +(sv.note?'<div class="note" style="font-size:10.5px;margin-top:6px;padding:6px 8px;border-left:2px solid var(--pink)">'+sv.note+'</div>':'')+'</div>';})()
-        +(function(){const qe=alQuery(it,'EN'),qj=alQuery(it,'JP');return '<div style="margin-top:7px">'
-          +'<a class="src" href="https://shopee.ph/search?keyword='+encodeURIComponent(qe)+'" target="_blank" title="쇼피 PH 검색: '+qe+'">PH↗</a>'
-          +'<a class="src" href="https://shopee.tw/search?keyword='+encodeURIComponent(qe)+'" target="_blank" title="쇼피 TW 검색: '+qe+'">TW↗</a>'
-          +'<a class="src" href="https://www.qoo10.jp/s/?keyword='+encodeURIComponent(qj)+'" target="_blank" title="Qoo10 JP 검색: '+qj+'">JP↗</a>'
-          +(it.channel!=='coupang'?'<a class="src" href="https://www.coupang.com/np/search?q='+encodeURIComponent((((it.brand||'')+' '+(it.name||'').replace(/\[[^\]]*\]/g,'')).trim().split(/\s+/).slice(0,5).join(' ')))+'" target="_blank" title="쿠팡 최저 사입가 확인">쿠팡가↗</a>':'')
-          +'</div>';})()
-        +'</div>';
+  if(zon){
+    if(!zones.length){h+='<p class="note" style="color:var(--review)">아직 존이 생성되지 않았습니다.</p>';el.innerHTML=h;return;}
+    h+='<div class="dz-feed" style="margin-top:14px">';
+    zones.forEach(z=>{
+      const isBeauty=['스킨케어','마스크팩','선케어','클렌징','토너패드','메이크업'].includes(z.category);
+      h+='<div class="dz-event"><span><b style="color:var(--pink)">'+z.zone+'</b> · '+z.category+' <span class="note">('+z.count+'건)</span>'
+        +(isBeauty?' <span style="color:var(--go);font-size:10.5px">→ 쇼피·Qoo10 등록 후보</span>':'')
+        +'</span><span class="t">'+z.count+'건</span></div>';
     });
     h+='</div>';
-  });
+    zones.forEach(z=>{
+      h+='<h3 style="font-size:13px;color:var(--ink);margin:18px 0 10px"><b style="color:var(--pink)">'+z.zone+'</b> — '+z.category+' <span class="note">('+z.items.length+'건)</span></h3><div class="dz-grid">';
+      z.items.slice(0,24).forEach(it=>{h+=alCard(it,it.channel);});
+      h+='</div>';
+    });
+  }else{
+    const items=raw[AL_F]||[];const C=AL_CH[AL_F];
+    h+='<h3 style="font-size:13px;color:var(--ink);margin:18px 0 10px"><b style="color:'+C.c+'">'+C.i+' '+C.n+'</b> 랭킹 <span class="note">('+items.length+'건 · 순위순)</span></h3><div class="dz-grid">';
+    items.forEach(it=>{h+=alCard(it,AL_F);});
+    h+='</div>';
+  }
   el.innerHTML=h;
 }
 function renderAutoLive(){
   fetch('data.json?_='+Date.now()).then(r=>r.json()).then(d=>{
     AL_D=d.autoCollected; AL_SV=d.marketSurvey||{};
-    if(!AL_D){document.getElementById('autolive-body').innerHTML='<p class="note" style="color:var(--no)">⚠ 아직 수집 데이터가 없습니다. 크롬 확장프로그램(K뷰티 소싱 수집기)으로 올영·쿠팡·다이소 페이지에서 수집 후 GitHub에 저장하세요.</p>';return;}
+    if(!AL_D){document.getElementById('autolive-body').innerHTML='<p class="note" style="color:var(--no)">⚠ 아직 수집 데이터가 없습니다. 크롬 확장프로그램(K뷰티 소싱 수집기)으로 랭킹 페이지에서 수집 후 GitHub에 저장하세요.</p>';return;}
     alDraw();
   }).catch(e=>{document.getElementById('autolive-body').innerHTML='<p class="note" style="color:var(--no)">data.json 로드 실패: '+e+'</p>';});
 }
