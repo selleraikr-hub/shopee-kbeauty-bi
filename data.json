@@ -221,13 +221,13 @@
     }
   ],
   "autoCollected": {
-    "collectedAt": "2026-07-05T12:50:30.329Z",
+    "collectedAt": "2026-07-05T12:52:37.019Z",
     "channels": {
       "coupang": 100,
       "oliveyoung": 100,
       "daiso": 504,
-      "29cm": 100,
-      "29cm-뷰티": 100
+      "29cm-뷰티": 100,
+      "29cm-여성의류": 100
     },
     "zones": [
       {
@@ -6798,708 +6798,6 @@
           "rank": 504
         }
       ],
-      "29cm": [
-        {
-          "brand": "웬즈데이오아시스",
-          "link": "https://www.29cm.co.kr/product/catalog/3229309",
-          "name": "[12차 리오더]W/Everyday woven banding short pants_10Color",
-          "price": 15170,
-          "rank": 1
-        },
-        {
-          "brand": "파르티멘토 우먼",
-          "link": "https://www.29cm.co.kr/product/catalog/3334217",
-          "name": "PWC EVERYDAY BALLOON JOGGER PANTS_18COLOR",
-          "price": 42400,
-          "rank": 2
-        },
-        {
-          "brand": "웬즈데이오아시스",
-          "link": "https://www.29cm.co.kr/product/catalog/3279646",
-          "name": "[15차 리오더]Summer See-Through Knit Cardigan_6Color(WC25-KN29)",
-          "price": 30980,
-          "rank": 3
-        },
-        {
-          "brand": "아틀리에 나인",
-          "link": "https://www.29cm.co.kr/product/catalog/2605280",
-          "name": "[장다연 PICK] LOND WAIST TUCK  BLOUSE (Z-BL-4225)",
-          "price": 41600,
-          "rank": 4
-        },
-        {
-          "brand": "꼼파뇨",
-          "link": "https://www.29cm.co.kr/product/catalog/3842592",
-          "name": "롤링 홉피 피그먼트 반팔티 다크그레이",
-          "price": 17160,
-          "rank": 5
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3993261",
-          "name": "Lc 23 BASIC TEE_IVORY [LC262TS18IV]",
-          "price": 41300,
-          "rank": 6
-        },
-        {
-          "brand": "링서울",
-          "link": "https://www.29cm.co.kr/product/catalog/3239225",
-          "name": "pintuck frill blouse-black",
-          "price": 72670,
-          "rank": 7
-        },
-        {
-          "brand": "아틀리에 나인",
-          "link": "https://www.29cm.co.kr/product/catalog/2686537",
-          "name": "[2026-07-08 블랙, 화이트 예약배송]_[제제로 PICK] ESSENTIAL SOLID SLEEVELESS TEE (Z-T-6930)",
-          "price": 15990,
-          "rank": 8
-        },
-        {
-          "brand": "닐바이피",
-          "link": "https://www.29cm.co.kr/product/catalog/4036208",
-          "name": "Summer volume wrap ops Navy [N6MOP01]",
-          "price": 179000,
-          "rank": 9
-        },
-        {
-          "brand": "코즈넉",
-          "link": "https://www.29cm.co.kr/product/catalog/2123023",
-          "name": "캡 내장 심리스 쿨링 크롭 레이어드 이너 나시 수면브라 끈나시",
-          "price": 6610,
-          "rank": 10
-        },
-        {
-          "brand": "파르티멘토 우먼",
-          "link": "https://www.29cm.co.kr/product/catalog/3751730",
-          "name": "PWC RIBBED EVERYDAY SHORT SLEEVE TEE_8COLOR",
-          "price": 26100,
-          "rank": 11
-        },
-        {
-          "brand": "루에브르",
-          "link": "https://www.29cm.co.kr/product/catalog/3911359",
-          "name": "[29CM 단독]_Sheer Belted U-Neck Blouse SW6MB723_2color",
-          "price": 110300,
-          "rank": 12
-        },
-        {
-          "brand": "튜드먼트",
-          "link": "https://www.29cm.co.kr/product/catalog/3191643",
-          "name": "50s EMBROIDERED T-SHIRT (7COL)",
-          "price": 26840,
-          "rank": 13
-        },
-        {
-          "brand": "비터셀즈",
-          "link": "https://www.29cm.co.kr/product/catalog/3853196",
-          "name": "Rose Petal Tee-Olive",
-          "price": 44100,
-          "rank": 14
-        },
-        {
-          "brand": "아틀리에 나인",
-          "link": "https://www.29cm.co.kr/product/catalog/3904880",
-          "name": "[5차] [제제로 PICK] POINTEL SLIMFIT ROUND NECK TEE (T-7220)",
-          "price": 21520,
-          "rank": 15
-        },
-        {
-          "brand": "미치코런던 코시노",
-          "link": "https://www.29cm.co.kr/product/catalog/3947586",
-          "name": "Summer Feeling Tee Pink",
-          "price": 31950,
-          "rank": 16
-        },
-        {
-          "brand": "블루브릭",
-          "link": "https://www.29cm.co.kr/product/catalog/1528500",
-          "name": "[기장선택][14차] Summer loose slacks (charcoal)",
-          "price": 106200,
-          "rank": 17
-        },
-        {
-          "brand": "랑거",
-          "link": "https://www.29cm.co.kr/product/catalog/2775487",
-          "name": "basic langer banding pants (4Color)",
-          "price": 57330,
-          "rank": 18
-        },
-        {
-          "brand": "썸웨어버터",
-          "link": "https://www.29cm.co.kr/product/catalog/3959378",
-          "name": "[17th] Sunkiss Stripe Long Top - Light Blue",
-          "price": 47790,
-          "rank": 19
-        },
-        {
-          "brand": "컴포트랩",
-          "link": "https://www.29cm.co.kr/product/catalog/2739238",
-          "name": "[화사PICK] 듀얼 쿨 튜브탑 6Color / 8Size",
-          "price": 34100,
-          "rank": 20
-        },
-        {
-          "brand": "꼼파뇨",
-          "link": "https://www.29cm.co.kr/product/catalog/3842575",
-          "name": "BUNNYNNY 피그먼트 반팔티 고스트그레이",
-          "price": 17160,
-          "rank": 21
-        },
-        {
-          "brand": "마인드브릿지 우먼",
-          "link": "https://www.29cm.co.kr/product/catalog/3969733",
-          "name": "[W]시어 스트라이프 오버핏 셔츠 - 3color M1WS3203",
-          "price": 22200,
-          "rank": 22
-        },
-        {
-          "brand": "컴포트랩",
-          "link": "https://www.29cm.co.kr/product/catalog/3263238",
-          "name": "에르고핏 에어코튼 브이넥 캐미탑 6Color / 8Size",
-          "price": 38600,
-          "rank": 23
-        },
-        {
-          "brand": "아틀리에 나인",
-          "link": "https://www.29cm.co.kr/product/catalog/3231459",
-          "name": "[29CM 단독][제제로 PICK] MIA DOUBLE WAIST STRIPE PANTS (PT-5643)",
-          "price": 75870,
-          "rank": 24
-        },
-        {
-          "brand": "아틀리에 나인",
-          "link": "https://www.29cm.co.kr/product/catalog/3886481",
-          "name": "[7/16 라이트 블루 예약배송]_[6차] SHEER STRIPE OVERSIZED SHIRT (BL-4412)",
-          "price": 60660,
-          "rank": 25
-        },
-        {
-          "brand": "하네",
-          "link": "https://www.29cm.co.kr/product/catalog/3266768",
-          "name": "[29CM 단독]_[알로하 PICK][기장선택]에센셜 린넨 팬츠 9Color",
-          "price": 53820,
-          "rank": 26
-        },
-        {
-          "brand": "포에트서울",
-          "link": "https://www.29cm.co.kr/product/catalog/3322447",
-          "name": "[인플루언서 착용/31st]checked puff sleeve blouse_lime green",
-          "price": 55600,
-          "rank": 27
-        },
-        {
-          "brand": "꼼파뇨",
-          "link": "https://www.29cm.co.kr/product/catalog/3842571",
-          "name": "DTP 케이크 베어 반팔티 화이트",
-          "price": 17160,
-          "rank": 28
-        },
-        {
-          "brand": "아워호프",
-          "link": "https://www.29cm.co.kr/product/catalog/3906123",
-          "name": "시어서커 스트라이프 네크라인 셔츠 - Sky Blue",
-          "price": 66750,
-          "rank": 29
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3293626",
-          "name": "[3rd Re-order]_OVERSIZED Lc SHEER CHECKED SHIRT_NAVY [LC262SH02NV]",
-          "price": 111300,
-          "rank": 30
-        },
-        {
-          "brand": "반원 아틀리에",
-          "link": "https://www.29cm.co.kr/product/catalog/3053156",
-          "name": "[수지 PICK]_A3510 Nature heritage 티셔츠_Melange gray",
-          "price": 29030,
-          "rank": 31
-        },
-        {
-          "brand": "가니송",
-          "link": "https://www.29cm.co.kr/product/catalog/3097248",
-          "name": "Fleur Pleats Blouse_7colors",
-          "price": 48750,
-          "rank": 32
-        },
-        {
-          "brand": "비터셀즈",
-          "link": "https://www.29cm.co.kr/product/catalog/3853210",
-          "name": "[지구 PICK]_Ruby Berry Tee-Lavender",
-          "price": 39600,
-          "rank": 33
-        },
-        {
-          "brand": "웬즈데이오아시스",
-          "link": "https://www.29cm.co.kr/product/catalog/3279625",
-          "name": "[이수 PICK]W/Seersucker Stripe Shirts_4COLOR(WC25-SH04)",
-          "price": 20480,
-          "rank": 34
-        },
-        {
-          "brand": "파르벵",
-          "link": "https://www.29cm.co.kr/product/catalog/4062137",
-          "name": "[9th reorder 7/2 PM13:18 open] BREEZE HALTER SHIRRING BLOUSE_BLACK",
-          "price": 116100,
-          "rank": 35
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3993296",
-          "name": "[2nd Re-order]_BUTTON 1/2 SLEEVE SHIRT_BLUE [LC262SH05BL]",
-          "price": 90300,
-          "rank": 36
-        },
-        {
-          "brand": "도씨",
-          "link": "https://www.29cm.co.kr/product/catalog/3171910",
-          "name": "[해원 PICK] 실크핏 클로에 반팔 커플 잠옷 세트",
-          "price": 20950,
-          "rank": 37
-        },
-        {
-          "brand": "미치코런던 코시노",
-          "link": "https://www.29cm.co.kr/product/catalog/3914560",
-          "name": "(Uni) Vivid One-mile Pants Magenta pink",
-          "price": 34790,
-          "rank": 38
-        },
-        {
-          "brand": "유라고",
-          "link": "https://www.29cm.co.kr/product/catalog/1991048",
-          "name": "[30차 리오더][with 다희][기장선택] Comfort string pants_2colors",
-          "price": 70290,
-          "rank": 39
-        },
-        {
-          "brand": "노티아",
-          "link": "https://www.29cm.co.kr/product/catalog/3950760",
-          "name": "[한겨레 착용]_[한겨레PICK] MONO PUFF BLOUSE - WHITE",
-          "price": 62630,
-          "rank": 40
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3293650",
-          "name": "LOW T-SHIRT_LIGHT MELANGE GREY [LC267TS17LG]",
-          "price": 34300,
-          "rank": 41
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3993289",
-          "name": "SHEER LINEN BLENDED POLO SWEATER_BLACK [LC262KN04BK]",
-          "price": 83300,
-          "rank": 42
-        },
-        {
-          "brand": "꼼파뇨",
-          "link": "https://www.29cm.co.kr/product/catalog/3842563",
-          "name": "홈런 버니 반팔티 멜란지화이트",
-          "price": 17160,
-          "rank": 43
-        },
-        {
-          "brand": "앤더슨벨",
-          "link": "https://www.29cm.co.kr/product/catalog/3226602",
-          "name": "[REORDER] UNISEX HEART MESSAGE T-SHIRT atb1251u(ECRU)",
-          "price": 65700,
-          "rank": 44
-        },
-        {
-          "brand": "유라고",
-          "link": "https://www.29cm.co.kr/product/catalog/2624482",
-          "name": "[10차 리오더] Flower pattern shorts_2colors",
-          "price": 36920,
-          "rank": 45
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3293651",
-          "name": "LOW T-SHIRT_CHARCOAL [LC267TS17CC]",
-          "price": 34300,
-          "rank": 46
-        },
-        {
-          "brand": "꼼파뇨",
-          "link": "https://www.29cm.co.kr/product/catalog/3842581",
-          "name": "캣 스티치 피그먼트 반팔티 고스트그레이",
-          "price": 18590,
-          "rank": 47
-        },
-        {
-          "brand": "프리버07",
-          "link": "https://www.29cm.co.kr/product/catalog/3941014",
-          "name": "[슈멍 X 29EDITION] Our friver overfit logo t-shirt [FRSP08TS04]_Blue",
-          "price": 31320,
-          "rank": 48
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3987221",
-          "name": "COTTON BUTTON-UP SHIRRING BLOUSE_OFF WHITE [LC262BL01OW]",
-          "price": 59500,
-          "rank": 49
-        },
-        {
-          "brand": "블루브릭",
-          "link": "https://www.29cm.co.kr/product/catalog/3951172",
-          "name": "[3차] Patigue long skirt (light khaki)",
-          "price": 107100,
-          "rank": 50
-        },
-        {
-          "brand": "프리버07",
-          "link": "https://www.29cm.co.kr/product/catalog/3904667",
-          "name": "Ruffle off tie blouse [FRSP07BL05]_Navy",
-          "price": 57510,
-          "rank": 51
-        },
-        {
-          "brand": "컴포트랩",
-          "link": "https://www.29cm.co.kr/product/catalog/3321599",
-          "name": "듀얼 쿨 백리스 니플 브라렛 6Color / 5Size",
-          "price": 26900,
-          "rank": 52
-        },
-        {
-          "brand": "포에토",
-          "link": "https://www.29cm.co.kr/product/catalog/4004183",
-          "name": "[15th] Fresh linen deep v-neck knit - ivory",
-          "price": 68400,
-          "rank": 53
-        },
-        {
-          "brand": "아메스 월드와이드",
-          "link": "https://www.29cm.co.kr/product/catalog/3964111",
-          "name": "[지구 pick][7/29 예약배송]_SWEET RABBIT TEE PINK",
-          "price": 21840,
-          "rank": 54
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3880226",
-          "name": "[3rd Reorder]_DEEP V-NECK STRETCHY T-SHIRTS_CREAM [LW262TS05CR]",
-          "price": 55300,
-          "rank": 55
-        },
-        {
-          "brand": "코즈넉",
-          "link": "https://www.29cm.co.kr/product/catalog/2123007",
-          "name": "캡 내장 기본 브이 끈나시 캡나시 패드내장 크롭탑 수면브라",
-          "price": 9800,
-          "rank": 56
-        },
-        {
-          "brand": "꼼파뇨",
-          "link": "https://www.29cm.co.kr/product/catalog/3842580",
-          "name": "HELLO FLOWER 피그먼트 반팔티 고스트그레이",
-          "price": 17160,
-          "rank": 57
-        },
-        {
-          "brand": "호쿠스포쿠스",
-          "link": "https://www.29cm.co.kr/product/catalog/4015069",
-          "name": "[4th] Flower Henley Loose Tee_Ivory",
-          "price": 85200,
-          "rank": 58
-        },
-        {
-          "brand": "108파운드",
-          "link": "https://www.29cm.co.kr/product/catalog/3410519",
-          "name": "Elloy Low-rise Jean_Blue",
-          "price": 59150,
-          "rank": 59
-        },
-        {
-          "brand": "부디무드라",
-          "link": "https://www.29cm.co.kr/product/catalog/2588863",
-          "name": "[BEST] Diagonal jogger pants (Unisex)_19 Colors",
-          "price": 105000,
-          "rank": 60
-        },
-        {
-          "brand": "울랄라 파자마",
-          "link": "https://www.29cm.co.kr/product/catalog/3867297",
-          "name": "[울랄라] BASIC Womens Pajama Set_Long Pants",
-          "price": 22000,
-          "rank": 61
-        },
-        {
-          "brand": "르닐",
-          "link": "https://www.29cm.co.kr/product/catalog/3154333",
-          "name": "[단독/사이즈추가][27차] Benjamin Stripe T-shirt (Forest)",
-          "price": 38400,
-          "rank": 62
-        },
-        {
-          "brand": "웬즈데이오아시스",
-          "link": "https://www.29cm.co.kr/product/catalog/3279608",
-          "name": "Sia Pin Stripe Sleeveless_IVORY(W25-TP27)",
-          "price": 15230,
-          "rank": 63
-        },
-        {
-          "brand": "비터셀즈",
-          "link": "https://www.29cm.co.kr/product/catalog/3869907",
-          "name": "[쁨이 PICK]Rose Petal Tee-Pigment Charcoal",
-          "price": 44100,
-          "rank": 64
-        },
-        {
-          "brand": "녹섭",
-          "link": "https://www.29cm.co.kr/product/catalog/3329172",
-          "name": "[10차 리오더][L사이즈 추가] Linen boat-neck jacket_cream",
-          "price": 165510,
-          "rank": 65
-        },
-        {
-          "brand": "유라고",
-          "link": "https://www.29cm.co.kr/product/catalog/3987072",
-          "name": "[1차 리오더][with 한겨레, 다희] Stripe frill blouse",
-          "price": 53250,
-          "rank": 66
-        },
-        {
-          "brand": "시야쥬",
-          "link": "https://www.29cm.co.kr/product/catalog/2617756",
-          "name": "SIST9035 나일론 반밴딩 스커트_Black",
-          "price": 50050,
-          "rank": 67
-        },
-        {
-          "brand": "도씨",
-          "link": "https://www.29cm.co.kr/product/catalog/3844696",
-          "name": "[태리태리 PICK] 실크핏 더스트 민소매 투피스 잠옷 세트",
-          "price": 20950,
-          "rank": 68
-        },
-        {
-          "brand": "몽돌",
-          "link": "https://www.29cm.co.kr/product/catalog/3259431",
-          "name": "[26SS]_[2PACK] 에센셜 라운드넥 반팔 티셔츠",
-          "price": 39960,
-          "rank": 69
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3993335",
-          "name": "HOLLYWOOD BASIC TEE_BLUE [LC262TS16BL]",
-          "price": 41300,
-          "rank": 70
-        },
-        {
-          "brand": "제너럴아이디어",
-          "link": "https://www.29cm.co.kr/product/catalog/3866102",
-          "name": "[여울 PICK] WOMAN 썸머 루즈핏 래글런 핀턱 블라우스 [IVORY] / GF2LBL514",
-          "price": 38400,
-          "rank": 71
-        },
-        {
-          "brand": "비터셀즈",
-          "link": "https://www.29cm.co.kr/product/catalog/3853199",
-          "name": "Rose Petal Tee-White",
-          "price": 44100,
-          "rank": 72
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3993264",
-          "name": "[2nd Re-order]_Lc 23 TEE_YELLOW [LC262TS20YE]",
-          "price": 41300,
-          "rank": 73
-        },
-        {
-          "brand": "제너럴아이디어",
-          "link": "https://www.29cm.co.kr/product/catalog/3944007",
-          "name": "[예약발송] WOMAN 드레이프 셔링 저지 블라우스 [CHARCOAL] / GF2LTS527",
-          "price": 30800,
-          "rank": 74
-        },
-        {
-          "brand": "히어리",
-          "link": "https://www.29cm.co.kr/product/catalog/3988792",
-          "name": "플라워 프린팅 오버사이즈 티셔츠_핑크플라워",
-          "price": 39830,
-          "rank": 75
-        },
-        {
-          "brand": "르바",
-          "link": "https://www.29cm.co.kr/product/catalog/3231989",
-          "name": "[18차] Classic Staple Denim Shorts - Stone Navy",
-          "price": 63190,
-          "rank": 76
-        },
-        {
-          "brand": "아우로",
-          "link": "https://www.29cm.co.kr/product/catalog/3232677",
-          "name": "[29CM 단독] CHIFFON TIE BLOUSE [ BEIGE ] - S SIZE",
-          "price": 92650,
-          "rank": 77
-        },
-        {
-          "brand": "웨이브유니온",
-          "link": "https://www.29cm.co.kr/product/catalog/3262785",
-          "name": "Bread and roses T-shirt heather gray",
-          "price": 28560,
-          "rank": 78
-        },
-        {
-          "brand": "무브웜",
-          "link": "https://www.29cm.co.kr/product/catalog/3341353",
-          "name": "Wave Pants- 5Colors",
-          "price": 72200,
-          "rank": 79
-        },
-        {
-          "brand": "아우로",
-          "link": "https://www.29cm.co.kr/product/catalog/3974897",
-          "name": "[세트구매] LAYERED SHIRRING HALTER TOP SET",
-          "price": 53550,
-          "rank": 80
-        },
-        {
-          "brand": "사파리스팟",
-          "link": "https://www.29cm.co.kr/product/catalog/4040836",
-          "name": "[Safarispot X 1011Gallery] Signature Logo T-Shirt (8Colors)",
-          "price": 55000,
-          "rank": 81
-        },
-        {
-          "brand": "티세르",
-          "link": "https://www.29cm.co.kr/product/catalog/3871386",
-          "name": "[uni] 마리나 시어서커 커플 반팔 잠옷 세트",
-          "price": 14180,
-          "rank": 82
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3993336",
-          "name": "HOLLYWOOD BABY TEE_YELLOW [LC262TS15YE]",
-          "price": 41300,
-          "rank": 83
-        },
-        {
-          "brand": "튜드먼트",
-          "link": "https://www.29cm.co.kr/product/catalog/2442739",
-          "name": "[김가을, 해삐 착용]_[7차]_[김나영 착용] CIGARETTE CAPRI PANTS (BLACK)",
-          "price": 63270,
-          "rank": 84
-        },
-        {
-          "brand": "웨이브유니온",
-          "link": "https://www.29cm.co.kr/product/catalog/1080752",
-          "name": "Tree T-shirt heather gray",
-          "price": 28560,
-          "rank": 85
-        },
-        {
-          "brand": "튜드먼트",
-          "link": "https://www.29cm.co.kr/product/catalog/3053978",
-          "name": "라글란 반팔 티셔츠 (MELANGE GREY)",
-          "price": 25560,
-          "rank": 86
-        },
-        {
-          "brand": "플라스틱 프로덕트",
-          "link": "https://www.29cm.co.kr/product/catalog/3671683",
-          "name": "MPa T-SHIRT WOMEN (BLACK)",
-          "price": 65000,
-          "rank": 87
-        },
-        {
-          "brand": "웬즈데이오아시스",
-          "link": "https://www.29cm.co.kr/product/catalog/3279590",
-          "name": "Twill Short Bermuda Pants_IVORY(WC25-PT06)",
-          "price": 23630,
-          "rank": 88
-        },
-        {
-          "brand": "아르토",
-          "link": "https://www.29cm.co.kr/product/catalog/4010556",
-          "name": "[4th] Clare Sheer Tencel T-Shirt_3 Colors",
-          "price": 43000,
-          "rank": 89
-        },
-        {
-          "brand": "아틀리에 나인",
-          "link": "https://www.29cm.co.kr/product/catalog/3181104",
-          "name": "[29CM단독]_[제제로 PICK] ESSENTIAL HENNE CROP CARDIGAN (CD-2201)",
-          "price": 46970,
-          "rank": 90
-        },
-        {
-          "brand": "몽돌",
-          "link": "https://www.29cm.co.kr/product/catalog/3185392",
-          "name": "[26SS]_[오제 PICK] 에센셜 라운드넥 반팔 티셔츠 MDTS073_10 Colors",
-          "price": 25160,
-          "rank": 91
-        },
-        {
-          "brand": "컴포트랩",
-          "link": "https://www.29cm.co.kr/product/catalog/3949081",
-          "name": "화사PICK_[화사PICK] 에르고핏 베이직 홀터탑",
-          "price": 41300,
-          "rank": 92
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3987296",
-          "name": "[3rd Re-order]_SHEER HOODED TEE_WHITE [LC262TS12WH]",
-          "price": 55300,
-          "rank": 93
-        },
-        {
-          "brand": "아우어솔티",
-          "link": "https://www.29cm.co.kr/product/catalog/3996848",
-          "name": "[5차 07/10, 6차 07/13, 7차 07/23 예약배송]_Fruit Gelato Long Skirt / Pastel",
-          "price": 50410,
-          "rank": 94
-        },
-        {
-          "brand": "링서울",
-          "link": "https://www.29cm.co.kr/product/catalog/1154093",
-          "name": "roll-up blouse (6color)",
-          "price": 66800,
-          "rank": 95
-        },
-        {
-          "brand": "주디앤",
-          "link": "https://www.29cm.co.kr/product/catalog/3829358",
-          "name": "레이비 여성 클린핏 반팔 파자마세트",
-          "price": 15540,
-          "rank": 96
-        },
-        {
-          "brand": "로우클래식",
-          "link": "https://www.29cm.co.kr/product/catalog/3293699",
-          "name": "AIRY OVERSIZED JEANS_BLUE [LC262PT23BL]",
-          "price": 111300,
-          "rank": 97
-        },
-        {
-          "brand": "시야쥬",
-          "link": "https://www.29cm.co.kr/product/catalog/2622907",
-          "name": "SITP5151 오버핏 라운지 실키 셔츠_White",
-          "price": 66490,
-          "rank": 98
-        },
-        {
-          "brand": "코즈넉",
-          "link": "https://www.29cm.co.kr/product/catalog/3936108",
-          "name": "[MD 추천] 벨시아 플라워 여성 잠옷 세트 홈웨어 파자마",
-          "price": 29540,
-          "rank": 99
-        },
-        {
-          "brand": "파르벵",
-          "link": "https://www.29cm.co.kr/product/catalog/3966727",
-          "name": "[16th reorder 7/2 PM23:16 open] BREEZE HALTER SHIRRING BLOUSE_GREY",
-          "price": 116100,
-          "rank": 100
-        }
-      ],
       "29cm-뷰티": [
         {
           "rank": 1,
@@ -8200,6 +7498,708 @@
           "name": "[제주 유기농 녹차수 78%+나이아신아마이드 5%] 안티에이징 펑션 No.1 녹차 토너",
           "price": 32300,
           "link": "https://www.29cm.co.kr/product/catalog/1567265"
+        }
+      ],
+      "29cm-여성의류": [
+        {
+          "brand": "웬즈데이오아시스",
+          "link": "https://www.29cm.co.kr/product/catalog/3229309",
+          "name": "[12차 리오더]W/Everyday woven banding short pants_10Color",
+          "price": 15170,
+          "rank": 1
+        },
+        {
+          "brand": "파르티멘토 우먼",
+          "link": "https://www.29cm.co.kr/product/catalog/3334217",
+          "name": "PWC EVERYDAY BALLOON JOGGER PANTS_18COLOR",
+          "price": 42400,
+          "rank": 2
+        },
+        {
+          "brand": "웬즈데이오아시스",
+          "link": "https://www.29cm.co.kr/product/catalog/3279646",
+          "name": "[15차 리오더]Summer See-Through Knit Cardigan_6Color(WC25-KN29)",
+          "price": 30980,
+          "rank": 3
+        },
+        {
+          "brand": "아틀리에 나인",
+          "link": "https://www.29cm.co.kr/product/catalog/2605280",
+          "name": "[장다연 PICK] LOND WAIST TUCK  BLOUSE (Z-BL-4225)",
+          "price": 41600,
+          "rank": 4
+        },
+        {
+          "brand": "꼼파뇨",
+          "link": "https://www.29cm.co.kr/product/catalog/3842592",
+          "name": "롤링 홉피 피그먼트 반팔티 다크그레이",
+          "price": 17160,
+          "rank": 5
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3993261",
+          "name": "Lc 23 BASIC TEE_IVORY [LC262TS18IV]",
+          "price": 41300,
+          "rank": 6
+        },
+        {
+          "brand": "링서울",
+          "link": "https://www.29cm.co.kr/product/catalog/3239225",
+          "name": "pintuck frill blouse-black",
+          "price": 72670,
+          "rank": 7
+        },
+        {
+          "brand": "아틀리에 나인",
+          "link": "https://www.29cm.co.kr/product/catalog/2686537",
+          "name": "[2026-07-08 블랙, 화이트 예약배송]_[제제로 PICK] ESSENTIAL SOLID SLEEVELESS TEE (Z-T-6930)",
+          "price": 15990,
+          "rank": 8
+        },
+        {
+          "brand": "닐바이피",
+          "link": "https://www.29cm.co.kr/product/catalog/4036208",
+          "name": "Summer volume wrap ops Navy [N6MOP01]",
+          "price": 179000,
+          "rank": 9
+        },
+        {
+          "brand": "코즈넉",
+          "link": "https://www.29cm.co.kr/product/catalog/2123023",
+          "name": "캡 내장 심리스 쿨링 크롭 레이어드 이너 나시 수면브라 끈나시",
+          "price": 6610,
+          "rank": 10
+        },
+        {
+          "brand": "파르티멘토 우먼",
+          "link": "https://www.29cm.co.kr/product/catalog/3751730",
+          "name": "PWC RIBBED EVERYDAY SHORT SLEEVE TEE_8COLOR",
+          "price": 26100,
+          "rank": 11
+        },
+        {
+          "brand": "루에브르",
+          "link": "https://www.29cm.co.kr/product/catalog/3911359",
+          "name": "[29CM 단독]_Sheer Belted U-Neck Blouse SW6MB723_2color",
+          "price": 110300,
+          "rank": 12
+        },
+        {
+          "brand": "튜드먼트",
+          "link": "https://www.29cm.co.kr/product/catalog/3191643",
+          "name": "50s EMBROIDERED T-SHIRT (7COL)",
+          "price": 26840,
+          "rank": 13
+        },
+        {
+          "brand": "비터셀즈",
+          "link": "https://www.29cm.co.kr/product/catalog/3853196",
+          "name": "Rose Petal Tee-Olive",
+          "price": 44100,
+          "rank": 14
+        },
+        {
+          "brand": "아틀리에 나인",
+          "link": "https://www.29cm.co.kr/product/catalog/3904880",
+          "name": "[5차] [제제로 PICK] POINTEL SLIMFIT ROUND NECK TEE (T-7220)",
+          "price": 21520,
+          "rank": 15
+        },
+        {
+          "brand": "미치코런던 코시노",
+          "link": "https://www.29cm.co.kr/product/catalog/3947586",
+          "name": "Summer Feeling Tee Pink",
+          "price": 31950,
+          "rank": 16
+        },
+        {
+          "brand": "블루브릭",
+          "link": "https://www.29cm.co.kr/product/catalog/1528500",
+          "name": "[기장선택][14차] Summer loose slacks (charcoal)",
+          "price": 106200,
+          "rank": 17
+        },
+        {
+          "brand": "랑거",
+          "link": "https://www.29cm.co.kr/product/catalog/2775487",
+          "name": "basic langer banding pants (4Color)",
+          "price": 57330,
+          "rank": 18
+        },
+        {
+          "brand": "썸웨어버터",
+          "link": "https://www.29cm.co.kr/product/catalog/3959378",
+          "name": "[17th] Sunkiss Stripe Long Top - Light Blue",
+          "price": 47790,
+          "rank": 19
+        },
+        {
+          "brand": "컴포트랩",
+          "link": "https://www.29cm.co.kr/product/catalog/2739238",
+          "name": "[화사PICK] 듀얼 쿨 튜브탑 6Color / 8Size",
+          "price": 34100,
+          "rank": 20
+        },
+        {
+          "brand": "꼼파뇨",
+          "link": "https://www.29cm.co.kr/product/catalog/3842575",
+          "name": "BUNNYNNY 피그먼트 반팔티 고스트그레이",
+          "price": 17160,
+          "rank": 21
+        },
+        {
+          "brand": "마인드브릿지 우먼",
+          "link": "https://www.29cm.co.kr/product/catalog/3969733",
+          "name": "[W]시어 스트라이프 오버핏 셔츠 - 3color M1WS3203",
+          "price": 22200,
+          "rank": 22
+        },
+        {
+          "brand": "컴포트랩",
+          "link": "https://www.29cm.co.kr/product/catalog/3263238",
+          "name": "에르고핏 에어코튼 브이넥 캐미탑 6Color / 8Size",
+          "price": 38600,
+          "rank": 23
+        },
+        {
+          "brand": "아틀리에 나인",
+          "link": "https://www.29cm.co.kr/product/catalog/3231459",
+          "name": "[29CM 단독][제제로 PICK] MIA DOUBLE WAIST STRIPE PANTS (PT-5643)",
+          "price": 75870,
+          "rank": 24
+        },
+        {
+          "brand": "아틀리에 나인",
+          "link": "https://www.29cm.co.kr/product/catalog/3886481",
+          "name": "[7/16 라이트 블루 예약배송]_[6차] SHEER STRIPE OVERSIZED SHIRT (BL-4412)",
+          "price": 60660,
+          "rank": 25
+        },
+        {
+          "brand": "하네",
+          "link": "https://www.29cm.co.kr/product/catalog/3266768",
+          "name": "[29CM 단독]_[알로하 PICK][기장선택]에센셜 린넨 팬츠 9Color",
+          "price": 53820,
+          "rank": 26
+        },
+        {
+          "brand": "포에트서울",
+          "link": "https://www.29cm.co.kr/product/catalog/3322447",
+          "name": "[인플루언서 착용/31st]checked puff sleeve blouse_lime green",
+          "price": 55600,
+          "rank": 27
+        },
+        {
+          "brand": "꼼파뇨",
+          "link": "https://www.29cm.co.kr/product/catalog/3842571",
+          "name": "DTP 케이크 베어 반팔티 화이트",
+          "price": 17160,
+          "rank": 28
+        },
+        {
+          "brand": "아워호프",
+          "link": "https://www.29cm.co.kr/product/catalog/3906123",
+          "name": "시어서커 스트라이프 네크라인 셔츠 - Sky Blue",
+          "price": 66750,
+          "rank": 29
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3293626",
+          "name": "[3rd Re-order]_OVERSIZED Lc SHEER CHECKED SHIRT_NAVY [LC262SH02NV]",
+          "price": 111300,
+          "rank": 30
+        },
+        {
+          "brand": "반원 아틀리에",
+          "link": "https://www.29cm.co.kr/product/catalog/3053156",
+          "name": "[수지 PICK]_A3510 Nature heritage 티셔츠_Melange gray",
+          "price": 29030,
+          "rank": 31
+        },
+        {
+          "brand": "가니송",
+          "link": "https://www.29cm.co.kr/product/catalog/3097248",
+          "name": "Fleur Pleats Blouse_7colors",
+          "price": 48750,
+          "rank": 32
+        },
+        {
+          "brand": "비터셀즈",
+          "link": "https://www.29cm.co.kr/product/catalog/3853210",
+          "name": "[지구 PICK]_Ruby Berry Tee-Lavender",
+          "price": 39600,
+          "rank": 33
+        },
+        {
+          "brand": "웬즈데이오아시스",
+          "link": "https://www.29cm.co.kr/product/catalog/3279625",
+          "name": "[이수 PICK]W/Seersucker Stripe Shirts_4COLOR(WC25-SH04)",
+          "price": 20480,
+          "rank": 34
+        },
+        {
+          "brand": "파르벵",
+          "link": "https://www.29cm.co.kr/product/catalog/4062137",
+          "name": "[9th reorder 7/2 PM13:18 open] BREEZE HALTER SHIRRING BLOUSE_BLACK",
+          "price": 116100,
+          "rank": 35
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3993296",
+          "name": "[2nd Re-order]_BUTTON 1/2 SLEEVE SHIRT_BLUE [LC262SH05BL]",
+          "price": 90300,
+          "rank": 36
+        },
+        {
+          "brand": "도씨",
+          "link": "https://www.29cm.co.kr/product/catalog/3171910",
+          "name": "[해원 PICK] 실크핏 클로에 반팔 커플 잠옷 세트",
+          "price": 20950,
+          "rank": 37
+        },
+        {
+          "brand": "미치코런던 코시노",
+          "link": "https://www.29cm.co.kr/product/catalog/3914560",
+          "name": "(Uni) Vivid One-mile Pants Magenta pink",
+          "price": 34790,
+          "rank": 38
+        },
+        {
+          "brand": "유라고",
+          "link": "https://www.29cm.co.kr/product/catalog/1991048",
+          "name": "[30차 리오더][with 다희][기장선택] Comfort string pants_2colors",
+          "price": 70290,
+          "rank": 39
+        },
+        {
+          "brand": "노티아",
+          "link": "https://www.29cm.co.kr/product/catalog/3950760",
+          "name": "[한겨레 착용]_[한겨레PICK] MONO PUFF BLOUSE - WHITE",
+          "price": 62630,
+          "rank": 40
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3293650",
+          "name": "LOW T-SHIRT_LIGHT MELANGE GREY [LC267TS17LG]",
+          "price": 34300,
+          "rank": 41
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3993289",
+          "name": "SHEER LINEN BLENDED POLO SWEATER_BLACK [LC262KN04BK]",
+          "price": 83300,
+          "rank": 42
+        },
+        {
+          "brand": "꼼파뇨",
+          "link": "https://www.29cm.co.kr/product/catalog/3842563",
+          "name": "홈런 버니 반팔티 멜란지화이트",
+          "price": 17160,
+          "rank": 43
+        },
+        {
+          "brand": "앤더슨벨",
+          "link": "https://www.29cm.co.kr/product/catalog/3226602",
+          "name": "[REORDER] UNISEX HEART MESSAGE T-SHIRT atb1251u(ECRU)",
+          "price": 65700,
+          "rank": 44
+        },
+        {
+          "brand": "유라고",
+          "link": "https://www.29cm.co.kr/product/catalog/2624482",
+          "name": "[10차 리오더] Flower pattern shorts_2colors",
+          "price": 36920,
+          "rank": 45
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3293651",
+          "name": "LOW T-SHIRT_CHARCOAL [LC267TS17CC]",
+          "price": 34300,
+          "rank": 46
+        },
+        {
+          "brand": "꼼파뇨",
+          "link": "https://www.29cm.co.kr/product/catalog/3842581",
+          "name": "캣 스티치 피그먼트 반팔티 고스트그레이",
+          "price": 18590,
+          "rank": 47
+        },
+        {
+          "brand": "프리버07",
+          "link": "https://www.29cm.co.kr/product/catalog/3941014",
+          "name": "[슈멍 X 29EDITION] Our friver overfit logo t-shirt [FRSP08TS04]_Blue",
+          "price": 31320,
+          "rank": 48
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3987221",
+          "name": "COTTON BUTTON-UP SHIRRING BLOUSE_OFF WHITE [LC262BL01OW]",
+          "price": 59500,
+          "rank": 49
+        },
+        {
+          "brand": "블루브릭",
+          "link": "https://www.29cm.co.kr/product/catalog/3951172",
+          "name": "[3차] Patigue long skirt (light khaki)",
+          "price": 107100,
+          "rank": 50
+        },
+        {
+          "brand": "프리버07",
+          "link": "https://www.29cm.co.kr/product/catalog/3904667",
+          "name": "Ruffle off tie blouse [FRSP07BL05]_Navy",
+          "price": 57510,
+          "rank": 51
+        },
+        {
+          "brand": "컴포트랩",
+          "link": "https://www.29cm.co.kr/product/catalog/3321599",
+          "name": "듀얼 쿨 백리스 니플 브라렛 6Color / 5Size",
+          "price": 26900,
+          "rank": 52
+        },
+        {
+          "brand": "포에토",
+          "link": "https://www.29cm.co.kr/product/catalog/4004183",
+          "name": "[15th] Fresh linen deep v-neck knit - ivory",
+          "price": 68400,
+          "rank": 53
+        },
+        {
+          "brand": "아메스 월드와이드",
+          "link": "https://www.29cm.co.kr/product/catalog/3964111",
+          "name": "[지구 pick][7/29 예약배송]_SWEET RABBIT TEE PINK",
+          "price": 21840,
+          "rank": 54
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3880226",
+          "name": "[3rd Reorder]_DEEP V-NECK STRETCHY T-SHIRTS_CREAM [LW262TS05CR]",
+          "price": 55300,
+          "rank": 55
+        },
+        {
+          "brand": "코즈넉",
+          "link": "https://www.29cm.co.kr/product/catalog/2123007",
+          "name": "캡 내장 기본 브이 끈나시 캡나시 패드내장 크롭탑 수면브라",
+          "price": 9800,
+          "rank": 56
+        },
+        {
+          "brand": "꼼파뇨",
+          "link": "https://www.29cm.co.kr/product/catalog/3842580",
+          "name": "HELLO FLOWER 피그먼트 반팔티 고스트그레이",
+          "price": 17160,
+          "rank": 57
+        },
+        {
+          "brand": "호쿠스포쿠스",
+          "link": "https://www.29cm.co.kr/product/catalog/4015069",
+          "name": "[4th] Flower Henley Loose Tee_Ivory",
+          "price": 85200,
+          "rank": 58
+        },
+        {
+          "brand": "108파운드",
+          "link": "https://www.29cm.co.kr/product/catalog/3410519",
+          "name": "Elloy Low-rise Jean_Blue",
+          "price": 59150,
+          "rank": 59
+        },
+        {
+          "brand": "부디무드라",
+          "link": "https://www.29cm.co.kr/product/catalog/2588863",
+          "name": "[BEST] Diagonal jogger pants (Unisex)_19 Colors",
+          "price": 105000,
+          "rank": 60
+        },
+        {
+          "brand": "울랄라 파자마",
+          "link": "https://www.29cm.co.kr/product/catalog/3867297",
+          "name": "[울랄라] BASIC Womens Pajama Set_Long Pants",
+          "price": 22000,
+          "rank": 61
+        },
+        {
+          "brand": "르닐",
+          "link": "https://www.29cm.co.kr/product/catalog/3154333",
+          "name": "[단독/사이즈추가][27차] Benjamin Stripe T-shirt (Forest)",
+          "price": 38400,
+          "rank": 62
+        },
+        {
+          "brand": "웬즈데이오아시스",
+          "link": "https://www.29cm.co.kr/product/catalog/3279608",
+          "name": "Sia Pin Stripe Sleeveless_IVORY(W25-TP27)",
+          "price": 15230,
+          "rank": 63
+        },
+        {
+          "brand": "비터셀즈",
+          "link": "https://www.29cm.co.kr/product/catalog/3869907",
+          "name": "[쁨이 PICK]Rose Petal Tee-Pigment Charcoal",
+          "price": 44100,
+          "rank": 64
+        },
+        {
+          "brand": "녹섭",
+          "link": "https://www.29cm.co.kr/product/catalog/3329172",
+          "name": "[10차 리오더][L사이즈 추가] Linen boat-neck jacket_cream",
+          "price": 165510,
+          "rank": 65
+        },
+        {
+          "brand": "유라고",
+          "link": "https://www.29cm.co.kr/product/catalog/3987072",
+          "name": "[1차 리오더][with 한겨레, 다희] Stripe frill blouse",
+          "price": 53250,
+          "rank": 66
+        },
+        {
+          "brand": "시야쥬",
+          "link": "https://www.29cm.co.kr/product/catalog/2617756",
+          "name": "SIST9035 나일론 반밴딩 스커트_Black",
+          "price": 50050,
+          "rank": 67
+        },
+        {
+          "brand": "도씨",
+          "link": "https://www.29cm.co.kr/product/catalog/3844696",
+          "name": "[태리태리 PICK] 실크핏 더스트 민소매 투피스 잠옷 세트",
+          "price": 20950,
+          "rank": 68
+        },
+        {
+          "brand": "몽돌",
+          "link": "https://www.29cm.co.kr/product/catalog/3259431",
+          "name": "[26SS]_[2PACK] 에센셜 라운드넥 반팔 티셔츠",
+          "price": 39960,
+          "rank": 69
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3993335",
+          "name": "HOLLYWOOD BASIC TEE_BLUE [LC262TS16BL]",
+          "price": 41300,
+          "rank": 70
+        },
+        {
+          "brand": "제너럴아이디어",
+          "link": "https://www.29cm.co.kr/product/catalog/3866102",
+          "name": "[여울 PICK] WOMAN 썸머 루즈핏 래글런 핀턱 블라우스 [IVORY] / GF2LBL514",
+          "price": 38400,
+          "rank": 71
+        },
+        {
+          "brand": "비터셀즈",
+          "link": "https://www.29cm.co.kr/product/catalog/3853199",
+          "name": "Rose Petal Tee-White",
+          "price": 44100,
+          "rank": 72
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3993264",
+          "name": "[2nd Re-order]_Lc 23 TEE_YELLOW [LC262TS20YE]",
+          "price": 41300,
+          "rank": 73
+        },
+        {
+          "brand": "제너럴아이디어",
+          "link": "https://www.29cm.co.kr/product/catalog/3944007",
+          "name": "[예약발송] WOMAN 드레이프 셔링 저지 블라우스 [CHARCOAL] / GF2LTS527",
+          "price": 30800,
+          "rank": 74
+        },
+        {
+          "brand": "히어리",
+          "link": "https://www.29cm.co.kr/product/catalog/3988792",
+          "name": "플라워 프린팅 오버사이즈 티셔츠_핑크플라워",
+          "price": 39830,
+          "rank": 75
+        },
+        {
+          "brand": "르바",
+          "link": "https://www.29cm.co.kr/product/catalog/3231989",
+          "name": "[18차] Classic Staple Denim Shorts - Stone Navy",
+          "price": 63190,
+          "rank": 76
+        },
+        {
+          "brand": "아우로",
+          "link": "https://www.29cm.co.kr/product/catalog/3232677",
+          "name": "[29CM 단독] CHIFFON TIE BLOUSE [ BEIGE ] - S SIZE",
+          "price": 92650,
+          "rank": 77
+        },
+        {
+          "brand": "웨이브유니온",
+          "link": "https://www.29cm.co.kr/product/catalog/3262785",
+          "name": "Bread and roses T-shirt heather gray",
+          "price": 28560,
+          "rank": 78
+        },
+        {
+          "brand": "무브웜",
+          "link": "https://www.29cm.co.kr/product/catalog/3341353",
+          "name": "Wave Pants- 5Colors",
+          "price": 72200,
+          "rank": 79
+        },
+        {
+          "brand": "아우로",
+          "link": "https://www.29cm.co.kr/product/catalog/3974897",
+          "name": "[세트구매] LAYERED SHIRRING HALTER TOP SET",
+          "price": 53550,
+          "rank": 80
+        },
+        {
+          "brand": "사파리스팟",
+          "link": "https://www.29cm.co.kr/product/catalog/4040836",
+          "name": "[Safarispot X 1011Gallery] Signature Logo T-Shirt (8Colors)",
+          "price": 55000,
+          "rank": 81
+        },
+        {
+          "brand": "티세르",
+          "link": "https://www.29cm.co.kr/product/catalog/3871386",
+          "name": "[uni] 마리나 시어서커 커플 반팔 잠옷 세트",
+          "price": 14180,
+          "rank": 82
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3993336",
+          "name": "HOLLYWOOD BABY TEE_YELLOW [LC262TS15YE]",
+          "price": 41300,
+          "rank": 83
+        },
+        {
+          "brand": "튜드먼트",
+          "link": "https://www.29cm.co.kr/product/catalog/2442739",
+          "name": "[김가을, 해삐 착용]_[7차]_[김나영 착용] CIGARETTE CAPRI PANTS (BLACK)",
+          "price": 63270,
+          "rank": 84
+        },
+        {
+          "brand": "웨이브유니온",
+          "link": "https://www.29cm.co.kr/product/catalog/1080752",
+          "name": "Tree T-shirt heather gray",
+          "price": 28560,
+          "rank": 85
+        },
+        {
+          "brand": "튜드먼트",
+          "link": "https://www.29cm.co.kr/product/catalog/3053978",
+          "name": "라글란 반팔 티셔츠 (MELANGE GREY)",
+          "price": 25560,
+          "rank": 86
+        },
+        {
+          "brand": "플라스틱 프로덕트",
+          "link": "https://www.29cm.co.kr/product/catalog/3671683",
+          "name": "MPa T-SHIRT WOMEN (BLACK)",
+          "price": 65000,
+          "rank": 87
+        },
+        {
+          "brand": "웬즈데이오아시스",
+          "link": "https://www.29cm.co.kr/product/catalog/3279590",
+          "name": "Twill Short Bermuda Pants_IVORY(WC25-PT06)",
+          "price": 23630,
+          "rank": 88
+        },
+        {
+          "brand": "아르토",
+          "link": "https://www.29cm.co.kr/product/catalog/4010556",
+          "name": "[4th] Clare Sheer Tencel T-Shirt_3 Colors",
+          "price": 43000,
+          "rank": 89
+        },
+        {
+          "brand": "아틀리에 나인",
+          "link": "https://www.29cm.co.kr/product/catalog/3181104",
+          "name": "[29CM단독]_[제제로 PICK] ESSENTIAL HENNE CROP CARDIGAN (CD-2201)",
+          "price": 46970,
+          "rank": 90
+        },
+        {
+          "brand": "몽돌",
+          "link": "https://www.29cm.co.kr/product/catalog/3185392",
+          "name": "[26SS]_[오제 PICK] 에센셜 라운드넥 반팔 티셔츠 MDTS073_10 Colors",
+          "price": 25160,
+          "rank": 91
+        },
+        {
+          "brand": "컴포트랩",
+          "link": "https://www.29cm.co.kr/product/catalog/3949081",
+          "name": "화사PICK_[화사PICK] 에르고핏 베이직 홀터탑",
+          "price": 41300,
+          "rank": 92
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3987296",
+          "name": "[3rd Re-order]_SHEER HOODED TEE_WHITE [LC262TS12WH]",
+          "price": 55300,
+          "rank": 93
+        },
+        {
+          "brand": "아우어솔티",
+          "link": "https://www.29cm.co.kr/product/catalog/3996848",
+          "name": "[5차 07/10, 6차 07/13, 7차 07/23 예약배송]_Fruit Gelato Long Skirt / Pastel",
+          "price": 50410,
+          "rank": 94
+        },
+        {
+          "brand": "링서울",
+          "link": "https://www.29cm.co.kr/product/catalog/1154093",
+          "name": "roll-up blouse (6color)",
+          "price": 66800,
+          "rank": 95
+        },
+        {
+          "brand": "주디앤",
+          "link": "https://www.29cm.co.kr/product/catalog/3829358",
+          "name": "레이비 여성 클린핏 반팔 파자마세트",
+          "price": 15540,
+          "rank": 96
+        },
+        {
+          "brand": "로우클래식",
+          "link": "https://www.29cm.co.kr/product/catalog/3293699",
+          "name": "AIRY OVERSIZED JEANS_BLUE [LC262PT23BL]",
+          "price": 111300,
+          "rank": 97
+        },
+        {
+          "brand": "시야쥬",
+          "link": "https://www.29cm.co.kr/product/catalog/2622907",
+          "name": "SITP5151 오버핏 라운지 실키 셔츠_White",
+          "price": 66490,
+          "rank": 98
+        },
+        {
+          "brand": "코즈넉",
+          "link": "https://www.29cm.co.kr/product/catalog/3936108",
+          "name": "[MD 추천] 벨시아 플라워 여성 잠옷 세트 홈웨어 파자마",
+          "price": 29540,
+          "rank": 99
+        },
+        {
+          "brand": "파르벵",
+          "link": "https://www.29cm.co.kr/product/catalog/3966727",
+          "name": "[16th reorder 7/2 PM23:16 open] BREEZE HALTER SHIRRING BLOUSE_GREY",
+          "price": 116100,
+          "rank": 100
         }
       ]
     }
