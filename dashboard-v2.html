@@ -593,6 +593,7 @@ function renderNiche(){const nf=s=>parseFloat(String(s).replace(/[^0-9.]/g,''))|
 renderGrowth();renderFee();renderSku();renderAcct();renderTop10();renderSettle();renderCTop();renderNiche();renderAutoLive();
 let AL_D=null, AL_F='all', AL_SV={};
 const AL_CH={oliveyoung:{n:'올리브영 베스트',i:'🌿',c:'var(--green)'},coupang:{n:'쿠팡 베스트100',i:'🛒',c:'var(--cyan)'},daiso:{n:'다이소 랭킹',i:'🧺',c:'var(--orange)'},'29cm':{n:'29CM',i:'🛍️',c:'var(--pink)'}};
+function chStyle(ch){if(AL_CH[ch])return AL_CH[ch];if(ch&&ch.indexOf('29cm')===0)return{n:'29CM · '+ch.slice(4).replace(/^[-:]/,''),i:'🛍️',c:'var(--pink)'};return{n:ch||'',i:'📦',c:'var(--sub)'};}
 // ── 검색어 보정: 브랜드 영문 + 제품유형 현지어 ──
 const ALBK={'해피바스':'Happy Bath','아벤느':'Avene','일리윤':'ILLIYOON','에스트라':'AESTURA','라로슈포제':'La Roche-Posay','헤라':'HERA','딘토':'dinto','바닐라코':'BANILA CO','토니모리':'TONYMOLY','비디비치':'VIDIVICI','어노브':'UNOVE','아떼':'athe','푸드올로지':'Foodology','센카':'SENKA','온더바디':'On The Body','에이페':'Affe','연작':'Yonzak','쏘피':'Sofy'};
 const ALTYPE=[['선스틱',['sun stick','サンスティック']],['선크림',['sunscreen','日焼け止め']],['선로션',['sun lotion','サンローション']],['풋크림',['foot cream','フットクリーム']],['비누',['bar soap','石鹸']],['샴푸',['shampoo','シャンプー']],['트리트먼트',['hair treatment','ヘアトリートメント']],['헤어 마스크',['hair mask','ヘアマスク']],['토너패드',['toner pad','トナーパッド']],['패드',['toner pad','トナーパッド']],['마스크',['mask pack','パック']],['틴트',['lip tint','ティント']],['립',['lip balm','リップ']],['쿠션',['cushion foundation','クッションファンデ']],['아이라이너',['eyeliner','アイライナー']],['섀도우',['eyeshadow','アイシャドウ']],['클렌징',['cleansing foam','クレンジングフォーム']],['세럼',['serum','セラム']],['앰플',['ampoule','アンプル']],['에센스',['essence','エッセンス']],['미스트',['face mist','ミスト']],['크림',['cream','クリーム']],['로션',['lotion','ローション']],['토너',['toner','化粧水']]];
@@ -643,7 +644,7 @@ function alSurvey(it){
     +(sv.note?'<div class="note" style="font-size:10.5px;margin-top:6px;padding:6px 8px;border-left:2px solid var(--pink)">'+sv.note+'</div>':'')+'</div>';
 }
 function alCard(it,ch){
-  const C=AL_CH[ch]||{n:ch||'',i:'',c:'var(--sub)'};
+  const C=chStyle(ch);
   let h='<div class="dz-item" style="border-left:3px solid '+C.c+'"><span class="rk">#'+it.rank+'</span> <span style="font-size:9.5px;color:'+C.c+';font-weight:700">'+C.n+'</span>'
     +(it.link?'<a class="nm" href="'+it.link+'" target="_blank">'+it.name+'</a>':'<span class="nm">'+it.name+'</span>')
     +(it.brand?'<span class="br">'+it.brand+'</span>':'')
@@ -662,17 +663,18 @@ function alDraw(){
   const A=AL_D;const el=document.getElementById('autolive-body');if(!A)return;
   const raw=A.raw||{};const chans=A.channels||{};const zones=A.zones||[];
   const chanTotal=Object.values(chans).reduce((s,n)=>s+n,0);
-  if(AL_F!=='zones'&&!(raw[AL_F]&&raw[AL_F].length)){AL_F=Object.keys(AL_CH).find(c=>(raw[c]||[]).length)||'zones';}
+  const chKeys=[...new Set([...Object.keys(AL_CH),...Object.keys(raw)])];
+  if(AL_F!=='zones'&&!(raw[AL_F]&&raw[AL_F].length)){AL_F=chKeys.find(c=>(raw[c]||[]).length)||'zones';}
   let h='';
   h+='<div class="dz-stats">'
     +'<div class="dz-stat"><b>'+chanTotal+'</b><span>수집된 상품</span></div>'
-    +'<div class="dz-stat"><b>'+Object.keys(chans).length+' / '+Object.keys(AL_CH).length+'</b><span>수집 채널</span></div>'
+    +'<div class="dz-stat"><b>'+Object.keys(chans).length+'</b><span>수집 채널</span></div>'
     +'<div class="dz-stat"><b>'+zones.length+'</b><span>자동 생성된 존</span></div>'
     +'<div class="dz-stat"><b style="font-size:14px">'+(A.collectedAt?A.collectedAt.slice(0,16).replace('T',' '):'-')+'</b><span>마지막 수집</span></div>'
     +'</div>';
   h+='<h3 style="font-size:13px;color:var(--sub);margin:6px 0 10px">채널 — 카드를 클릭하면 그 채널의 랭킹 리스트</h3><div class="dz-sources">';
-  Object.keys(AL_CH).forEach(ch=>{
-    const n=(raw[ch]||[]).length||chans[ch]||0;const C=AL_CH[ch];const on=AL_F===ch;
+  chKeys.forEach(ch=>{
+    const n=(raw[ch]||[]).length||chans[ch]||0;const C=chStyle(ch);const on=AL_F===ch;
     h+='<div class="dz-source" onclick="alFilter(\''+ch+'\')" style="cursor:pointer;border-left:4px solid '+C.c+';'+(on?'background:rgba(255,255,255,.05);box-shadow:0 0 0 1px '+C.c+';':'')+(n?'':'opacity:.5;')+'">'
       +'<div class="ico">'+C.i+'</div><div class="txt"><b style="color:'+C.c+'">'+C.n+'</b>'+(on?' <span style="font-size:10px;color:'+C.c+'">◀ 보는 중</span>':'')
       +'<div class="last">'+(n?n+'건 수집됨':'미수집')+'</div></div></div>';
@@ -698,7 +700,7 @@ function alDraw(){
       h+='</div>';
     });
   }else{
-    const items=raw[AL_F]||[];const C=AL_CH[AL_F];
+    const items=raw[AL_F]||[];const C=chStyle(AL_F);
     h+='<h3 style="font-size:13px;color:var(--ink);margin:18px 0 10px"><b style="color:'+C.c+'">'+C.i+' '+C.n+'</b> 랭킹 <span class="note">('+items.length+'건 · 순위순)</span></h3><div class="dz-grid">';
     items.forEach(it=>{h+=alCard(it,AL_F);});
     h+='</div>';
