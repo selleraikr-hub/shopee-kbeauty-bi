@@ -592,8 +592,8 @@ function renderCTop(){const codes=['PH','TW','SG','VN'];const fl={PH:'🇵🇭',
 function renderNiche(){const nf=s=>parseFloat(String(s).replace(/[^0-9.]/g,''))||0;const fl={PH:'🇵🇭',TW:'🇹🇼',SG:'🇸🇬',VN:'🇻🇳'};let h='';Object.keys(NICHE).forEach(code=>{const m=MK[code],D=NICHE[code];h+='<div class="panel"><h3>'+fl[code]+' '+m.name+' 니치 키워드 스캔 <span class="note" style="font-weight:400">· '+D.scanDate+' · '+D.kw+' · sortBy=sales</span></h3>';h+='<p class="note" style="color:var(--go)">✅ 실스캔 — 공개 쇼피 베스트(로그인 불필요). 공급가·무게 추정(링크로 실값 확인).</p>';h+='<table><thead><tr><th>키워드</th><th>상품</th><th class="r">현지가</th><th class="c">공식</th><th class="r">추정공급가</th><th class="r">SLS권장가(KRW)</th><th class="c">판정</th><th>링크</th></tr></thead><tbody>';let _c={GO:0,REVIEW:0,NO:0,off:0},_go=[];D.items.forEach(it=>{const sp='https://shopee.'+TLD[code]+'/search?keyword='+encodeURIComponent(BKMAP[it.brandKo]||it.brandKo)+'&sortBy=price';const kw='https://shopee.'+TLD[code]+'/search?keyword='+encodeURIComponent(it.kw)+'&sortBy=sales';const kor=it.name.replace(/^[A-Za-z0-9'’()&.+%*\- ]+/,'').trim();const q=(kor&&kor.indexOf(it.brandKo)===0)?kor:(it.brandKo+(kor?' '+kor:''));const oy='https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query='+encodeURIComponent(q);const cp='https://www.coupang.com/np/search?q='+encodeURIComponent(q);let supplyC,recC,vC;if(it.official){supplyC='-';recC='-';vC='<span class="v-제외">⊘</span>';_c.off++;}else{const pk=calc(code,it.supplyKRW,it.w,25).pk;const localKRW=nf(it.price)*m.fx;const ratio=localKRW>0?pk/localKRW:9;const v=ratio<=0.85?'GO':ratio<=1.05?'REVIEW':'NO';_c[v]++;if(v==='GO')_go.push(it.brandKo);supplyC='₩'+won(it.supplyKRW)+'<br><span class="note">'+it.w+'g</span>';recC='₩'+won(pk)+'<br><span class="note">현지 ₩'+won(localKRW)+'</span>';vC='<span class="v-'+v+'">'+v+'</span>';}h+='<tr><td><a class="src" href="'+kw+'" target="_blank">'+it.kw+'↗</a></td><td class="nm">'+it.name+'</td><td class="r">'+it.price+'</td><td class="c">'+(it.official?'⊘':'✅')+'</td><td class="r">'+supplyC+'</td><td class="r">'+recC+'</td><td class="c">'+vC+'</td><td><a class="src" href="'+sp+'" target="_blank">쇼피↗</a>'+(it.official?'':' <a class="src" href="'+oy+'" target="_blank">올영↗</a> <a class="src" href="'+cp+'" target="_blank">쿠팡↗</a>')+'</td></tr>';});h+='</tbody></table>';const _src=D.items.length-_c.off;const _gou=[...new Set(_go)].join('·');let _t;if(_c.GO>0)_t='✅ GO '+_c.GO+'건('+_gou+') — 현지 프리미엄가 × 한국 저가공급 조합. 사입가·무게 실측 후 진행 검토.';else if(_c.REVIEW>0)_t='△ 확실한 GO 없음, REVIEW '+_c.REVIEW+'건 — 바우처·번들·합포장으로 마진 보완 시 가능.';else _t='⛔ 이 니치엔 GO 없음 — 현지가가 이미 낮거나 공식브랜드 포화. 다른 키워드/마켓 탐색.';h+='<div style="margin-top:10px;padding:11px 13px;border-left:3px solid var(--pink);background:rgba(255,77,141,.07);border-radius:0 8px 8px 0;font-size:12.5px;line-height:1.6"><b style="color:var(--pink)">🧠 AI 분석</b> — 소싱가능 '+_src+'개 중 <b class="v-GO">GO '+_c.GO+'</b>·<b class="v-REVIEW">REVIEW '+_c.REVIEW+'</b>·<b class="v-NO">NO '+_c.NO+'</b>, 공식/현지브랜드(제외) '+_c.off+'개.<br>'+_t+'</div></div>';});h+='<div class="panel"><p class="note"><b>핵심 패턴</b>: 니치라고 다 GO가 아니라 <b>현지 프리미엄가 × 한국 저가공급 × 가벼움</b> 조합만 GO. PDRN은 수요 폭증·셀러 분산 → 프리미엄 단품(VT)·번들로, 선스틱은 현지 저가 로컬(PH Cemu·blk / TW AHC)을 피해 한국 프리미엄(토코보)으로 차별화. <b>📌 SG·VN 니치 스캔은 데일리 작업으로 추가 예정</b> (SG는 GST 9%로 대부분 NO 예상).</p></div>';document.getElementById('niche').innerHTML=h;}
 renderGrowth();renderFee();renderSku();renderAcct();renderTop10();renderSettle();renderCTop();renderNiche();renderAutoLive();
 let AL_D=null, AL_F='all', AL_SV={};
-const AL_CH={oliveyoung:{n:'올리브영 베스트',i:'🌿',c:'var(--green)'},coupang:{n:'쿠팡 베스트100',i:'🛒',c:'var(--cyan)'},daiso:{n:'다이소 랭킹',i:'🧺',c:'var(--orange)'}};
-function chStyle(ch){if(AL_CH[ch])return AL_CH[ch];if(ch&&ch.indexOf('29cm')===0){const cat=ch.slice(4).replace(/^[-:]/,'');return{n:cat?'29CM · '+cat:'29CM',i:'🛍️',c:'var(--pink)',cat:cat||'전체'};}return{n:ch||'',i:'📦',c:'var(--sub)'};}
+const AL_CH={oliveyoung:{n:'올리브영 베스트',i:'🌿',c:'var(--green)'},coupang:{n:'쿠팡 베스트100',i:'🛒',c:'var(--cyan)'},daiso:{n:'다이소 랭킹',i:'🧺',c:'var(--orange)'},'29cm':{n:'29CM',i:'🛍️',c:'var(--pink)'}};
+function chStyle(ch){if(AL_CH[ch])return AL_CH[ch];if(ch&&ch.indexOf('29cm')===0)return{n:'29CM · '+ch.slice(4).replace(/^[-:]/,''),i:'🛍️',c:'var(--pink)'};return{n:ch||'',i:'📦',c:'var(--sub)'};}
 // ── 검색어 보정: 브랜드 영문 + 제품유형 현지어 ──
 const ALBK={'해피바스':'Happy Bath','아벤느':'Avene','일리윤':'ILLIYOON','에스트라':'AESTURA','라로슈포제':'La Roche-Posay','헤라':'HERA','딘토':'dinto','바닐라코':'BANILA CO','토니모리':'TONYMOLY','비디비치':'VIDIVICI','어노브':'UNOVE','아떼':'athe','푸드올로지':'Foodology','센카':'SENKA','온더바디':'On The Body','에이페':'Affe','연작':'Yonzak','쏘피':'Sofy'};
 const ALTYPE=[['선스틱',['sun stick','サンスティック']],['선크림',['sunscreen','日焼け止め']],['선로션',['sun lotion','サンローション']],['풋크림',['foot cream','フットクリーム']],['비누',['bar soap','石鹸']],['샴푸',['shampoo','シャンプー']],['트리트먼트',['hair treatment','ヘアトリートメント']],['헤어 마스크',['hair mask','ヘアマスク']],['토너패드',['toner pad','トナーパッド']],['패드',['toner pad','トナーパッド']],['마스크',['mask pack','パック']],['틴트',['lip tint','ティント']],['립',['lip balm','リップ']],['쿠션',['cushion foundation','クッションファンデ']],['아이라이너',['eyeliner','アイライナー']],['섀도우',['eyeshadow','アイシャドウ']],['클렌징',['cleansing foam','クレンジングフォーム']],['세럼',['serum','セラム']],['앰플',['ampoule','アンプル']],['에센스',['essence','エッセンス']],['미스트',['face mist','ミスト']],['크림',['cream','クリーム']],['로션',['lotion','ローション']],['토너',['toner','化粧水']]];
@@ -624,7 +624,9 @@ function alQuery(it,mkt){
   n=n.split(' ').slice(0,4).join(' ');
   return ((it.brand||'')+' '+n).trim();
 }
-function alFilter(ch){AL_F=ch;alDraw();}
+function is29(k){return k==='29cm'||/^29cm[-:]/.test(k);}
+function cm29subs(){var r=(AL_D&&AL_D.raw)||{};return Object.keys(r).filter(function(k){return /^29cm[-:]/.test(k)&&r[k].length;});}
+function alFilter(ch){if(ch==='29cm'){var s=cm29subs();ch=s[0]||'29cm';}AL_F=ch;alDraw();}
 function alSurvey(it){
   const sv=AL_SV[it.name];if(!sv)return '';
   const cl=v=>v==='GO'?'var(--go)':v==='NO'?'var(--no)':'var(--review)';
@@ -664,11 +666,7 @@ function alDraw(){
   const raw=A.raw||{};const chans=A.channels||{};const zones=A.zones||[];
   const chanTotal=Object.values(chans).reduce((s,n)=>s+n,0);
   const chKeys=[...new Set([...Object.keys(AL_CH),...Object.keys(raw)])];
-  const keys29=chKeys.filter(c=>c.indexOf('29cm')===0).sort();
-  const baseKeys=chKeys.filter(c=>c.indexOf('29cm')!==0);
-  if(AL_F==='29cm'&&keys29.length)AL_F=keys29[0];
-  if(AL_F!=='zones'&&AL_F!=='29cm'&&!(raw[AL_F]&&raw[AL_F].length)){AL_F=baseKeys.find(c=>(raw[c]||[]).length)||(keys29.length?keys29[0]:'zones');}
-  const sel29=AL_F&&AL_F.indexOf('29cm')===0;
+  if(AL_F!=='zones'&&!(raw[AL_F]&&raw[AL_F].length)){AL_F=chKeys.find(c=>(raw[c]||[]).length)||'zones';}
   let h='';
   h+='<div class="dz-stats">'
     +'<div class="dz-stat"><b>'+chanTotal+'</b><span>수집된 상품</span></div>'
@@ -677,31 +675,18 @@ function alDraw(){
     +'<div class="dz-stat"><b style="font-size:14px">'+(A.collectedAt?A.collectedAt.slice(0,16).replace('T',' '):'-')+'</b><span>마지막 수집</span></div>'
     +'</div>';
   h+='<h3 style="font-size:13px;color:var(--sub);margin:6px 0 10px">채널 — 카드를 클릭하면 그 채널의 랭킹 리스트</h3><div class="dz-sources">';
-  baseKeys.forEach(ch=>{
+  chKeys.forEach(ch=>{if(is29(ch))return;
     const n=(raw[ch]||[]).length||chans[ch]||0;const C=chStyle(ch);const on=AL_F===ch;
     h+='<div class="dz-source" onclick="alFilter(\''+ch+'\')" style="cursor:pointer;border-left:4px solid '+C.c+';'+(on?'background:rgba(255,255,255,.05);box-shadow:0 0 0 1px '+C.c+';':'')+(n?'':'opacity:.5;')+'">'
       +'<div class="ico">'+C.i+'</div><div class="txt"><b style="color:'+C.c+'">'+C.n+'</b>'+(on?' <span style="font-size:10px;color:'+C.c+'">◀ 보는 중</span>':'')
       +'<div class="last">'+(n?n+'건 수집됨':'미수집')+'</div></div></div>';
   });
-  const n29=keys29.reduce((s2,c)=>s2+((raw[c]||[]).length),0);
-  h+='<div class="dz-source" onclick="alFilter(\'29cm\')" style="cursor:pointer;border-left:4px solid var(--pink);'+(sel29?'background:rgba(255,255,255,.05);box-shadow:0 0 0 1px var(--pink);':'')+(n29?'':'opacity:.5;')+'">'
-    +'<div class="ico">🛍️</div><div class="txt"><b style="color:var(--pink)">29CM</b>'+(sel29?' <span style="font-size:10px;color:var(--pink)">◀ 보는 중</span>':'')
-    +'<div class="last">'+(n29?keys29.length+'개 카테고리 · '+n29+'건':'미수집')+'</div></div></div>';
-  const zon=AL_F==='zones';
+  (function(){var subs=cm29subs();var C=AL_CH['29cm'];var tot=subs.reduce(function(a,c){return a+raw[c].length;},0);var on=is29(AL_F);h+='<div class="dz-source" onclick="alFilter(&#39;29cm&#39;)" style="cursor:pointer;border-left:4px solid '+C.c+';'+(on?'background:rgba(255,255,255,.05);box-shadow:0 0 0 1px '+C.c+';':'')+(tot?'':'opacity:.5;')+'">'+'<div class="ico">'+C.i+'</div><div class="txt"><b style="color:'+C.c+'">'+C.n+'</b>'+(on?' <span style="font-size:10px;color:'+C.c+'">◀ 보는 중</span>':'')+'<div class="last">'+(tot?tot+'건 · '+subs.length+'개 카테고리':'미수집')+'</div></div></div>';})();
+const zon=AL_F==='zones';
   h+='<div class="dz-source" onclick="alFilter(\'zones\')" style="cursor:pointer;border-left:4px solid var(--pink);'+(zon?'background:rgba(255,255,255,.05);box-shadow:0 0 0 1px var(--pink);':'')+'">'
     +'<div class="ico">🎯</div><div class="txt"><b style="color:var(--pink)">존 TOP5 (카테고리)</b>'+(zon?' <span style="font-size:10px;color:var(--pink)">◀ 보는 중</span>':'')
     +'<div class="last">'+zones.length+'개 존</div></div></div>';
   h+='</div>';
-  if(sel29&&keys29.length){
-    h+='<div class="dz-sources" style="margin-top:2px;padding-left:14px;border-left:2px solid var(--pink)">';
-    keys29.forEach(ch=>{
-      const n=(raw[ch]||[]).length;const on=AL_F===ch;const cat=chStyle(ch).cat;
-      h+='<div class="dz-source" onclick="alFilter(\''+ch+'\')" style="cursor:pointer;padding:10px 12px;border-left:3px solid var(--pink);'+(on?'background:rgba(255,255,255,.06);box-shadow:0 0 0 1px var(--pink);':'')+'">'
-        +'<div class="txt"><b style="color:var(--pink)">'+cat+'</b>'+(on?' <span style="font-size:10px;color:var(--pink)">◀</span>':'')
-        +'<div class="last">'+n+'건</div></div></div>';
-    });
-    h+='</div>';
-  }
   if(zon){
     if(!zones.length){h+='<p class="note" style="color:var(--review)">아직 존이 생성되지 않았습니다.</p>';el.innerHTML=h;return;}
     h+='<div class="dz-feed" style="margin-top:14px">';
@@ -719,6 +704,7 @@ function alDraw(){
     });
   }else{
     const items=raw[AL_F]||[];const C=chStyle(AL_F);
+if(is29(AL_F)){var _subs=cm29subs();h+='<div class="dz-sources" style="margin-top:4px;margin-bottom:2px">';_subs.forEach(function(sc){var SC=chStyle(sc);var son=AL_F===sc;var cat=sc.replace(/^29cm[-:]/,'');h+='<div class="dz-source" onclick="alFilter(&#39;'+sc+'&#39;)" style="cursor:pointer;border-left:4px solid '+SC.c+';'+(son?'background:rgba(255,255,255,.05);box-shadow:0 0 0 1px '+SC.c+';':'')+'">'+'<div class="ico">🛍️</div><div class="txt"><b style="color:'+SC.c+'">'+cat+'</b>'+(son?' <span style="font-size:10px;color:'+SC.c+'">◀ 보는 중</span>':'')+'<div class="last">'+raw[sc].length+'건</div></div></div>';});h+='</div>';}
     h+='<h3 style="font-size:13px;color:var(--ink);margin:18px 0 10px"><b style="color:'+C.c+'">'+C.i+' '+C.n+'</b> 랭킹 <span class="note">('+items.length+'건 · 순위순)</span></h3><div class="dz-grid">';
     items.forEach(it=>{h+=alCard(it,AL_F);});
     h+='</div>';
