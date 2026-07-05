@@ -593,11 +593,29 @@ function renderNiche(){const nf=s=>parseFloat(String(s).replace(/[^0-9.]/g,''))|
 renderGrowth();renderFee();renderSku();renderAcct();renderTop10();renderSettle();renderCTop();renderNiche();renderAutoLive();
 let AL_D=null, AL_F='all';
 const AL_CH={oliveyoung:{n:'올리브영',i:'🌿',c:'var(--green)'},coupang:{n:'쿠팡',i:'🛒',c:'var(--cyan)'},daiso:{n:'다이소',i:'🧺',c:'var(--orange)'}};
-function alQuery(it){
-  let n=(it.name||'').replace(/\[[^\]]*\]/g,'').replace(/\([^)]*\)/g,'').replace(/[,·]/g,' ').replace(/\s+/g,' ').trim();
+// ── 검색어 보정: 브랜드 영문 + 제품유형 현지어 ──
+const ALBK={'해피바스':'Happy Bath','아벤느':'Avene','일리윤':'ILLIYOON','에스트라':'AESTURA','라로슈포제':'La Roche-Posay','헤라':'HERA','딘토':'dinto','바닐라코':'BANILA CO','토니모리':'TONYMOLY','비디비치':'VIDIVICI','어노브':'UNOVE','아떼':'athe','푸드올로지':'Foodology','센카':'SENKA','온더바디':'On The Body','에이페':'Affe','연작':'Yonzak','쏘피':'Sofy'};
+const ALTYPE=[['선스틱',['sun stick','サンスティック']],['선크림',['sunscreen','日焼け止め']],['선로션',['sun lotion','サンローション']],['풋크림',['foot cream','フットクリーム']],['비누',['bar soap','石鹸']],['샴푸',['shampoo','シャンプー']],['트리트먼트',['hair treatment','ヘアトリートメント']],['헤어 마스크',['hair mask','ヘアマスク']],['토너패드',['toner pad','トナーパッド']],['패드',['toner pad','トナーパッド']],['마스크',['mask pack','パック']],['틴트',['lip tint','ティント']],['립',['lip balm','リップ']],['쿠션',['cushion foundation','クッションファンデ']],['아이라이너',['eyeliner','アイライナー']],['섀도우',['eyeshadow','アイシャドウ']],['클렌징',['cleansing foam','クレンジングフォーム']],['세럼',['serum','セラム']],['앰플',['ampoule','アンプル']],['에센스',['essence','エッセンス']],['미스트',['face mist','ミスト']],['크림',['cream','クリーム']],['로션',['lotion','ローション']],['토너',['toner','化粧水']]];
+function alBrandEn(b){if(!b)return null;return ALBK[b]||BKMAP[b]||null;}
+function alQuery(it,mkt){
+  const bEn=alBrandEn(it.brand);
+  let type=null;
+  const nm=it.name||'';
+  for(const t of ALTYPE){if(nm.includes(t[0])){type=t[1];break;}}
+  if(mkt==='JP'){
+    if(bEn&&type)return bEn+' '+type[1];
+    if(bEn)return bEn;
+    if(type)return type[1];
+  }else{
+    if(bEn&&type)return bEn+' '+type[0];
+    if(bEn)return bEn;
+    if(type&&it.brand)return it.brand+' '+type[0];
+    if(type)return 'korean '+type[0];
+  }
+  // 폴백: 행사문구 제거한 한글 축약
+  let n=nm.replace(/\[[^\]]*\]/g,'').replace(/\([^)]*\)/g,'').replace(/[,·]/g,' ').replace(/\s+/g,' ').trim();
   n=n.split(' ').slice(0,4).join(' ');
-  const b=it.brand?((BKMAP[it.brand]||it.brand)+' '):'';
-  return (b+n).trim();
+  return ((it.brand||'')+' '+n).trim();
 }
 function alFilter(ch){AL_F=(AL_F===ch)?'all':ch;alDraw();}
 function alDraw(){
@@ -647,10 +665,10 @@ function alDraw(){
         +(it.link?'<a class="nm" href="'+it.link+'" target="_blank">'+it.name+'</a>':'<span class="nm">'+it.name+'</span>')
         +(it.brand?'<span class="br">'+it.brand+'</span>':'')
         +'<div class="pr">'+(it.price?'₩'+won(it.price):'-')+'</div>'
-        +(function(){const q=encodeURIComponent(alQuery(it));return '<div style="margin-top:7px">'
-          +'<a class="src" href="https://shopee.ph/search?keyword='+q+'" target="_blank" title="쇼피 필리핀에서 검색">PH↗</a>'
-          +'<a class="src" href="https://shopee.tw/search?keyword='+q+'" target="_blank" title="쇼피 대만에서 검색">TW↗</a>'
-          +'<a class="src" href="https://www.qoo10.jp/s/?keyword='+q+'" target="_blank" title="Qoo10 재팬에서 검색">JP↗</a>'
+        +(function(){const qe=alQuery(it,'EN'),qj=alQuery(it,'JP');return '<div style="margin-top:7px">'
+          +'<a class="src" href="https://shopee.ph/search?keyword='+encodeURIComponent(qe)+'" target="_blank" title="쇼피 PH 검색: '+qe+'">PH↗</a>'
+          +'<a class="src" href="https://shopee.tw/search?keyword='+encodeURIComponent(qe)+'" target="_blank" title="쇼피 TW 검색: '+qe+'">TW↗</a>'
+          +'<a class="src" href="https://www.qoo10.jp/s/?keyword='+encodeURIComponent(qj)+'" target="_blank" title="Qoo10 JP 검색: '+qj+'">JP↗</a>'
           +'</div>';})()
         +'</div>';
     });
