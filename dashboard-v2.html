@@ -39,6 +39,23 @@
   .fld{display:inline-flex;flex-direction:column;gap:4px;margin:0 14px 12px 0;vertical-align:top;}
   .fld label{font-size:11px;color:var(--sub);} .fld input,.fld select,.fld textarea{background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:8px 10px;font-size:14px;font-family:inherit;width:160px;}
   .kpis{display:flex;flex-wrap:wrap;gap:12px;margin:4px 0 6px;} .kpi{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 16px;min-width:130px;}
+  /* 데이제로 스타일 자동수집 피드 */
+  .dz-stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
+  .dz-stat{flex:1;min-width:140px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px;}
+  .dz-stat b{display:block;font-size:22px;color:#fff;} .dz-stat span{font-size:11.5px;color:var(--sub);}
+  .dz-sources{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:18px;}
+  .dz-source{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;gap:10px;align-items:flex-start;}
+  .dz-source .ico{font-size:22px;line-height:1;} .dz-source .txt{font-size:12px;color:var(--sub);}
+  .dz-source .txt b{color:var(--ink);} .dz-source .last{font-size:10.5px;color:#566;margin-top:4px;}
+  .dz-feed{display:flex;flex-direction:column;gap:8px;}
+  .dz-event{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;padding:10px 14px;font-size:12.5px;display:flex;justify-content:space-between;gap:10px;align-items:center;}
+  .dz-event.up{border-left-color:var(--no);} .dz-event.down{border-left-color:var(--go);} .dz-event.warn{border-left-color:var(--review);}
+  .dz-event .t{color:#566;font-size:10.5px;white-space:nowrap;}
+  .dz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;}
+  .dz-item{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px;}
+  .dz-item .rk{display:inline-block;background:var(--pink);color:#fff;font-size:10px;font-weight:700;border-radius:6px;padding:1px 6px;margin-bottom:6px;}
+  .dz-item .nm{font-size:12.5px;font-weight:600;display:block;margin:4px 0 2px;color:var(--ink);text-decoration:none;}
+  .dz-item .br{font-size:11px;color:var(--sub);} .dz-item .pr{font-size:13px;color:var(--green);font-weight:700;margin-top:6px;}
   .kpi b{display:block;font-size:18px;font-weight:700;} .kpi span{font-size:11px;color:var(--sub);}
   .bd td:first-child{color:var(--sub);} .pos{color:var(--go);font-weight:700;}
   .note{font-size:11.5px;color:var(--sub);} .flag{font-size:10px;padding:1px 6px;border-radius:8px;background:#2a313c;color:#9fb0c0;margin-left:4px;}
@@ -65,13 +82,15 @@
   <nav class="side">
     <div class="grp">오늘</div>
     <a data-s="brief" class="on">🔔 브리핑</a>
-    <div class="grp">분석</div>
+    <div class="grp">🔴 실시간 자동수집</div>
+    <a data-s="autolive">📡 자동수집 LIVE (올영·쿠팡)</a>
+    <div class="grp">🗂 레거시 리서치 (수동·검증필요)</div>
     <a data-s="market">📊 시장 현황</a>
-    <a data-s="autolive">📡 자동수집 LIVE</a>
-    <a data-s="top10">🏆 올영 TOP10</a>
-    <a data-s="ctop">🌐 나라별 쇼피 TOP10</a>
-    <a data-s="niche">🎯 니치 GO 헌팅</a>
-    <a data-s="compete">🔍 경쟁·추격</a>
+    <a data-s="top10">🏆 올영 TOP10 (레거시)</a>
+    <a data-s="ctop">🌐 나라별 쇼피 TOP10 (레거시)</a>
+    <a data-s="niche">🎯 니치 GO 헌팅 (레거시)</a>
+    <a data-s="compete">🔍 경쟁·추격 (레거시)</a>
+    <div class="grp">분석</div>
     <a data-s="guide">📚 소싱 플레이북</a>
     <a data-s="edu">📖 입점·운영 가이드</a>
     <div class="grp">나라별 소싱</div>
@@ -107,7 +126,7 @@
     <section class="sec" id="s-tw"></section>
     <section class="sec" id="s-autolive">
       <h2 class="title">📡 자동수집 LIVE</h2>
-      <p class="desc">GitHub Actions가 매일 07:00(KST)에 올영·쿠팡을 자동 수집해 이 데이터를 갱신합니다. 사람이 손으로 넣은 값이 아니라 실제 수집 결과입니다.</p>
+      <p class="desc">크롬 확장프로그램(K뷰티 소싱 수집기)으로 올영·쿠팡·다이소 TOP100을 수집 → 카테고리 자동 태깅 → 가장 많은 카테고리 TOP5가 "존"이 됩니다. 존1~5는 매번 수집할 때마다 시장에 따라 바뀝니다.</p>
       <div id="autolive-body"><p class="note">불러오는 중…</p></div>
     </section>
 
@@ -127,6 +146,7 @@
     <section class="sec" id="s-top10">
       <h2 class="title">🏆 올영 세일 TOP10 (SLS · 무게 마진)</h2>
       <p class="desc">올리브영 세일 TOP10 · 2026-06-21 · 목표마진 25% · 권장가÷정가 ≤1.15 GO / ≤1.40 REVIEW · 직입점 제외</p>
+      <div class="panel" style="border-color:#4a3018;background:rgba(255,180,0,.08)"><p class="note" style="color:#ffb020">⚠ <b>레거시 수동 리서치 자료</b> — 실시간 자동수집이 아닌 특정 시점 수동 조사/입력 데이터입니다. 브랜드 영문표기 등 일부 값은 검증되지 않았을 수 있습니다. 실시간 데이터는 좌측 "📡 자동수집 LIVE" 참고.</p></div>
       <div class="panel"><h3>TOP10 × 마켓 판정</h3>
         <table><thead><tr><th>#</th><th>브랜드/상품</th><th class="r">정가</th><th class="r">세일가</th><th class="r">무게</th><th class="c">PH</th><th class="c">TW</th><th class="c">SG</th><th class="c">VN</th></tr></thead><tbody id="t10rows"></tbody></table>
         <p class="note" id="t10sum" style="margin-top:8px"></p></div>
@@ -136,11 +156,13 @@
     <section class="sec" id="s-ctop">
       <h2 class="title">🌐 나라별 쇼피 TOP10 (수요 조사)</h2>
       <p class="desc">각 나라 쇼피에서 잘 팔리는 K뷰티 → 올영·쿠팡에서 떼다 팔 만한지 판단 + 표 아래 🧠AI 분석 코멘트. PH·TW 실스캔(6/21) / SG·VN 예시(스캔 예정).</p>
+      <div class="panel" style="border-color:#4a3018;background:rgba(255,180,0,.08)"><p class="note" style="color:#ffb020">⚠ <b>레거시 수동 리서치 자료</b> — 실시간 자동수집이 아닌 특정 시점 수동 조사/입력 데이터입니다. 브랜드 영문표기 등 일부 값은 검증되지 않았을 수 있습니다. 실시간 데이터는 좌측 "📡 자동수집 LIVE" 참고.</p></div>
       <div id="ctop"></div>
     </section>
     <section class="sec" id="s-niche">
       <h2 class="title">🎯 니치 GO 헌팅 (비포화 키워드)</h2>
       <p class="desc">포화된 베스트 말고 — 수요는 있는데 셀러가 적은 니치 키워드(toner pad·sunscreen stick·PDRN·cica)를 직접 스캔해 GO 후보를 발굴. 🇵🇭 PH·🇹🇼 TW 실스캔(6/21), SG·VN 추가 예정. 나라별 표 아래 🧠AI 분석.</p>
+      <div class="panel" style="border-color:#4a3018;background:rgba(255,180,0,.08)"><p class="note" style="color:#ffb020">⚠ <b>레거시 수동 리서치 자료</b> — 실시간 자동수집이 아닌 특정 시점 수동 조사/입력 데이터입니다. 브랜드 영문표기 등 일부 값은 검증되지 않았을 수 있습니다. 실시간 데이터는 좌측 "📡 자동수집 LIVE" 참고.</p></div>
       <div id="niche"></div>
     </section>
     <section class="sec" id="s-compete">
@@ -522,18 +544,60 @@ function renderAutoLive(){
   fetch('data.json?_='+Date.now()).then(r=>r.json()).then(d=>{
     const A=d.autoCollected;
     const el=document.getElementById('autolive-body');
-    if(!A){el.innerHTML='<p class="note" style="color:var(--no)">⚠ 아직 자동수집이 한 번도 안 돌았습니다. GitHub Actions 탭에서 "자동 수집 (올영/쿠팡)" 워크플로우를 확인하세요.</p>';return;}
-    let h='<p class="note">마지막 수집: <b>'+(A.collectedAt||'-')+'</b></p>';
-    h+='<div class="panel"><h3>🌿 올리브영</h3>';
-    const oy=A.oliveyoung||{};
-    const oyCats=Object.keys(oy);
-    if(!oyCats.length){h+='<p class="note">데이터 없음</p>';}
-    else{oyCats.forEach(cat=>{const items=oy[cat]||[];h+='<b style="font-size:12px">'+cat+'</b> ('+items.length+'건)<table><thead><tr><th>#</th><th>브랜드</th><th>상품명</th><th class="r">가격</th></tr></thead><tbody>';if(!items.length){h+='<tr><td colspan=4 class="note">0건 — 셀렉터 점검 필요</td></tr>';}items.forEach(it=>{h+='<tr><td>'+it.rank+'</td><td>'+(it.brand||'-')+'</td><td class="nm">'+(it.link?'<a class="src" href="'+it.link+'" target="_blank">'+it.name+'↗</a>':it.name)+'</td><td class="r">'+(it.price?won(it.price):'-')+'</td></tr>';});h+='</tbody></table>';});}
-    h+='</div><div class="panel"><h3>🛒 쿠팡 (파트너스 API)</h3>';
-    const cp=A.coupang||{};
-    if(cp._status==='pending_api_key'){h+='<p class="note" style="color:var(--review)">⏳ 파트너스 API 키 미등록 — partners.coupang.com 가입 후 GitHub Secrets에 COUPANG_ACCESS_KEY/COUPANG_SECRET_KEY 등록하면 자동 활성화.</p>';}
-    else{const cpKws=Object.keys(cp);if(!cpKws.length){h+='<p class="note">데이터 없음</p>';}cpKws.forEach(kw=>{const items=cp[kw]||[];h+='<b style="font-size:12px">'+kw+'</b> ('+items.length+'건)<table><thead><tr><th>#</th><th>상품명</th><th class="r">가격</th></tr></thead><tbody>';items.forEach(it=>{h+='<tr><td>'+it.rank+'</td><td class="nm">'+(it.link?'<a class="src" href="'+it.link+'" target="_blank">'+it.name+'↗</a>':it.name)+'</td><td class="r">'+(it.price?won(it.price):'-')+'</td></tr>';});h+='</tbody></table>';});}
-    h+='</div><div class="panel"><h3>🧺 다이소</h3><p class="note">JS 렌더링 사이트라 정적 수집 불가 — Playwright 도입 후 3번째로 추가 예정.</p></div>';
+    if(!A){el.innerHTML='<p class="note" style="color:var(--no)">⚠ 아직 수집 데이터가 없습니다. 크롬 확장프로그램(K뷰티 소싱 수집기)으로 올영·쿠팡·다이소 페이지에서 수집 후 GitHub에 저장하세요.</p>';return;}
+
+    const zones=A.zones||[];
+    const chans=A.channels||{};
+    const chanTotal=Object.values(chans).reduce((s,n)=>s+n,0);
+
+    let h='';
+    // 상단 통계
+    h+='<div class="dz-stats">'
+      +'<div class="dz-stat"><b>'+chanTotal+'</b><span>수집된 상품</span></div>'
+      +'<div class="dz-stat"><b>'+Object.keys(chans).length+' / 3</b><span>수집 채널</span></div>'
+      +'<div class="dz-stat"><b>'+zones.length+'</b><span>자동 생성된 존</span></div>'
+      +'<div class="dz-stat"><b style="font-size:14px">'+(A.collectedAt?A.collectedAt.slice(0,16).replace('T',' '):'-')+'</b><span>마지막 수집</span></div>'
+      +'</div>';
+
+    // 채널 카드
+    h+='<h3 style="font-size:13px;color:var(--sub);margin:6px 0 10px">수집 채널</h3><div class="dz-sources">';
+    const chIco={oliveyoung:'🌿',coupang:'🛒',daiso:'🧺'};
+    const chName={oliveyoung:'올리브영',coupang:'쿠팡',daiso:'다이소'};
+    ['oliveyoung','coupang','daiso'].forEach(ch=>{
+      const n=chans[ch]||0;
+      h+='<div class="dz-source"'+(n?'':' style="opacity:.5"')+'><div class="ico">'+chIco[ch]+'</div><div class="txt"><b>'+chName[ch]+'</b><div class="last">'+(n?n+'건 수집됨':'미수집')+'</div></div></div>';
+    });
+    h+='</div>';
+
+    if(!zones.length){
+      h+='<p class="note" style="color:var(--review)">아직 존이 생성되지 않았습니다. 상품을 수집하면 카테고리별로 자동 분류돼 TOP5가 존이 됩니다.</p>';
+      el.innerHTML=h;return;
+    }
+
+    // 존 요약 바
+    h+='<h3 style="font-size:13px;color:var(--sub);margin:18px 0 10px">🎯 자동 생성된 존 (가장 많이 수집된 카테고리 TOP5)</h3>';
+    h+='<div class="dz-feed">';
+    zones.forEach((z,i)=>{
+      const isBeauty=['스킨케어','마스크팩','선케어','클렌징','토너패드','메이크업'].includes(z.category);
+      h+='<div class="dz-event"'+(i===0?'':'')+'><span><b style="color:var(--pink)">'+z.zone+'</b> · '+z.category+' <span class="note">('+z.count+'건)</span>'
+        +(isBeauty?' <span style="color:var(--go);font-size:10.5px">→ 쇼피 K뷰티 파이프라인</span>':'')
+        +'</span><span class="t">'+z.count+'건</span></div>';
+    });
+    h+='</div>';
+
+    // 각 존별 상품 카드
+    zones.forEach(z=>{
+      h+='<h3 style="font-size:13px;color:var(--ink);margin:18px 0 10px"><b style="color:var(--pink)">'+z.zone+'</b> — '+z.category+' <span class="note">('+z.items.length+'건)</span></h3><div class="dz-grid">';
+      z.items.slice(0,24).forEach(it=>{
+        const chBadge=it.channel?'<span style="font-size:9.5px;color:var(--sub)">'+(chName[it.channel]||it.channel)+'</span>':'';
+        h+='<div class="dz-item"><span class="rk">#'+it.rank+'</span> '+chBadge
+          +(it.link?'<a class="nm" href="'+it.link+'" target="_blank">'+it.name+'</a>':'<span class="nm">'+it.name+'</span>')
+          +(it.brand?'<span class="br">'+it.brand+'</span>':'')
+          +'<div class="pr">'+(it.price?'₩'+won(it.price):'-')+'</div></div>';
+      });
+      h+='</div>';
+    });
+
     el.innerHTML=h;
   }).catch(e=>{document.getElementById('autolive-body').innerHTML='<p class="note" style="color:var(--no)">data.json 로드 실패: '+e+'</p>';});
 }
