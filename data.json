@@ -221,8 +221,16 @@
     }
   ],
   "autoCollected": {
-    "collectedAt": null,
-    "oliveyoung": {},
+    "collectedAt": "2026-07-05T14:26:40.113478+09:00",
+    "oliveyoung": {
+      "스킨케어": [],
+      "마스크팩": [],
+      "클렌징": [],
+      "선케어": [],
+      "더모코스메틱": [],
+      "헤어케어": [],
+      "바디케어": []
+    },
     "coupang": {
       "_status": "pending_api_key"
     },
